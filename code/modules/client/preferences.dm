@@ -173,9 +173,20 @@ datum/preferences
 		user << browse_rsc(bg1,"bg.png")
 		user << browse_rsc(dice,"dice.png")
 		//var/dat = "<html><head><style type='text/css'>html {overflow: auto;};body {cursor: url('pointer.cur'), auto;overflow:hidden;font-family: Times;background-repeat:repeat-x;}a {text-decoration:none;outline: none;border: none;margin:-1px;}a:focus{outline:none;border: none;}a:hover {Color:#0d0d0d;background:#505055;outline: none;border: none;}a.active { text-decoration:none; Color:#533333;border: none;}a.inactive:hover {Color:#0d0d0d;background:#bb0000;border: none;}a.active:hover {Color:#bb0000;background:#0f0f0f;}a.inactive:hover { text-decoration:none; Color:#0d0d0d; background:#bb0000;border: none;}a img {     border: 0; }TABLE.winto {z-index:-1;position: absolute;top: 12;left:14;background-position: bottom;background-repeat:repeat-x;border: 4px dotted #222222;/*    border-top:4px double #777777; */border-bottom: none;border-top: none;}TR {border: 0px;}</style></head><body background = 'bg2.png' bgColor=#0d0d0d text=#555555 alink=#777777 vlink=#777777 link=#777777>"
-		var/dat = "<META charset='UTF-8'> <Title>Farweb</title> <style type='text/css'> html {overflow: auto;}; body { cursor: url('pointer.cur'), auto; overflow:hidden; font-family: Times; background-repeat:repeat-x; } a {text-decoration:none;outline: none;border: none;margin:-1px;} a:focus{outline:none;border: none;} a:hover {Color:#0d0d0d;background:#505055;outline: none;border: none;} a.active { text-decoration:none; Color:#533333;border: none;} a.inactive:hover {Color:#0d0d0d;background:#bb0000;border: none;} a.active:hover {Color:#bb0000;background:#0f0f0f;} a.inactive:hover { text-decoration:none; Color:#0d0d0d; background:#bb0000;border: none;} a img { border: 0; } TABLE.winto { z-index:-1; position: absolute; top: 12; left:14; background-position: bottom; background-repeat:repeat-x; border: 4px dotted #222222; /* border-top:4px double #777777; */ border-bottom: none; border-top: none; } TR { border: 0px; } </style>"
+		var/dat = {"<html><head><META charset='UTF-8'> <Title>Farweb</title> <style>
+			html { overflow: show; }
+			body { cursor: url('pointer.cur'), auto; overflow: show; font-family: Times; background-repeat: repeat-x; position: relative; }
+			a { text-decoration:none; outline: none; border: none; margin:-1px; }
+			a:focus { outline:none; border: none; }
+			a:hover { color:#0d0d0d; background:#505055; outline: none; border: none; }
+			a.active { text-decoration:none; color:#533333; border: none; }
+			a.inactive:hover { color:#0d0d0d; background:#bb0000; border: none; }
+			a.active:hover { color:#bb0000; background:#0f0f0f; }
+			a img { border: 0; }
+			TABLE.winto { position: relative; top: 12px; left: 14px; background-position: bottom; background-repeat: repeat-x; border: 4px dotted #222222; border-bottom: none; border-top: none; }
+			TR { border: 0px; } </style></head>"}
 		var/mob/new_player/N = user
-		dat += "<html><body background = 'bg2.png' bgColor=#0d0d0d text=#555555 alink=#777777 vlink=#777777 link=#777777>"
+		dat += "<body background = 'bg2.png' bgColor=#0d0d0d text=#555555 alink=#777777 vlink=#777777 link=#777777>"
 		dat += "<p style='position: absolute;top: 10;left:295; font-size:400%'><font face='Times'><b>†</b></font></p>"
 		dat += "<p align = 'right'><a onfocus='this.blur()' href='?_src_=prefs;preference=toggleLobbyScreen'>¤</a></p>"
 		//dat += "<p align = 'right'><a onfocus='this.blur()' href='byond://?src=[0x30005a1];preferences=1;toggletitle=1'>¤</a></p>"
@@ -287,7 +298,7 @@ datum/preferences
 		//height 	 - Screen's height. Defaults to 500 to make it look nice.
 
 
-		var/HTML = "<META http-equiv='X-UA-Compatible' content='IE=edge' charset='UTF-8'><Title>Farweb</title><style type='text/css'>body {font-family: Times;cursor: url('pointer.cur'), auto;}a {text-decoration:none;outline: none;border: none;margin:-1px;}a:focus{outline:none;}a:hover {color:#0d0d0d;background:#505055;outline: none;border: none;}a.active { text-decoration:none; color:#533333;}a.inactive:hover {color:#0d0d0d;background:#bb0000}a.active:hover {color:#bb0000;background:#0f0f0f}a.inactive:hover { text-decoration:none; color:#0d0d0d; background:#bb0000}table { width:100%; }td {text-align: center;}TR {border: 0px;}</style><script type='text/javascript'>function updateText(tmpdesc){document.getElementById('INFO').innerHTML = tmpdesc;}</script><body bgcolor=#0d0d0d text=#555555 alink=#777777 vlink=#777777 link=#777777>"
+		var/HTML = "<html><body><head><META http-equiv='X-UA-Compatible' content='IE=edge' charset='UTF-8'><Title>Farweb</title><style type='text/css'>body {font-family: Times;cursor: url('pointer.cur'), auto;}a {text-decoration:none;outline: none;border: none;margin:-1px;}a:focus{outline:none;}a:hover {color:#0d0d0d;background:#505055;outline: none;border: none;}a.active { text-decoration:none; color:#533333;}a.inactive:hover {color:#0d0d0d;background:#bb0000}a.active:hover {color:#bb0000;background:#0f0f0f}a.inactive:hover { text-decoration:none; color:#0d0d0d; background:#bb0000}table { width:100%; }td {text-align: center;}TR {border: 0px;}</style><script type='text/javascript'>function updateText(tmpdesc){document.getElementById('INFO').innerHTML = tmpdesc;}</script><body bgcolor=#0d0d0d text=#555555 alink=#777777 vlink=#777777 link=#777777></head>"
 		HTML += "<tt><center>"
 		HTML += "<b>Choose your destiny.</b><br>"
 		HTML += "<center><a href='?_src_=prefs;preference=job;task=close'>\[Done\]</a></center><br>" // Easier to press up here.
@@ -369,7 +380,7 @@ datum/preferences
 */
 		HTML += "<center><font color=#e8dada><a href='?_src_=prefs;preference=job;task=reset'>\[Reset]</a></center></font>"
 		HTML += "</tt>"
-		HTML += "<i id = 'INFO'></i>"
+		HTML += "<i id = 'INFO'></i></body></html>"
 
 		user << browse(null, "window=preferences;")
 		user << browse(HTML, "window=mob_occupation;size=[width]x[height];can_close=0; can_resize=0;can_minimize=0;titlebar=1")

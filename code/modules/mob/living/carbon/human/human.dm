@@ -384,8 +384,8 @@
 	if(istype(src, /mob/living/carbon/human/monster))
 		return
 	user.set_machine(src)
-	var/dat = {"<META http-equiv="X-UA-Compatible" content="IE=edge" charset="UTF-8"> <Title>Inventory</title> <style type="text/css"> body {font-family: Times; cursor: url('http://lfwb.ru/Icons/pointer.cur'), auto;} a {text-decoration:none;outline: none;border: none;margin:-1px;} a:focus{outline:none;} a:hover {color:#0d0d0d;background:#505055;outline: none;border: none;} a.active { text-decoration:none; color:#533333;} a.inactive:hover {color:#0d0d0d;background:#bb0000} a.active:hover {color:#bb0000;background:#0f0f0f} a.inactive:hover { text-decoration:none; color:#0d0d0d; background:#bb0000}</style> <body background bgColor=#0d0d0d text=#862525 alink=#777777 vlink=#777777 link=#777777>
-	<B><HR><FONT size=3>[name]</FONT></B>
+	var/dat = {"<html><head><META http-equiv="X-UA-Compatible" content="IE=edge" charset="UTF-8"> <Title>Inventory</title> <style type="text/css"> body {font-family: Times; cursor: url('http://lfwb.ru/Icons/pointer.cur'), auto;} a {text-decoration:none;outline: none;border: none;margin:-1px;} a:focus{outline:none;} a:hover {color:#0d0d0d;background:#505055;outline: none;border: none;} a.active { text-decoration:none; color:#533333;} a.inactive:hover {color:#0d0d0d;background:#bb0000} a.active:hover {color:#bb0000;background:#0f0f0f} a.inactive:hover { text-decoration:none; color:#0d0d0d; background:#bb0000}</style> <body background bgColor=#0d0d0d text=#862525 alink=#777777 vlink=#777777 link=#777777></head>
+	<body><B><HR><FONT size=3>[name]</FONT></B>
 	<BR><HR>
 	<BR><B>Mask:</B> <A href='?src=\ref[src];item=mask'>[(wear_mask ? wear_mask : "<small>Nothing</small>")]</A>
 	<BR><B>Neck:</B> <A href='?src=\ref[src];item=amulet'>[(amulet ? amulet : "<small>Nothing</small>")]</A>
@@ -413,7 +413,7 @@
 	<BR><A href='?src=\ref[src];item=pockets'>Empty Pockets</A>
 	<BR><A href='?src=\ref[user];refresh=1'>Refresh</A>
 	<BR><A href='?src=\ref[user];mach_close=mob[name]'>Close</A>
-	<BR>"}
+	<BR></body></html>"}
 	user << browse(dat, text("window=Inventory;size=340x480;border=1;"))
 	onclose(user, "Inventory")
 	return

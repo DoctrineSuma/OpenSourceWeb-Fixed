@@ -517,7 +517,7 @@
 				return
 
 			if (href_list["createpill_multiple"])
-				count = Clamp(isgoodnumber(input("Select the number of pills to make.", 10, pillamount) as num),1,max_pill_count)
+				count = clamp(isgoodnumber(input("Select the number of pills to make.", 10, pillamount) as num),1,max_pill_count)
 
 			if(reagents.total_volume/count < 1) //Sanity checking.
 				return
@@ -1478,9 +1478,9 @@
 		on = !on
 		. = 1
 	if(href_list["adjust_temperature"])
-		var/val = Clamp(input("Please input the target temperature", name) as num, 0, 1000)
+		var/val = clamp(input("Please input the target temperature", name) as num, 0, 1000)
 		if(isnum(val))
-			temperature = Clamp(val, 0, 1000) //WHO THE FUCK THOUGHT THAT TEMPERATURE+VAL IS NORMAL?!
+			temperature = clamp(val, 0, 1000) //WHO THE FUCK THOUGHT THAT TEMPERATURE+VAL IS NORMAL?!
 		else
 			return 0
 		. = 1

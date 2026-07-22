@@ -15,7 +15,7 @@ var/list/datum/showlads_holder/showlads_list = list()
 /client/verb/who()
 	set name = "Who"
 	set category = "OOC"
-	var/dat = "<META http-equiv='X-UA-Compatible' content='IE=edge' charset='UTF-8'><META charset='UTF-8'><Title>WHO+</title><style type='text/css'>html {overflow: auto;};body {font-family: Times;cursor: url('pointer.cur'), auto;}.D3{background-color: #000;color: #fff;padding: 3px;}.D2{background-color: #eee;}img {padding-bottom:0px;}table, th, td {   border: 1px solid #bbb;}table{border-collapse: collapse;}</style>"
+	var/dat = "<html><head><META http-equiv='X-UA-Compatible' content='IE=edge' charset='UTF-8'><META charset='UTF-8'><Title>WHO+</title><style>html {overflow: auto;};body {font-family: Times;cursor: url('pointer.cur'), auto;}.D3{background-color: #000;color: #fff;padding: 3px;}.D2{background-color: #eee;}img {padding-bottom:0px;}table, th, td {   border: 1px solid #bbb;}table{border-collapse: collapse;}</style></head>"
 	var/n = 0
 	var/mills = world.time // 1/10 of a second, not real milliseconds but whatever
 	//var/secs = ((mills % 36000) % 600) / 10 //Not really needed, but I'll leave it here for refrence.. or something
@@ -82,7 +82,7 @@ var/list/datum/showlads_holder/showlads_list = list()
 		dat += "</tr>"
 	dat += "</table>"
 	dat += "<BR><b>[n] players online.</b>"
-	dat += "<BR><b>Round Duration: [round(hours)]h [round(mins)]m</b>"
+	dat += "<BR><b>Round Duration: [round(hours)]h [round(mins)]m</b></body></html>"
 	src << browse(dat, "window=whoscreen;size=850x520;can_close=1")
 
 /*

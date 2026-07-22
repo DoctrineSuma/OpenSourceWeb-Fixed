@@ -38,7 +38,7 @@
 			shown = 0
 		client = user.client
 
-	progress = Clamp(progress, 0, goal)
+	progress = clamp(progress, 0, goal)
 	//bar.icon_state = "prog_bar_[round(((progress / goal) * 100), 5)]"
 	bar.icon_state = "[round(((progress / goal) * 100), 5)]"
 	if (!shown)

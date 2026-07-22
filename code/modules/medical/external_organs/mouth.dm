@@ -22,7 +22,7 @@
 	return amt
 
 /datum/organ/external/mouth/proc/knock_out_teeth(throw_dir, num=32) //Won't support knocking teeth out of a dismembered head or anything like that yet.
-	num = Clamp(num, 1, 32)
+	num = clamp(num, 1, 32)
 	var/done = 0
 	if(teeth_list && teeth_list.len) //We still have teeth
 		var/stacks = rand(1,3)

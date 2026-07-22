@@ -9,7 +9,7 @@
 
 	var/pain = get_pain() //only do it once, lags less
 
-	var/moan = Clamp(pain/(10.5*src.my_stats.ht), 0, 4)
+	var/moan = clamp(pain/(10.5*src.my_stats.ht), 0, 4)
 	if(moan >= 1)
 		if(prob(5))
 			emote("agonymoan",1,null,0)

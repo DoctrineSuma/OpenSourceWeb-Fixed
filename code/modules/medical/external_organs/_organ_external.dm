@@ -1261,7 +1261,7 @@ Note that amputating the affected organ does in fact remove the infection from t
 /datum/organ/external/proc/ripout_fingers(throw_dir, num=32) //Won't support knocking teeth out of a dismembered head or anything like that yet.
 	if(ismonster(owner))
 		return
-	num = Clamp(num, 1, 32)
+	num = clamp(num, 1, 32)
 	var/done = 0
 	if(fingers && fingers.len) //We still have teeth
 		var/lostfingers = rand(1,3)

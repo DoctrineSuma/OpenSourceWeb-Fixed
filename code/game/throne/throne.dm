@@ -11,7 +11,7 @@ var/global/list/medal_nominated = list()
 	var/captured = FALSE
 
 /obj/structure/stool/bed/chair/ThroneMid/proc/baron_ui(var/mob/user as mob)
-	var/dat = {"<META http-equiv='X-UA-Compatible' content='IE=edge' charset='UTF-8'><TITLE>The Dragon Throne</TITLE></META>
+	var/dat = {"<html><head><META http-equiv='X-UA-Compatible' content='IE=edge' charset='UTF-8'><TITLE>The Dragon Throne</TITLE></META>
 <style type='text/css'>
 body {font-family: PTSANS; cursor: url('pointer.cur'), auto;padding:20px;
 background-color: #060606;overflow:hidden;
@@ -69,9 +69,9 @@ background-color: #0e0e0e;
 	.typewriter {font-family: Type, Verdana, sans-serif;}
 	.arabic {font-family: Arabic, serif; font-size:180%;}
 	.droser {font-family: Droser, Verdana, sans-serif;}
-</style>
+</style></head><body>
 <DIV id='thronecom'><BR><BR><A class='thronelinks' href='byond://?src=\ref[src];usecrown=declareemergency'><span class='thronelink'>Declare Emergency</span></A><BR><A class='thronelinks' href='byond://?src=\ref[src];usecrown=gathermeeting'><span class='thronelink second'>Gather a Meeting</span></A><BR><A class='thronelinks' href='byond://?src=\ref[src];usecrown=decree'><span class='thronelink'>Make a Decree</span></A><BR><A class='thronelinks' href='byond://?src=\ref[src];usecrown=capture'><span class='thronelink second'>Capture</span></A><BR><A class='thronelinks' href='byond://?src=\ref[src];usecrown=execute'><span class='thronelink'>Execute</span></A><BR><A class='thronelinks' href='byond://?src=\ref[src];usecrown=settaxes'><span class='thronelink second'>Set the Taxes</span></A><BR><A class='thronelinks' href='byond://?src=\ref[src];usecrown=riotreal'><span class='thronelink'>Riot!</span></A><BR><A class='thronelinks' href='byond://?src=\ref[src];usecrown=appointhand'><span class='thronelink second'>Appoint a Hand</span></A><BR><A class='thronelinks' href='byond://?src=\ref[src];usecrown=battlealarm'><span class='thronelink'>Battle Alarm!</span></A><BR><A class='thronelinks' href='byond://?src=\ref[src];usecrown=firearmlaw'><span class='thronelink second'>Firearms Trade Law</span></A><BR><A class='thronelinks' href='byond://?src=\ref[src];usecrown=drugslaw'><span class='thronelink'>Drugs Trade Law</span></A><BR><A class='thronelinks' href='byond://?src=\ref[src];usecrown=expandchurch'><span class='thronelink second'>Expand Church Powers</span></A><BR><A class='thronelinks' href='byond://?src=\ref[src];usecrown=reassign'><span class='thronelink'>Reassign</span></A><BR><A class='thronelinks' href='byond://?src=\ref[src];usecrown=playsong'><span class='thronelink second'>Play Songs</span></A><BR><A class='thronelinks' href='byond://?src=\ref[src];usecrown=migburnlaw'><span class='thronelink'>Migrants Burn Law</span></A><BR><A class='thronelinks' href='byond://?src=\ref[src];usecrown=openpit'><span class='thronelink second'>Open the Pit!</span></A><BR><A class='thronelinks' href='byond://?src=\ref[src];usecrown=callformigrants'><span class='thronelink'>Call For Migrants</span></A><BR><A class='thronelinks' href='byond://?src=\ref[src];usecrown=craftmedal'><span class='thronelink second'>Craft a Medal</span></A><BR><A class='thronelinks' href='byond://?src=\ref[src];usecrown=energylaw'><span class='thronelink'>Energy Law</span></A><BR><BR></DIV>
-"}
+</body></html>"}
 	user << browse(dat, "window=id_com;size=300x700")
 
 var/global/isEmergency = 0
