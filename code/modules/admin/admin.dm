@@ -547,8 +547,8 @@ var/global/log_adminsay = 1
 /datum/admins/proc/Game()
 	if(!check_rights(0))	return
 
-	var/dat = {"<META http-equiv='X-UA-Compatible' content='IE=edge' charset='UTF-8'><style type='text/css'> body {font-family: Times; cursor: url('http://lfwb.ru/Icons/pointer.cur'), auto;} a {text-decoration:none;outline: none;border: none;margin:-1px;} a:focus{outline:none;} a:hover {color:#0d0d0d;background:#505055;outline: none;border: none;} a.active { text-decoration:none; color:#533333;} a.inactive:hover {color:#0d0d0d;background:#bb0000} a.active:hover {color:#bb0000;background:#0f0f0f} a.inactive:hover { text-decoration:none; color:#0d0d0d; background:#bb0000}</style>
-	<body background bgColor=#0d0d0d text=#862525 alink=#777777 vlink=#777777 link=#777777>
+	var/dat = {"<html><head><META http-equiv='X-UA-Compatible' content='IE=edge' charset='UTF-8'><style type='text/css'> body {font-family: Times; cursor: url('http://lfwb.ru/Icons/pointer.cur'), auto;} a {text-decoration:none;outline: none;border: none;margin:-1px;} a:focus{outline:none;} a:hover {color:#0d0d0d;background:#505055;outline: none;border: none;} a.active { text-decoration:none; color:#533333;} a.inactive:hover {color:#0d0d0d;background:#bb0000} a.active:hover {color:#bb0000;background:#0f0f0f} a.inactive:hover { text-decoration:none; color:#0d0d0d; background:#bb0000}</style>
+	<body background bgColor=#0d0d0d text=#862525 alink=#777777 vlink=#777777 link=#777777></head><body>
 		<center><B>Game Panel</B></center><hr>\n
 		<A href='?src=\ref[src];c_mode=1'>Change Game Mode</A><br>
 		"}
@@ -566,6 +566,7 @@ var/global/log_adminsay = 1
 		<A href='?src=\ref[src];vsc=default'>Choose a default ZAS setting</A><br>
 		"}
 
+	dat += "</body></html>"
 	usr << browse(dat, "window=admin2;size=210x280")
 	return
 

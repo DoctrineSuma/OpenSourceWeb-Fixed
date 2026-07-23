@@ -154,7 +154,7 @@ var/aspects_max = 3
 				return
 			var/dat = "<head><style type='text/css'> @font-face {font-family: Gothic;src: url(gothic.ttf);} @font-face {font-family: Book;src: url(book.ttf);} @font-face {font-family: Hando;src: url(hando.ttf);} @font-face {font-family: Eris;src: url(eris.otf);} @font-face {font-family: Brandon;src: url(brandon.otf);} @font-face {font-family: VRN;src: url(vrn.otf);} @font-face {font-family: NEOM;src: url(neom.otf);} @font-face {font-family: PTSANS;src: url(PTSANS.ttf);} @font-face {font-family: Type;src: url(type.ttf);} @font-face {font-family: Enlightment;src: url(enlightment.ttf);} @font-face {font-family: Arabic;src: url(arabic.ttf);} @font-face {font-family: Digital;src: url(digital.ttf);} @font-face {font-family: Cond;src: url(cond2.ttf);} @font-face {font-family: Semi;src: url(semi.ttf);} @font-face {font-family: Droser;src: url(Droser.ttf);} .goth {font-family: Gothic, Verdana, sans-serif;} .book {font-family: Book, serif;} .hando {font-family: Hando, Verdana, sans-serif;} .typewriter {font-family: Type, Verdana, sans-serif;} .arabic {font-family: Arabic, serif; font-size:180%;} .droser {font-family: Droser, Verdana, sans-serif;} </style><style type='text/css'> @charset 'utf-8'; body {font-family: PTSANS;cursor: url('pointer.cur'), auto;} a {text-decoration:none;outline: none;border: none;margin:-1px;} a:focus{outline:none;} a:hover {color:#0d0d0d;background:#505055;outline: none;border: none;} a.active { text-decoration:none; color:#533333;} a.inactive:hover {color:#0d0d0d;background:#bb0000} a.active:hover {color:#bb0000;background:#0f0f0f} a.inactive:hover { text-decoration:none; color:#0d0d0d; background:#bb0000}</style></head><body background bgColor=#0d0d0d text=#533333 alink=#777777 vlink=#777777 link=#777777>"
 			dat += "<style type='text/css'> body {font-family: 'Cond'; margin: 0; color:#888;padding: 10px;font-size:75%;overflow:hidden; background-image: url('bg2.png'); background-repeat: no-repeat; background-size: cover; } table{width:100%;background: #322;} table,tr,td{ border:none;border-collapse: collapse;padding:3px;} .horriblestate	{color: #ff00c0; text-shadow:0px 0px 5px #ff00c0; font-size: 110%;}.rank{color:#bbb;width:30%;text-align:right;padding-right:10px;} tr:nth-child(even){background: #422;} </style>"
-			dat += "<TITLE>Farweb Lobby</TITLE>"
+			dat += "<TITLE>Farweb Lobby</TITLE></head><body>"
 			/*
 			if((ticker.current_state == GAME_STATE_PREGAME) && going)
 				dat += "<CENTER>Time to Start: [ticker.pregame_timeleft]</CENTER>"
@@ -170,7 +170,8 @@ var/aspects_max = 3
 				else if(client && ready)
 					dat += "<TABLE><TR><TD class='rank'>[player.client.work_chosen]</TD><TD>[player.key]</TD></TR></TABLE>"
 				*/
-				// DESATIVAR ISSO CASO DE ERRADO
+
+				dat += "</body></html>"
 				player.client << browse(dat, "window=playerlist;size=300x385;can_close=0; can_resize=0;")
 			//dat += "</TR></TABLE>"
 /*			for(var/mob/new_player/player in player_list)
@@ -403,7 +404,7 @@ var/aspects_max = 3
 		var/mins = (mills % 36000) / 600
 		var/hours = mills / 36000
 
-		var/dat = "<html><head><Title>Farweb</title><style type='text/css'>body {font-family: Times;cursor: url('pointer.cur'), auto;}a {text-decoration:none;outline: none;border: none;margin:-1px;}a:focus{outline:none;}a:hover {color:#0d0d0d;background:#505055;border: none;outline: none;border: none;}a.active { text-decoration:none; color:#533333;border: none;}a.inactive:hover {color:#0d0d0d;background:#bb0000;border: none;}a.active:hover {color:#bb0000;background:#0f0f0f;border: none;}a.inactive:hover { text-decoration:none; color:#0d0d0d; background:#bb0000}</style><body background bgColor=#0d0d0d text=#555555 alink=#777777 vlink=#777777 link=#777777></head>"
+		var/dat = "<html><head><Title>Farweb</title><style type='text/css'>body {font-family: Times;cursor: url('pointer.cur'), auto;}a {text-decoration:none;outline: none;border: none;margin:-1px;}a:focus{outline:none;}a:hover {color:#0d0d0d;background:#505055;border: none;outline: none;border: none;}a.active { text-decoration:none; color:#533333;border: none;}a.inactive:hover {color:#0d0d0d;background:#bb0000;border: none;}a.active:hover {color:#bb0000;background:#0f0f0f;border: none;}a.inactive:hover { text-decoration:none; color:#0d0d0d; background:#bb0000}</style><body background bgColor=#0d0d0d text=#555555 alink=#777777 vlink=#777777 link=#777777></head><body>"
 		dat += "Game Duration: [round(hours)]h [round(mins)]m<br>"
 		dat += "Choose your fate:<br>"
 		var/list/allowedFatesList = list("Baron","Inquisitor","Bookkeper","Bookkeeper","Migrant","Bum","Servant","Nun","Maid", "Meister", "Bartender", "Soiler", "Innkeeper", "Misero", "Bookkeeper", "Grayhound", "Hump", "Patriarch", "Jester", "Amuser", "Pusher", "Weaponsmith", "Bum", "Apprentice", "Servant", "Mortus", "Sitzfrau", "Butler", "Prophet", "Esculap", "Serpent", "Armorsmith", "Metalsmith", "Innkeeper Wife", "Guest", "Baron", "Incarn", "Hand", "Heir", "Marduk", "Bishop", "Baroness", "Practicus", "Baroness Bodyguard", "Inquisitor", "Tiamat")
@@ -447,6 +448,7 @@ var/aspects_max = 3
 					dat += "<a href='byond://?src=\ref[src];SelectedJob=[job.title]'>[job.title] ([job.current_positions])</a><br>"
 
 		dat += "</center>"
+		dat += "</body></html>"
 		src << browse(dat, "window=latechoices;size=300x640;can_close=1")
 
 	proc/Joining_War()
@@ -457,7 +459,7 @@ var/aspects_max = 3
 		if(ticker.mode.config_tag != "miniwar")
 			return
 		var/datum/game_mode/miniwar/M = ticker.mode
-		var/dat = "<html><head><Title>Farweb</title><style type='text/css'>body {font-family: Times;cursor: url('pointer.cur'), auto;}a {text-decoration:none;outline: none;border: none;margin:-1px;}a:focus{outline:none;}a:hover {color:#0d0d0d;background:#505055;border: none;outline: none;border: none;}a.active { text-decoration:none; color:#533333;border: none;}a.inactive:hover {color:#0d0d0d;background:#bb0000;border: none;}a.active:hover {color:#bb0000;background:#0f0f0f;border: none;}a.inactive:hover { text-decoration:none; color:#0d0d0d; background:#bb0000}</style><body background bgColor=#0d0d0d text=#555555 alink=#777777 vlink=#777777 link=#777777></head>"
+		var/dat = "<html><head><Title>Farweb</title><style type='text/css'>body {font-family: Times;cursor: url('pointer.cur'), auto;}a {text-decoration:none;outline: none;border: none;margin:-1px;}a:focus{outline:none;}a:hover {color:#0d0d0d;background:#505055;border: none;outline: none;border: none;}a.active { text-decoration:none; color:#533333;border: none;}a.inactive:hover {color:#0d0d0d;background:#bb0000;border: none;}a.active:hover {color:#bb0000;background:#0f0f0f;border: none;}a.inactive:hover { text-decoration:none; color:#0d0d0d; background:#bb0000}</style><body background bgColor=#0d0d0d text=#555555 alink=#777777 vlink=#777777 link=#777777></head><body>"
 		dat += "Game Duration: [round(hours)]h [round(mins)]m<br>"
 		dat += "Choose your team:<br>"
 		var/list/War_Teams = list("Northner", "Southner")
@@ -470,6 +472,7 @@ var/aspects_max = 3
 		for(var/side_name in War_Teams)
 			dat += "<a href='byond://?src=\ref[src];SelectedJob=[side_name]'>Join [side_name]s Team!</a><br>"
 		dat += "</center>"
+		dat += "</body></html>"
 		src << browse(dat, "window=miniwar;size=300x640;can_close=1")
 
 	proc/create_character(var/joined_late = 0)

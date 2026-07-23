@@ -297,7 +297,7 @@
 	return
 
 /atom/proc/RightClick(var/mob/user)
-	if(user.attackhand_rightclick())//se ele vai dar attackhand com a mao vazia
+	if(user.attackhand_rightclick())// if he's going to do an attack hand with his empty hand
 		src.attackhand_right(user)
 	return
 

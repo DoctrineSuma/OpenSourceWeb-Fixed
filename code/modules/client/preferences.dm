@@ -1449,7 +1449,7 @@ datum/preferences
 				character.mutations += FAT
 
 	proc/open_load_dialog(mob/user)
-		var/dat = "<head><META http-equiv='X-UA-Compatible' content='IE=edge' charset='UTF-8'><Title>Farweb</title><style type='text/css'>"
+		var/dat = "<html><head><META http-equiv='X-UA-Compatible' content='IE=edge' charset='UTF-8'><Title>Farweb</title><style type='text/css'>"
 		dat += "cursor: url('pointer.cur'), auto;body {font-family: Times;}a {text-decoration:none;outline: none;border: none;margin:-1px;}a:focus{outline:none;}a:hover {color:#0d0d0d;background:#505055;outline: none;border: none;}a.active { text-decoration:none; color:#533333;}a.inactive:hover {color:#0d0d0d;background:#bb0000}a.active:hover {color:#bb0000;background:#0f0f0f}a.inactive:hover { text-decoration:none; color:#0d0d0d; background:#bb0000}</style>"
 		dat += "</head><body background bgColor=#0d0d0d text=#555555 alink=#777777 vlink=#777777 link=#777777>"
 		dat += "<tt><center>"
@@ -1470,6 +1470,7 @@ datum/preferences
 		dat += "<br><br>"
 		dat += "<a href='byond://?src=\ref[user];preference=close_load_dialog'>Close</a><br>"
 		dat += "</center></tt>"
+		dat += "</body></html>"
 		user << browse(dat, "window=saves;size=300x390")
 
 	proc/close_load_dialog(mob/user)

@@ -44,8 +44,6 @@ text-align:center;
 background-color: #0e0e0e;
 }
 </style>
-<body background ext=#533333 alink=#777777 vlink=#777777 link=#777777>
-
 <style type='text/css'>
 	@font-face {font-family: Gothic;src: url(gothic.ttf);}
 	@font-face {font-family: Book;src: url(book.ttf);}
@@ -69,7 +67,7 @@ background-color: #0e0e0e;
 	.typewriter {font-family: Type, Verdana, sans-serif;}
 	.arabic {font-family: Arabic, serif; font-size:180%;}
 	.droser {font-family: Droser, Verdana, sans-serif;}
-</style></head><body>
+</style></head><body background ext=#533333 alink=#777777 vlink=#777777 link=#777777>
 <DIV id='thronecom'><BR><BR><A class='thronelinks' href='byond://?src=\ref[src];usecrown=declareemergency'><span class='thronelink'>Declare Emergency</span></A><BR><A class='thronelinks' href='byond://?src=\ref[src];usecrown=gathermeeting'><span class='thronelink second'>Gather a Meeting</span></A><BR><A class='thronelinks' href='byond://?src=\ref[src];usecrown=decree'><span class='thronelink'>Make a Decree</span></A><BR><A class='thronelinks' href='byond://?src=\ref[src];usecrown=capture'><span class='thronelink second'>Capture</span></A><BR><A class='thronelinks' href='byond://?src=\ref[src];usecrown=execute'><span class='thronelink'>Execute</span></A><BR><A class='thronelinks' href='byond://?src=\ref[src];usecrown=settaxes'><span class='thronelink second'>Set the Taxes</span></A><BR><A class='thronelinks' href='byond://?src=\ref[src];usecrown=riotreal'><span class='thronelink'>Riot!</span></A><BR><A class='thronelinks' href='byond://?src=\ref[src];usecrown=appointhand'><span class='thronelink second'>Appoint a Hand</span></A><BR><A class='thronelinks' href='byond://?src=\ref[src];usecrown=battlealarm'><span class='thronelink'>Battle Alarm!</span></A><BR><A class='thronelinks' href='byond://?src=\ref[src];usecrown=firearmlaw'><span class='thronelink second'>Firearms Trade Law</span></A><BR><A class='thronelinks' href='byond://?src=\ref[src];usecrown=drugslaw'><span class='thronelink'>Drugs Trade Law</span></A><BR><A class='thronelinks' href='byond://?src=\ref[src];usecrown=expandchurch'><span class='thronelink second'>Expand Church Powers</span></A><BR><A class='thronelinks' href='byond://?src=\ref[src];usecrown=reassign'><span class='thronelink'>Reassign</span></A><BR><A class='thronelinks' href='byond://?src=\ref[src];usecrown=playsong'><span class='thronelink second'>Play Songs</span></A><BR><A class='thronelinks' href='byond://?src=\ref[src];usecrown=migburnlaw'><span class='thronelink'>Migrants Burn Law</span></A><BR><A class='thronelinks' href='byond://?src=\ref[src];usecrown=openpit'><span class='thronelink second'>Open the Pit!</span></A><BR><A class='thronelinks' href='byond://?src=\ref[src];usecrown=callformigrants'><span class='thronelink'>Call For Migrants</span></A><BR><A class='thronelinks' href='byond://?src=\ref[src];usecrown=craftmedal'><span class='thronelink second'>Craft a Medal</span></A><BR><A class='thronelinks' href='byond://?src=\ref[src];usecrown=energylaw'><span class='thronelink'>Energy Law</span></A><BR><BR></DIV>
 </body></html>"}
 	user << browse(dat, "window=id_com;size=300x700")

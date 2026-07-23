@@ -363,7 +363,7 @@ var/rewarded = 0
 				if(ticker.mode.config_tag == "siege")
 					M2 = H
 
-		to_chat(world, "<span class='ravenheartfortress'>Fortress Firethorn</span>")
+		to_chat(world, "<span class='ravenheartfortress'>Firethorn Fortress</span>")
 		to_chat(world, "<span class='excomm'>By the bonds of the Cross, [married1] and [married2] are united unto Death! Rejoice!</span>")
 		world << sound('sound/AI/bell_toll.ogg')
 		to_chat(world, "<br>")
