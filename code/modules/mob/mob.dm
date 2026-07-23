@@ -1240,7 +1240,7 @@ note dizziness decrements automatically in the mob's Life() proc.
 
 /mob/living/carbon/human/mouse_fixeye()
 	if(src.special == "weirdgait")
-		to_chat(src, "<span class='combat'>[pick(nao_consigoen)] I'm stuck!</span>")
+		to_chat(src, "<span class='combat'>[pick(cant_phrase)] I'm stuck!</span>")
 		return
 	..()
 

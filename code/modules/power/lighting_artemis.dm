@@ -34,7 +34,7 @@
 // Luz de tubo da OS13
 
 /obj/machinery/light/small/artemis/tube/shinebright
-	name = "Uma lampada de tubo."
+	name = "Tube lamp"
 	icon = 'icons/obj/lighting.dmi'
 	base_state = "shinebright"// base description and icon_state
 	icon_state = "shinebright"
@@ -43,7 +43,7 @@
 	brightness_power = 5
 
 /obj/machinery/light/small/artemis/tube/shinebrighter
-	name = "Uma lampada de tubo."
+	name = "Tube lamp"
 	icon = 'icons/obj/lighting.dmi'
 	base_state = "shinebrighter"// base description and icon_state
 	icon_state = "shinebrighter"
@@ -52,7 +52,7 @@
 	brightness_power = 5
 
 /obj/machinery/light/small/artemis/tube
-	name = "Uma lampada de tubo."
+	name = "Tube lamp"
 	icon = 'icons/obj/lighting.dmi'
 	base_state = "artemistube"		// base description and icon_state
 	icon_state = "artemistube1"

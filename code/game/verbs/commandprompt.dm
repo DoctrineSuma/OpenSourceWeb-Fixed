@@ -91,7 +91,7 @@ client/verb/prompt_command()
 				return
 			if("togglefuta")
 				if(!futa.Find(src.ckey))
-					to_chat(usr, "<span class='combatbold'>[pick(nao_consigoen)]</span> <span class='combat'>[pick("I'm poor","I don't have it","My wallet is empty","I'm broke")]!</span>")
+					to_chat(usr, "<span class='combatbold'>[pick(cant_phrase)]</span> <span class='combat'>[pick("I'm poor","I don't have it","My wallet is empty","I'm broke")]!</span>")
 					return
 				if(src.mob.type != /mob/new_player)
 					to_chat(usr, "<span class='combatbold'>FAIL!</span><span class='combat'> It can only be changed in the lobby!</span>")
@@ -116,7 +116,7 @@ client/verb/prompt_command()
 				return
 			if("togglesize")
 				if(!thirtycm.Find(src.ckey))
-					to_chat(usr, "<span class='combatbold'>[pick(nao_consigoen)]</span> <span class='combat'>[pick("I'm poor","I don't have it","My wallet is empty","I'm broke")]!</span>")
+					to_chat(usr, "<span class='combatbold'>[pick(cant_phrase)]</span> <span class='combat'>[pick("I'm poor","I don't have it","My wallet is empty","I'm broke")]!</span>")
 					return
 				if(src.mob.type != /mob/new_player)
 					to_chat(usr, "<span class='combatbold'>FAIL!</span><span class='combat'> It can only be changed in the lobby!</span>")
@@ -289,7 +289,7 @@ client/verb/prompt_command()
 					to_chat(src, "You have enabled stretch to fit. Remember to Reconnect.")
 			if("togglesquire")
 				if(!adultsquire.Find(src.ckey))
-					to_chat(usr, "<span class='combatbold'>[pick(nao_consigoen)]</span> <span class='combat'>[pick("I'm poor","I don't have it","My wallet is empty","I'm broke")]!</span>")
+					to_chat(usr, "<span class='combatbold'>[pick(cant_phrase)]</span> <span class='combat'>[pick("I'm poor","I don't have it","My wallet is empty","I'm broke")]!</span>")
 					return
 				var/input = input(usr, "Are you sure you want to disable / enable adult squire?", "Farweb") in list("Yes", "No")
 				switch(input)

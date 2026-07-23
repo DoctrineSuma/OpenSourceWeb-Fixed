@@ -296,11 +296,11 @@
 	if(get_dist(src,M) >= 2)
 		return
 	if(broken)
-		to_chat(H, "<span class='combatbold'>[pick(nao_consigoen)] it's broken!</span>")
+		to_chat(H, "<span class='combatbold'>[pick(cant_phrase)] it's broken!</span>")
 		return
 
 	if(M.wear_mask && M.wear_mask.flags & MASKCOVERSMOUTH)
-		to_chat(M, "<span class='combat'>[pick(nao_consigoen)] my mask is in the way!</span>")
+		to_chat(M, "<span class='combat'>[pick(cant_phrase)] my mask is in the way!</span>")
 		return
 
 	var/datum/reagents/reagents = new/datum/reagents(3)
@@ -323,7 +323,7 @@
 		return
 
 	if(broken)
-		to_chat(M, "<span class='combatbold'>[pick(nao_consigoen)] it's broken!</span>")
+		to_chat(M, "<span class='combatbold'>[pick(cant_phrase)] it's broken!</span>")
 		return
 
 	if(!Adjacent(M))
@@ -367,7 +367,7 @@
 				to_chat(user, "<span class='passive'>You begin repairing \the [src]...</span>")
 				if(do_after(user, 30))
 					broken = FALSE
-		to_chat(user, "<span class='combatbold'>[pick(nao_consigoen)] it's broken!</span>")
+		to_chat(user, "<span class='combatbold'>[pick(cant_phrase)] it's broken!</span>")
 		return
 
 	if (istype(O, /obj/item/weapon/reagent_containers))

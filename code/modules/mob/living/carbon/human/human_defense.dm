@@ -332,7 +332,7 @@ emp_act
 		return
 
 	if(istype(user.buckled,/obj/structure/stool/bed/chair/comfy/torture))
-		to_chat(usr,"<span class='combat'>[pick(nao_consigoen)] I can't move my legs!</span>")
+		to_chat(usr,"<span class='combat'>[pick(cant_phrase)] I can't move my legs!</span>")
 		return
 
 	if(istype(user?.species, /datum/species/human/alien))
@@ -690,7 +690,7 @@ emp_act
 	if(user.get_active_hand() != null) //nao da pra roubar com a mão cheia
 		return
 	if(src.combat_mode)
-		to_chat(user, "<span class='combatbold'>[pick(nao_consigoen)] They're aware!</span>")
+		to_chat(user, "<span class='combatbold'>[pick(cant_phrase)] They're aware!</span>")
 		return
 
 	var/hit_zone = user.zone_sel.selecting
@@ -725,7 +725,7 @@ emp_act
 					whatwillitsteal = src.l_store
 					slot_it_will_go = l_store
 				else
-					to_chat(user, "[pick(nao_consigoen)] There is nothing left in the pockets!")
+					to_chat(user, "[pick(cant_phrase)] There is nothing left in the pockets!")
 					return
 		if("vitals" || "groin")
 			if(src.belt)
@@ -736,14 +736,14 @@ emp_act
 					whatwillitsteal = src.s_store
 					slot_it_will_go = s_store
 				else
-					to_chat(user, "[pick(nao_consigoen)] There is nothing left in the belt!")
+					to_chat(user, "[pick(cant_phrase)] There is nothing left in the belt!")
 					return
 		if("l_hand" || "r_hand")
 			if(!src.gloves)
 				whatwillitsteal = src.wear_id
 				slot_it_will_go = slot_wear_id
 			else
-				to_chat(user, "[pick(nao_consigoen)] They're wearing gloves!")
+				to_chat(user, "[pick(cant_phrase)] They're wearing gloves!")
 				return
 	if(whatwillitsteal)
 		var/obj/item/stolen/S = new(src)

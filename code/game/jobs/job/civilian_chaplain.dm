@@ -90,7 +90,7 @@ var/global/Inquisitor_Type = "Null"
 		message_admins("[key_name_admin(src)] has created a excomm report", 1)
 
 	else
-		to_chat(H, "<span class='excomm'>[pick(nao_consigoen)] I can't. I must go to the church.</span>")
+		to_chat(H, "<span class='excomm'>[pick(cant_phrase)] I can't. I must go to the church.</span>")
 
 /mob/living/carbon/human/proc/epitemia()
 	set hidden = 0
@@ -210,7 +210,7 @@ var/rewarded = 0
 					if(do_after(src, 15))
 						H?.client?.ChromieWinorLoose(src.client, 1)
 						world << sound('sound/AI/bell_toll_02_lp.ogg')
-						to_chat(world, "<h1 class='ravenheartfortress'>Fortaleza de Firethorn</span>")
+						to_chat(world, "<h1 class='ravenheartfortress'>Firethorn Fortress</span>")
 						to_chat(world, "<span class='excomm'>By the will of the blood and cross [H.real_name] is coronated the new Baron!</span>")
 						world << sound('sound/AI/bell_toll.ogg')
 						to_chat(world, "<br>")
@@ -230,13 +230,13 @@ var/rewarded = 0
 	if(src.get_active_hand() == /obj/item/weapon/organ)
 		var/obj/item/weapon/organ/O = src.get_active_hand()
 		if(O.blood_DNA == src.dna.unique_enzymes)
-			var/list/frasestosay = list("Finalmente, fortaleçam-se no Senhor e no seu forte poder. Vistam toda a armadura de Deus, para poderem ficar firmes contra as ciladas do Diabo, pois a nossa luta não é contra seres humanos, mas contra os poderes e autoridades, contra os dominadores deste mundo de trevas, contra as forças espirituais do mal nas regiões celestiais. Por isso, vistam toda a armadura de Deus, para que possam resistir no dia mau e permanecer inabaláveis, depois de terem feito tudo.",\
-			"Bendito seja o Senhor, a minha Rocha, que treina as minhas mãos para a guerra e os meus dedos para a batalha. Ele é o meu aliado fiel, a minha fortaleza, a minha torre de proteção e o meu libertador; é o meu escudo, aquele em quem me refugio. Ele subjuga a mim os povos.",
-			"Pois, embora vivamos como homens, não lutamos segundo os padrões humanos. As armas com as quais lutamos não são humanas; ao contrário, são poderosas em Deus para destruir fortalezas. Destruímos argumentos e toda pretensão que se levanta contra o conhecimento de Deus e levamos cativo todo pensamento, para torná-lo obediente a Cristo.",
-			"Combata o bom combate da fé. Tome posse da vida eterna, para a qual você foi chamado e fez a boa confissão na presença de muitas testemunhas.",
-			"Suporte comigo os meus sofrimentos, como bom soldado de Cristo Jesus. Nenhum soldado se deixa envolver pelos negócios da vida civil, já que deseja agradar àquele que o alistou.",
-			"Lutei o bom combate, terminei a corrida, guardei a fé. Agora me está reservada a coroa da justiça, que o Senhor, justo Juiz, me dará naquele dia; e não somente a mim, mas também a todos os que amam a sua vinda.",
-			"O Senhor é a minha força e a minha canção; ele é a minha salvação! Ele é o meu Deus, e eu o louvarei; é o Deus de meu pai, e eu o exaltarei! O Senhor é guerreiro, o seu nome é Senhor."
+			var/list/frasestosay = list("Finally, be strong in the Lord and in his mighty power. Put on the full armor of God, so that you can take your stand against the devil’s schemes. For our struggle is not against flesh and blood, but against the rulers, against the authorities, against the powers of this dark world and against the spiritual forces of evil in the heavenly realms. Therefore put on the full armor of God, so that when the day of evil comes, you may be able to stand your ground, and after you have done everything, to stand.",\
+			"Blessed be the Lord, my Rock, who trains my hands for war and my fingers for battle. He is my faithful ally, my fortress, my tower of protection and my deliverer; he is my shield, in whom I take refuge. He subdues the peoples under me.",
+			"For though we live in the world, we do not wage war as the world does. The weapons we fight with are not the weapons of the world. On the contrary, they have divine power to demolish strongholds. We demolish arguments and every pretension that sets itself up against the knowledge of God, and we take captive every thought to make it obedient to Christ.",
+			"Fight the good fight of faith. Take hold of the eternal life to which you were called and made the good confession in the presence of many witnesses.",
+			"Endure hardship with me, like a good soldier of Christ Jesus. No one serving as a soldier gets entangled in civilian affairs, since their aim is to please the one who enlisted them.",
+			"I have fought the good fight, I have finished the race, I have kept the faith. Now there is in store for me the crown of righteousness, which the Lord, the righteous Judge, will award to me on that day—and not only to me, but also to all who have longed for his appearing.",
+			"The Lord is my strength and my song; he has become my salvation! He is my God, and I will praise him; my father’s God, and I will exalt him! The Lord is a warrior; the Lord is his name."
 			)
 			src.say(pick(frasestosay))
 			if(do_after(src, 30))
@@ -312,7 +312,7 @@ var/rewarded = 0
 		log_admin("[key_name(src)] has called for a meeting at the church")
 		message_admins("[key_name_admin(src)] has called for a meeting at the church", 1)
 	else
-		to_chat(H, "<span class='excomm'>[pick(nao_consigoen)] I can't. I must go to the church.</span>")
+		to_chat(H, "<span class='excomm'>[pick(cant_phrase)] I can't. I must go to the church.</span>")
 
 /mob/living/carbon/human/proc/marriage()
 	set hidden = 0
@@ -363,7 +363,7 @@ var/rewarded = 0
 				if(ticker.mode.config_tag == "siege")
 					M2 = H
 
-		to_chat(world, "<span class='ravenheartfortress'>Fortaleza de Firethorn</span>")
+		to_chat(world, "<span class='ravenheartfortress'>Fortress Firethorn</span>")
 		to_chat(world, "<span class='excomm'>By the bonds of the Cross, [married1] and [married2] are united unto Death! Rejoice!</span>")
 		world << sound('sound/AI/bell_toll.ogg')
 		to_chat(world, "<br>")
@@ -384,7 +384,7 @@ var/rewarded = 0
 						S.result = SIEGE_DRAW_MARRIAGE
 						roundendready = TRUE
 	else
-		to_chat(MM, "<span class='excomm'>[pick(nao_consigoen)] I can't. I must go to the church.</span>")
+		to_chat(MM, "<span class='excomm'>[pick(cant_phrase)] I can't. I must go to the church.</span>")
 
 /mob/living/carbon/human/proc/ClearName()
 	set hidden = 0

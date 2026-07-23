@@ -39,7 +39,7 @@ mob/proc/succubus_enslave(var/mob/living/carbon/human/target, var/silent = FALSE
 	set hidden = 0
 	set name = "teleportSlaves"
 	if(src?.mind?.succubus?.skillCooldown)
-		to_chat(src, "<span class='combat'>[pick(nao_consigoen)] It's not ready yet!</span>")
+		to_chat(src, "<span class='combat'>[pick(cant_phrase)] It's not ready yet!</span>")
 		return
 	to_chat(src, "<span class='jogtowalk'>[pick("You teleport your slaves near yourself.","You bring your slaves to you.","You bring your slaves near you.")]</span>")
 	src?.mind?.succubus?.skillCooldown = TRUE
@@ -55,7 +55,7 @@ mob/proc/succubus_enslave(var/mob/living/carbon/human/target, var/silent = FALSE
 	if(src.stat)
 		return
 	if(src?.mind?.succubus?.skillCooldown)
-		to_chat(src, "<span class='combat'>[pick(nao_consigoen)] It's not ready yet!</span>")
+		to_chat(src, "<span class='combat'>[pick(cant_phrase)] It's not ready yet!</span>")
 		return
 	var/mob/living/carbon/human/selection = input("Kill someone!", "SLAVE LIST", null, null) as null|anything in src.mind.succubus.succubusSlaves
 	if(!selection)

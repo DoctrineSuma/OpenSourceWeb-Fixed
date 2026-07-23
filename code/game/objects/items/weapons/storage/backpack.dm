@@ -23,12 +23,12 @@
 /obj/item/weapon/storage/backpack/attack_hand(mob/user)
 	if(!ishuman(user))
 		if(src == user.back && !is_satchel)  // you have to hold backpacks, sorry my guys
-			to_chat(user, "<span class ='combat'>[pick(nao_consigoen)] I can't reach my [src]!</span>")
+			to_chat(user, "<span class ='combat'>[pick(cant_phrase)] I can't reach my [src]!</span>")
 			return
 	else
 		var/mob/living/carbon/human/H = user
 		if((src == H.back || src == H.back2) && !is_satchel)  // you have to hold backpacks, sorry my guys
-			to_chat(H, "<span class ='combat'>[pick(nao_consigoen)] I can't reach my [src]!</span>")
+			to_chat(H, "<span class ='combat'>[pick(cant_phrase)] I can't reach my [src]!</span>")
 			return
 
 	..()

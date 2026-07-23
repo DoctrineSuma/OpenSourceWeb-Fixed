@@ -5,12 +5,14 @@ var/interquote = pick("I hate this place and I would do anything to get out of h
 "Be happy that it happened, not sad that it ends","This world is a machine! A Machine for Pigs! Fit only for the slaughtering of pigs!",
 "I am begging you. You made me. You are my Creator, my Father. You cannot destroy me!","I have you now, creature. I will destroy you.",
 "It is over. It is time to end this madness.","He who makes a beast of himself removes himself from the pain of being human.")
+
 var/brquote = pick("Odeio este lugar e faria qualquer coisa para sair daqui, que o grande senhor tenha misericórdia de nós.",
 "Todos os porcos devem morrer.", "Não há anjos no céu; eles estão todos aqui em baixo.", "Construa suas asas ao descer.", "Sou um covarde, enfie sua faca em mim." ,
 "A morte é apenas uma ameaça por causa da felicidade.", "Três podem guardar um segredo, se dois deles estiverem mortos.", "Carne consciente. Carne que ama. Carne dos sonhos.",
 "Fiquem felizes com o que aconteceu, não tristes que isso acabe", "Este mundo é uma máquina! Uma Máquina para Porcos! Destina-se apenas ao abate de porcos!",
 "Eu estou te implorando. Você me fez. Você é meu Criador, meu Pai. Você não pode me destruir!", "Eu tenho você agora, criatura. Eu vou destruir você.",
 "Acabou. É hora de acabar com essa loucura.", "Aquele que faz de si mesmo um animal afasta-se da dor de ser humano.")
+
 /obj/effect/lobby_image
 	name = "Farweb"
 	desc = "Theatre of pain."

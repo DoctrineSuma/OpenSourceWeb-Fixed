@@ -784,7 +784,7 @@
 	if(get_dist(src,user) <= 1)
 		if(narrow == 1)
 			if(!(ishuman(usr)  && istype(usr:species, /datum/species/human/alien)))
-				to_chat(user,"<span class='combatbold'>[pick(nao_consigoen)] the table is too narrow!</span>")
+				to_chat(user,"<span class='combatbold'>[pick(cant_phrase)] the table is too narrow!</span>")
 				return
 
 		if(user.stat)

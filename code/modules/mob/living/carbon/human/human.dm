@@ -639,7 +639,7 @@
 		else if (href_list["interaction"] == "kiss")
 			if( ((Adjacent(P) && !istype(P.loc, /obj/structure/closet)) || (H.loc == P.loc)) && mouthfree && mouthfree_p  && (H.species.flags & HAS_LIPS) && (P.species.flags & HAS_LIPS))
 				if(H.wear_mask && H.wear_mask.flags & MASKCOVERSMOUTH)
-					to_chat(H, "<span class='combat'>[pick(nao_consigoen)] my mask is in the way!</span>")
+					to_chat(H, "<span class='combat'>[pick(cant_phrase)] my mask is in the way!</span>")
 					return
 				if (H.lust == 0)
 					H.visible_message("<span class='erpbold'>[H]</span> <span class='erp'>kisses</span> <span class='erpbold'>[P]</span>")

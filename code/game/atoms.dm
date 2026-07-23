@@ -516,7 +516,7 @@ its easier to just keep the beam vertical.
 		return
 
 	if(user.legcuffed)
-		to_chat(user, "<span class='combatbold'>[pick(nao_consigoen)] I'm stuck!</span>")
+		to_chat(user, "<span class='combatbold'>[pick(cant_phrase)] I'm stuck!</span>")
 		return
 	if(user.handcuffed)
 		if(isliving(src))

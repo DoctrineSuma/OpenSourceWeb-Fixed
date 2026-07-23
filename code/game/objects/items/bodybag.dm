@@ -162,7 +162,7 @@
 
 /obj/structure/stool/bed/sleepingbag/buckle_mob(mob/living/carbon/human/M as mob, mob/user as mob)
 	if(M.shoes)
-		to_chat(user, "<span class='combatbold'>[pick(nao_consigoen)] can't use \the [src] with shoes on!</span>")
+		to_chat(user, "<span class='combatbold'>[pick(cant_phrase)] can't use \the [src] with shoes on!</span>")
 		return
 	..()
 	return

@@ -397,7 +397,7 @@
 					if(HH.mind.changeling)
 						HH.reagents.add_reagent("dentrine",2000)
 	else
-		to_chat(H, "<span class='combat'>[pick(nao_consigoen)] I need to absorb atleast three people.</span>")
+		to_chat(H, "<span class='combat'>[pick(cant_phrase)] I need to absorb atleast three people.</span>")
 
 /obj/effect/lump
 	name = "Lump"
@@ -442,9 +442,9 @@
 				playsound(H, pick('sound/lfwbsounds/lump_spawn.ogg', 'sound/lfwbsounds/lump_spawn2.ogg'), 100, 1)
 				new/obj/effect/lump(src.loc)
 		else
-			to_chat(H, "<span class='combat'>[pick(nao_consigoen)] I need to be naked.</span>")
+			to_chat(H, "<span class='combat'>[pick(cant_phrase)] I need to be naked.</span>")
 	else
-		to_chat(H, "<span class='combat'>[pick(nao_consigoen)] I need to wait longer!</span>")
+		to_chat(H, "<span class='combat'>[pick(cant_phrase)] I need to wait longer!</span>")
 		return
 
 /mob/verb/learn()
@@ -464,7 +464,7 @@
 
 				playsound(H, 'sound/lfwbsounds/they_learn.ogg', 100, 1)
 				return
-		to_chat(H, "<span class='combat'>[pick(nao_consigoen)] I must stand still.</span>")
+		to_chat(H, "<span class='combat'>[pick(cant_phrase)] I must stand still.</span>")
 
 
 

@@ -143,7 +143,7 @@
 
 	coisas_possiveis = list(
 	list(name = "Golden Sword", path = /obj/item/weapon/claymore/golden, amount=1),
-	list(name = "Colar de Ouro", path = /obj/item/clothing/head/amulet/goldeneck, amount=2),
+	list(name = "Gold Necklace", path = /obj/item/clothing/head/amulet/goldeneck, amount=2),
 	list(name = "Golden Breastplate", path = /obj/item/clothing/suit/armor/vest/gold_breastplate, amount=1),
 	list(name = "Golden Shield", path = /obj/item/weapon/shield/golden, amount=1),
 	list(name = "Golden Dildo", path = /obj/item/weapon/dildo/goldeb, amount=3),

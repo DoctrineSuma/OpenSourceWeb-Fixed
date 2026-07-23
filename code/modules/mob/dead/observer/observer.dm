@@ -637,7 +637,7 @@ var/hasgifthand = FALSE
 	set desc = "Joins the late party."
 	//var/latepartynum = 0
 	if(master_mode == "holywar" || master_mode == "minimig")
-		to_chat(src, "<span class='combatbold'>[pick(nao_consigoen)],</span><span class='combat'> fuck you.</span>")
+		to_chat(src, "<span class='combatbold'>[pick(cant_phrase)],</span><span class='combat'> fuck you.</span>")
 		return
 	if(world.time < 6000)
 		to_chat(usr, "<span class='passive'>It's too early for the late party,It will be available in [round((6000-world.time)/600)] minutes.</span>")

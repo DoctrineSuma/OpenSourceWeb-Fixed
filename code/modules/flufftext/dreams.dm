@@ -129,7 +129,7 @@ mob/living/carbon/proc/handle_dreamer()
 		sleep(intensity)
 
 /mob/living/carbon/proc/handle_dreamer_mob_hallucination()
-	var/mob_msg = pick("É A MÃE!", "Eu tenho que ME APRESSAR!", "Estão VINDO!","Estão PRÓXIMOS!", "ELE DE NOVO NÃO!!")
+	var/mob_msg = pick("It's the mother!", "Eu tenho que ME APRESSAR!", "Estão VINDO!","Estão PRÓXIMOS!", "ELE DE NOVO NÃO!!")
 	var/turf/turfie
 	var/list/turf/turfies = list()
 	for(var/turf/torf in view(src))

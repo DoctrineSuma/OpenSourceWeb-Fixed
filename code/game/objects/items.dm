@@ -364,7 +364,7 @@
 		if (user.hand)
 			temp = user:organs_by_name["l_hand"]
 		if(temp && !temp.is_usable())
-			to_chat(src, "<span class='combat'>[pick(nao_consigoen)] I can't use my [temp.display_name].</span>")
+			to_chat(src, "<span class='combat'>[pick(cant_phrase)] I can't use my [temp.display_name].</span>")
 			return
 
 	if(istype(user, /mob/living/carbon/human))

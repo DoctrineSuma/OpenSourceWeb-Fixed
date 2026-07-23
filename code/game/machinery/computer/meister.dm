@@ -21,14 +21,14 @@
 	switch(href_list["choice"])
 		if("nullify")
 			if(money_account == treasuryworth)
-				to_chat(usr, "<span class='combatbold'>[pick(nao_consigoen)] I can't do this to Baron's ring!</span>")
+				to_chat(usr, "<span class='combatbold'>[pick(cant_phrase)] I can't do this to Baron's ring!</span>")
 				return
 			to_chat(usr, "[src.name] has been nullified ([src.rank])")
 			log_game("[usr.real_name]([usr.key]) has nullified [src.name]'s funds.")
 			money_account.set_money(0)
 		if("addfund")
 			if(money_account == treasuryworth)
-				to_chat(usr, "<span class='combatbold'>[pick(nao_consigoen)] I can't do this to Baron's ring!</span>")
+				to_chat(usr, "<span class='combatbold'>[pick(cant_phrase)] I can't do this to Baron's ring!</span>")
 				return
 			var/manyobols = input("How many obols in copper are they going to receive? [treasuryworth.get_money()] obols in Treasury!", "MEISTERY") as null|num
 			if(manyobols <= 0)
@@ -63,10 +63,10 @@
 				ID.receivePayment(manyobols)
 		if ("recovercrown")
 			if(!fortCrown)
-				to_chat(usr, "<span class='combatbold'>[pick(nao_consigoen)] The crown does not exist!</span>")
+				to_chat(usr, "<span class='combatbold'>[pick(cant_phrase)] The crown does not exist!</span>")
 				return
 			if(istype(fortCrown.loc, /mob/living))
-				to_chat(usr, "<span class='combatbold'>[pick(nao_consigoen)] Someone is wearing the crown!</span>")
+				to_chat(usr, "<span class='combatbold'>[pick(cant_phrase)] Someone is wearing the crown!</span>")
 				return
 			log_game("[usr.real_name]([usr.key]) has recovered the crown.")
 			to_chat(usr, "<span class='passive'>Success</span>")

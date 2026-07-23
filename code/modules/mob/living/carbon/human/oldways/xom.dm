@@ -16,14 +16,14 @@ var/global/list/xomPowers = list(
 	)
 
 //EU DEVIA FAZER UM DATUM MAS FODASE!!
-var/xomPhrases = list("Hora da zueira!", "Já foi mamado por um deus?", "Deus me perdoe.. mas terei que combater os invejosos.", "Me convida pra festa...", "The zueira never ends!", "Filho da puta!!!", "Cala boca filho da puta!", "Eu sou gay.", "Os homossexuais vão estragar esse país.", "É 17 ou não é?", "Viva Lula!", "Viva Cuba!", "Eu foderia a Dilma Rousseff.", "Eu não sei o que sou, eu ainda não transei.", "Cala boca criança retardada!", "...")
+var/xomPhrases = list("Time for some fun!", "Have you ever been breastfed by a god?", "God forgive me... but I will have to fight the envious.", "Invite me to the party...", "The fun never ends!", "Son of a bitch!!!", "Shut your mouth, you son of a bitch!", "I am gay.", "Homosexuals are going to ruin this country.", "Is it 17 or not?", "Viva Lula!", "Viva Cuba!", "I would fuck Dilma Rousseff.", "I don't know what I am, I haven't had sex yet.", "Shut up, you retarded child!", "...")
 
 /obj/structure/oldways
 	name = "Xom"
 	density = 1
 	icon = 'icons/mining.dmi'
 	icon_state = "XOM"
-	var/convertPhrase = list("Você é da zueira?", "Tá na call?", "A zueira não pode acabar...", "Meu deus do céu.", "Sai daqui eu tô tomando banho!")
+	var/convertPhrase = list("Are you into jokes?", "Are you on the call?", "The fun can't end...", "My God in heaven.", "Get out of here, I'm taking a shower!")
 	var/textColor = "#808080"
 	var/fontSize = "100%"
 	anchored = 1
@@ -115,7 +115,7 @@ var/xomPhrases = list("Hora da zueira!", "Já foi mamado por um deus?", "Deus me
 						O.overlays -= objchatimage
 
 /mob/living/carbon/human/proc/yourenew(var/fontSize = "133%", var/textColor = "#808080  ", var/name = "Xom")
-	visible_message("<span style='font-size: [fontSize]'><span class='saybasic'><b style='color: [textColor]'>[name]</b></span> <span class='sayverb'>exclaims, </span>\"<span class='saybasic'><b>Você é novo!</b></span></span>\"")
+	visible_message("<span style='font-size: [fontSize]'><span class='saybasic'><b style='color: [textColor]'>[name]</b></span> <span class='sayverb'>exclaims, </span>\"<span class='saybasic'><b>You're new!</b></span></span>\"")
 
 	my_stats.st += rand(-3, 3)
 	my_stats.it += rand(-3, 3)
@@ -133,7 +133,7 @@ var/xomPhrases = list("Hora da zueira!", "Já foi mamado por um deus?", "Deus me
 	if(!client)
 		return
 	var/client/C = client
-	to_chat(src, "<span style='font-size: [fontSize]'><span class='saybasic'><b style='color: [textColor]'>[name]</b></span> <span class='sayverb'>exclaims, </span>\"<span class='saybasic'><b>Toma um presente pra você!</b></span></span>\"")
+	to_chat(src, "<span style='font-size: [fontSize]'><span class='saybasic'><b style='color: [textColor]'>[name]</b></span> <span class='sayverb'>exclaims, </span>\"<span class='saybasic'><b>Here's a gift for you!</b></span></span>\"")
 
 	var/timesToChromie = rand(1, 4)
 	var/removeLater = 0
@@ -144,7 +144,7 @@ var/xomPhrases = list("Hora da zueira!", "Já foi mamado por um deus?", "Deus me
 		sleep(1)
 
 	spawn(rand(70, 130))
-		to_chat(src, "<span style='font-size: [fontSize]'><span class='saybasic'><b style='color: [textColor]'>[name]</b></span> <span class='sayverb'>exclaims, </span>\"<span class='saybasic'><b>Era brinks! Não gosto de gente do seu tipo!</b></span></span>\"")
+		to_chat(src, "<span style='font-size: [fontSize]'><span class='saybasic'><b style='color: [textColor]'>[name]</b></span> <span class='sayverb'>exclaims, </span>\"<span class='saybasic'><b>Just kidding! I don't like people like you!</b></span></span>\"")
 		C.ChromieWinorLoose(src, -1 * removeLater)
 
 /mob/living/carbon/human/proc/letsseeafriend(var/fontSize = "133%", var/textColor = "#808080", var/name = "Xom")
@@ -154,17 +154,17 @@ var/xomPhrases = list("Hora da zueira!", "Já foi mamado por um deus?", "Deus me
 
 	if(!friends.len)
 		return
-	visible_message("<span style='font-size: [fontSize]'><span class='saybasic'><b style='color: [textColor]'>[name]</b></span> <span class='sayverb'>exclaims, </span>\"<span class='saybasic'><b>Você está sozinho demais!!</b></span></span>\"")
+	visible_message("<span style='font-size: [fontSize]'><span class='saybasic'><b style='color: [textColor]'>[name]</b></span> <span class='sayverb'>exclaims, </span>\"<span class='saybasic'><b>You are too lonely!!</b></span></span>\"")
 
 	spawn(rand(15, 25))
 		var/mob/living/carbon/human = pick(friends)
 		x = human.x
 		y = human.y
 		z = human.z
-		visible_message("<span style='font-size: [fontSize]'><span class='saybasic'><b style='color: [textColor]'>[name]</b></span> <span class='sayverb'>exclaims, </span>\"<span class='saybasic'><b>Vocês dois! Falem entre si!</b></span></span>\"")
+		visible_message("<span style='font-size: [fontSize]'><span class='saybasic'><b style='color: [textColor]'>[name]</b></span> <span class='sayverb'>exclaims, </span>\"<span class='saybasic'><b>You two! Talk to each other!</b></span></span>\"")
 
 /mob/living/carbon/human/proc/spawnmonsters(var/fontSize = "133%", var/textColor = "#808080", var/name = "Xom")
-	visible_message("<span style='font-size: [fontSize]'><span class='saybasic'><b style='color: [textColor]'>[name]</b></span> <span class='sayverb'>exclaims, </span>\"<span class='saybasic'><b>Trolei! Zuei!</b></span></span>\"")
+	visible_message("<span style='font-size: [fontSize]'><span class='saybasic'><b style='color: [textColor]'>[name]</b></span> <span class='sayverb'>exclaims, </span>\"<span class='saybasic'><b>I trolled you! I joked!</b></span></span>\"")
 
 	for(var/turf/T in oview(9, src))
 		var/monster = pick(subtypesof(/mob/living/carbon/human/monster))
@@ -201,19 +201,19 @@ var/xomPhrases = list("Hora da zueira!", "Já foi mamado por um deus?", "Deus me
 	if(!istype(T, /turf/simulated/floor/open))
 		return
 
-	visible_message("<span style='font-size: [fontSize]'><span class='saybasic'><b style='color: [textColor]'>[name]</b></span> <span class='sayverb'>exclaims, </span>\"<span class='saybasic'><b>Voe como um pombo!</b></span></span>\"")
+	visible_message("<span style='font-size: [fontSize]'><span class='saybasic'><b style='color: [textColor]'>[name]</b></span> <span class='sayverb'>exclaims, </span>\"<span class='saybasic'><b>Fly like a pigeon!</b></span></span>\"")
 	Move(T)
 	T.Enter(src)
 
 /mob/living/carbon/human/proc/getrich(var/fontSize = "133%", var/textColor = "#808080", var/name = "Xom")
 	if(goldXoomed)
 		return
-	visible_message("<span style='font-size: [fontSize]'><span class='saybasic'><b style='color: [textColor]'>[name]</b></span> <span class='sayverb'>exclaims, </span>\"<span class='saybasic'><b>Você quer ser rico e poderoso? Cague! Cague!</b></span></span>\"")
+	visible_message("<span style='font-size: [fontSize]'><span class='saybasic'><b style='color: [textColor]'>[name]</b></span> <span class='sayverb'>exclaims, </span>\"<span class='saybasic'><b>Do you want to be rich and powerful? Screw it! Screw it!</b></span></span>\"")
 
 	if(prob(75))
 		bowels = 1000
 		spawn(rand(60, 75))
-			visible_message("<span style='font-size: [fontSize]'><span class='saybasic'><b style='color: [textColor]'>[name]</b></span> <span class='sayverb'>exclaims, </span>\"<span class='saybasic'><b>Quanto mais cocô você comer! Mais rico será!</b></span></span>\"")
+			visible_message("<span style='font-size: [fontSize]'><span class='saybasic'><b style='color: [textColor]'>[name]</b></span> <span class='sayverb'>exclaims, </span>\"<span class='saybasic'><b>The more poop you eat, the richer you'll be!</b></span></span>\"")
 		return 1
 
 	goldXoomed = 1
@@ -222,7 +222,7 @@ var/xomPhrases = list("Hora da zueira!", "Já foi mamado por um deus?", "Deus me
 	return 1
 
 /mob/living/carbon/human/proc/fakeneckwrench(var/fontSize = "133%", var/textColor = "#808080", var/name = "Xom")
-	visible_message("<span style='font-size: [fontSize]'><span class='saybasic'><b style='color: [textColor]'>[name]</b></span> <span class='sayverb'>exclaims, </span>\"<span class='saybasic'><b>Oi. Tchau. Te vejo mais tarde.</b></span></span>\"")
+	visible_message("<span style='font-size: [fontSize]'><span class='saybasic'><b style='color: [textColor]'>[name]</b></span> <span class='sayverb'>exclaims, </span>\"<span class='saybasic'><b>Hi. Bye. See you later.</b></span></span>\"")
 	spawn(50)
 		var/datum/organ/external/head/H = get_organ("head")
 		neckXommed = 1
@@ -238,9 +238,9 @@ var/xomPhrases = list("Hora da zueira!", "Já foi mamado por um deus?", "Deus me
 		return
 	}
 	if(prob(2)){
-		visible_message("<span style='font-size: [fontSize]'><span class='saybasic'><b style='color: [textColor]'>[name]</b></span> <span class='sayverb'>exclaims, </span>\"<span class='saybasic'><b>Imite o Izumi!</b></span></span>\"")
+		visible_message("<span style='font-size: [fontSize]'><span class='saybasic'><b style='color: [textColor]'>[name]</b></span> <span class='sayverb'>exclaims, </span>\"<span class='saybasic'><b>Imitate Izumi!</b></span></span>\"")
 	}
-	visible_message("<span style='font-size: [fontSize]'><span class='saybasic'><b style='color: [textColor]'>[name]</b></span> <span class='sayverb'>exclaims, </span>\"<span class='saybasic'><b>Olha o saci!</b></span></span>\"")
+	visible_message("<span style='font-size: [fontSize]'><span class='saybasic'><b style='color: [textColor]'>[name]</b></span> <span class='sayverb'>exclaims, </span>\"<span class='saybasic'><b>Look, it's Saci!</b></span></span>\"")
 	s_tone = -185
 	update_body()
 

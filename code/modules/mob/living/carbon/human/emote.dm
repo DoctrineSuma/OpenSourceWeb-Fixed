@@ -771,9 +771,9 @@
 			if(isChild(src))
 				return
 			if(src.mutilated_genitals)
-				return to_chat(src, "<span class='combatbold'>[pick(nao_consigoen)]</span><span class='combat'> I can't.</span>")
+				return to_chat(src, "<span class='combatbold'>[pick(cant_phrase)]</span><span class='combat'> I can't.</span>")
 			if(src.wear_suit)
-				return to_chat(src, "<span class='combatbold'>[pick(nao_consigoen)]</span><span class='combat'> I have clothes on.</span>")
+				return to_chat(src, "<span class='combatbold'>[pick(cant_phrase)]</span><span class='combat'> I have clothes on.</span>")
 			if(src.has_penis())
 				if(src.erpcooldown == 0)
 					if(src.potenzia > 0)

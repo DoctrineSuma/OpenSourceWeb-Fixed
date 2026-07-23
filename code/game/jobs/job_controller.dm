@@ -527,7 +527,7 @@ var/global/thanatiWords = list()
 
 							thanatiWords += fullWord
 							H.mind.store_memory("My word is [H.mind.thanati_corrupt] and my circle is [H.mind.thanati_type]")
-							to_chat(H, "<span class='baron'>Your corrupt word: [H.mind.thanati_corrupt], [H.mind.thanati_word_random] (Круг [H.mind.thanati_type]).</span>\n")
+							to_chat(H, "<span class='baron'>Your corrupt word: [H.mind.thanati_corrupt], [H.mind.thanati_word_random] (circle [H.mind.thanati_type]).</span>\n")
 							to_chat(H, "\n<span class='barondarker'><i>* Glorify our lord in a Sigil to remember our goals. *</i></span>")
 							H.verbs += /mob/living/carbon/human/proc/getWords
 							H.verbs += /mob/living/carbon/human/proc/praisethelord

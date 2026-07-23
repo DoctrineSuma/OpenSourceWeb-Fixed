@@ -471,7 +471,7 @@
 	else if(istype(W, /obj/item/weapon))
 		W.damageItem("SOFT")
 		user.show_message("<span class='notice'>You innefectively hit the [src]!</span>", 1)
-		to_chat(user, "<span class='combatbold'>[pick(nao_consigoen)]<span><span class='combat'> I can't cut this with \the [W],<i> only an sharp axe can do it!</i></span>")
+		to_chat(user, "<span class='combatbold'>[pick(cant_phrase)]<span><span class='combat'> I can't cut this with \the [W],<i> only an sharp axe can do it!</i></span>")
 		playsound(W.loc, pick('wood_chop_01.ogg','wood_chop_02.ogg','wood_chop_03.ogg','wood_chop_04.ogg'), 5, 1, -1)
 		return
 

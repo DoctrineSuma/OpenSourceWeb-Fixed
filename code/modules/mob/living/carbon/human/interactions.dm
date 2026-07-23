@@ -32,7 +32,7 @@
 			var/turf/T = get_turf(user)
 			new condomtype(T)
 	else
-		to_chat(user, "<span class='combat'>[pick(nao_consigoen)] it is already open!</span>")
+		to_chat(user, "<span class='combat'>[pick(cant_phrase)] it is already open!</span>")
 	return
 
 /obj/item/condom_wrapper/small
@@ -120,7 +120,7 @@
 	if(istype(I, /obj/item/condom) && attacker.zone_sel.selecting == "groin" && !src.ConDom)
 		var/obj/item/condom/C = I
 		if(src.potenzia < C.minsize || src.potenzia > C.maxsize)
-			to_chat(src, "<span class='combatbold'>[pick(nao_consigoen)] Won't fit!</span>")
+			to_chat(src, "<span class='combatbold'>[pick(cant_phrase)] Won't fit!</span>")
 			return
 		if(do_after(attacker, 10))
 			attacker.drop_from_inventory(I)

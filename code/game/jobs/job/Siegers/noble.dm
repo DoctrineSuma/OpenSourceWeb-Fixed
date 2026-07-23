@@ -185,7 +185,7 @@
 			if(S.specialgang)
 				failed = TRUE
 	if(failed)
-		to_chat(src, "<span class='combat'>[pick(nao_consigoen)] I already called one!</span>")
+		to_chat(src, "<span class='combat'>[pick(cant_phrase)] I already called one!</span>")
 		return
 	switch(alert("Would you like to call for Special Reinforcements? (You can do this only once for short period of time)","Call for Special Reinforcements","Yes","No"))
 		if("Yes")

@@ -740,10 +740,10 @@ var/list/admin_verbs_mod = list(
 	set category = "Server"
 
 	if(private_party)
-		usr << "Whitelist de CKEY Desligada."
+		usr << "CKEY whitelist disabled."
 		private_party = FALSE
 	else
-		usr << "Whitelist de CKEY ligada."
+		usr << "CKEY whitelist enabled."
 
 /client/proc/ReloadKeys()
 	set name = "Reload Ckeys"

@@ -44,9 +44,9 @@ var/list/scoutssiegers = list("Scout", "Hunter")
 		return
 	var/datum/game_mode/siege/S = ticker.mode
 	if(length(S.flag_colors) < 2)
-		to_chat(H, "[pick(nao_consigoen)] Count need to decide our uniform color!")
+		to_chat(H, "[pick(cant_phrase)] Count need to decide our uniform color!")
 	if(H.migclass)
-		to_chat(H, "[pick(nao_consigoen)] I can't do this no more!")
+		to_chat(H, "[pick(cant_phrase)] I can't do this no more!")
 		return
 	H.migclass = input(H,"Select a sieger class..","SIEGERS", pick(siegerclasses)) in siegerclasses
 	switch(H.migclass)

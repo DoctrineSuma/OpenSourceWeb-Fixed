@@ -86,7 +86,7 @@
 			var/mob/living/M = target
 			if(user.zone_sel.selecting == "mouth")
 				if(!reagents.total_volume)
-					to_chat(user, "<span class='combatbold'>[pick(nao_consigoen)]</span> <span class='combat'>\the<span class='combatbold'>[src]</span> is empty!</span>")
+					to_chat(user, "<span class='combatbold'>[pick(cant_phrase)]</span> <span class='combat'>\the<span class='combatbold'>[src]</span> is empty!</span>")
 					return
 				if(user == M)
 					to_chat(user,"<span class='passive'> You drink from <span class='passivebold'>[src]</span>.</span>")

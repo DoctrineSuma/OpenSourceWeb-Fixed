@@ -45,7 +45,7 @@
 	if(emote_cooldown > 0)
 		return
 	if(src.wear_mask && src.wear_mask.flags & MASKCOVERSMOUTH)
-		to_chat(src, "<span class='combat'>[pick(nao_consigoen)] my mask is in the way!</span>")
+		to_chat(src, "<span class='combat'>[pick(cant_phrase)] my mask is in the way!</span>")
 		return
 	emote_cooldown += 3
 	var/mob/living/carbon/human/H = usr

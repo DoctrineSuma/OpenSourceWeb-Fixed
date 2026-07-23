@@ -51,5 +51,5 @@
 				var/obj/structure/morgueplate/M = locate() in H.loc
 				if(M)
 					H.buried = TRUE
-					src.name = "Aqui Jaz [H.real_name]"
-					src.desc = "Corpo de [H.real_name]"
+					src.name = "Here lies [H.real_name]"
+					src.desc = "Corpse of [H.real_name]"

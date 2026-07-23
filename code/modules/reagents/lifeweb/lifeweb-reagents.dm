@@ -150,7 +150,7 @@
 /datum/reagent/cocaine
 	name = "Cocaine"
 	id = "cocaine"
-	description = "Кокаинум!"
+	description = "cocainum!"
 	reagent_state = LIQUID
 	color = "#C8A5DC"
 	overdose_threshold = 30

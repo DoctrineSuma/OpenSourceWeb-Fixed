@@ -143,7 +143,7 @@
 	if(!turfie)
 		return
 	var/hall_type = pick("mom", "M3", "deepone")
-	if(mob_msg == "É A MÃE!" || mob_msg == "It's mom!")
+	if(mob_msg == "It's the mother!" || mob_msg == "It's mom!")
 		hall_type = "mom"
 	var/image/I = image('icons/life/dreamer_mobs.dmi', turfie, hall_type, FLOAT_LAYER, get_dir(turfie, src))
 

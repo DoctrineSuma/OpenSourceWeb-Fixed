@@ -2,40 +2,40 @@ var/list/trainparts = list()
 var/list/inquisitrainparts = list()
 
 /area/dunwell/train
-    name = "trainbody"
-    forced_ambience = list('sound/lfwbambimusic/atrementous-city.ogg', 'sound/lfwbambimusic/curvedblade.ogg', 'sound/lfwbambimusic/dustareallherbeauties.ogg', 'sound/fwambi/ravenheart7.ogg', 'sound/fwambi/happy_temple.ogg', 'sound/fwambi/many_torches.ogg')
+	name = "trainbody"
+	forced_ambience = list('sound/lfwbambimusic/atrementous-city.ogg', 'sound/lfwbambimusic/curvedblade.ogg', 'sound/lfwbambimusic/dustareallherbeauties.ogg', 'sound/fwambi/ravenheart7.ogg', 'sound/fwambi/happy_temple.ogg', 'sound/fwambi/many_torches.ogg')
 
 
 /area/dunwell/trainpath
-    name = "trainpath"
-    forced_ambience = list('sound/lfwbambimusic/atrementous-city.ogg', 'sound/lfwbambimusic/curvedblade.ogg', 'sound/lfwbambimusic/dustareallherbeauties.ogg', 'sound/fwambi/ravenheart7.ogg', 'sound/fwambi/happy_temple.ogg', 'sound/fwambi/many_torches.ogg')
+	name = "trainpath"
+	forced_ambience = list('sound/lfwbambimusic/atrementous-city.ogg', 'sound/lfwbambimusic/curvedblade.ogg', 'sound/lfwbambimusic/dustareallherbeauties.ogg', 'sound/fwambi/ravenheart7.ogg', 'sound/fwambi/happy_temple.ogg', 'sound/fwambi/many_torches.ogg')
 
 
 /area/dunwell/trainpathInquisition
-    name = "trainpathInquisition"
-    forced_ambience = list('sound/lfwbambimusic/atrementous-city.ogg', 'sound/lfwbambimusic/curvedblade.ogg', 'sound/lfwbambimusic/dustareallherbeauties.ogg', 'sound/fwambi/ravenheart7.ogg', 'sound/fwambi/happy_temple.ogg', 'sound/fwambi/many_torches.ogg')
+	name = "trainpathInquisition"
+	forced_ambience = list('sound/lfwbambimusic/atrementous-city.ogg', 'sound/lfwbambimusic/curvedblade.ogg', 'sound/lfwbambimusic/dustareallherbeauties.ogg', 'sound/fwambi/ravenheart7.ogg', 'sound/fwambi/happy_temple.ogg', 'sound/fwambi/many_torches.ogg')
 
 /turf/simulated/train/rail
-    icon = 'train.dmi'
-    icon_state = "1,3"
+	icon = 'train.dmi'
+	icon_state = "1,3"
 
 /obj/structure/grille/reinforced/bars/notreact
-    name = "barras de metal"
-    desc = "Um monte de pedaços de ferro presos ao chão."
-    icon_state = "bars"
-    icon_destroyed = "barsbroken"
-    throwpass = 1
-    layer = MOB_LAYER+1
-    dire = SOUTH
+	name = "metal bars"
+	desc = "A bunch of iron rods stuck in the ground."
+	icon_state = "bars"
+	icon_destroyed = "barsbroken"
+	throwpass = 1
+	layer = MOB_LAYER+1
+	dire = SOUTH
 
 /obj/train
-    name = "train"
-    icon = 'icons/turf/train.dmi'
-    icon_state = "floor"
-    density = 0
-    opacity = 0
-    layer = 2
-    anchored = 1
+	name = "train"
+	icon = 'icons/turf/train.dmi'
+	icon_state = "floor"
+	density = 0
+	opacity = 0
+	layer = 2
+	anchored = 1
 
 /obj/train/New()
 	..()

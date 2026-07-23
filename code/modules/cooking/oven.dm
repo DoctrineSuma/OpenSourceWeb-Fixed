@@ -92,7 +92,7 @@
 		var/obj/item/weapon/grab/G = O
 		return
 	else
-		to_chat(user,"<span class='combat'><span class='combatbold'>[pick(nao_consigoen)]</span> What could I possibly cook with the  \the <span class='combatbold'>[O]</span>?</span>")
+		to_chat(user,"<span class='combat'><span class='combatbold'>[pick(cant_phrase)]</span> What could I possibly cook with the  \the <span class='combatbold'>[O]</span>?</span>")
 		return
 
 

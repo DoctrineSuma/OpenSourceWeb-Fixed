@@ -367,13 +367,13 @@
 			if(GP_FAILED)
 				rangetospawn = list(rangetospawn[1], rangetospawn[2] + margin)
 			if(GP_CRITFAIL)
-				to_chat(H,"<span class='combatbold'>[pick(nao_consigoen)]</span><span class='combat'> I've <span class='combatbold'>RUINED</span> the plant!</span>")
+				to_chat(H,"<span class='combatbold'>[pick(cant_phrase)]</span><span class='combat'> I've <span class='combatbold'>RUINED</span> the plant!</span>")
 				qdel(plantgrowing)
 				overlays = list()
 				plantgrowing = new
 
 		if(rangetospawn[2] <= 0)
-			to_chat(H,"<span class='combatbold'>[pick(nao_consigoen)]</span><span class='combat'> I've failed to harvest the plant!</span>")
+			to_chat(H,"<span class='combatbold'>[pick(cant_phrase)]</span><span class='combat'> I've failed to harvest the plant!</span>")
 			return
 
 		for(var/x = rangetospawn[1]; x != rangetospawn[2]; x++)
@@ -494,7 +494,7 @@
 			return
 		var/mob/living/carbon/human/H = user
 		if(ground_state == GROUND_SOFT)
-			to_chat(user,"<span class='combatbold'>[pick(nao_consigoen)]</span><span class='combat'> The soil is already soft!</span>")
+			to_chat(user,"<span class='combatbold'>[pick(cant_phrase)]</span><span class='combat'> The soil is already soft!</span>")
 			return
 		var/obj/item/weapon/W = C
 		var/mod = 0
@@ -521,12 +521,12 @@
 
 			if(GP_FAILED)
 				if(do_after(user, (25 - margin)))
-					to_chat(user,"<span class='combatbold'>[pick(nao_consigoen)]</span><span class='combat'> I haven't managed to soften \the <span class ='combatbold'>[src]</span>!</span>")
+					to_chat(user,"<span class='combatbold'>[pick(cant_phrase)]</span><span class='combat'> I haven't managed to soften \the <span class ='combatbold'>[src]</span>!</span>")
 					return
 
 			if(GP_CRITFAIL)
 				if(do_after(user, (25 - margin)))
-					to_chat(user,"<span class='combatbold'>[pick(nao_consigoen)]</span><span class='combat'> I've ruined \the <span class ='combatbold'>[src]</span>!</span>")
+					to_chat(user,"<span class='combatbold'>[pick(cant_phrase)]</span><span class='combat'> I've ruined \the <span class ='combatbold'>[src]</span>!</span>")
 					ground_state = GROUND_VERY_HARD
 					return
 	..()

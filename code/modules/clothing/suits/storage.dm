@@ -30,7 +30,7 @@
 /obj/item/clothing/suit/storage/hear_talk(mob/M, var/msg, verb, datum/language/speaking)
 	pockets.hear_talk(M, msg, verb, speaking)
 	..()
-*/ // Требуется исправление
+*/ // TODO: needs a fix
 //Jackets with buttons, used for labcoats, IA jackets, First Responder jackets, and brown jackets.
 /*
 /obj/item/clothing/suit/storage/toggle
@@ -74,11 +74,11 @@
 
 		if(icon_state == icon_badge)
 			icon_state = icon_nobadge
-			usr << "Ты отстегиваешь значок от жилета."
+			usr << "You unpin the badge from the vest."
 		else if(icon_state == icon_nobadge)
 			icon_state = icon_badge
-			usr << "Ты прикрепляешь значок на жилет."
+			usr << "You pin the badge to the vest"
 		else
-			usr << "Вы не можете найти значок для [src]."
+			usr << "You can't find a badge for the [src]"
 			return
-//		update_clothing_icon() // Требуется исправление
+//		update_clothing_icon() // TODO: needs a fix

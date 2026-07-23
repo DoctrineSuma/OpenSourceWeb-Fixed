@@ -206,7 +206,7 @@
 		user.learn_skill(W.speciality, src, 0, TRUE)
 		return
 	else
-		to_chat(user, "[pick(nao_consigoen)] I can't learn anything with [W]")
+		to_chat(user, "[pick(cant_phrase)] I can't learn anything with [W]")
 		return
 
 /obj/structure/lifeweb/statue/dummy/comicursed

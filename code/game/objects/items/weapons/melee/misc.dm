@@ -39,7 +39,7 @@
 /obj/item/weapon/gavelplatform/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	if(istype(W, /obj/item/weapon/gavelhammer))
 		if(cooldown)
-			to_chat(user, "<span class='combatbold'>[pick(nao_consigoen)] I can't yet!</span>")
+			to_chat(user, "<span class='combatbold'>[pick(cant_phrase)] I can't yet!</span>")
 			return
 		cooldown = TRUE
 		spawn(50)

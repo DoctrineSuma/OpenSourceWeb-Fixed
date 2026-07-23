@@ -165,7 +165,7 @@
 	if(HHC.gloves)
 		var/obj/item/clothing/gloves/G = HHC.gloves
 		if(!no_trigger_guard && G.blocks_firing)
-			to_chat(user,"<span class='combatbold'><span class='combat'>[pick(nao_consigoen)]</span> I can't pull the trigger in these gloves!</span>")
+			to_chat(user,"<span class='combatbold'><span class='combat'>[pick(cant_phrase)]</span> I can't pull the trigger in these gloves!</span>")
 			return
 	if(safety)
 		click_empty(user, target)

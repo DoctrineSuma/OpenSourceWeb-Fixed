@@ -13,7 +13,7 @@
 		var/perk = new perks
 		return perk
 	else
-		warning("erro na perk de alguem ai")
+		warning("There's an error in someone's perk.")
 
 /datum/perk/proc/pick_perk_ref(var/list/current_perks)
 	var/perks
@@ -25,7 +25,7 @@
 		var/perk = new perks
 		return perk
 	else
-		warning("erro na perk de alguem ai")
+		warning("There's an error in someone's perk2.")
 
 /mob/living/carbon/human/proc/add_perk(var/datum/perk/perkpath)
 	var/datum/perk/perkpaths = new perkpath(src.perks)
@@ -166,7 +166,7 @@
 		to_chat(src, "<span class='combat'>I need to find a bed.</span>")
 		return
 	if(!buckled)
-		to_chat(src, "<span class='combat'>[pick(nao_consigoen)] I need to sleep on a bed.</span>")
+		to_chat(src, "<span class='combat'>[pick(cant_phrase)] I need to sleep on a bed.</span>")
 		return
 	if(stat == 1 && reflectneed >= 740 && istype(buckled, /obj/structure/stool/bed))
 		src.gainWP(1,1)

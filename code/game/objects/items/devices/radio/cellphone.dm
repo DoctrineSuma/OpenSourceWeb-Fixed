@@ -80,7 +80,7 @@ var/list/mob_phone_sounds = list('mob0.ogg','mob1.ogg','mob2.ogg','mob3.ogg','mo
             playsound(src, 'sound/lfwbcombatuse/energy_reload.ogg', 50, 0)
             return
     else
-        to_chat(user, "<span class='combatbold'>[pick(nao_consigoen)]</span><span class='combat'> there is a RIM-card already!</span>")
+        to_chat(user, "<span class='combatbold'>[pick(cant_phrase)]</span><span class='combat'> there is a RIM-card already!</span>")
         return
 
 /obj/item/device/cellphone/attack_self(mob/user as mob)
@@ -128,30 +128,30 @@ var/list/mob_phone_sounds = list('mob0.ogg','mob1.ogg','mob2.ogg','mob3.ogg','mo
                                 var/call_number = input("Insert a 4 digit phone number.","Cellphone") as num
                                 var/numcheck = num2text(call_number)
                                 if(length(numcheck) > 4)
-                                    to_chat(user, "<span class='combatbold'>[pick(nao_consigoen)]</span><span class='combat'> the number is too long!</span>")
+                                    to_chat(user, "<span class='combatbold'>[pick(cant_phrase)]</span><span class='combat'> the number is too long!</span>")
                                     playsound(src, pick(mob_phone_sounds), 90, 0)
                                     return
                                 if(length(numcheck) < 4)
-                                    to_chat(user, "<span class='combatbold'>[pick(nao_consigoen)]</span><span class='combat'> the number is too short!</span>")
+                                    to_chat(user, "<span class='combatbold'>[pick(cant_phrase)]</span><span class='combat'> the number is too short!</span>")
                                     playsound(src, pick(mob_phone_sounds), 90, 0)
                                     return
                                 if(call_number == rimcard.phone_number)
-                                    to_chat(user, "<span class='combatbold'>[pick(nao_consigoen)]</span><span class='combat'> I can't call to my own number!</span>")
+                                    to_chat(user, "<span class='combatbold'>[pick(cant_phrase)]</span><span class='combat'> I can't call to my own number!</span>")
                                     playsound(src, pick(mob_phone_sounds), 90, 0)
                                     return
                                 if(!phone_numbers.Find(call_number))
-                                    to_chat(user, "<span class='combatbold'>[pick(nao_consigoen)]</span><span class='combat'> this phone number doesn't exist!</span>")
+                                    to_chat(user, "<span class='combatbold'>[pick(cant_phrase)]</span><span class='combat'> this phone number doesn't exist!</span>")
                                     playsound(src, pick(mob_phone_sounds), 90, 0)
                                     return
                                 for(var/obj/item/device/rim_card/RI in rim_cards)
                                     if(RI.phone_number == call_number)
                                         if(!RI.Phone)
-                                            to_chat(user, "<span class='combatbold'>[pick(nao_consigoen)]</span><span class='combat'> their RIM-card is inactive!</span>")
+                                            to_chat(user, "<span class='combatbold'>[pick(cant_phrase)]</span><span class='combat'> their RIM-card is inactive!</span>")
                                             playsound(src, pick(mob_phone_sounds), 90, 0)
                                             return
                                         if(RI.Phone)
                                             if(RI.in_call || RI.Phone.ringing)
-                                                to_chat(user, "<span class='combatbold'>[pick(nao_consigoen)]</span><span class='combat'> they're busy!</span>")
+                                                to_chat(user, "<span class='combatbold'>[pick(cant_phrase)]</span><span class='combat'> they're busy!</span>")
                                                 playsound(src, pick(mob_phone_sounds), 90, 0)
                                                 return
                                             else
@@ -173,5 +173,5 @@ var/list/mob_phone_sounds = list('mob0.ogg','mob1.ogg','mob2.ogg','mob3.ogg','mo
                                 to_chat(user, "\n<div class='firstdivmood'><div class='moodbox'><span class='graytext'>Firethorn-Range Phone Number List: \n[english_list(phone_numbers)]</span></div></div>")
                                 return
     else
-        to_chat(user, "<span class='combatbold'>[pick(nao_consigoen)]</span><span class='combat'> I need a RIM-card!</span>")
+        to_chat(user, "<span class='combatbold'>[pick(cant_phrase)]</span><span class='combat'> I need a RIM-card!</span>")
         return

@@ -117,7 +117,7 @@
 						return
 					if(BP_HEAD)
 						if(is_it_high(M))
-							to_chat(M, "<span class='combatbold'>[pick(nao_consigoen)] You can't reach that high.</span>")
+							to_chat(M, "<span class='combatbold'>[pick(cant_phrase)] You can't reach that high.</span>")
 							return
 						var/obj/item/weapon/grab/wrench/W = new /obj/item/weapon/grab/wrench(M, src)
 						M.put_in_active_hand(W)
@@ -127,7 +127,7 @@
 						return
 					if("face")
 						if(is_it_high(M))
-							to_chat(M, "<span class='combatbold'>[pick(nao_consigoen)] You can't reach that high.</span>")
+							to_chat(M, "<span class='combatbold'>[pick(cant_phrase)] You can't reach that high.</span>")
 							return
 						var/obj/item/weapon/grab/wrench/W = new /obj/item/weapon/grab/wrench(M, src)
 						M.put_in_active_hand(W)
@@ -137,7 +137,7 @@
 						return
 					if("mouth")
 						if(is_it_high(M))
-							to_chat(M, "<span class='combatbold'>[pick(nao_consigoen)] You can't reach that high.</span>")
+							to_chat(M, "<span class='combatbold'>[pick(cant_phrase)] You can't reach that high.</span>")
 							return
 						var/obj/item/weapon/grab/wrench/W = new /obj/item/weapon/grab/wrench(M, src)
 						M.put_in_active_hand(W)
@@ -219,14 +219,14 @@
 			M.adjustStaminaLoss(rand(2,3))//ja ta balangando o braço, gasta stamina
 
 			if(affecting?.status && affecting?.status & ORGAN_DESTROYED) //nao da pra bater em limb que nao existe
-				to_chat(M, "<span class='combatbold'>[pick(nao_consigoen)] Their limb is destroyed.</span>")
+				to_chat(M, "<span class='combatbold'>[pick(cant_phrase)] Their limb is destroyed.</span>")
 				visible_message("<span class='hitbold'>[M]</span><span class='hit'> misses trying to attack </span><span class='hitbold'>[src]'s</span><span class='hit'> [affecting] with the fist!</span>")
 				playsound(loc, attack.miss_sound, 25, 1)
 				return
 
 			if(is_it_high(M)) // ta muito alto
 				visible_message("<span class='hitbold'>[M]</span><span class='hit'> misses trying to attack </span><span class='hitbold'>[src]'s</span><span class='hit'> [affecting] with the fist!</span>")
-				to_chat(M, "<span class='combatbold'>[pick(nao_consigoen)] too high.</span>")
+				to_chat(M, "<span class='combatbold'>[pick(cant_phrase)] too high.</span>")
 				playsound(loc, attack.miss_sound, 25, 1)
 				return
 

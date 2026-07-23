@@ -48,9 +48,7 @@ var/list/paper_blacklist = list("java","onblur","onchange","onclick","ondblclick
 	"onkeypress","onkeyup","onload","onmousedown","onmousemove","onmouseout","onmouseover",	\
 	"onmouseup","onreset","onselect","onsubmit","onunload")
 
-var/global/list/nao_consigo = list("Merda!", "Droga!", "Inferno!", "Porra!", "Desgraça!")
-
-var/global/list/nao_consigoen = list("Fnord,", "No!", "I've failed,", "NOPE!", "Krya,", "Neca de pitibiribas,")
+var/global/list/cant_phrase = list("No!", "I cant!", "Nope!", "Never!")
 
 var/BLINDBLOCK = 0
 var/DEAFBLOCK = 0

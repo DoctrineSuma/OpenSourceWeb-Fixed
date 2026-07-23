@@ -15,7 +15,7 @@
 	set name = "Ascend"
 
 	if(in_hell)
-		to_chat(src, "<span class='combat'>[pick(nao_consigoen)] I've been damned!</span>")
+		to_chat(src, "<span class='combat'>[pick(cant_phrase)] I've been damned!</span>")
 		return
 
 	if(src.wraith_pain >= 30)
@@ -35,7 +35,7 @@
 	set name = "Jaunt"
 
 	if(in_hell)
-		to_chat(src, "<span class='combat'>[pick(nao_consigoen)] I've been damned!</span>")
+		to_chat(src, "<span class='combat'>[pick(cant_phrase)] I've been damned!</span>")
 		return
 	if(src.wraith_pain >= 5)
 		if(can_reenter_corpse)
@@ -51,12 +51,12 @@
 	set name = "GrueSpawn"
 	set category = "Wraith"
 	if(in_hell)
-		to_chat(src, "<span class='combat'>[pick(nao_consigoen)] I've been damned!</span>")
+		to_chat(src, "<span class='combat'>[pick(cant_phrase)] I've been damned!</span>")
 		return
 	var/turf/T = get_turf(src)
 	var/area/A = get_area(T)
 	if(A.luminosity || istype(A,/area/dunwell/realsurface) || istype(A, /area/shuttle/train))
-		to_chat(src, "<spanclass='combatbold'>[pick(nao_consigoen)]</span><span class='combat'> too bright!</span>")
+		to_chat(src, "<spanclass='combatbold'>[pick(cant_phrase)]</span><span class='combat'> too bright!</span>")
 		return
 	if(src.wraith_pain >= 15)
 		if(can_reenter_corpse)
@@ -75,7 +75,7 @@
 	set name = "Ignition"
 	set category = "Wraith"
 	if(in_hell)
-		to_chat(src, "<span class='combat'>[pick(nao_consigoen)] I've been damned!</span>")
+		to_chat(src, "<span class='combat'>[pick(cant_phrase)] I've been damned!</span>")
 		return
 	if(src.wraith_pain >= 30)
 		if(can_reenter_corpse)
@@ -93,7 +93,7 @@
 	set name = "InterveneDreams"
 	set category = "Wraith"
 	if(in_hell)
-		to_chat(src, "<span class='combat'>[pick(nao_consigoen)] I've been damned!</span>")
+		to_chat(src, "<span class='combat'>[pick(cant_phrase)] I've been damned!</span>")
 		return
 	msg = sanitize(msg)
 	if(!msg)	return
@@ -109,7 +109,7 @@
 		build_click(src, client.buildmode, params, A)
 		return
 	if(in_hell)
-		to_chat(src, "<span class='combat'>[pick(nao_consigoen)] I've been damned!</span>")
+		to_chat(src, "<span class='combat'>[pick(cant_phrase)] I've been damned!</span>")
 		return
 	if(src.wraith_pain >= 1)
 		if(istype(A,/obj/structure/fireplace) || istype(A, /obj/structure/torchwall))

@@ -134,7 +134,7 @@
 	if(!proximity) return
 	if(istype(A, /turf) && src in user)
 		if(!soaked)
-			to_chat(user,"<span class='combat'>[pick(nao_consigoen)] it's  dry!</span>")
+			to_chat(user,"<span class='combat'>[pick(cant_phrase)] it's  dry!</span>")
 			return
 		user.visible_message("[user] starts to wipe down [A] with [src]!")
 		var/cleancheck

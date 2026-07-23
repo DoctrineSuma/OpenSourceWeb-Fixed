@@ -103,10 +103,10 @@
 
 /turf/simulated/wall/proc/climbWall(mob/living/carbon/human/user as mob)
 	if(!climbable)
-		to_chat(user, "<span class='combatbold'>[pick(nao_consigoen)] I can't even imagine climbing this!</span>")
+		to_chat(user, "<span class='combatbold'>[pick(cant_phrase)] I can't even imagine climbing this!</span>")
 		return
 	if(!check_both_hands_empty(user))
-		to_chat(user, "<span class='combatbold'>[pick(nao_consigoen)] My hands must be empty!</span>")
+		to_chat(user, "<span class='combatbold'>[pick(cant_phrase)] My hands must be empty!</span>")
 		return
 	if(user.stat)
 		return
@@ -138,7 +138,7 @@
 				if(istype(above,/turf/simulated/floor/lifeweb/stone/ladder))
 					var/turf/simulated/floor/lifeweb/stone/ladder/L = above
 					if(!L.opened)
-						to_chat(user, "<span class='combatbold'>[pick(nao_consigoen)]</span><span class='combat'> there's a closed manhole above me!</span>")
+						to_chat(user, "<span class='combatbold'>[pick(cant_phrase)]</span><span class='combat'> there's a closed manhole above me!</span>")
 						return
 				to_chat(user, "<span class='passive'>You start climbing [src].</span>")
 				var/mob/living/carbon/human/H = user
@@ -209,7 +209,7 @@
 
 /turf/simulated/wall/proc/climbWallHelp(mob/living/carbon/human/user as mob, var/mob/living/carbon/human/assailant, var/obj/item/weapon/grab/W)
 	if(!climbable)
-		to_chat(assailant, "<span class='combatbold'>[pick(nao_consigoen)] I can't even imagine climbing this!</span>")
+		to_chat(assailant, "<span class='combatbold'>[pick(cant_phrase)] I can't even imagine climbing this!</span>")
 		return
 	if(!user.resting || !user.lying)
 		return

@@ -136,7 +136,7 @@ var/list/riot_essential = list("Baron", "Baroness Bodyguard", "Incarn", "Squire"
 								if(B.alert == "baronriot")
 									B.close()
 						if(riot == 1)
-							to_chat(usr, "<span class='combat'>[pick(nao_consigoen)] I need to turn off the Battle Alarm first!</span>")
+							to_chat(usr, "<span class='combat'>[pick(cant_phrase)] I need to turn off the Battle Alarm first!</span>")
 
 		if(allowedjobs.Find(H.job) && H.head && istype(H.head, /obj/item/clothing/head/caphat))
 			switch(href_list["usecrown"])
@@ -300,7 +300,7 @@ var/list/riot_essential = list("Baron", "Baroness Bodyguard", "Incarn", "Squire"
 								if(B.alert == "baronalert")
 									B.close()
 						if(riotreal == 1)
-							to_chat(usr, "<span class='combat'>[pick(nao_consigoen)] I need to turn off the Riot Alarm first!</span>")
+							to_chat(usr, "<span class='combat'>[pick(cant_phrase)] I need to turn off the Riot Alarm first!</span>")
 
 				if("riotreal")
 					if(riotreal == 0 && riot != 1)
@@ -331,7 +331,7 @@ var/list/riot_essential = list("Baron", "Baroness Bodyguard", "Incarn", "Squire"
 								if(B.alert == "baronriot")
 									B.close()
 						if(riot == 1)
-							to_chat(usr, "<span class='combat'>[pick(nao_consigoen)] I need to turn off the Battle Alarm first!</span>")
+							to_chat(usr, "<span class='combat'>[pick(cant_phrase)] I need to turn off the Battle Alarm first!</span>")
 
 				if("firearmlaw")
 					world << sound('sound/AI/bell_toll.ogg')
@@ -728,7 +728,7 @@ var/roundendready = FALSE
 				if(B.alert == "baronalert")
 					B.close()
 		if(riotreal == 1)
-			to_chat(usr, "<span class='combat'>[pick(nao_consigoen)] I need to turn off the Riot Alarm first!</span>")
+			to_chat(usr, "<span class='combat'>[pick(cant_phrase)] I need to turn off the Riot Alarm first!</span>")
 
 		log_admin("[key_name(src)] has turned on the battle alarm")
 		message_admins("[key_name_admin(src)] has turned on the battle alarm", 1)
@@ -766,18 +766,18 @@ var/roundendready = FALSE
 				if(B.alert == "baronriot")
 					B.close()
 		if(riot == 1)
-			to_chat(usr, "<span class='combat'>[pick(nao_consigoen)] I need to turn off the Battle Alarm first!</span>")
+			to_chat(usr, "<span class='combat'>[pick(cant_phrase)] I need to turn off the Battle Alarm first!</span>")
 
 			log_admin("[key_name(src)] has declared riot")
 			message_admins("[key_name_admin(src)] has declared riot", 1)
 		if(riot == 1)
-			to_chat(usr, "<span class='combat'>[pick(nao_consigoen)] I need to turn off the Battle Alarm first!</span>")
+			to_chat(usr, "<span class='combat'>[pick(cant_phrase)] I need to turn off the Battle Alarm first!</span>")
 
 /mob/living/carbon/human/verb/DrugBan()
 	set hidden = 0
 	set category = "Baron"
-	set name = "VendadeDrogas"
-	set desc="Proibe ou permite venda de drogas."
+	set name = "Drug Sales"
+	set desc="Prohibits or permits the sale of drugs."
 
 	to_chat(world, "<br>")
 	to_chat(world, "<span class='ravenheartfortress'>Firethorn Fortress</span>")
@@ -795,8 +795,8 @@ var/roundendready = FALSE
 /mob/living/carbon/human/verb/WeaponBan()
 	set hidden = 0
 	set category = "Baron"
-	set name = "VendadeArmas"
-	set desc="Proibe ou permite venda de armas."
+	set name = "Gun Sales"
+	set desc="Prohibits or permits the sale of weapons."
 
 	world << sound('sound/AI/bell_toll.ogg')
 	to_chat(world, "<br>")
@@ -834,8 +834,8 @@ var/roundendready = FALSE
 /mob/living/carbon/human/verb/Migrants()
 	set hidden = 0
 	set category = "Baron"
-	set name = "TrafegodeMigrantes"
-	set desc="Proibe ou permite a entrada de migrantes."
+	set name = "Migrant Traffic"
+	set desc = "It prohibits or allows the entry of migrants."
 
 	to_chat(world, "<br>")
 	to_chat(world, "<span class='ravenheartfortress'>Firethorn Fortress</span>")

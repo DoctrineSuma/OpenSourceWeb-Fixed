@@ -36,7 +36,7 @@
 		return
 
 	if(M.wear_mask && M.wear_mask.flags & MASKCOVERSMOUTH)
-		to_chat(M, "<span class='combat'>[pick(nao_consigoen)] my mask is in the way!</span>")
+		to_chat(M, "<span class='combat'>[pick(cant_phrase)] my mask is in the way!</span>")
 		return
 
 	var/datum/reagents/reagents = new/datum/reagents(2)

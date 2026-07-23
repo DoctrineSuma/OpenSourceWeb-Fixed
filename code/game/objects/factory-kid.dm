@@ -12,7 +12,7 @@
 |  Factory Kid - 80%
 *-------------------------------------------------------------------*/
 
-//Máquina
+//Mï¿½quina
 /obj/structure/factory/shoemaking
 	name = "shoemaking bench"
 	icon = 'icons/obj/objects.dmi'
@@ -54,7 +54,7 @@
 	if(Shoemaker.stat != 0)	return
 
 	if(!Shoemaker.check_perk(/datum/perk/shoemaking))
-		to_chat(usr, "<span class='combatbold'>[pick(nao_consigoen)] How do I use this?</span>")
+		to_chat(usr, "<span class='combatbold'>[pick(cant_phrase)] How do I use this?</span>")
 		return
 
 	if(src.contents.len >= 1)
@@ -72,7 +72,7 @@
 		else
 			return
 	else
-		to_chat(usr, "<span class='combatbold'>[pick(nao_consigoen)] I have ([contents.len]/5) amounts of leather!</span>")
+		to_chat(usr, "<span class='combatbold'>[pick(cant_phrase)] I have ([contents.len]/5) amounts of leather!</span>")
 		return
 	..()
 

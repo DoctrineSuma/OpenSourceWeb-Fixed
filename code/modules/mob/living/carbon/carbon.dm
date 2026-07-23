@@ -597,7 +597,7 @@ var/const/GALOSHES_DONT_HELP = 8
 	else
 		if(ishuman(src))
 			if(H.feels_pain() && (get_pain() > (70 + my_stats.ht*3)) )
-				to_chat(H, "<span class='combatbold'>[pick(nao_consigoen)]</span><span class='combat'> I can't sleep while... IN PAIN!</span>")
+				to_chat(H, "<span class='combatbold'>[pick(cant_phrase)]</span><span class='combat'> I can't sleep while... IN PAIN!</span>")
 				return
 			var/cansleep = TRUE
 			if(istype(H.wear_suit, /obj/item/clothing/suit/armor))
@@ -609,7 +609,7 @@ var/const/GALOSHES_DONT_HELP = 8
 			if(istype(H.gloves, /obj/item/clothing/gloves/combat))
 				cansleep = FALSE
 			if(!cansleep)
-				to_chat(H, "<span class='combatbold'>[pick(nao_consigoen)]</span><span class='combat'> I can't sleep while wearing armor!</span>")
+				to_chat(H, "<span class='combatbold'>[pick(cant_phrase)]</span><span class='combat'> I can't sleep while wearing armor!</span>")
 				return
 		H.tryingtosleep = TRUE
 		H.sleeping = 6

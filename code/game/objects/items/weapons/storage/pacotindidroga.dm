@@ -1,6 +1,6 @@
 /obj/item/weapon/storage/pacote
-	name = "papelote"
-	desc = "Papelote de droga."
+	name = "paper"
+	desc = "drug packet."
 	icon_state ="powderbag"
 	item_state = "shake"
 	throw_speed = 1

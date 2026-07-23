@@ -18,7 +18,7 @@ var/lady = 0
 	if(!client) return
 
 	if(master_mode == "holywar" || master_mode == "minimig")
-		to_chat(usr, "<span class	='combatbold'>[pick(nao_consigoen)],</span><span class='combat'> fuck you.</span>")
+		to_chat(usr, "<span class	='combatbold'>[pick(cant_phrase)],</span><span class='combat'> fuck you.</span>")
 		return 0
 
 	if(world.time < 1)

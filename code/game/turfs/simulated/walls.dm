@@ -55,7 +55,7 @@
 					H.pixel_x = -11
 
 		if(!climbable)
-			to_chat(usr, "<span class='combatbold'>[pick(nao_consigoen)] I can't even imagine climbing this!</span>")
+			to_chat(usr, "<span class='combatbold'>[pick(cant_phrase)] I can't even imagine climbing this!</span>")
 			return
 		else
 			var/mob/living/carbon/human/H = M

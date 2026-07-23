@@ -21,7 +21,7 @@
 	If you have any  questions about this stuff feel free to ask. ~Carn
 	*/
 
-var/global/max_players = 30 // Изменить в зависимости от RAM
+var/global/max_players = 30
 
 /client/Topic(href, href_list, hsrc)
 	if(!usr || usr != mob)	//stops us calling Topic for somebody else's client. Also helps prevent usr=null

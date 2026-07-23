@@ -220,7 +220,7 @@
 		qdel(X)
 		return
 
-	if(istype(user.buckled,/obj/structure/stool/bed/chair/comfy/torture)) return to_chat(usr,"<span class='combat'>[pick(nao_consigoen)] I can't move my legs!</span>")
+	if(istype(user.buckled,/obj/structure/stool/bed/chair/comfy/torture)) return to_chat(usr,"<span class='combat'>[pick(cant_phrase)] I can't move my legs!</span>")
 	if(user.grabbed_by.len)
 		for(var/x = 1; x <= user.grabbed_by.len; x++)
 			if(user.grabbed_by[x])

@@ -124,7 +124,7 @@
 			playsound(src.loc, 'sound/effects/forge.ogg', 25, 1)
 			user.visible_message("<span class='notice'><B>[user]</B> strikes the ingot!")
 		if(metalin && !oquefazer)	
-			oquefazer = input("What do you want to forge?", "Farweb") in list("long sword","bastard sword","sabre", "bardiche", "spear", "falchion", "axe", "pitchfork","iron plate armor","Iron mask", "iron cuirass", "iron breastplate", "iron open helmet", "dildo", "steel gauntlets", "elite helmet", "skull open iron helmet","squire armor", "sledgehammer","Alicate de aço","Shovel","Pickaxe","Club","Light Club","Dagger", "combat knife","knife","handcuffs","chain","klevetz","crossbow","bolt","shield")
+			oquefazer = input("What do you want to forge?", "Farweb") in list("long sword","bastard sword","sabre", "bardiche", "spear", "falchion", "axe", "pitchfork","iron plate armor","Iron mask", "iron cuirass", "iron breastplate", "iron open helmet", "dildo", "steel gauntlets", "elite helmet", "skull open iron helmet","squire armor", "sledgehammer","Steel pliers","Shovel","Pickaxe","Club","Light Club","Dagger", "combat knife","knife","handcuffs","chain","klevetz","crossbow","bolt","shield")
 		if(completo >= 100)
 			to_chat(user, "<span class='notice'><b>The ingot is done.</b> I need to quench it.</span>")
 
@@ -294,7 +294,7 @@
 				new/obj/item/clothing/suit/armor/vest/squire(user.loc)
 			if(A.item_to_become == "sledgehammer")
 				new/obj/item/weapon/sledgehammer(user.loc)
-			if(A.item_to_become == "Alicate de aço")
+			if(A.item_to_become == "Steel pliers")
 				new/obj/item/weapon/alicate(user.loc)
 			if(A.item_to_become == "Shovel")
 				new/obj/item/weapon/shovel(user.loc)

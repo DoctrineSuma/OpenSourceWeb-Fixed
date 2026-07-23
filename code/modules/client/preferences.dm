@@ -1199,7 +1199,7 @@ datum/preferences
 									dat += "<h3><b>Ruled by:</b> <i>Sir Jakob the Unworthy</i></h3>"
 									dat += "<br>A fishing village nestled deep in the cave systems near Ravenheart, the air is humid and the fish pulled from the rivers are warm to the touch, babbling and singing fanciful nonsense. A knight disgraced by his losses in the crusades was given reign of this small settlement, and rule of his land and his title was granted to the Raven of the North. The people of Savo are strangely welcoming of outsiders, and many who leave their hospitality carry this kindness with them. It is rumored to be a Thanati territory, with hidden safehouses for their agents and the entirety of the people loyal to their cause. Even those who stay true to the light of the Comatic are touched by the gifts of the breathing streams, with calm catches swimming placidly to their lures."
 								if("Salar")
-									dat += "<h3><b>Ruled by:</b> <i>Владимир Сталино</i></h3>"
+									dat += "<h3><b>Ruled by:</b> <i>Vladimir Stalin</i></h3>"
 									dat += "<br>You come from the province of Salar."
 								if("Wanderer")
 									dat += "<h3><b>Ruled by:</b> <i>Yourself</i></h3>"

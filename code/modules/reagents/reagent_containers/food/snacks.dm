@@ -296,10 +296,10 @@
 	if(ishuman(user))
 		var/mob/living/carbon/human/H = user
 		if(H.my_stats.it <= 3)
-			to_chat(user, "<span class='combat'>[pick(nao_consigoen)] [pick("WHAT???","FUNNY!!","CANDY!!!","HOW??","HUNGRY!!")]!</span>")
+			to_chat(user, "<span class='combat'>[pick(cant_phrase)] [pick("WHAT???","FUNNY!!","CANDY!!!","HOW??","HUNGRY!!")]!</span>")
 			return
 		if(H.my_stats.pr <= 5)
-			to_chat(user, "<span class='combat'>[pick(nao_consigoen)], this will be harder than what I expected to be!</span>")
+			to_chat(user, "<span class='combat'>[pick(cant_phrase)], this will be harder than what I expected to be!</span>")
 			var/mod2 = (H.my_stats.pr + H.my_stats.it) / 2
 			if(do_after(user, rand(5,30-mod2)))
 				goto CANDY
@@ -312,12 +312,12 @@
 			playsound(user, "open_candy.ogg", 50, 0)
 			update_icon()
 	else
-		to_chat(user, "<span class='combat'>[pick(nao_consigoen)] it is already open!</span>")
+		to_chat(user, "<span class='combat'>[pick(cant_phrase)] it is already open!</span>")
 	return
 
 /obj/item/weapon/reagent_containers/food/snacks/candy/attack(mob/M as mob, mob/user as mob, def_zone)
 	if(!candy_open)
-		to_chat(user, "<span class='combat'>[pick(nao_consigoen)] I need to open it before eating!</span>")
+		to_chat(user, "<span class='combat'>[pick(cant_phrase)] I need to open it before eating!</span>")
 		return
 	..()
 

@@ -263,7 +263,7 @@ var/mob/FortLordHand
 			H.terriblethings = TRUE
 		if("Lord")
 			if(FortLords)
-				to_chat(src, "<span class='combatbold'>[pick(nao_consigoen)] There can't be two lords!</span>")
+				to_chat(src, "<span class='combatbold'>[pick(cant_phrase)] There can't be two lords!</span>")
 				return
 			FortLords = H
 			H.equip_to_slot_or_del(new /obj/item/weapon/claymore/bastard(H), slot_l_hand)
@@ -304,7 +304,7 @@ var/mob/FortLordHand
 				rings_account[C] = C.money_account
 		if("Lord Hand")
 			if(FortLordHand)
-				to_chat(src, "<span class='combatbold'>[pick(nao_consigoen)] There can't be two hands!</span>")
+				to_chat(src, "<span class='combatbold'>[pick(cant_phrase)] There can't be two hands!</span>")
 				return
 			FortLordHand = H
 			H.equip_to_slot_or_del(new /obj/item/weapon/claymore/bastard(H), slot_l_hand)

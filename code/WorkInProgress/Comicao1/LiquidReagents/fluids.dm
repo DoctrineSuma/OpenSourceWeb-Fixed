@@ -122,7 +122,7 @@
 		var/obj/reagent/R = src.liquid
 		if(R.reagents?.total_volume && H?.zone_sel?.selecting == "mouth")
 			if(H.wear_mask && H.wear_mask.flags & MASKCOVERSMOUTH)
-				to_chat(H, "<span class='combat'>[pick(nao_consigoen)] my mask is in the way!</span>")
+				to_chat(H, "<span class='combat'>[pick(cant_phrase)] my mask is in the way!</span>")
 			R.reagents.reaction(H, INGEST, override = R.depth)
 			visible_message("<span class='bname'>⠀[H]</span> drinks from \the [R]!</span>")
 			playsound(R, 'sound/items/drink.ogg', rand(10, 50), 1)
@@ -135,7 +135,7 @@
 			var/obj/reagent/R = O.liquid
 			if(R.reagents?.total_volume && H?.zone_sel?.selecting == "mouth")
 				if(H.wear_mask && H.wear_mask.flags & MASKCOVERSMOUTH)
-					to_chat(H, "<span class='combat'>[pick(nao_consigoen)] my mask is in the way!</span>")
+					to_chat(H, "<span class='combat'>[pick(cant_phrase)] my mask is in the way!</span>")
 				R.reagents.reaction(H, INGEST, override = R.depth)
 				visible_message("<span class='bname'>⠀[H]</span> drinks from \the [R]!</span>")
 				playsound(R, 'sound/items/drink.ogg', rand(10, 50), 1)

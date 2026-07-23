@@ -634,7 +634,7 @@
 			else
 				var/mob/living/carbon/human/HHH = usr
 				if(HHH.special == "weirdgait")
-					to_chat(HHH, "<span class='combat'>[pick(nao_consigoen)] I'm stuck!</span>")
+					to_chat(HHH, "<span class='combat'>[pick(cant_phrase)] I'm stuck!</span>")
 					return
 				usr.fixeye()
 				if(usr.facing_dir)

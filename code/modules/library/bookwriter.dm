@@ -42,7 +42,7 @@
 
 	establish_db_connection()
 	if(!dbcon.IsConnected())
-		to_chat(user, "<span class='combatbold'>[pick(nao_consigoen)]</span> Bookcases are not working properly, contact your local god-king!</font>")
+		to_chat(user, "<span class='combatbold'>[pick(cant_phrase)]</span> Bookcases are not working properly, contact your local god-king!</font>")
 		return
 
 	var/DBQuery/x_query = dbcon.NewQuery("INSERT INTO `erro_library` (`sqltitle`, `sqlauthor`, `sqlcontent`,`sqlcategory`) VALUES ([dbcon.Quote(sqltitle)], [dbcon.Quote(sqlauthor)],[dbcon.Quote(sqlcontent)],'[sqlcategory]')")
