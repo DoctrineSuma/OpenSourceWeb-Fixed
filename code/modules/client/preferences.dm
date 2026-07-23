@@ -22,9 +22,7 @@ var/global/list/special_roles = list( //keep synced with the defines BE_* in set
 var/const/MAX_SAVE_SLOTS = 10
 var/list/VicesList = list(vices)
 //used for alternate_option
-#define GET_RANDOM_JOB 0
-#define BE_ASSISTANT 1
-#define RETURN_TO_LOBBY 2
+
 #define LEGAL_RELIGION  "Gray Church"
 #define ILLEGAL_RELIGION "Thanati"
 

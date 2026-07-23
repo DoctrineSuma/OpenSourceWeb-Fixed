@@ -453,7 +453,7 @@ proc/blood_splatter(var/target,var/datum/reagent/blood/source,var/large)
 						H.bloody_body(src)
 						H.bloody_hands(src)
 						var/blinding = FALSE
-						if(place == BP_HEAD OR place == "face" OR place == BP_MOUTH)
+						if(place == BP_HEAD || place == "face" || place == BP_MOUTH)
 							blinding = TRUE
 							for(var/obj/item/I in list(H.head, H.glasses, H.wear_mask))
 								if(I && (I.body_parts_covered & EYES))

@@ -8,62 +8,62 @@
 	if(!client) return
 	if(doubleVisioned) return
 
-	var/tmp/obj/render_controller/R1 = new
+	var/obj/render_controller/R1 = new
 	R1.alpha = 128
 	R1.render_source = "all"
 	R1.plane = 4
 
-	var/tmp/obj/render_controller/R2 = new
+	var/obj/render_controller/R2 = new
 	R2.alpha = 65
 	R2.render_source = "all"
 	R2.plane = 5
 
-	var/tmp/obj/render_controller/R3 = new
+	var/obj/render_controller/R3 = new
 	R3.alpha = 78
 	R3.render_source = "mob"
 	R3.plane = 11
 
-	var/tmp/obj/render_controller/R4 = new
+	var/obj/render_controller/R4 = new
 	R4.alpha = 110
 	R4.render_source = "mob"
 	R4.plane = 12
 
-	var/tmp/obj/render_controller/R5 = new
+	var/obj/render_controller/R5 = new
 	R5.alpha = 90
 	R5.render_source = "all2"
 	R5.plane = 16
 
-	var/tmp/obj/render_controller/R6 = new
+	var/obj/render_controller/R6 = new
 	R6.alpha = 115
 	R6.render_source = "all2"
 	R6.plane = 17
 
-	var/tmp/obj/render_controller/R7 = new
+	var/obj/render_controller/R7 = new
 	R7.alpha = 90
 	R7.render_source = "all3"
 	R7.plane = 19
 
-	var/tmp/obj/render_controller/R8 = new
+	var/obj/render_controller/R8 = new
 	R8.alpha = 115
 	R8.render_source = "all3"
 	R8.plane = 20
 
-	var/tmp/obj/render_controller/R9 = new
+	var/obj/render_controller/R9 = new
 	R9.alpha = 90
 	R9.render_source = "all4"
 	R9.plane = 22
 
-	var/tmp/obj/render_controller/R10 = new
+	var/obj/render_controller/R10 = new
 	R10.alpha = 115
 	R10.render_source = "all4"
 	R10.plane = 23
 
-	var/tmp/obj/render_controller/R11 = new
+	var/obj/render_controller/R11 = new
 	R9.alpha = 90
 	R9.render_source = "all5"
 	R9.plane = 24
 
-	var/tmp/obj/render_controller/R12 = new
+	var/obj/render_controller/R12 = new
 	R10.alpha = 115
 	R10.render_source = "all5"
 	R10.plane = 25

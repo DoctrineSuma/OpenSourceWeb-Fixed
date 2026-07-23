@@ -1,4 +1,3 @@
-#define UNSETEMPTY(L) if (L && !length(L)) L = null
 /mob/living/carbon/human/var
 	enmaconhado = 0
 

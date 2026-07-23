@@ -224,7 +224,7 @@ var/list/cuckoldlist = list()
 
 	H.lastfucked = null
 	H.lfhole = ""
-	var/dat = "<META http-equiv='X-UA-Compatible' content='IE=edge' charset='UTF-8'><style type='text/css'> body {font-family: Times; cursor: url('http://lfwb.ru/Icons/pointer.cur'), auto;} a {text-decoration:none;outline: none;border: none;margin:-1px;} a:focus{outline:none;} a:hover {color:#0d0d0d;background:#505055;outline: none;border: none;} a.active { text-decoration:none; color:#533333;} a.inactive:hover {color:#0d0d0d;background:#bb0000} a.active:hover {color:#bb0000;background:#0f0f0f} a.inactive:hover { text-decoration:none; color:#0d0d0d; background:#bb0000}</style>"
+	var/dat = "<html><head><META http-equiv='X-UA-Compatible' content='IE=edge' charset='UTF-8'><style type='text/css'> body {font-family: Times; cursor: url('http://lfwb.ru/Icons/pointer.cur'), auto;} a {text-decoration:none;outline: none;border: none;margin:-1px;} a:focus{outline:none;} a:hover {color:#0d0d0d;background:#505055;outline: none;border: none;} a.active { text-decoration:none; color:#533333;} a.inactive:hover {color:#0d0d0d;background:#bb0000} a.active:hover {color:#bb0000;background:#0f0f0f} a.inactive:hover { text-decoration:none; color:#0d0d0d; background:#bb0000}</style></head>"
 	dat += "<body background bgColor=#0d0d0d text=#862525 alink=#777777 vlink=#777777 link=#777777>"
 	dat += "<title>Interactions</title><B><HR><FONT size=3>INTERACTIONS - [H.partner]</FONT></B><BR><HR>"
 	//var/ya = "&#1103;"
@@ -295,6 +295,7 @@ var/list/cuckoldlist = list()
 			dat += {"<font size=3><B>Vagina:</B></font><BR>"}
 			dat += {"<A href='?src=\ref[usr];interaction=mount'>Mount</A><BR><HR>"}
 
+	dat += "</body></html>"
 	//var/datum/browser/popup = new(usr, "interactions", "Interactions", 340, 480)
 	usr << browse(dat, "window=interactions;size=350x300;can_resize=0")
 	//popup.set_content(dat)

@@ -24,7 +24,7 @@
 
 /datum/reagent/dylovene/on_mob_life(var/mob/living/M as mob)
 	if(!M) M = holder.my_atom
-	M.adjustToxLoss(-3*REM)
+	M.adjustToxLoss(-3*REAGENTS_EFFECT_MULTIPLIER)
 	for(var/datum/reagent/R in M.reagents.reagent_list)
 		if(R != src)
 			M.reagents.remove_reagent(R.id,1)
@@ -43,14 +43,14 @@
 	if(!M)
 		M = holder.my_atom
 	if(M.health < -10 && M.health > -65)
-		M.adjustToxLoss(-1*REM)
-		M.adjustBruteLoss(-1*REM)
-		M.adjustFireLoss(-1*REM)
+		M.adjustToxLoss(-1*REAGENTS_EFFECT_MULTIPLIER)
+		M.adjustBruteLoss(-1*REAGENTS_EFFECT_MULTIPLIER)
+		M.adjustFireLoss(-1*REAGENTS_EFFECT_MULTIPLIER)
 	if(M.oxyloss > 35)
 		M.setOxyLoss(35)
 	if(M.losebreath > 3)
 		M.losebreath = 3
-	M.adjustHalLoss(-1*REM)
+	M.adjustHalLoss(-1*REAGENTS_EFFECT_MULTIPLIER)
 	if(prob(30))
 		M.AdjustParalysis(-1)
 		M.AdjustStunned(-1)
@@ -72,7 +72,7 @@
 	for(var/datum/organ/internal/org in M.internal_organs)
 		org.damage = max(0, org.damage-2)
 	if(prob(55))
-		M.adjustBruteLoss(-1*REM)
+		M.adjustBruteLoss(-1*REAGENTS_EFFECT_MULTIPLIER)
 	..()
 	return
 
@@ -80,14 +80,14 @@
 	if(!M)
 		M = holder.my_atom
 	if(M.health < -10 && M.health > -65)
-		M.adjustToxLoss(-1*REM)
-		M.adjustBruteLoss(-1*REM)
-		M.adjustFireLoss(-1*REM)
+		M.adjustToxLoss(-1*REAGENTS_EFFECT_MULTIPLIER)
+		M.adjustBruteLoss(-1*REAGENTS_EFFECT_MULTIPLIER)
+		M.adjustFireLoss(-1*REAGENTS_EFFECT_MULTIPLIER)
 	if(M.oxyloss > 35)
 		M.setOxyLoss(35)
 	if(M.losebreath > 3)
 		M.losebreath = 3
-	M.adjustHalLoss(-1*REM)
+	M.adjustHalLoss(-1*REAGENTS_EFFECT_MULTIPLIER)
 	if(prob(30))
 		M.AdjustParalysis(-1)
 		M.AdjustStunned(-1)
@@ -110,7 +110,7 @@
 	on_mob_life(var/mob/living/carbon/human/M as mob)
 		M.reagents.add_reagent("tramadol", 1)
 		if(prob(55))
-			M.adjustBruteLoss(-1*REM)
+			M.adjustBruteLoss(-1*REAGENTS_EFFECT_MULTIPLIER)
 		if(prob(40))
 			M.setHalLoss(0)
 		..()
@@ -203,7 +203,7 @@
 	for(var/datum/organ/external/org in M.organs)
 		org.painLW = 0
 	if(prob(55))
-		M.adjustBruteLoss(-1*REM)
+		M.adjustBruteLoss(-1*REAGENTS_EFFECT_MULTIPLIER)
 	..()
 	return
 
@@ -224,14 +224,14 @@
 	metabolization_rate = 2
 
 /datum/reagent/kelotane/reaction_mob(var/mob/living/M as mob, var/method=TOUCH, var/volume)
-	M.adjustFireLoss((volume-(volume*2))*REM)
+	M.adjustFireLoss((volume-(volume*2))*REAGENTS_EFFECT_MULTIPLIER)
 	..()
 	return
 
 /datum/reagent/kelotane/on_mob_life(var/mob/living/M as mob)
 	if(!M) M = holder.my_atom
 	if(prob(55))
-		M.adjustFireLoss(-2*REM)
+		M.adjustFireLoss(-2*REAGENTS_EFFECT_MULTIPLIER)
 	..()
 	return
 
@@ -247,14 +247,14 @@
 	if(!istype(M))
 		..()
 		return
-	M.heal_organ_damage(volume*REM,0)
+	M.heal_organ_damage(volume*REAGENTS_EFFECT_MULTIPLIER,0)
 	M.emote("scream")
 	return
 
 /datum/reagent/bicaridine/on_mob_life(var/mob/living/M as mob)
 	if(!M) M = holder.my_atom
 	if(prob(55))
-		M.adjustBruteLoss(-2*REM)
+		M.adjustBruteLoss(-2 * REAGENTS_EFFECT_MULTIPLIER)
 	..()
 	return
 
@@ -266,17 +266,18 @@
 	color = "#C8A5DC" // rgb: 200, 165, 220
 
 /datum/reagent/tricordazine/reaction_mob(var/mob/living/M, var/volume)
-	if(!M) M = holder.my_atom
-	M.adjustBruteLoss(-(2*volume)*REM)
-	M.adjustFireLoss(-(2*volume)*REM)
+	if(!M)
+		M = holder.my_atom
+	M.adjustBruteLoss(-(2*volume) * REAGENTS_EFFECT_MULTIPLIER)
+	M.adjustFireLoss(-(2*volume) * REAGENTS_EFFECT_MULTIPLIER)
 	..()
 	return
 
 /datum/reagent/tricordazine/on_mob_life(var/mob/living/M as mob)
 	if(!M) M = holder.my_atom
 	if(prob(55))
-		M.adjustBruteLoss(-2*REM)
-		M.adjustFireLoss(-2*REM)
+		M.adjustBruteLoss(-2 * REAGENTS_EFFECT_MULTIPLIER)
+		M.adjustFireLoss(-2 * REAGENTS_EFFECT_MULTIPLIER)
 	..()
 	return
 
@@ -307,11 +308,11 @@
 
 /datum/reagent/widowtear/on_mob_life(var/mob/living/M as mob)
 	if(!M) M = holder.my_atom
-	M.adjustToxLoss((0.1*volume)*REM)
-	M.adjustBruteLoss((0.1*volume)*REM)
+	M.adjustToxLoss((0.1*volume)*REAGENTS_EFFECT_MULTIPLIER)
+	M.adjustBruteLoss((0.1*volume)*REAGENTS_EFFECT_MULTIPLIER)
 	if(prob(25))
-		M.adjustOxyLoss(pick(1,3)*REM)
-		M.adjustToxLoss(pick(2,4)*REM)
+		M.adjustOxyLoss(pick(1,3)*REAGENTS_EFFECT_MULTIPLIER)
+		M.adjustToxLoss(pick(2,4)*REAGENTS_EFFECT_MULTIPLIER)
 	..()
 	return
 

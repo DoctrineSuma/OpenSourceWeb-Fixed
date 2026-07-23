@@ -712,9 +712,9 @@ var/turf/MiniSpawn
 						to_chat(world, "<span class='bname'>Крепость была покинута.</span>")
 						qdel(world)
 					else
-						to_chat(world,"<span class='passivebold'>[pick(nao_consigoen)]</span> <span class='passive'>Коматозник еще не позволил этой истории закончиться!</span>")
+						to_chat(world,"<span class='passivebold'>[pick(cant_phrase)]</span> <span class='passive'>Коматозник еще не позволил этой истории закончиться!</span>")
 				else
-					to_chat(world,"<span class='passivebold'>[pick(nao_consigoen)]</span> <span class='passive'>Коматозник еще не позволил этой истории закончиться!</span>")
+					to_chat(world,"<span class='passivebold'>[pick(cant_phrase)]</span> <span class='passive'>Коматозник еще не позволил этой истории закончиться!</span>")
 
 
 		return 1

@@ -1,4 +1,38 @@
-//This file was auto-corrected by findeclaration.exe on 25.5.2012 20:42:31
+#define subtypesof(prototype) (typesof(prototype) - prototype)
+
+// Helper macros to aid in optimizing lazy instantiation of lists.
+// All of these are null-safe, you can use them without knowing if the list var is initialized yet
+
+//Picks from the list, with some safeties, and returns the "default" arg if it fails
+#define DEFAULTPICK(L, default) ((istype(L, /list) && L:len) ? pick(L) : default)
+// Ensures L is initailized after this point
+#define LAZYINITLIST(L) if (!L) L = list()
+// Sets a L back to null iff it is empty
+#define UNSETEMPTY(L) if (L && !L.len) L = null
+// Removes I from list L, and sets I to null if it is now empty
+#define LAZYREMOVE(L, I) if(L) { L -= I; if(!length(L)) { L = null; } }
+// Adds I to L, initalizing L if necessary
+#define LAZYADD(L, I) if(!L) { L = list(); } L += I;
+// Insert I into L at position X, initalizing L if necessary
+#define LAZYINSERT(L, I, X) if(!L) { L = list(); } L.Insert(X, I);
+// Adds I to L, initalizing L if necessary, if I is not already in L
+#define LAZYDISTINCTADD(L, I) if(!L) { L = list(); } L |= I;
+// Sets L[A] to I, initalizing L if necessary
+#define LAZYSET(L, A, I) if(!L) { L = list(); } L[A] = I;
+// Reads I from L safely - Works with both associative and traditional lists.
+#define LAZYACCESS(L, I) (L ? (isnum(I) ? (I > 0 && I <= length(L) ? L[I] : null) : L[I]) : null)
+// Reads the length of L, returning 0 if null
+#define LAZYLEN(L) length(L)
+// Safely checks if I is in L
+#define LAZYISIN(L, I) (L ? (I in L) : FALSE)
+// Null-safe List.Cut() and discard.
+#define LAZYCLEARLIST(L) if(L) { L.Cut(); L = null; }
+// Reads L or an empty list if L is not a list.  Note: Does NOT assign, L may be an expression.
+#define SANITIZE_LIST(L) ( islist(L) ? L : list() )
+
+#define SOLID 1
+#define LIQUID 2
+#define GAS 3
 
 #define DEBUG
 
@@ -13,17 +47,9 @@
 #define DELAY_THROW 8
 #define DELAY_ALL (DELAY_MOVE|DELAY_ATTACK|DELAY_SPECIAL|DELAY_THROW)
 
-#define OR ||
-
 #define ARBITRARILY_LARGE_NUMBER 10000 //Used in delays.dm and vehicle.dm. Upper limit on delays
 #define ARBITRARILY_PLANCK_NUMBER 1.417*(10**32) //1.417×10^32. Because ARBITRARILY_LARGE_NUMBER is too small and INF is too large
 #define MAX_VALUE 65535
-
-#define R_IDEAL_GAS_EQUATION	8.31 //kPa*L/(K*mol)
-#define ONE_ATMOSPHERE		101.325	//kPa
-#define IDEAL_GAS_ENTROPY_CONSTANT 	1164	//(mol^3 * s^3) / (kg^3 * L). Equal to (4*pi/(avrogadro's number * planck's constant)^2)^(3/2) / (avrogadro's number * 1000 Liters per m^3).
-
-#define STEFAN_BOLTZMANN_CONSTANT    5.6704e-8 // W/(m^2*K^4).
 
 #define CELL_VOLUME 2500	//liters in a cell
 #define MOLES_CELLSTANDARD (ONE_ATMOSPHERE*CELL_VOLUME/(T20C*R_IDEAL_GAS_EQUATION))	//moles in a 2.5 m^3 cell at 101.325 Pa and 20 degC
@@ -99,7 +125,10 @@
 // By defining the effect multiplier this way, it'll exactly adjust
 // all effects according to how they originally were with the 0.4 metabolism
 #define REAGENTS_EFFECT_MULTIPLIER REAGENTS_METABOLISM / 0.4
+#define REM REAGENTS_EFFECT_MULTIPLIER
 
+#define FOOD_METABOLISM 0.4
+#define REAGENTS_OVERDOSE 30
 
 #define MINIMUM_AIR_RATIO_TO_SUSPEND 0.0000000000 //Previus: 0.05. If there is a lag significantly increased by several orders of magnitude.
 	//Minimum ratio of air that must move to/from a tile to suspend group processing
@@ -889,3 +918,44 @@ var/list/hit_appends = list("-OOF", "-ACK", "-UGH", "-HRNK", "-HURGH", "-GLORF")
 #define SLASH 1
 #define STAB 2
 #define BASH 3
+
+#define GLOBAL_PROC "some_magic_bullshit"
+
+#define INVOKE_ASYNC world.ImmediateInvokeAsync
+
+//defines that give qdel hints. these can be given as a return in destory() or by calling
+
+#define isvirtualmob(A) istype(A, /mob/observer/virtual)
+#define listequal(A, B) (A.len == B.len && !length(A^B))
+
+/proc/trange(rad = 0, turf/centre = null) //alternative to range (ONLY processes turfs and thus less intensive)
+	if(!centre)
+		return
+
+	var/turf/x1y1 = locate(((centre.x-rad)<1 ? 1 : centre.x-rad),((centre.y-rad)<1 ? 1 : centre.y-rad),centre.z)
+	var/turf/x2y2 = locate(((centre.x+rad)>world.maxx ? world.maxx : centre.x+rad),((centre.y+rad)>world.maxy ? world.maxy : centre.y+rad),centre.z)
+	return block(x1y1,x2y2)
+
+#define TimeOfGame (get_game_time())
+#define TimeOfTick (world.tick_usage*0.01*world.tick_lag)
+
+// Process status defines
+#define PROCESS_STATUS_IDLE 1
+#define PROCESS_STATUS_QUEUED 2
+#define PROCESS_STATUS_RUNNING 3
+#define PROCESS_STATUS_MAYBE_HUNG 4
+#define PROCESS_STATUS_PROBABLY_HUNG 5
+#define PROCESS_STATUS_HUNG 6
+
+// Process time thresholds
+#define PROCESS_DEFAULT_HANG_WARNING_TIME 	300 // 30 seconds
+#define PROCESS_DEFAULT_HANG_ALERT_TIME 	600 // 60 seconds
+#define PROCESS_DEFAULT_HANG_RESTART_TIME 	900 // 90 seconds
+#define PROCESS_DEFAULT_SCHEDULE_INTERVAL 	50  // 50 ticks
+#define PROCESS_DEFAULT_SLEEP_INTERVAL		2	// 2 ticks
+#define PROCESS_DEFAULT_CPU_THRESHOLD		90  // 90%
+
+// SCHECK macros
+// This references src directly to work around a weird bug with try/catch
+#define SCHECK_EVERY(this_many_calls) if(++src.calls_since_last_scheck >= this_many_calls) sleepCheck()
+#define SCHECK SCHECK_EVERY(50)
