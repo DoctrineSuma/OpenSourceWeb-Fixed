@@ -3,17 +3,19 @@
 #define UNCONSCIOUS 1
 #define DEAD        2
 
-// Bitflags defining which status effects could be or are inflicted on a mob.
-#define CANSTUN     0x1
-#define CANWEAKEN   0x2
-#define CANPARALYSE 0x4
-#define CANPUSH     0x8
-#define LEAPING     0x10
-#define PASSEMOTES  0x32    // Mob has a cortical borer or holders inside of it that need to see emotes.
-#define GODMODE     0x1000
-#define FAKEDEATH   0x2000  // Replaces stuff like changeling.changeling_fakedeath.
-#define NO_ANTAG    0x4000  // Players are restricted from gaining antag roles when occupying this mob
-#define XENO_HOST   0x8000  // Tracks whether we're gonna be a baby alien's mummy.
+//Bitflags defining which status effects could be or are inflicted on a mob
+#define CANSTUN				1
+#define CANWEAKEN			2
+#define CANPARALYSE			4
+#define CANPUSH				8
+#define LEAPING				16
+#define PASSEMOTES			32      //Mob has a cortical borer or holders inside of it that need to see emotes.
+#define GOTTAGOFAST			64
+#define GODMODE				4096
+#define FAKEDEATH			8192	//Replaces stuff like changeling.changeling_fakedeath
+#define DISFIGURED			16384	//I'll probably move this elsewhere if I ever get wround to writing a bitflag mob-damage system
+#define XENO_HOST			32768	//Tracks whether we're gonna be a baby alien's mummy.
+#define STATUS_NO_PAIN		65536
 
 // Grab levels.
 #define GRAB_PASSIVE    1
@@ -93,8 +95,6 @@
 
 
 #define MIN_SUPPLIED_LAW_NUMBER 15
-#define MAX_SUPPLIED_LAW_NUMBER 50
-
 #define MAX_SUPPLIED_LAW_NUMBER 50
 
 // NT's alignment towards the character

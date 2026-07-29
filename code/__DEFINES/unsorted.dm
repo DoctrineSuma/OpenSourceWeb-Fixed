@@ -3,33 +3,6 @@
 // Helper macros to aid in optimizing lazy instantiation of lists.
 // All of these are null-safe, you can use them without knowing if the list var is initialized yet
 
-//Picks from the list, with some safeties, and returns the "default" arg if it fails
-#define DEFAULTPICK(L, default) ((istype(L, /list) && L:len) ? pick(L) : default)
-// Ensures L is initailized after this point
-#define LAZYINITLIST(L) if (!L) L = list()
-// Sets a L back to null iff it is empty
-#define UNSETEMPTY(L) if (L && !L.len) L = null
-// Removes I from list L, and sets I to null if it is now empty
-#define LAZYREMOVE(L, I) if(L) { L -= I; if(!length(L)) { L = null; } }
-// Adds I to L, initalizing L if necessary
-#define LAZYADD(L, I) if(!L) { L = list(); } L += I;
-// Insert I into L at position X, initalizing L if necessary
-#define LAZYINSERT(L, I, X) if(!L) { L = list(); } L.Insert(X, I);
-// Adds I to L, initalizing L if necessary, if I is not already in L
-#define LAZYDISTINCTADD(L, I) if(!L) { L = list(); } L |= I;
-// Sets L[A] to I, initalizing L if necessary
-#define LAZYSET(L, A, I) if(!L) { L = list(); } L[A] = I;
-// Reads I from L safely - Works with both associative and traditional lists.
-#define LAZYACCESS(L, I) (L ? (isnum(I) ? (I > 0 && I <= length(L) ? L[I] : null) : L[I]) : null)
-// Reads the length of L, returning 0 if null
-#define LAZYLEN(L) length(L)
-// Safely checks if I is in L
-#define LAZYISIN(L, I) (L ? (I in L) : FALSE)
-// Null-safe List.Cut() and discard.
-#define LAZYCLEARLIST(L) if(L) { L.Cut(); L = null; }
-// Reads L or an empty list if L is not a list.  Note: Does NOT assign, L may be an expression.
-#define SANITIZE_LIST(L) ( islist(L) ? L : list() )
-
 #define SOLID 1
 #define LIQUID 2
 #define GAS 3
@@ -179,11 +152,8 @@
 #define PLASMA_MINIMUM_OXYGEN_PLASMA_RATIO	20
 #define PLASMA_OXYGEN_FULLBURN				10
 
-#define T0C 273.15					// 0degC
-#define T20C 293.15					// 20degC
 #define MAGMA 973.15					// MAGMA
 #define SURFACETEMP 250.15
-#define TCMB 2.7					// -270.3degC
 #define CAVEDIRT 243.15
 
 //XGM gas flags
@@ -443,11 +413,6 @@ var/MAX_EXPLOSION_RANGE = 14
 #define MUTE			2
 #define DEAF			4
 
-//mob/var/stat things
-#define CONSCIOUS	0
-#define UNCONSCIOUS	1
-#define DEAD		2
-
 // channel numbers for power
 #define EQUIP	1
 #define LIGHT	2
@@ -522,28 +487,7 @@ var/list/global_mutations = list() // list of hidden mutation things
 #define TOXLOSS 4
 #define OXYLOSS 8
 
-//Bitflags defining which status effects could be or are inflicted on a mob
-#define CANSTUN				1
-#define CANWEAKEN			2
-#define CANPARALYSE			4
-#define CANPUSH				8
-#define LEAPING				16
-#define PASSEMOTES			32      //Mob has a cortical borer or holders inside of it that need to see emotes.
-#define GOTTAGOFAST			64
-#define GODMODE				4096
-#define FAKEDEATH			8192	//Replaces stuff like changeling.changeling_fakedeath
-#define DISFIGURED			16384	//I'll probably move this elsewhere if I ever get wround to writing a bitflag mob-damage system
-#define XENO_HOST			32768	//Tracks whether we're gonna be a baby alien's mummy.
-#define STATUS_NO_PAIN		65536
-
 var/static/list/scarySounds = list('sound/weapons/thudswoosh.ogg','sound/weapons/Taser.ogg','sound/weapons/armbomb.ogg','sound/voice/hiss1.ogg','sound/voice/hiss2.ogg','sound/voice/hiss3.ogg','sound/voice/hiss4.ogg','sound/voice/hiss5.ogg','sound/voice/hiss6.ogg','sound/effects/Glassbr1.ogg','sound/effects/Glassbr2.ogg','sound/effects/Glassbr3.ogg','sound/items/Welder.ogg','sound/items/Welder2.ogg','sound/machines/airlock.ogg','sound/effects/clownstep1.ogg','sound/effects/clownstep2.ogg')
-
-//Grab levels
-#define GRAB_PASSIVE	1
-#define GRAB_AGGRESSIVE	2
-#define GRAB_NECK		3
-#define GRAB_UPGRADING	4
-#define GRAB_KILL		5
 
 //Security levels
 #define SEC_LEVEL_GREEN	0
@@ -789,22 +733,11 @@ var/list/be_special_flags = list(
 #define IMPTRACK_HUD	7 // tracking implant
 #define IMPMENTOR_HUD	8 // mentor   implant
 
-//Pulse levels, very simplified
-#define PULSE_NONE		0	//so !M.pulse checks would be possible
-#define PULSE_SLOW		1	//<60 bpm
-#define PULSE_NORM		2	//60-90 bpm
-#define PULSE_FAST		3	//90-120 bpm
-#define PULSE_2FAST		4	//>120 bpm
-#define PULSE_THREADY	5	//occurs during hypovolemic shock
 //feel free to add shit to lists below
 var/list/tachycardics = list("coffee", "epinephrine", "morphine", "nitroglycerin", "thirteenloko", "nicotine")	//increase heart rate
 var/list/bradycardics = list("neurotoxin", "cryoxadone", "clonexadone", "space_drugs", "stoxin")					//decrease heart rate
 var/list/heartstopper = list("potassium_phorochloride", "zombie_powder") //this stops the heart
 var/list/cheartstopper = list("potassium_chloride") //this stops the heart when overdose is met -- c = conditional
-
-//proc/get_pulse methods
-#define GETPULSE_HAND	0	//less accurate (hand)
-#define GETPULSE_TOOL	1	//more accurate (med scanner, sleeper, etc)
 
 var/list/RESTRICTED_CAMERA_NETWORKS = list( //Those networks can only be accessed by preexisting terminals. AIs and new terminals can't use them.
 	"thunder",
@@ -919,10 +852,6 @@ var/list/hit_appends = list("-OOF", "-ACK", "-UGH", "-HRNK", "-HURGH", "-GLORF")
 #define STAB 2
 #define BASH 3
 
-#define GLOBAL_PROC "some_magic_bullshit"
-
-#define INVOKE_ASYNC world.ImmediateInvokeAsync
-
 //defines that give qdel hints. these can be given as a return in destory() or by calling
 
 #define isvirtualmob(A) istype(A, /mob/observer/virtual)
@@ -935,27 +864,3 @@ var/list/hit_appends = list("-OOF", "-ACK", "-UGH", "-HRNK", "-HURGH", "-GLORF")
 	var/turf/x1y1 = locate(((centre.x-rad)<1 ? 1 : centre.x-rad),((centre.y-rad)<1 ? 1 : centre.y-rad),centre.z)
 	var/turf/x2y2 = locate(((centre.x+rad)>world.maxx ? world.maxx : centre.x+rad),((centre.y+rad)>world.maxy ? world.maxy : centre.y+rad),centre.z)
 	return block(x1y1,x2y2)
-
-#define TimeOfGame (get_game_time())
-#define TimeOfTick (world.tick_usage*0.01*world.tick_lag)
-
-// Process status defines
-#define PROCESS_STATUS_IDLE 1
-#define PROCESS_STATUS_QUEUED 2
-#define PROCESS_STATUS_RUNNING 3
-#define PROCESS_STATUS_MAYBE_HUNG 4
-#define PROCESS_STATUS_PROBABLY_HUNG 5
-#define PROCESS_STATUS_HUNG 6
-
-// Process time thresholds
-#define PROCESS_DEFAULT_HANG_WARNING_TIME 	300 // 30 seconds
-#define PROCESS_DEFAULT_HANG_ALERT_TIME 	600 // 60 seconds
-#define PROCESS_DEFAULT_HANG_RESTART_TIME 	900 // 90 seconds
-#define PROCESS_DEFAULT_SCHEDULE_INTERVAL 	50  // 50 ticks
-#define PROCESS_DEFAULT_SLEEP_INTERVAL		2	// 2 ticks
-#define PROCESS_DEFAULT_CPU_THRESHOLD		90  // 90%
-
-// SCHECK macros
-// This references src directly to work around a weird bug with try/catch
-#define SCHECK_EVERY(this_many_calls) if(++src.calls_since_last_scheck >= this_many_calls) sleepCheck()
-#define SCHECK SCHECK_EVERY(50)
