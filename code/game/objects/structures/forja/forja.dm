@@ -46,7 +46,7 @@
 	reagents.reaction(H, INGEST)
 	reagents.trans_to(H, 2)
 	visible_message("<span class='bname'>[H]</span> drinks from \the [src]!</span>")
-	H.bladder += rand(1,3) //For peeing
+	H.bladder += BLADDERFILL_FACTOR
 	H.hidratacao += 10
 	playsound(M.loc, 'sound/items/drink.ogg', rand(10, 50), 1)
 	return

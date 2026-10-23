@@ -6,7 +6,11 @@
 #define THIRST_LEVEL_DEHYDRATED 50
 
 // Factor of how fast mob nutrition decreases
-#define HUNGER_FACTOR 0.18
+#define HUNGER_FACTOR 0.8
 
-// Fator de sede no cara fodaseee
-#define THIRST_FACTOR 0.5
+// Thirst factor of the guy
+#define THIRST_FACTOR 0.2
+
+// poopenpissen
+#define BLADDERFILL_FACTOR 1 // You can make it rand(1,3) as it was before
+#define BOWELFILL_FACTOR 1

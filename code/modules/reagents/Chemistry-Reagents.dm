@@ -255,7 +255,7 @@ datum/reagent/water
 	on_mob_life(var/mob/living/carbon/human/M as mob)
 		//M.bladder += nutriment_factor
 		M.hidratacao += 30
-		M.bowels += nutriment_factor * REM
+		M.bowels += (nutriment_factor * REM)/2
 		var/datum/reagent/blood/B = locate() in M.vessel.reagent_list //Grab some blood
 		if(B)
 			B.volume += 4
@@ -645,7 +645,7 @@ datum/reagent/sugar
 
 	on_mob_life(var/mob/living/M as mob)
 		M.nutrition += 1*REM
-		M.bowels += nutriment_factor * REM
+		M.bowels += (nutriment_factor * REM)/2
 		..()
 		return
 
@@ -779,7 +779,7 @@ datum/reagent/virus_food
 	on_mob_life(var/mob/living/M as mob)
 		if(!M) M = holder.my_atom
 		M.nutrition += nutriment_factor*REM
-		M.bowels += nutriment_factor * REM
+		M.bowels += (nutriment_factor * REM)/2
 		..()
 		return
 
@@ -1698,7 +1698,7 @@ datum/reagent/nutriment
 		if(!M) M = holder.my_atom
 		if(prob(50)) M.heal_organ_damage(1,0)
 		M.nutrition += nutriment_factor	// For hunger and fatness
-		M.bowels += nutriment_factor * REM
+		M.bowels += (nutriment_factor * REM)/2
 		..()
 		return
 
@@ -1874,7 +1874,7 @@ datum/reagent/coco
 
 	on_mob_life(var/mob/living/M as mob)
 		M.nutrition += nutriment_factor
-		M.bowels += nutriment_factor * REM
+		M.bowels += (nutriment_factor * REM)/2
 		..()
 		return
 
@@ -1890,7 +1890,7 @@ datum/reagent/hot_coco
 		if (M.bodytemperature < 310)//310 is the normal bodytemp. 310.055
 			M.bodytemperature = min(310, M.bodytemperature + (5 * TEMPERATURE_DAMAGE_COEFFICIENT))
 		M.nutrition += nutriment_factor
-		M.bowels += nutriment_factor * REM
+		M.bowels += (nutriment_factor * REM)/2
 		..()
 		return
 
@@ -1937,12 +1937,12 @@ datum/reagent/sprinkles
 
 	on_mob_life(var/mob/living/M as mob)
 		M.nutrition += nutriment_factor
-		M.bowels += nutriment_factor * REM
+		M.bowels += (nutriment_factor * REM)/2
 		if(istype(M, /mob/living/carbon/human) && M.job in list("Security Officer", "Head of Security", "Detective", "Warden"))
 			if(!M) M = holder.my_atom
 			M.heal_organ_damage(1,1)
 			M.nutrition += nutriment_factor
-			M.bowels += nutriment_factor * REM
+			M.bowels += (nutriment_factor * REM)/2
 			..()
 			return
 
@@ -1977,7 +1977,7 @@ datum/reagent/cornoil
 
 	on_mob_life(var/mob/living/M as mob)
 		M.nutrition += nutriment_factor
-		M.bowels += nutriment_factor * REM
+		M.bowels += (nutriment_factor * REM)/2
 		..()
 		return
 	reaction_turf(var/turf/simulated/T, var/volume)
@@ -2025,7 +2025,7 @@ datum/reagent/dry_ramen
 
 	on_mob_life(var/mob/living/M as mob)
 		M.nutrition += nutriment_factor
-		M.bowels += nutriment_factor * REM
+		M.bowels += (nutriment_factor * REM)/2
 		..()
 		return
 
@@ -2039,7 +2039,7 @@ datum/reagent/hot_ramen
 
 	on_mob_life(var/mob/living/M as mob)
 		M.nutrition += nutriment_factor
-		M.bowels += nutriment_factor * REM
+		M.bowels += (nutriment_factor * REM)/2
 		if (M.bodytemperature < 310)//310 is the normal bodytemp. 310.055
 			M.bodytemperature = min(310, M.bodytemperature + (10 * TEMPERATURE_DAMAGE_COEFFICIENT))
 		..()
@@ -2055,7 +2055,7 @@ datum/reagent/hell_ramen
 
 	on_mob_life(var/mob/living/M as mob)
 		M.nutrition += nutriment_factor
-		M.bowels += nutriment_factor * REM
+		M.bowels += (nutriment_factor * REM)/2
 		M.bodytemperature += 10 * TEMPERATURE_DAMAGE_COEFFICIENT
 		..()
 		return
@@ -2070,7 +2070,7 @@ datum/reagent/flour
 
 	on_mob_life(var/mob/living/M as mob)
 		M.nutrition += nutriment_factor
-		M.bowels += nutriment_factor * REM
+		M.bowels += (nutriment_factor * REM)/2
 		..()
 		return
 
@@ -2089,7 +2089,7 @@ datum/reagent/rice
 
 	on_mob_life(var/mob/living/M as mob)
 		M.nutrition += nutriment_factor
-		M.bowels += nutriment_factor * REM
+		M.bowels += (nutriment_factor * REM)/2
 		..()
 		return
 
@@ -2103,7 +2103,7 @@ datum/reagent/cherryjelly
 
 	on_mob_life(var/mob/living/M as mob)
 		M.nutrition += nutriment_factor
-		M.bowels += nutriment_factor * REM
+		M.bowels += (nutriment_factor * REM)/2
 		..()
 		return
 
@@ -2141,7 +2141,7 @@ datum/reagent/drink
 		return
 
 datum/reagent/drink/reaction_mob(var/mob/living/M as mob, var/method=INGEST, var/volume)
-	M.bladder += nutriment_factor/2
+	M.bladder += nutriment_factor/4
 	..()
 	return
 
@@ -2673,7 +2673,7 @@ datum/reagent/ethanol
 
 	on_mob_life(var/mob/living/carbon/human/M as mob)
 		M:nutrition += nutriment_factor
-		M.bowels += nutriment_factor * REM
+		M.bowels += (nutriment_factor * REM)/2
 		holder.remove_reagent(src.id, FOOD_METABOLISM)
 		if(M.vice == "Alcoholic")
 			M.viceneed = 0

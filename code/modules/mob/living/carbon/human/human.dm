@@ -96,8 +96,8 @@
 
 	prev_gender = gender // Debug for plural genders
 	make_blood()
-	bladder = rand(0,100)
-	bowels = rand(0, 100)
+	bladder = rand(0, 35)
+	bowels = rand(0, 35)
 	potenzia = roll("3d6+5")
 	resistenza = (prob(80) ? rand(150, 300) : pick(rand(10, 100), rand(350,600)))
 	init_skills()
