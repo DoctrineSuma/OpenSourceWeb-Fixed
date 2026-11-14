@@ -140,13 +140,16 @@ Please contact me on #coderbus IRC. ~Carn x
 #define R_HAND_LAYER			28
 #define TAIL_LAYER				29      //bs12 specific. this hack is probably gonna come back to haunt me
 #define TARGETED_LAYER			30      //BS12: Layer for the target overlay from weapon targeting system
+#undef FIRE_LAYER
 #define FIRE_LAYER				31      //If you're on fire
 #define COLDBREATH_LAYER		32
 #define SMELLING_LAYER			33
 #define TYPINGINDICATOR_LAYER   34
+#undef USERLESS_LAYER
 #define USERLESS_LAYER			35
 #define ARTERY_LAYER			36
 #define AIMED_LAYER				38
+#undef BLOOD_LAYER
 #define BLOOD_LAYER				39
 #define WATER_LAYER				41
 #define RIPPLE_LAYER			42

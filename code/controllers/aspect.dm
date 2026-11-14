@@ -14,7 +14,6 @@ var/list/allClothing = list()
     allClothing.Remove(src)
     ..()
 
-#define subtypesof(prototype) (typesof(prototype) - prototype)
 /datum/controller/gameticker/proc/pick_round_event()
 	var/event_type = pick(subtypesof(/datum/round_event))
 	if (event_type)

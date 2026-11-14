@@ -1,4 +1,3 @@
-#define LEGAL_RELIGION	"Gray Church"
 /mob
 	density = 1
 	layer = 4.0

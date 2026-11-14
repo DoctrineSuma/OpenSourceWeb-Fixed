@@ -296,10 +296,6 @@ var/MAX_EXPLOSION_RANGE = 14
 #define THERMAL_PROTECTION_HAND_LEFT	0.025
 #define THERMAL_PROTECTION_HAND_RIGHT	0.025
 
-//bitflags for mutations
-	// Extra powers:
-#define SCREAM			(1<<11)	// supersonic screaming (25%)
-#define EXPLOSIVE		(1<<12)	// exploding on-demand (15%)
 
 // String identifiers for associative list lookup
 
@@ -491,9 +487,6 @@ var/list/liftable_structures = list(\
 
 //Some mob defines below
 
-#define BORGMESON 1
-#define BORGTHERM 2
-#define BORGXRAY  4
 
 //some arbitrary defines to be used by self-pruning global lists. (see master_controller)
 #define PROCESS_KILL 26	//Used to trigger removal from a processing list
@@ -508,11 +501,6 @@ var/list/TAGGERLOCATIONS = list("Disposals",
 	"Robotics", "HoP Office", "Library", "Chapel", "Theatre",
 	"Bar", "Kitchen", "Hydroponics", "Janitor Closet","Genetics")
 
-#define HOSTILE_STANCE_IDLE 1
-#define HOSTILE_STANCE_ALERT 2
-#define HOSTILE_STANCE_ATTACK 3
-#define HOSTILE_STANCE_ATTACKING 4
-#define HOSTILE_STANCE_TIRED 5
 
 #define ROUNDSTART_LOGOUT_REPORT_TIME 6000 //Amount of time (in deciseconds) after the rounds starts, that the player disconnect report is issued.
 
@@ -520,20 +508,7 @@ var/list/TAGGERLOCATIONS = list("Disposals",
 
 #define CUT 		"cut"
 #define BRUISE		"bruise"
-#define BRUTE		"brute"
-#define BURN		"fire"
-#define TOX			"tox"
-#define OXY			"oxy"
-#define CLONE		"clone"
-#define HALLOSS		"halloss"
 
-#define STUN		"stun"
-#define WEAKEN		"weaken"
-#define PARALYZE	"paralize"
-#define IRRADIATE	"irradiate"
-#define STUTTER		"stutter"
-#define EYE_BLUR	"eye_blur"
-#define DROWSY		"drowsy"
 
 ///////////////////ORGAN DEFINES///////////////////
 
@@ -549,7 +524,6 @@ var/list/TAGGERLOCATIONS = list("Disposals",
 #define ORGAN_ARTERY 4096
 #define ORGAN_TENDON 	8192
 
-#define ROUNDSTART_LOGOUT_REPORT_TIME 6000 //Amount of time (in deciseconds) after the rounds starts, that the player disconnect report is issued.
 
 //Please don't edit these values without speaking to Errorage first	~Carn
 //Admin Permissions
@@ -626,8 +600,6 @@ var/list/be_special_flags = list(
 
 //Languages!
 
-#define LEFT 1
-#define RIGHT 2
 
 // for secHUDs and medHUDs and variants. The number is the location of the image on the list hud_list of humans.
 #define HEALTH_HUD		1 // dead, alive, sick, health status

@@ -1165,6 +1165,7 @@ var/list/WALLITEMS = list(
 	if (O.edge) return 1
 	return 0
 
+#undef DELTA_CALC
 #define DELTA_CALC max(((max(world.tick_usage, world.cpu) / 100) * max(1,1)), 1)
 
 /proc/stoplag()

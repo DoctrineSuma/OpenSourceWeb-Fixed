@@ -83,7 +83,7 @@ client/proc/invite_ckey()
 
 
 client/proc/remove_whitelist()
-	var/ckeyy = ckey(input("Who do you want to ban?", "Farweb")) as null|text
+	var/ckeyy = ckey(input("Who do you want to ban?", "Farweb"))
 	var/reason = input("Why are you doing this for?", "Farweb") as null|message
 	var/DBQuery/query = dbcon.NewQuery("INSERT INTO bansfarweb (ckey, reason, adminckey, isbanned) VALUES (\"[ckeyy]\", \"[reason]\", \"[usr.ckey]\", \"1\")")
 	if(!query.Execute())

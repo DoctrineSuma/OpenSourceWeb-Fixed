@@ -4,7 +4,9 @@
 
 // these define the time taken for the shuttle to get to SS13
 // and the time before it leaves again
+#undef SHUTTLEARRIVETIME
 #define SHUTTLEARRIVETIME 21		// 10 minutes = 600 seconds
+#undef SHUTTLETRANSITTIME
 #define SHUTTLETRANSITTIME 21		// 2 minutes = 120 seconds
 
 var/global/datum/train_controller/train_shuttle/train_shuttle

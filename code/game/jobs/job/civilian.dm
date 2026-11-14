@@ -715,7 +715,7 @@
 	var/response = input(usr, "Who?", "Who?") in lista
 	if(!response)
 		return
-	var/responseTwo = sanitize(input(usr, "What name?", "What name?")) as text
+	var/responseTwo = sanitize(input(usr, "What name?", "What name?"))
 	if(!length(responseTwo))
 		return
 	if(stat) return

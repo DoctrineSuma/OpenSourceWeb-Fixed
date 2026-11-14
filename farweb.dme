@@ -1341,7 +1341,6 @@
 #include "code\modules\mining\satchel_ore_boxdm.dm"
 #include "code\modules\mob\abilities.dm"
 #include "code\modules\mob\death.dm"
-#include "code\modules\mob\defines.dm"
 #include "code\modules\mob\emote.dm"
 #include "code\modules\mob\hear_say.dm"
 #include "code\modules\mob\inventory.dm"

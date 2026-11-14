@@ -10,7 +10,7 @@
 	very effective when randomly roaming and destroying
 **/
 
-#define cycle_pause 15 //min 1
+#undef viewrange
 #define viewrange 6 //min 2
 
 /mob/living/carbon/human/zombiebot

@@ -5,27 +5,19 @@ var/const/VIRTUAL_ABILITY_ALL  = (~VIRTUAL_ABILITY_NONE)
 
 #define DEBUG
 // Turf-only flags.
-#define NOJAUNT 1 // This is used in literally one place, turf.dm, to block ethereal jaunt.
 
+#undef TRANSITIONEDGE
 #define TRANSITIONEDGE 7 // Distance from edge to move to another z-level.
 
 // Invisibility constants.
-#define INVISIBILITY_LIGHTING    20
-#define INVISIBILITY_LEVEL_ONE   35
-#define INVISIBILITY_LEVEL_TWO   45
-#define INVISIBILITY_OBSERVER    60
 #define INVISIBILITY_EYE         61
 #define INVISIBILITY_SYSTEM      99
 
-#define SEE_INVISIBLE_LIVING     25
-#define SEE_INVISIBLE_LEVEL_ONE  INVISIBILITY_LEVEL_ONE
-#define SEE_INVISIBLE_LEVEL_TWO  INVISIBILITY_LEVEL_TWO
+#undef SEE_INVISIBLE_OBSERVER
 #define SEE_INVISIBLE_OBSERVER   INVISIBILITY_EYE
 
 #define SEE_IN_DARK_DEFAULT 8
 
-#define SEE_INVISIBLE_MINIMUM 5
-#define INVISIBILITY_MAXIMUM 100
 
 /datum/proc/get_client()
 	return null
