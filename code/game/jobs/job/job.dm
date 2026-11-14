@@ -60,15 +60,6 @@
 	var/jobdesc // use html_decode if you want to display anywhere other than html.
 	var/jobdescbr
 
-/mob/living/carbon/human/proc/playambi()
-	var/area/newarea = get_area(src.loc)
-	if(src.client)
-		if(!src.client.ambience_playing)
-			src.client.ambience_playing = 1
-			src << sound(pick(newarea.forced_ambience), repeat = 1, wait = 1, volume = 30, channel = 2)
-			spawn(3600)
-				src.client.ambience_playing = 0
-
 /mob/living/carbon/human/proc/qualarea()
 	var/area/newarea = get_area(src.loc)
 	if(lastarea)
@@ -102,7 +93,6 @@
 	if(available_in_days(C) == 0)
 		return 1	//Available in 0 days = available right now = player is old enough to play.
 	return 0
-
 
 /datum/job/proc/available_in_days(client/C)
 	if(!C)

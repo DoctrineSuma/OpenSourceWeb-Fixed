@@ -3,7 +3,6 @@
 
 	The zombie's AI is separated into two loops:
 
-
 	head's version of this code used A* search for when the target
 	moved out of the zombie's range
 
@@ -13,10 +12,6 @@
 
 #define cycle_pause 15 //min 1
 #define viewrange 6 //min 2
-
-#define ZOMBIE_SLEEP 0
-#define ZOMBIE_ATTACK 1
-#define ZOMBIE_IDLE 2
 
 /mob/living/carbon/human/zombiebot
 	name = "Unknown"
@@ -36,8 +31,6 @@
 	var/list/path_idle = new/list()
 	var/list/objects
 	health = 100
-
-
 
 	New()
 		..()
@@ -185,7 +178,6 @@
 
 			if(target.stat == 2 || iszombie(target))
 				target = null
-
 
 			var/distance = get_dist(src, target)
 

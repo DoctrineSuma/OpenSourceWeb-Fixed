@@ -120,8 +120,6 @@
 			amount++
 		icon_state = "hole[min(3, amount)]"
 
-
-
 /obj/structure/pit/proc/open()
 	name = "pit"
 	desc = "Watch your step, partner."
@@ -152,36 +150,6 @@
 
 /obj/structure/pit/return_air()
 	return open
-
-/obj/structure/pit/proc/digout(mob/escapee)
-	var/breakout_time = 1 //2 minutes by default
-
-	if(open)
-		return
-
-	if(escapee.stat || escapee.restrained())
-		return
-
-	escapee.setClickCooldown(100)
-	to_chat(escapee, "<span class='warning'>You start digging your way out of \the [src] (this will take about [breakout_time] minute\s)</span>")
-	visible_message("<span class='danger'>Something is scratching its way out of \the [src]!</span>")
-
-	for(var/i in 1 to (6*breakout_time * 2)) //minutes * 6 * 5seconds * 2
-		playsound(src.loc, 'sound/weapons/bite.ogg', 100, 1)
-
-		if(!do_after(escapee, 50))
-			to_chat(escapee, "<span class='warning'>You have stopped digging.</span>")
-			return
-		if(open)
-			return
-
-		if(i == 6*breakout_time)
-			to_chat(escapee, "<span class='warning'>Halfway there...</span>")
-
-	to_chat(escapee, "<span class='warning'>You successfuly dig yourself out!</span>")
-	visible_message("<span class='danger'>\the [escapee] emerges from \the [src]!</span>")
-	playsound(src.loc, 'sound/effects/squelch1.ogg', 100, 1)
-	open()
 
 /obj/structure/pit/closed
 	name = "mound"

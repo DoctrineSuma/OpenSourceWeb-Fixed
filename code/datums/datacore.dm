@@ -1,5 +1,3 @@
-/hook/startup/proc/createDatacore()
-	return 1
 
 /obj/effect/datacore/proc/manifest(var/nosleep = 0)
 	spawn()
@@ -34,7 +32,6 @@
 			assignment = "Unassigned"
 
 		var/id = add_zero(num2hex(rand(1, 1.6777215E7)), 6)	//this was the best they could come up with? A large random number? *sigh*
-
 
 		//General Record
 		var/datum/data/record/G = new()
@@ -106,7 +103,6 @@
 		L.fields["image"]		= getFlatIcon(H,0)	//This is god-awful
 		locked += L
 	return
-
 
 proc/get_id_photo(var/mob/living/carbon/human/H)
 	var/icon/preview_icon = null

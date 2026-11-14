@@ -213,15 +213,6 @@
 	if(rotting)
 		to_chat(usr, "<span class='warning'>There is fungus growing on [src].</span>")
 
-/turf/simulated/wall/proc/generate_overlays()
-	var/alpha_inc = 256 / damage_overlays.len
-
-	for(var/i = 1; i <= damage_overlays.len; i++)
-		var/image/img = image(icon = 'icons/turf/walls.dmi', icon_state = "overlay_damage")
-		img.blend_mode = BLEND_MULTIPLY
-		img.alpha = (i * alpha_inc) - 1
-		damage_overlays[i] = img
-
 /turf/simulated/wall/proc/damage_overlay()
 	var/image/img = image(icon = 'icons/turf/bholes.dmi', icon_state = pick("bhole1","bhole2","bhole3","bhole4"))
 	img.pixel_x = rand(1,32)
@@ -356,7 +347,6 @@
 
 	return src.attack_hand(user)
 
-
 /turf/simulated/wall/attack_animal(mob/living/M as mob)
 	if(M.wall_smash)
 		if (istype(src, /turf/simulated/wall/r_wall) && !rotting)
@@ -457,7 +447,6 @@
 		return
 	src.add_fingerprint(user)
 	climbWall(user)
-
 
 /*
 /turf/simulated/wall/attack_hand(mob/living/carbon/human/user as mob)

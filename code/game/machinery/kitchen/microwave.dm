@@ -16,7 +16,6 @@
 	var/niggabi
 	plane = 21
 
-
 /obj/machinery/microwave/south
 	pixel_y = -32
 
@@ -28,7 +27,6 @@
 
 /obj/machinery/microwave/west
 	pixel_x = -32
-
 
 // see code/modules/food/recipes_microwave.dm for recipes
 
@@ -67,7 +65,6 @@
 /obj/machinery/microwave/process()
 	if(operating)
 		playsound(src, 'sound/webbers/bigfireloop.ogg', 100, wait=1, repeat=0)
-
 
 /obj/machinery/microwave/attackby(var/obj/item/O as obj, var/mob/user as mob)
 	if(operating)
@@ -193,8 +190,6 @@
 	onclose(user, "microwave")
 	return
 
-
-
 /***********************************
 *   Microwave Menu Handling/Cooking
 ************************************/
@@ -240,15 +235,6 @@
 	for (var/i=1 to seconds)
 		sleep(10)
 	return 1
-
-/obj/machinery/microwave/proc/has_extra_item()
-	for (var/obj/O in contents)
-		if ( \
-				!istype(O,/obj/item/weapon/reagent_containers/food) && \
-				!istype(O, /obj/item/weapon/grown) \
-			)
-			return 1
-	return 0
 
 /obj/machinery/microwave/proc/start()
 	src.operating = 1

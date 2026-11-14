@@ -1,90 +1,10 @@
 // Garbage collection testing/debugging/profiling code
 
-/client/proc/qdel_toggle()
-	set name = "(GC) Toggle Queueing"
-	set desc = "Toggle qdel usage between normal and force del()."
-	set category = "Debug"
-
-	if(!check_rights(R_DEBUG))
-		return
-
-	garbageCollector.del_everything = !garbageCollector.del_everything
-//	to_chat(world, "<b>GC: qdel turned [garbageCollector.del_everything ? "off" : "on"].</b>")
-	log_admin("[key_name(usr)] turned qdel [garbageCollector.del_everything ? "off" : "on"].")
-	message_admins("\blue [key_name_admin(usr)] turned qdel [garbageCollector.del_everything ? "off" : "on"].", 1)
-
-/client/proc/gc_toggle_profiling()
-	set name = "(GC) Toggle Profiling"
-	set desc = "Toggle profiling of deletion methods"
-	set category = "Debug"
-
-	if(!check_rights(R_DEBUG))
-		return
-
-	del_profiling = !del_profiling
-	log_admin("[key_name(usr)] turned deletion profiling [del_profiling ? "on" : "off"].")
-	message_admins("\blue [key_name_admin(usr)] turned deletion profiling [del_profiling ? "on" : "off"].", 1)
-
-/client/proc/gc_show_del_report()
-	set name = "(GC) Show Del Report"
-	set desc = "Show report of deletions seen while profiling"
-	set category = "Debug"
-
-	if(!check_rights(R_DEBUG))
-		return
-
-	delete_profiler_report()
-
-/client/proc/gc_dump_hdl()
-	set name = "(GC) Hard Del List"
-	set desc = "List types that are hard del()'d by the GC."
-	set category = "Debug"
-
-	if(!check_rights(R_DEBUG))
-		return
-
-	if(!gc_hard_del_types || !gc_hard_del_types.len)
-		to_chat(usr, "<span class='notice'>No hard del()'d types found.</span>")
-		return
-
-	to_chat(usr, "Types hard del()'d by the GC:")
-	for(var/A in gc_hard_del_types)
-		to_chat(usr, "[A]")
-
 // Profiling stuff
 var/global/del_profiling = 0
 var/global/list/dels_profiled = list()
 var/global/list/gdels_profiled = list()
 var/global/list/ghdels_profiled = list()
-
-/proc/delete_profile(var/datum/D)
-	if(!ticker || (ticker.current_state < 3)) return
-	var/code = 0
-	var/type = D.type
-	if(isnull(D.gcDestroyed))
-		code = 0
-	else if(D.hard_deleted == -1)
-		code = 0 // A non-queued hard deletion is counted as a straight deletion
-	else if(D.hard_deleted)
-		code = 1
-	else
-		code = 2
-	switch(code)
-		if(0) // Directly deleted (skipped the GC queue entirely)
-			if (!("[type]" in dels_profiled))
-				dels_profiled["[type]"] = 0
-
-			dels_profiled["[type]"] += 1
-		if(1) // Hard-deleted by the GC
-			if (!("[type]" in ghdels_profiled))
-				ghdels_profiled["[type]"] = 0
-
-			ghdels_profiled["[type]"] += 1
-		if(2) // qdel'd and garbage collected by BYOND
-			if (!("[type]" in gdels_profiled))
-				gdels_profiled["[type]"] = 0
-
-			gdels_profiled["[type]"] += 1
 
 /proc/delete_profiler_report()
 	var/dat = "<html><head><title>Deletion Profiler Report</title></head>"

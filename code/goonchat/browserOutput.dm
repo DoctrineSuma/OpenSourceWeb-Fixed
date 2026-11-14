@@ -84,7 +84,6 @@ GLOBAL_DATUM_INIT(iconCache, /savefile, new("data/iconCache.sav")) //Cache of ic
 	if(data)
 		ehjax_send(data = data)
 
-
 //Called on chat output done-loading by JS.
 /datum/chatOutput/proc/doneLoading()
 	if(loaded)
@@ -93,7 +92,6 @@ GLOBAL_DATUM_INIT(iconCache, /savefile, new("data/iconCache.sav")) //Cache of ic
 	testing("Chat loaded for [owner.ckey]")
 	loaded = TRUE
 	showChat()
-
 
 	for(var/message in messageQueue)
 		to_chat(owner, message)
@@ -216,18 +214,6 @@ GLOBAL_DATUM_INIT(iconCache, /savefile, new("data/iconCache.sav")) //Cache of ic
 			return
 		// url_encode it TWICE, this way any UTF-8 characters are able to be decoded by the Javascript.
 		send_output(C, url_encode(message), "browseroutput:output")
-
-/proc/grab_client(target)
-	if(istype(target, /client))
-		return target
-	else if(ismob(target))
-		var/mob/M = target
-		if(M.client)
-			return M.client
-	else if(istype(target, /datum/mind))
-		var/datum/mind/M = target
-		if(M.current && M.current.client)
-			return M.current.client
 
 /proc/generatehintbox(var/imgUrl = "", var/description = "")
 	var/newId = rand(1, 1000)

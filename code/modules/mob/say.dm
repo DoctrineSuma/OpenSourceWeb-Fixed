@@ -64,8 +64,6 @@ client/var/say_focus = FALSE
 	var/mob/living/carbon/human/H = src
 	H.update_saychat()
 
-
-
 /mob/verb/me_verb(message as text)
 	set name = "Me"
 	set category = "IC"
@@ -108,7 +106,6 @@ client/var/say_focus = FALSE
 	for(var/mob/M in player_list)
 		if(M.client && M.client.holder && (M.client.prefs.toggles & CHAT_DEAD) ) // Show the message to admins/mods with deadchat toggled on
 			to_chat(M, rendered)	//Admins can hear deadchat, if they choose to, no matter if they're blind/deaf or not.
-
 
 	return
 
@@ -158,18 +155,9 @@ client/var/say_focus = FALSE
 		verb="asks"
 	return verb
 
-
 /mob/proc/emote(var/act, var/type, var/message)
 	if(act == "me")
 		return custom_emote(type, message)
-
-/mob/proc/get_ear()
-	// returns an atom representing a location on the map from which this
-	// mob can hear things
-
-	// should be overloaded for all mobs whose "ear" is separate from their "mob"
-
-	return get_turf(src)
 
 /mob/proc/say_test(var/text)
 	var/ending = copytext_char(text, length(text))

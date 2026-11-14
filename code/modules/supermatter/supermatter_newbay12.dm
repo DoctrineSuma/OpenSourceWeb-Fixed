@@ -1,10 +1,8 @@
 
 #define NITROGEN_RETARDATION_FACTOR 4        //Higher == N2 slows reaction more
-#define THERMAL_RELEASE_MODIFIER 10                //Higher == less heat released during reaction
 #define PLASMA_RELEASE_MODIFIER 1500                //Higher == less plasma released by reaction
 #define OXYGEN_RELEASE_MODIFIER 750        //Higher == less oxygen released at high temperature/power
 #define REACTION_POWER_MODIFIER 1.1                //Higher == more overall power
-
 
 //These would be what you would get at point blank, decreases with distance
 #define DETONATION_RADS 200
@@ -69,11 +67,9 @@
 
 		explosion_power = 3 //3,6,9,12? Or is that too small?
 
-
 /obj/machinery/power/supermatter/New()
 	. = ..()
 	radio = new (src)
-
 
 /obj/machinery/power/supermatter/Del()
 	del radio
@@ -194,13 +190,11 @@
 
 	return 1
 
-
 /obj/machinery/power/supermatter/bullet_act(var/obj/item/projectile/beam/Proj)
 	var/turf/L = loc
 	if(!istype(L))		// We don't run process() when we are in space
 		return 0	// This stops people from being able to really power up the supermatter
 				// Then bring it inside to explode instantly upon landing on a valid turf.
-
 
 	if(Proj.flag != "bullet")
 		power += Proj.damage * config_bullet_energy
@@ -208,10 +202,8 @@
 		damage += Proj.damage * config_bullet_energy
 	return 0
 
-
 /obj/machinery/power/supermatter/attack_paw(mob/user as mob)
 	return attack_hand(user)
-
 
 /obj/machinery/power/supermatter/attack_robot(mob/user as mob)
 	if(Adjacent(user))
@@ -246,7 +238,6 @@
 
 	user.apply_effect(150, IRRADIATE)
 
-
 /obj/machinery/power/supermatter/Bumped(atom/AM as mob|obj)
 	if(istype(AM, /mob/living))
 		AM.visible_message("<span class=\"warning\">\The [AM] slams into \the [src] inducing a resonance... \his body starts to glow and catch flame before flashing into ash.</span>",\
@@ -257,7 +248,6 @@
 		"<span class=\"warning\">You hear a loud crack as you are washed with a wave of heat.</span>")
 
 	Consume(AM)
-
 
 /obj/machinery/power/supermatter/proc/Consume(var/mob/living/user)
 	if(istype(user))
@@ -277,4 +267,3 @@
 			l.show_message("<span class=\"warning\">You hear an uneartly ringing and notice your skin is covered in fresh radiation burns.</span>", 2)
 		var/rads = 500 * sqrt( 1 / (get_dist(l, src) + 1) )
 		l.apply_effect(rads, IRRADIATE)
-

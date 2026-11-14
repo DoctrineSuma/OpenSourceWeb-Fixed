@@ -1,7 +1,6 @@
 /mob/Destroy()//This makes sure that mobs with clients/keys are not just deleted from the game.
 	mob_list -= src
 
-
 	unset_machine()
 	if(hud_used)
 		qdel(hud_used)
@@ -40,7 +39,6 @@
 	if(client)
 		client = null
 	. = ..()
-
 
 /atom/movable/Destroy()
 	if(virtual_mob && !ispath(virtual_mob))
@@ -140,7 +138,6 @@
 	for(var/mob/M in viewers(src))
 		M.show_message( message, 1, blind_message, 2)
 
-
 /mob/proc/findname(msg)
 	. = 0
 	for(var/mob/M in mob_list)
@@ -183,7 +180,6 @@
 			base_slowdown *= A.slowdown_modifier
 	base_slowdown *= turf_speed_multiplier
 	return base_slowdown
-
 
 /mob/proc/Life()
 //	if(organStructure)
@@ -300,7 +296,6 @@ var/list/slot_equipment_priority = list( \
 				client.eye = loc
 				src.looking_up = FALSE
 	return
-
 
 /mob/proc/show_inv(mob/user as mob)
 	user.set_machine(src)
@@ -474,11 +469,6 @@ var/list/slot_equipment_priority = list( \
 
 		flavor_text = msg
 
-/mob/proc/warn_flavor_changed()
-	if(flavor_text && flavor_text != "") // don't spam people that don't use it!
-		src << "<h2 class='alert'>OOC Warning:</h2>"
-		src << "<span class='alert'>Your flavor text is likely out of date! <a href='byond://?src=\ref[src];flavor_change=1'>Change</a></span>"
-
 /mob/proc/print_flavor_text()
 	if(flavor_text && flavor_text != "")
 		var/msg = sanitize_uni(replacetext(flavor_text, "\n", " "))
@@ -514,7 +504,6 @@ var/list/slot_equipment_priority = list( \
 			pluralcheck = " [deathtimeminutes] minutes and"
 		var/deathtimeseconds = round((deathtime - deathtimeminutes * 600) / 10,1)
 		usr << "You have been dead for[pluralcheck] [deathtimeseconds] seconds."
-
 
 		if (deathtime < 6000)
 			to_chat(src, "You must wait 10 minutes to escape from the limbo!")
@@ -654,7 +643,6 @@ var/list/slot_equipment_priority = list( \
 				namecounts[name] = 1
 			creatures[name] = O
 
-
 	for(var/mob/M in sortAtom(mob_list))
 		var/name = M.name
 		if (names.Find(name))
@@ -665,7 +653,6 @@ var/list/slot_equipment_priority = list( \
 			namecounts[name] = 1
 
 		creatures[name] = M
-
 
 	client.perspective = EYE_PERSPECTIVE
 
@@ -708,7 +695,6 @@ var/list/slot_equipment_priority = list( \
 		update_flavor_text()
 	return
 
-
 /mob/proc/pull_damage()
 	if(ishuman(src))
 		var/mob/living/carbon/human/H = src
@@ -728,7 +714,6 @@ var/list/slot_equipment_priority = list( \
 	if(!Adjacent(usr)) return
 	if(istype(M,/mob/living/silicon/ai)) return
 	show_inv(usr)
-
 
 /mob/verb/stop_pulling()
 
@@ -777,17 +762,8 @@ var/list/slot_equipment_priority = list( \
 		var/mob/pulled = AM
 		pulled.inertia_dir = 0
 
-/mob/proc/can_use_hands()
-	return
-
 /mob/proc/is_active()
 	return (0 >= usr.stat)
-
-/mob/proc/is_mechanical()
-	if(mind && (mind.assigned_role == "Cyborg" || mind.assigned_role == "AI"))
-		return 1
-	return istype(src, /mob/living/silicon) || get_species() == "Machine"
-
 
 /mob/proc/see(message)
 	if(!is_active())
@@ -817,7 +793,6 @@ below 100 is not dizzy
 	if(dizziness > 100 && !is_dizzy)
 		spawn(0)
 			dizzy_process()
-
 
 /*
 dizzy process - wiggles the client's pixel offset over time
@@ -851,7 +826,6 @@ note dizziness decrements automatically in the mob's Life() proc.
 		spawn(0)
 			jittery_process()
 
-
 // Typo from the oriignal coder here, below lies the jitteriness process. So make of his code what you will, the previous comment here was just a copypaste of the above.
 /mob/proc/jittery_process()
 	var/old_x = pixel_x
@@ -871,7 +845,6 @@ note dizziness decrements automatically in the mob's Life() proc.
 	is_jittery = 0
 	pixel_x = old_x
 	pixel_y = old_y
-
 
 // facing verbs
 /mob/proc/canface()
@@ -921,7 +894,6 @@ note dizziness decrements automatically in the mob's Life() proc.
         update_vision_cone()
         return canmove
 
-
 /mob/proc/fall(var/forced)
 	drop_l_hand()
 	drop_r_hand()
@@ -946,25 +918,20 @@ note dizziness decrements automatically in the mob's Life() proc.
 	set hidden = 1
 	return facedir(client.client_dir(EAST))
 
-
 /mob/verb/westface()
 	set hidden = 1
 	return facedir(client.client_dir(WEST))
-
 
 /mob/verb/northface()
 	set hidden = 1
 	return facedir(client.client_dir(NORTH))
 
-
 /mob/verb/southface()
 	set hidden = 1
 	return facedir(client.client_dir(SOUTH))
 
-
 /mob/proc/IsAdvancedToolUser()//This might need a rename but it should replace the can this mob use things check
 	return 0
-
 
 /mob/proc/Stun(amount)
 	if(ismonster(src)){
@@ -1036,10 +1003,6 @@ note dizziness decrements automatically in the mob's Life() proc.
 	sleeping = max(max(sleeping,amount),0)
 	return
 
-/mob/proc/SetSleeping(amount)
-	sleeping = max(amount,0)
-	return
-
 /mob/proc/AdjustSleeping(amount)
 	sleeping = max(sleeping + amount,0)
 	return
@@ -1047,14 +1010,6 @@ note dizziness decrements automatically in the mob's Life() proc.
 /mob/proc/Resting(amount)
 	facing_dir = null
 	resting = max(max(resting,amount),0)
-	return
-
-/mob/proc/SetResting(amount)
-	resting = max(amount,0)
-	return
-
-/mob/proc/AdjustResting(amount)
-	resting = max(resting + amount,0)
 	return
 
 /mob/proc/Dizzy(amount)
@@ -1199,18 +1154,9 @@ note dizziness decrements automatically in the mob's Life() proc.
 		slurring = max(slurring-1, 0)
 	return slurring
 
-/mob/living/proc/handle_paralysed() // Currently only used by simple_animal.dm, treated as a special case in other mobs
-	if(paralysis)
-		AdjustParalysis(-1)
-	return paralysis
-
-
 /mob/proc/UpdateLuminosity()			//�� ������, ��� ���������, �� �� ������ ������ ������� � �����.
 
 	return 1
-
-/mob/proc/face_direction()
-	set_face_dir()
 
 /mob/verb/mouse_fixeye()
 	set name = ".mousefixeye"
@@ -1288,10 +1234,6 @@ note dizziness decrements automatically in the mob's Life() proc.
 			return ..(facing_dir)
 	else
 		return ..()
-
-/mob/proc/set_stat(var/new_stat)
-	. = stat != new_stat
-	stat = new_stat
 
 /mob/verb/northfaceperm()
 	set hidden = 1

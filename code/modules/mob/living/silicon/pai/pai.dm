@@ -19,7 +19,6 @@
 	var/speakExclamation = "declares"
 	var/speakQuery = "queries"
 
-
 	var/obj/item/weapon/pai_cable/cable		// The cable we produce and use when door or camera jacking
 
 	var/global/list/possible_say_verbs = list(
@@ -60,7 +59,6 @@
 
 	var/obj/item/radio/integrated/signal/sradio // AI's signaller
 
-
 /mob/living/silicon/pai/New(var/obj/item/device/paicard)
 	canmove = 0
 	src.loc = paicard
@@ -84,12 +82,7 @@
 	..()
 	usr << browse_rsc('html/paigrid.png')			// Go ahead and cache the interface resources as early as possible
 
-
 // this function shows the information about being silenced as a pAI in the Status panel
-/mob/living/silicon/pai/proc/show_silenced()
-	if(src.silence_time)
-		var/timeleft = round((silence_time - world.timeofday)/10 ,1)
-		stat(null, "Communications system reboot in -[(timeleft / 60) % 60]:[add_zero(num2text(timeleft % 60), 2)]")
 
 /mob/living/silicon/pai/check_eye(var/mob/user as mob)
 	if (!src.current)
@@ -157,7 +150,6 @@
 
 	src.updatehealth()
 
-
 // See software.dm for Topic()
 
 /mob/living/silicon/pai/meteorhit(obj/O as obj)
@@ -188,7 +180,6 @@
 	src:current = C
 	src.reset_view(C)
 	return 1
-
 
 /mob/living/silicon/pai/cancel_camera()
 	set category = "pAI Commands"
@@ -236,7 +227,6 @@
 	src << "\blue Switched to [src.network] camera network."
 //End of code by Mord_Sith
 */
-
 
 /*
 // Debug command - Maybe should be added to admin verbs later

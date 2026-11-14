@@ -116,7 +116,6 @@ var/global/list/obj/machinery/message_server/message_servers = list()
 
 	return
 
-
 /datum/feedback_variable
 	var/variable
 	var/value
@@ -146,19 +145,8 @@ var/global/list/obj/machinery/message_server/message_servers = list()
 		else
 			value = -num
 
-/datum/feedback_variable/proc/set_value(var/num)
-	if(isnum(num))
-		value = num
-
-/datum/feedback_variable/proc/get_value()
-	return value
-
 /datum/feedback_variable/proc/get_variable()
 	return variable
-
-/datum/feedback_variable/proc/set_details(var/text)
-	if(istext(text))
-		details = text
 
 /datum/feedback_variable/proc/add_details(var/text)
 	if(istext(text))
@@ -166,12 +154,6 @@ var/global/list/obj/machinery/message_server/message_servers = list()
 			details = text
 		else
 			details += " [text]"
-
-/datum/feedback_variable/proc/get_details()
-	return details
-
-/datum/feedback_variable/proc/get_parsed()
-	return list(variable,value,details)
 
 var/obj/machinery/blackbox_recorder/blackbox
 
@@ -237,62 +219,7 @@ var/obj/machinery/blackbox_recorder/blackbox
 	feedback += FV
 	return FV
 
-/obj/machinery/blackbox_recorder/proc/get_round_feedback()
-	return feedback
-
-/obj/machinery/blackbox_recorder/proc/round_end_data_gathering()
-
-	var/pda_msg_amt = 0
-	var/rc_msg_amt = 0
-
-	for(var/obj/machinery/message_server/MS in machines)
-		if(MS.pda_msgs.len > pda_msg_amt)
-			pda_msg_amt = MS.pda_msgs.len
-		if(MS.rc_msgs.len > rc_msg_amt)
-			rc_msg_amt = MS.rc_msgs.len
-
-	feedback_set_details("radio_usage","")
-
-	feedback_add_details("radio_usage","COM-[msg_common.len]")
-	feedback_add_details("radio_usage","SCI-[msg_science.len]")
-	feedback_add_details("radio_usage","HEA-[msg_command.len]")
-	feedback_add_details("radio_usage","MED-[msg_medical.len]")
-	feedback_add_details("radio_usage","ENG-[msg_engineering.len]")
-	feedback_add_details("radio_usage","SEC-[msg_security.len]")
-	feedback_add_details("radio_usage","DTH-[msg_deathsquad.len]")
-	feedback_add_details("radio_usage","SYN-[msg_syndicate.len]")
-	feedback_add_details("radio_usage","MIN-[msg_mining.len]")
-	feedback_add_details("radio_usage","CAR-[msg_cargo.len]")
-	feedback_add_details("radio_usage","OTH-[messages.len]")
-	feedback_add_details("radio_usage","PDA-[pda_msg_amt]")
-	feedback_add_details("radio_usage","RC-[rc_msg_amt]")
-
-
-	feedback_set_details("round_end","[time2text(world.realtime)]") //This one MUST be the last one that gets set.
-
-
 //This proc is only to be called at round end.
-/obj/machinery/blackbox_recorder/proc/save_all_data_to_sql()
-	if(!feedback) return
-
-	round_end_data_gathering() //round_end time logging and some other data processing
-	establish_db_connection()
-	if(!dbcon.IsConnected()) return
-	var/round_id
-
-	var/DBQuery/query = dbcon.NewQuery("SELECT MAX(round_id) AS round_id FROM erro_feedback")
-	query.Execute()
-	while(query.NextRow())
-		round_id = query.item[1]
-
-	if(!isnum(round_id))
-		round_id = text2num(round_id)
-	round_id++
-
-	for(var/datum/feedback_variable/FV in feedback)
-		var/sql = "INSERT INTO erro_feedback VALUES (null, Now(), [round_id], \"[FV.get_variable()]\", [FV.get_value()], \"[FV.get_details()]\")"
-		var/DBQuery/query_insert = dbcon.NewQuery(sql)
-		query_insert.Execute()
 
 // Sanitize inputs to avoid SQL injection attacks
 proc/sql_sanitize_text(var/text)
@@ -300,51 +227,6 @@ proc/sql_sanitize_text(var/text)
 	text = replacetext(text, ";", "")
 	text = replacetext(text, "&", "")
 	return text
-
-proc/feedback_set(var/variable,var/value)
-	if(!blackbox) return
-
-	variable = sql_sanitize_text(variable)
-
-	var/datum/feedback_variable/FV = blackbox.find_feedback_datum(variable)
-
-	if(!FV) return
-
-	FV.set_value(value)
-
-proc/feedback_inc(var/variable,var/value)
-	if(!blackbox) return
-
-	variable = sql_sanitize_text(variable)
-
-	var/datum/feedback_variable/FV = blackbox.find_feedback_datum(variable)
-
-	if(!FV) return
-
-	FV.inc(value)
-
-proc/feedback_dec(var/variable,var/value)
-	if(!blackbox) return
-
-	variable = sql_sanitize_text(variable)
-
-	var/datum/feedback_variable/FV = blackbox.find_feedback_datum(variable)
-
-	if(!FV) return
-
-	FV.dec(value)
-
-proc/feedback_set_details(var/variable,var/details)
-	if(!blackbox) return
-
-	variable = sql_sanitize_text(variable)
-	details = sql_sanitize_text(details)
-
-	var/datum/feedback_variable/FV = blackbox.find_feedback_datum(variable)
-
-	if(!FV) return
-
-	FV.set_details(details)
 
 proc/feedback_add_details(var/variable,var/details)
 	if(!blackbox) return

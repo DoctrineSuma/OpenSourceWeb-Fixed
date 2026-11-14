@@ -25,12 +25,6 @@ var/command_name = null
 	command_name = name
 	return name
 
-/proc/change_command_name(var/name)
-
-	command_name = name
-
-	return name
-
 var/religion_name = null
 /proc/religion_name()
 	if (religion_name)
@@ -56,16 +50,5 @@ var/religion_name = null
 	name += pick("Baron","Dreamer","Child","Bum","Amuser","Randy","Terrorist","Enoch","Consyte","Mortician","Whore","Witch","Lodge","Graga","Rat","Beast","Demon","Chimera","God","Inquisitor","Soup","Bees","Prophet","Bishop","Sheriff")
 */
 	world.name = name
-
-	return name
-
-/proc/world_name(var/name)
-
-	vessel_name = name
-
-	if (config && config.server_name)
-		world.name = "[config.server_name]: [name]"
-	else
-		world.name = name
 
 	return name

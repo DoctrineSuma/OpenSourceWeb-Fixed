@@ -2,11 +2,9 @@
 
 // Controls the emergency shuttle
 
-
 // these define the time taken for the shuttle to get to SS13
 // and the time before it leaves again
 #define SHUTTLEARRIVETIME 21		// 10 minutes = 600 seconds
-#define SHUTTLELEAVETIME 0		// 3 minutes = 180 seconds
 #define SHUTTLETRANSITTIME 21		// 2 minutes = 120 seconds
 
 var/global/datum/train_controller/train_shuttle/train_shuttle
@@ -49,7 +47,6 @@ datum/train_controller
 
 datum/train_controller/proc/shuttlealert(var/X)
 		alert = X
-
 
 datum/train_controller/proc/recall()
 
@@ -150,7 +147,6 @@ datum/train_controller/proc/backtotransit()
 		sleep(210)
 		backtostation()
 
-
 datum/train_controller/proc/backtostation()
 	if(location == 5 && direction == 2)
 		alert = 0
@@ -200,9 +196,6 @@ datum/train_controller/proc/backtostation()
 						if(!M.buckled)
 							M.Weaken(5)*/
 
-
-
-
 datum/train_controller/proc/process()
 
 datum/train_controller/train_shuttle/process()
@@ -237,7 +230,6 @@ datum/train_controller/train_shuttle/process()
 
 						world << 'pods_launched.ogg'
 					else
-
 
 			last60 = timeleft() - 1
 
@@ -297,10 +289,7 @@ datum/train_controller/train_shuttle/process()
 							if(!M.buckled)
 								M.Weaken(5)*/
 
-
 					online = 0
-
-
 
 					return 1
 
@@ -375,7 +364,6 @@ datum/train_controller/train_shuttle/process()
 					/*if(istype(M, /mob/living/carbon))
 						if(!M.buckled)
 							M.Weaken(5)*/
-
 
 				return 1
 

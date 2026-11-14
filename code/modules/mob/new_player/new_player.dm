@@ -57,7 +57,6 @@ var/aspects_max = 3
 		set src = usr
 		new_player_panel_proc()
 
-
 	proc/new_player_panel_proc()
 		set waitfor = 0
 		var/output = "<div align='center'><B>New Player Options</B>"
@@ -287,7 +286,6 @@ var/aspects_max = 3
 		else if(!href_list["late_join"])
 			new_player_panel()
 
-
 	proc/IsJobAvailable(rank)
 		var/datum/job/job = job_master.GetJob(rank)
 		if(!job)	return 0
@@ -295,7 +293,6 @@ var/aspects_max = 3
 		if(jobban_isbanned(src,rank))	return 0
 		if(!job.player_old_enough(src.client))	return 0
 		return 1
-
 
 	proc/AttemptLateSpawn(rank)
 		if (src != usr)
@@ -338,11 +335,9 @@ var/aspects_max = 3
 			ticker.minds += character.mind//Cyborgs and AIs handle this in the transform proc.	//TODO!!!!! ~Carn
 			AnnounceArrival(character, rank)
 
-
 		else
 			character.Robotize()
 		qdel(src)
-
 
 	proc/AttemptMigSpawn()
 		/*if (src != usr)
@@ -516,7 +511,6 @@ var/aspects_max = 3
 			if(is_alien_whitelisted(src, client.prefs.language) || !config.usealienwhitelist || !(chosen_language.flags & WHITELISTED) || (new_character.species && (chosen_language.name in new_character.species.secondary_langs)))
 				new_character.add_language("[client.prefs.language]")
 
-
 		if(ticker.random_players)
 			new_character.gender = pick(MALE, FEMALE)
 			client.prefs.real_name = random_name(new_character.gender)
@@ -567,16 +561,8 @@ var/aspects_max = 3
 
 		return new_character
 
-	proc/ViewManifest()
-		var/dat = "<html><body>"
-		dat += "<h4>Crew Manifest</h4>"
-		dat += data_core.get_manifest(OOC = 1)
-
-		src << browse(dat, "window=manifest;size=370x420;can_close=1")
-
 	Move()
 		return 0
-
 
 	proc/close_spawn_windows()
 		src << browse(null, "window=latechoices") //closes late choices window
@@ -591,8 +577,6 @@ var/aspects_max = 3
 		if(!S) return 1
 		return is_alien_whitelisted(src, S.name) || !config.usealienwhitelist || !(S.flags & IS_WHITELISTED)
 
-
-
 /mob/new_player/get_species()
 	var/datum/species/chosen_species
 	if(client.prefs.species)
@@ -606,7 +590,6 @@ var/aspects_max = 3
 
 	return "Human"
 
-
 /mob/new_player/hear_say(var/message, var/verb = "says", var/datum/language/language = null, var/alt_name = "",var/italics = 0, var/mob/speaker = null)
 	return
 
@@ -618,7 +601,6 @@ var/aspects_max = 3
 
 	spawning = 1
 	src << sound(null, repeat = 0, wait = 0, volume = 85, channel = 1) // MAD JAMS cant last forever yo
-
 
 	observer.started_as_observer = 1
 	close_spawn_windows()

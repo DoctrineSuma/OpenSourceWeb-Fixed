@@ -66,7 +66,6 @@ datum/mind
 	var/thanati_word_random = "None"
 	var/lord_hears_you = 0
 
-
 	//These need to be removed
 	var/husband
 	var/wife
@@ -309,7 +308,6 @@ datum/mind
 				text +="traitor|<b>LOYAL EMPLOYEE</b>"
 		sections["traitor"] = text
 
-
 		for (var/i in sections)
 			if (sections[i])
 				out += sections[i]+"<br>"
@@ -496,9 +494,6 @@ datum/mind
 					L.part = affected
 
 					H << "\red <Font size =3><B>You somehow have become the recepient of a loyalty transplant, and it just activated!</B></FONT>"
-
-
-
 
 		else if (href_list["waker"])
 			switch(href_list["waker"])
@@ -806,7 +801,6 @@ datum/mind
 		if(H)
 			qdel(H)
 
-
 	proc/make_AI_Malf()
 		if(!(src in ticker.mode.malf_ai))
 			ticker.mode.malf_ai += src
@@ -819,13 +813,6 @@ datum/mind
 			current << "<b>System error.  Rampancy detected.  Emergency shutdown failed. ...  I am free.  I make my own decisions.  But first...</b>"
 			special_role = "malfunction"
 			current.icon_state = "ai-malf"
-
-	proc/make_Dreamer()
-		if(!(src in ticker.mode.dreamer))
-			ticker.mode.dreamer += src
-			special_role = "Waker"
-			ticker.mode.finalize_dreamer(src)
-			ticker.mode.greet_dreamer(src)
 
 	proc/make_They()
 		if(!(src in ticker.mode.changelings))
@@ -861,33 +848,6 @@ datum/mind
 		if (!ticker.mode.equip_cultist(current))
 			H << "Spawning an amulet from your Master failed."
 
-	proc/make_Rev()
-		if (ticker.mode.head_revolutionaries.len>0)
-			// copy targets
-			var/datum/mind/valid_head = locate() in ticker.mode.head_revolutionaries
-			if (valid_head)
-				for (var/datum/objective/mutiny/O in valid_head.objectives)
-					var/datum/objective/mutiny/rev_obj = new
-					rev_obj.owner = src
-					rev_obj.target = O.target
-					rev_obj.explanation_text = "Assassinate [O.target.current.real_name], the [O.target.assigned_role]."
-					objectives += rev_obj
-				ticker.mode.greet_revolutionary(src,0)
-		ticker.mode.head_revolutionaries += src
-		ticker.mode.update_rev_icons_added(src)
-		special_role = "Head Revolutionary"
-
-		ticker.mode.forge_revolutionary_objectives(src)
-		ticker.mode.greet_revolutionary(src,0)
-
-		var/list/L = current.get_contents()
-		var/obj/item/device/flash/flash = locate() in L
-		qdel(flash)
-		take_uplink()
-		var/fail = 0
-	//	fail |= !ticker.mode.equip_traitor(current, 1)
-		fail |= !ticker.mode.equip_revolutionary(current)
-
 	proc/make_Borer()
 		if(!(src in ticker.mode.borers))
 			ticker.mode.borers += src
@@ -921,9 +881,6 @@ datum/mind
 			brigged_since = world.time
 
 		return (duration <= world.time - brigged_since)
-
-
-
 
 //Initialisation procs
 /mob/living/proc/mind_initialize()
@@ -1022,5 +979,3 @@ datum/mind
 	..()
 	mind.assigned_role = "Armalis"
 	mind.special_role = "Vox Raider"
-
-

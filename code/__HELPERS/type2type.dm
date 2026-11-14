@@ -87,7 +87,6 @@
 		hex = text("0[]", hex)
 	return hex
 
-
 // Concatenates a list of strings into a single string.  A seperator may optionally be provided.
 /proc/list2text(list/ls, sep)
 	if(ls.len <= 1) // Early-out code for empty or singleton lists.
@@ -188,16 +187,7 @@
 		count++
 	return newText
 
-
 //slower then list2text, but correctly processes associative lists.
-proc/tg_list2text(list/list, glue=",")
-	if(!istype(list) || !list.len)
-		return
-	var/output
-	for(var/i=1 to list.len)
-		output += (i!=1? glue : null)+(!isnull(list["[list[i]]"])?"[list["[list[i]]"]]":"[list[i]]")
-	return output
-
 
 //Converts a string into a list by splitting the string at each delimiter found. (discarding the seperator)
 /proc/text2list(text, delimiter="\n")
@@ -236,22 +226,10 @@ proc/tg_list2text(list/list, glue=",")
 	return
 
 //Case Sensitive!
-/proc/text2listEx(text, delimiter="\n")
-	var/delim_len = length(delimiter)
-	if(delim_len < 1) return list(text)
-	. = list()
-	var/last_found = 1
-	var/found
-	do
-		found = findtextEx(text, delimiter, last_found, 0)
-		. += copytext(text, last_found, found)
-		last_found = found + delim_len
-	while(found)
 
 //Splits the text of a file at seperator and returns them in a list.
 /proc/file2list(filename, seperator="\n")
 	return text2list(return_file_text(filename),seperator)
-
 
 //Turns a direction into text
 
@@ -263,8 +241,6 @@ proc/tg_list2text(list/list, glue=",")
 		if(8.0) return WEST
 		else
 			world.log << "UNKNOWN DIRECTION: [direction]"
-
-
 
 //Turns a direction into text
 /proc/dir2text(direction)
@@ -339,7 +315,6 @@ proc/tg_list2text(list/list, glue=",")
 //Returns the angle in english
 /proc/angle2text(var/degree)
 	return dir2text(angle2dir(degree))
-
 
 //Converts a rights bitfield into a string
 /proc/rights2text(rights,seperator="")

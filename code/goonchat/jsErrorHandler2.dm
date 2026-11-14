@@ -56,7 +56,6 @@
 
 	return deleted
 
-
 GLOBAL_DATUM_INIT(debugFileOutput, /datum/debugFileOutput, new)
 
 /client/Topic(href, href_list)
@@ -66,35 +65,3 @@ GLOBAL_DATUM_INIT(debugFileOutput, /datum/debugFileOutput, new)
 		var/file = href_list["file"]
 		var/message = href_list["message"]
 		debugFileOutput.error(file, message, src)
-
-/client/proc/deleteJsLogFile(fileName as text)
-	set category = "Debug"
-	set name = "Delete JS Logfile"
-	set desc = "Delete a logfile for JS error reporting. Be sure you want to do this!"
-	set popup_menu = 0
-	if(!holder)
-		return
-	if (!fileName)
-		return
-
-	debugFileOutput.clear(fileName)
-
-	log_admin("[key_name(usr)] deleted the '[fileName]' JS logfile")
-	message_admins("[key_name_admin(usr)] deleted the '[fileName]' JS logfile")
-
-/client/proc/deleteAllJsLogFiles()
-	set category = null
-	set name = "Delete All JS Logfiles"
-	set desc = "Delete all logfiles for JS error reporting. Be extra sure you want to do this!"
-
-	if(!holder)
-		return
-
-	if (alert("Are you really sure you want to delete every single JS logfile?", "No", "Yes") == "No")
-		return
-
-	var/list/summary = debugFileOutput.clearAll()
-	var/friendlySummary = summary.Join(", ")
-
-	log_admin("[key_name(usr)] deleted every JS logfile! ([friendlySummary])")
-	message_admins("[key_name_admin(usr)] deleted every JS logfile! ([friendlySummary])")

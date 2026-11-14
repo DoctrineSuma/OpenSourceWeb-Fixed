@@ -8,7 +8,6 @@
  *			Misc
  */
 
-
 /*
  * SQL sanitization
  */
@@ -259,10 +258,6 @@
 
 //Checks the beginning of a string for a specified sub-string
 //Returns the position of the substring or 0 if it was not found
-/proc/dd_hasprefix(text, prefix)
-	var/start = 1
-	var/end = length(prefix) + 1
-	return findtext(text, prefix, start, end)
 
 //Checks the beginning of a string for a specified sub-string. This proc is case sensitive
 //Returns the position of the substring or 0 if it was not found
@@ -291,9 +286,6 @@
  */
 /proc/replaceText(text, find, replacement)
 	return list2text(text2list(text, find), replacement)
-
-/proc/replaceTextEx(text, find, replacement)
-	return list2text(text2listEx(text, find), replacement)
 
 //Adds 'u' number of zeros ahead of the text 't'
 /proc/add_zero(t, u)
@@ -348,21 +340,6 @@
 	return text
 
 //Centers text by adding spaces to either side of the string.
-/proc/dd_centertext(message, length)
-	var/new_message = message
-	var/size = length(message)
-	var/delta = length - size
-	if(size == length)
-		return new_message
-	if(size > length)
-		return copytext_char(new_message, 1, length + 1)
-	if(delta == 1)
-		return new_message + " "
-	if(delta % 2)
-		new_message = " " + new_message
-		delta--
-	var/spaces = add_lspace("",delta/2-1)
-	return spaces + new_message + spaces
 
 //Limits the length of the text. Note: MAX_MESSAGE_LEN and MAX_NAME_LEN are widely used for this purpose
 /proc/dd_limittext(message, length)
@@ -370,7 +347,6 @@
 	if(size <= length)
 		return message
 	return copytext_char(message, 1, length + 1)
-
 
 /proc/stringmerge(var/text,var/compare,replace = "*")
 //This proc fills in all spaces with the "replace" var (* by default) with whatever
@@ -405,12 +381,6 @@
 			count++
 	return count
 
-/proc/reverse_text(var/text = "")
-	var/new_text = ""
-	for(var/i = length(text); i > 0; i--)
-		new_text += copytext_char(text, i, i+1)
-	return new_text
-
 /proc/upperrustext(text as text)
 	var/t = ""
 	for(var/i = 1, i <= length(text), i++)
@@ -423,7 +393,6 @@
 	t = replacetext(t,"&#255;","�")
 	return t
 
-
 /proc/lowerrustext(text as text)
 	var/t = ""
 	for(var/i = 1, i <= length(text), i++)
@@ -434,21 +403,6 @@
 			t += ascii2text(184)
 		else t += ascii2text(a)
 	return t
-
-/proc/rhtml_encode(var/msg)
-	var/list/c = text2list(msg, "�")
-	if(c.len == 1)
-		c = text2list(msg, "&#255;")
-		if(c.len == 1)
-			return html_encode(msg)
-	var/out = ""
-	var/first = 1
-	for(var/text in c)
-		if(!first)
-			out += "&#255;"
-		first = 0
-		out += html_encode(text)
-	return out
 
 /proc/rhtml_encode_paper(var/msg)
 	var/list/c = text2list(msg, "�")
@@ -494,7 +448,6 @@
 		first = 0
 		out += html_decode(text)
 	return out
-
 
 //Used in preferences' SetFlavorText and human's set_flavor verb
 //Previews a string of len or less length

@@ -32,8 +32,6 @@ A list of items and costs is stored under the datum of every game mode, alongsid
 		if(O.len>0)
 			valid_items += O[1]
 
-
-
 /*
 	Built the Items List for use with NanoUI
 */
@@ -63,56 +61,6 @@ A list of items and costs is stored under the datum of every game mode, alongsid
 	return items_nano
 
 //Let's build a menu!
-/obj/item/device/uplink/proc/generate_menu()
-
-	var/dat = "<B>[src.welcome]</B><BR>"
-	dat += "Tele-Crystals left: [src.uses]<BR>"
-	dat += "<HR>"
-	dat += "<B>Request item:</B><BR>"
-	dat += "<I>Each item costs a number of tele-crystals as indicated by the number following their name.</I><br><BR>"
-
-	var/cost
-	var/item
-	var/name
-	var/path_obj
-	var/path_text
-	var/category_items = 1 //To prevent stupid :P
-
-	for(var/D in ItemList)
-		var/list/O = text2list(D, ":")
-		if(O.len != 3)	//If it is not an actual item, make a break in the menu.
-			if(O.len == 1)	//If there is one item, it's probably a title
-				dat += "<b>[O[1]]</b><br>"
-				category_items = 0
-			else	//Else, it's a white space.
-				if(category_items < 1)	//If there were no itens in the last category...
-					dat += "<i>We apologize, as you could not afford anything from this category.</i><br>"
-				dat += "<br>"
-			continue
-
-		path_text = O[1]
-		cost = clamp(text2num(O[2]),1,20) //Another halfassed fix for href exploit ~Z
-
-		if(cost>uses)
-			continue
-
-		path_obj = text2path(path_text)
-
-		// Because we're using strings, this comes up if item paths change.
-		// Failure to handle this error borks uplinks entirely.  -Sayu
-		if(!path_obj)
-			error("Syndicate item is not a valid path: [path_text]")
-		else
-			item = new path_obj()
-			name = O[3]
-			del item
-
-			dat += "<A href='byond://?src=\ref[src];buy_item=[path_text];cost=[cost]'>[name]</A> ([cost])<BR>"
-			category_items++
-
-	dat += "<A href='byond://?src=\ref[src];buy_item=random'>Random Item (??)</A><br>"
-	dat += "<HR>"
-	return dat
 
 //If 'random' was selected
 /obj/item/device/uplink/proc/chooseRandomItem()

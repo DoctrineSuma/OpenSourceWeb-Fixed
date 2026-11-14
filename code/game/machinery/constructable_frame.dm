@@ -17,19 +17,9 @@
 	var/list/connected_parts = list()
 	var/pattern_idx=0
 
-
 // unfortunately, we have to instance the objects really quickly to get the names
 // fortunately, this is only called once when the board is added and the items are immediately GC'd
 // and none of the parts do much in their constructors
-/obj/machinery/constructable_frame/proc/update_namelist()
-	if(!req_components)
-		return
-
-	req_component_names = new()
-	for(var/tname in req_components)
-		var/path = tname
-		var/obj/O = new path()
-		req_component_names[tname] = O.name
 
 /obj/machinery/constructable_frame/proc/get_req_components_amt()
 	var/amt = 0
@@ -57,47 +47,6 @@
 		desc = "Does not require any more components."
 	else
 		desc += "."
-
-/obj/machinery/constructable_frame/machine_frame/proc/find_square()
-	// This is fucking stupid but what the hell.
-
-	// This corresponds to indicies from alldirs.
-	//                         1      2      3     4     5          6          7          8
-	// var/list/alldirs = list(NORTH, SOUTH, EAST, WEST, NORTHEAST, NORTHWEST, SOUTHEAST, SOUTHWEST)
-	var/valid_patterns=list(
-		list(1,3,5), //SW - NORTH,EAST,NORTHEAST
-		list(2,3,7), //NW - SOUTH,EAST,SOUTHEAST
-		list(1,4,6), //SE - NORTH,WEST,NORTHWEST
-		list(2,4,8)  //NE - SOUTH,WEST,SOUTHWEST
-	)
-	var/detected_parts[8]
-	var/tally=0
-	var/turf/T
-	var/obj/machinery/constructable_frame/machine_frame/friend
-	for(var/i=1;i<=8;i++)
-		T=get_step(src.loc,alldirs[i])
-		friend = locate() in T
-		if(friend)
-			detected_parts[i]=friend
-			tally++
-	// Need at least 3 connections to make a square
-	if(tally<3)
-		return
-	// Find stuff in the patterns indicated
-	for(var/i=1;i<=4;i++)
-		var/list/scanidxs=valid_patterns[i]
-		var/list/new_connected=list()
-		var/allfound=1
-		for(var/diridx in scanidxs)
-			if(detected_parts[diridx]==null)
-				allfound=0
-				break
-			new_connected.Add(detected_parts[diridx])
-		if(allfound)
-			connected_parts=new_connected
-			pattern_idx=i
-			return 1
-	return 0
 
 /obj/machinery/constructable_frame/machine_frame/attackby(obj/item/P as obj, mob/user as mob)
 	if(P.crit_fail)
@@ -246,7 +195,6 @@
 				if(P && P.loc != src && !istype(P, /obj/item/stack/cable_coil))
 					user << "\red You cannot add that component to the machine!"
 
-
 //Machine Frame Circuit Boards
 /*Common Parts: Parts List: Ignitor, Timer, Infra-red laser, Infra-red sensor, t_scanner, Capacitor, Valve, sensor unit,
 micro-manipulator, console screen, beaker, Microlaser, matter bin, power cells.
@@ -285,7 +233,6 @@ to destroy them and players will be able to make replacements.
 							/obj/item/weapon/stock_parts/matter_bin = 2,
 							/obj/item/weapon/stock_parts/manipulator = 2,
 							/obj/item/weapon/reagent_containers/glass/beaker = 2)
-
 
 /obj/item/weapon/circuitboard/circuit_imprinter
 	name = "Circuit board (Circuit Imprinter)"
@@ -378,7 +325,6 @@ to destroy them and players will be able to make replacements.
 							/obj/item/stack/cable_coil = 1,
 							/obj/item/weapon/stock_parts/console_screen = 1)
 
-
 /obj/item/weapon/circuitboard/chem_dispenser
 	name = "circuit board (Portable Chem Dispenser)"
 	build_path = /obj/machinery/chem_dispenser/constructable
@@ -409,7 +355,6 @@ to destroy them and players will be able to make replacements.
 	req_components = list(
 							/obj/item/stack/cable_coil = 1,
 							/obj/item/weapon/stock_parts/capacitor = 5)
-
 
 // Telecomms circuit boards:
 
@@ -517,7 +462,6 @@ to destroy them and players will be able to make replacements.
 							/obj/item/weapon/stock_parts/manipulator = 1,
 							/obj/item/weapon/stock_parts/console_screen = 1)
 
-
 /obj/item/weapon/circuitboard/thermomachine
 	name = "circuit board (Freezer)"
 	desc = "Use screwdriver to switch between heating and cooling modes."
@@ -541,7 +485,6 @@ to destroy them and players will be able to make replacements.
 			name = "circuit board (Freezer)"
 			user << "<span class='notice'>You set the board to cooling.</span>"
 
-
 /obj/item/weapon/circuitboard/clonepod
 	name = "circuit board (Clone Pod)"
 	build_path = /obj/machinery/clonepod
@@ -552,7 +495,6 @@ to destroy them and players will be able to make replacements.
 							/obj/item/weapon/stock_parts/scanning_module = 2,
 							/obj/item/weapon/stock_parts/manipulator = 2,
 							/obj/item/weapon/stock_parts/console_screen = 1)
-
 
 /obj/item/weapon/circuitboard/engine
 	name = "circuit board (Engine Nozzle)"

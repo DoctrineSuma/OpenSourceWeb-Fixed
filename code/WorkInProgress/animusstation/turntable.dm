@@ -1,5 +1,3 @@
-#define TURNTABLE_CHANNEL 10
-
 
 /mob/var/datum/hear_music/hear_music
 #define NONE_MUSIC 0
@@ -41,7 +39,6 @@
 		else if(status == UPLOADING)
 			stop = 1
 		target.hear_music = null
-
 
 /mob/var/sound/music
 
@@ -92,7 +89,6 @@
 			if(prob(D.probability))
 				turntable_soundtracks.Add(D)
 
-
 /obj/machinery/party/turntable/attackby(obj/O, mob/user)
 	if(istype(O, /obj/item/weapon/disk/music) && !disk)
 		var/obj/item/weapon/disk/music/M = O
@@ -103,7 +99,6 @@
 		O.loc = src
 		disk = O
 		attack_hand(user)
-
 
 /obj/machinery/party/turntable/attack_paw(user as mob)
 	return src.attack_hand(user)
@@ -131,7 +126,6 @@
 		t += "<A href='?src=\ref[src];eject=1'>Eject disk</A><br>"
 	t += "<tr><td height='50' weight='50'></td><td height='50' weight='50'><A href='?src=\ref[src];off=1'><font color='red'>T</font><font color='lightgreen'>urn</font> <font color='red'>Off</font></A></td><td height='50' weight='50'></td></tr>"
 	t += "<tr>"
-
 
 	var/lastcolor = "red"
 	for(var/i = 10; i <= 100; i += 10)
@@ -226,19 +220,6 @@
 
 /obj/machinery/party/turntable/proc/update_sound(update = 0)
 	return
-
-/obj/machinery/party/turntable/proc/create_sound(mob/M)
-	//var/area/A = get_area(src)
-	//var/inRange = (get_area(M) in A.related)
-	var/sound/S = sound(track.path)
-	S.repeat = 1
-	S.channel = TURNTABLE_CHANNEL
-	S.falloff = 2
-	S.wait = 0
-	S.volume = 0
-	S.status = 0 //SOUND_STREAM
-	M.music = S
-	M << S
 
 /obj/machinery/party/mixer
 	name = "mixer"
@@ -365,11 +346,8 @@
 					cycle = 1
 				X++
 
-
-
 /obj/machinery/party/lasermachine/proc/turnoff()
 	var/area/A = src.loc.loc
 	for(var/area/RA in A.related)
 		for(var/obj/effect/laser2/F in RA)
 			qdel(F)
-

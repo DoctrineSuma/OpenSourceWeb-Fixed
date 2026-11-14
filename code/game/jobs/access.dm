@@ -137,8 +137,6 @@
 			if(n)
 				req_one_access += n
 
-
-
 //returns 1 if this mob has sufficient access to use this object
 /obj/proc/allowed(mob/M)
 	//check if it doesn't require any access at all
@@ -186,7 +184,6 @@
 				return 1
 		return 0
 	return 1
-
 
 /obj/proc/check_access_list(var/list/L)
 	if(!src.req_access  && !src.req_one_access)	return 1
@@ -281,7 +278,6 @@
 			return "Station General"
 		if(7) //supply
 			return "Supply"
-
 
 /proc/get_access_desc(A)
 	switch(A)
@@ -452,74 +448,9 @@
 
 //gets the actual job rank (ignoring alt titles)
 //this is used solely for sechuds
-/obj/proc/GetJobRealName()
-	if (!istype(src, /obj/item/device/pda) && !istype(src,/obj/item/weapon/card/id))
-		return
-
-	var/rank
-	var/assignment
-	if(istype(src, /obj/item/device/pda))
-		if(src:id)
-			rank = src:id:rank
-			assignment = src:id:assignment
-	else if(istype(src, /obj/item/weapon/card/id))
-		rank = src:rank
-		assignment = src:assignment
-
-	if( rank in get_all_jobs() )
-		return rank
-
-	if( assignment in get_all_jobs() )
-		return assignment
-
-	return "Unknown"
 
 //gets the alt title, failing that the actual job rank
 //this is unused
-/obj/proc/sdsdsd()	//GetJobDisplayName
-	if (!istype(src, /obj/item/device/pda) && !istype(src,/obj/item/weapon/card/id))
-		return
-
-	var/assignment
-	if(istype(src, /obj/item/device/pda))
-		if(src:id)
-			assignment = src:id:assignment
-	else if(istype(src, /obj/item/weapon/card/id))
-		assignment = src:assignment
-
-	if(assignment)
-		return assignment
-
-	return "Unknown"
-
-proc/FindNameFromID(var/mob/living/carbon/human/H)
-	ASSERT(istype(H))
-	var/obj/item/weapon/card/id/C = H.get_active_hand()
-	if( istype(C) || istype(C, /obj/item/device/pda) )
-		var/obj/item/weapon/card/id/ID = C
-
-		if( istype(C, /obj/item/device/pda) )
-			var/obj/item/device/pda/pda = C
-			ID = pda.id
-		if(!istype(ID))
-			ID = null
-
-		if(ID)
-			return ID.registered_name
-
-	C = H.wear_id
-
-	if( istype(C) || istype(C, /obj/item/device/pda) )
-		var/obj/item/weapon/card/id/ID = C
-
-		if( istype(C, /obj/item/device/pda) )
-			var/obj/item/device/pda/pda = C
-			ID = pda.id
-		if(!istype(ID))
-			ID = null
-
-		if(ID)
-			return ID.registered_name
 
 proc/get_all_job_icons() //For all existing HUD icons
 	return get_all_jobs() + list("Prisoner")
@@ -541,4 +472,3 @@ proc/get_all_job_icons() //For all existing HUD icons
 	if(jobName in get_all_centcom_jobs()) //Return with the NT logo if it is a Centcom job
 		return "Centcom"
 	return "Unknown" //Return unknown if none of the above apply
-

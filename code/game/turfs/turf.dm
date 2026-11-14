@@ -131,8 +131,6 @@ var/list/turfs = list()
 			inertial_drift(M)
 	*/
 
-
-
 		else if(!istype(src, /turf/space))
 			M:inertia_dir = 0
 	..()
@@ -170,7 +168,6 @@ var/list/turfs = list()
 			if(!luminosity)
 				M.gruemessage = FALSE
 
-
 /turf/Entered(atom/atom as mob|obj)
     ..()
     if(!istype(atom, /atom/movable))
@@ -201,14 +198,10 @@ var/list/turfs = list()
             return
     return
 
-
-
 /turf/proc/adjacent_fire_act(turf/simulated/floor/source, temperature, volume)
 	return
 
 /turf/proc/is_plating()
-	return 0
-/turf/proc/is_asteroid_floor()
 	return 0
 /turf/proc/is_plasteel_floor()
 	return 0
@@ -221,8 +214,6 @@ var/list/turfs = list()
 /turf/proc/is_carpet_floor()
 	return 0
 /turf/proc/is_underplating()
-	return 0
-/turf/proc/return_siding_icon_state()		//used for grass floors, which have siding.
 	return 0
 
 /turf/proc/inertial_drift(atom/movable/A as mob|obj)
@@ -271,7 +262,6 @@ var/list/turfs = list()
 	var/old_lighting_overlay = lighting_overlay
 
 //	log_debug("Replacing [src.type] with [N]")
-
 
 	if(connections) connections.erase_all()
 
@@ -351,7 +341,6 @@ var/list/turfs = list()
 		//the zone will only really do heavy lifting once.
 		var/turf/simulated/S = src
 		if(S.zone) S.zone.rebuild()
-
 
 	if(ispath(N, /turf/simulated/floor))
 		//if the old turf had a zone, connect the new turf to it as well - Cael
@@ -471,20 +460,9 @@ var/list/turfs = list()
 				S.air.update_values()
 */
 
-
 /turf/proc/ReplaceWithLattice()
 	src.ChangeTurf(/turf/space)
 	new /obj/structure/lattice( locate(src.x, src.y, src.z) )
-
-/turf/proc/kill_creatures(mob/U = null)//Will kill people/creatures and damage mechs./N
-//Useful to batch-add creatures to the list.
-	for(var/mob/living/M in src)
-		if(M==U)	continue//Will not harm U. Since null != M, can be excluded to kill everyone.
-		spawn(0)
-			M.gib()
-	for(var/obj/mecha/M in src)//Mecha are not gibbed but are damaged.
-		spawn(0)
-			M.take_damage(100, "brute")
 
 /turf/proc/Bless()
 	if(flags & NOJAUNT)

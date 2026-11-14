@@ -53,8 +53,6 @@
 //			//log_admin("ATTACK: [hit_atom] ([M.ckey]) was hit by [src] thrown by ([src.fingerprintslast])")
 //			msg_admin_attack("[hit_atom] ([M.ckey])(<A HREF='?src=%admin_ref%;adminplayerobservejump=\ref[M]'>JMP</A>) was hit by [src] thrown by ([src.fingerprintslast])", 2)
 
-
-
 	else if(isobj(hit_atom))
 		var/obj/O = hit_atom
 		if(!O.anchored)
@@ -74,7 +72,6 @@
 				M.take_organ_damage(20)
 				if(prob(40))
 					M.emote("scream")
-
 
 /atom/proc/assume_air(datum/gas_mixture/giver)
 	qdel(giver)
@@ -108,13 +105,7 @@
 
 /*//Convenience proc to see whether a container can be accessed in a certain way.
 
-	proc/can_subract_container()
-		return flags & EXTRACT_CONTAINER
-
-	proc/can_add_container()
-		return flags & INSERT_CONTAINER
 */
-
 
 /atom/proc/meteorhit(obj/meteor as obj)
 	return
@@ -166,9 +157,6 @@
 		if(A.contents.len)
 			found += A.search_contents_for(path,d_filter_path)
 	return found
-
-
-
 
 /*
 Beam code by Gunbuddy
@@ -238,7 +226,6 @@ its easier to just keep the beam vertical.
 					//I've found that 3 ticks provided a nice balance for my use.
 	for(var/obj/effect/overlay/beam/O in orange(10,src)) if(O.BeamSource==src) del O
 
-
 //All atoms
 /atom/verb/examine()
 	set name = "Examine"
@@ -280,9 +267,6 @@ its easier to just keep the beam vertical.
  // tirei o icon e a caixa pq n tem isso no lwb :+1: -- izumi
 
 /atom/proc/relaymove()
-	return
-
-/atom/proc/container_dir_changed(new_dir)
 	return
 
 /atom/proc/ex_act()
@@ -394,7 +378,6 @@ its easier to just keep the beam vertical.
 		qdel(fingerprints)
 	return
 
-
 /atom/proc/transfer_fingerprints_to(var/atom/A)
 	if(!istype(A.fingerprints,/list))
 		A.fingerprints = list()
@@ -408,7 +391,6 @@ its easier to just keep the beam vertical.
 		A.fingerprints |= fingerprints.Copy()            //detective
 	if(fingerprintshidden)
 		A.fingerprintshidden |= fingerprintshidden.Copy()    //admin	A.fingerprintslast = fingerprintslast
-
 
 //returns 1 if made bloody, returns 0 otherwise
 /atom/proc/add_blood(mob/living/carbon/human/M as mob)
@@ -446,7 +428,6 @@ its easier to just keep the beam vertical.
 		if(toxvomit)
 			this.icon_state = "vomittox_[pick(1,4)]"
 
-
 /atom/proc/clean_blood()
 	if(!simulated)
 		return
@@ -455,8 +436,6 @@ its easier to just keep the beam vertical.
 	if(istype(blood_DNA, /list))
 		blood_DNA = null
 		return 1
-
-
 
 /atom/proc/get_global_map_pos()
 	if(!islist(global_map) || isemptylist(global_map)) return
@@ -480,9 +459,6 @@ its easier to just keep the beam vertical.
 /atom/proc/handle_fall()
 	return
 
-/atom/proc/CheckParts()
-	return
-
 /atom/proc/handle_slip()
 	return
 /atom/proc/set_dir(new_dir)
@@ -493,7 +469,6 @@ its easier to just keep the beam vertical.
 			if(G.assailant == G.affecting)
 				continue
 			return
-
 
 	var/old_dir = dir
 	if(new_dir == old_dir)
@@ -814,7 +789,6 @@ var/list/fonts = list('gothic.ttf', 'hando.ttf', 'type.ttf')
 	qdel(src)
 	return
 
-
 /obj/item/weapon/flame/candle/tnt/bundle/flame_act()
 	explosion(src.loc, 2, 4, 6, 4)
 	qdel(src)
@@ -834,8 +808,6 @@ var/list/fonts = list('gothic.ttf', 'hando.ttf', 'type.ttf')
 	explosion(src.loc, 1, 1, 1, 1)
 	qdel(src)
 	return
-
-
 
 /obj/machinery/computerVendor/acid_act()
 	for(var/obj/AA in src.contents)

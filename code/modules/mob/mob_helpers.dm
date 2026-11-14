@@ -47,38 +47,8 @@
 		return 1
 	return 0
 
-/proc/iscrab(A)
-	if(istype(A, /mob/living/simple_animal/crab))
-		return 1
-	return 0
-
-/proc/iscat(A)
-	if(istype(A, /mob/living/simple_animal/cat))
-		return 1
-	return 0
-
-/proc/isspider(A)
-	if(istype(A, /mob/living/simple_animal/hostile/giant_spider))
-		return 1
-	return 0
-
 /proc/ismouse(A)
 	if(istype(A, /mob/living/simple_animal/mouse))
-		return 1
-	return 0
-
-/proc/isbear(A)
-	if(istype(A, /mob/living/simple_animal/hostile/bear))
-		return 1
-	return 0
-
-/proc/iscarp(A)
-	if(istype(A, /mob/living/simple_animal/hostile/carp))
-		return 1
-	return 0
-
-/proc/isclown(A)
-	if(istype(A, /mob/living/simple_animal/hostile/retaliate/clown))
 		return 1
 	return 0
 
@@ -145,10 +115,6 @@ proc/isskeleton(A)
 proc/hasorgans(A)
 	return ishuman(A)
 
-/proc/hsl2rgb(h, s, l)
-	return
-
-
 /proc/check_zone(zone)
 	if(!zone)	return "chest"
 /*	switch(zone)
@@ -168,7 +134,6 @@ proc/hasorgans(A)
 			zone = "chest"
 */
 	return zone
-
 
 /proc/ran_zone(zone, probability)
 	zone = check_zone(zone)
@@ -243,7 +208,6 @@ proc/hasorgans(A)
 
 	return zone
 
-
 /proc/stars(n, pr)
 	if (pr == null)
 		pr = 25
@@ -308,7 +272,6 @@ proc/slur(phrase)
 		index = findtext(newphrase, "ÿ")
 	return newphrase
 
-
 /proc/stutter(phrase)
 	phrase = rhtml_decode(phrase)
 
@@ -345,7 +308,6 @@ proc/slur(phrase)
 		split_phrase[index] = word
 
 	return sanitize(dd_list2text(split_phrase," "))
-
 
 proc/Gibberish(t, p)//t is the inputted message, and any value higher than 70 for p will cause letters to be replaced instead of added
 	/* Turn text into complete gibberish! */
@@ -424,7 +386,6 @@ It's fairly easy to fix if dealing with single letters but not so much with comp
 		p=p+n_mod
 	return copytext(sanitize(t),1,MAX_MESSAGE_LEN)
 
-
 /proc/shake_camera(mob/M, duration, strength=1)
 	if(!M || !M.client || M.shakecamera || M.stat || isAI(M))
 		return
@@ -477,7 +438,6 @@ It's fairly easy to fix if dealing with single letters but not so much with comp
 	animate(M.client, pixel_y = 0, time = rand1, easing = TEST_EASING)
 	sleep(rand1)
 	M.shakecameraslight = 0
-
 
 #undef TEMPO_BASE
 
@@ -546,7 +506,6 @@ var/list/intents = list("help","disarm","grab","hurt")
 /proc/get_both_hands(mob/living/carbon/M)
 	var/list/hands = list(M.l_hand, M.r_hand)
 	return hands
-
 
 /proc/check_both_hands_empty(mob/living/carbon/M)
 	if(M.l_hand)

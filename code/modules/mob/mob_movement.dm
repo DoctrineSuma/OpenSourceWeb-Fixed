@@ -31,7 +31,6 @@
 		mob:swim_up()
 	return
 
-
 /client/Southeast()
 	var/turf/controllerlocation = locate(1, 1, usr.z)
 	if (istype(mob, /mob/dead/observer))
@@ -47,7 +46,6 @@
 		mob:swim_down()
 	return
 
-
 /client/Southwest()
 	if(iscarbon(usr))
 		var/mob/living/carbon/C = usr
@@ -55,7 +53,6 @@
 	else
 		usr << "\red This mob type cannot throw items."
 	return
-
 
 /client/Northwest()
 	if(iscarbon(usr))
@@ -96,7 +93,6 @@
 		mob.mode()
 	return
 
-
 /client/verb/toggle_throw_mode()
 	set hidden = 1
 	if(!istype(mob, /mob/living/carbon))
@@ -106,13 +102,11 @@
 	else
 		return
 
-
 /client/verb/drop_item()
 	set hidden = 1
 	if(!isrobot(mob))
 		mob.drop_item_v()
 	return
-
 
 /client/Center()
 	/* No 3D movement in 2D spessman game. dir 16 is Z Up
@@ -122,7 +116,6 @@
 			return O.relaymove(mob, 16)
 	*/
 	return
-
 
 /atom/movable/Move(NewLoc, direct)
 	if (direct & (direct - 1))
@@ -170,16 +163,6 @@
 		src.m_flag = 1
 		if ((A != src.loc && A && A.z == src.z))
 			src.last_move = get_dir(A, src.loc)
-
-/client/proc/Move_object(direct)
-	if(mob && mob.control_object)
-		if(mob.control_object.density)
-			step(mob.control_object,direct)
-			if(!mob.control_object)	return
-			mob.control_object.dir = direct
-		else
-			mob.control_object.loc = get_step(mob.control_object,direct)
-	return
 
 /mob/var/next_movement = 0
 
@@ -245,7 +228,6 @@
 							M.other_mobs = null
 							M.animate_movement = 2
 							return
-
 
 		else if(mob.confused)
 			step(mob, pick(cardinal))
@@ -369,7 +351,6 @@
 	if(movement_dir && dense_object_backup)
 		if(dense_object_backup.newtonian_move(turn(movement_dir, 180))) //You're pushing off something movable, so it moves
 			src << "<span class='info'>You push off of [dense_object_backup] to propel yourself.</span>"
-
 
 		return 1
 	return 0

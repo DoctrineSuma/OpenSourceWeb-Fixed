@@ -96,12 +96,10 @@
 		return 0
 	hud_used.add_inventory_overlay()
 
-
 /mob/proc/drop_item_v()		//this is dumb.
 	if(stat == CONSCIOUS && isturf(loc))
 		return drop_item()
 	return 0
-
 
 /mob/proc/drop_from_inventory(var/obj/item/W)
 	if(W)
@@ -154,7 +152,6 @@
 		l_hand.plane = initial(l_hand.plane)
 		l_hand.appearance_flags = initial(l_hand.appearance_flags)
 
-
 		if(Target)	l_hand.loc = Target.loc
 		else		l_hand.loc = loc
 
@@ -176,8 +173,6 @@
 		r_hand.layer = initial(r_hand.layer)
 		r_hand.plane = initial(r_hand.plane)
 		r_hand.appearance_flags = initial(r_hand.appearance_flags)
-
-
 
 		if(Target)	r_hand.loc = Target.loc
 		else		r_hand.loc = loc
@@ -208,7 +203,6 @@
 		return drop_l_hand(Target)
 	else		return drop_r_hand(Target)
 
-
 /mob/proc/drop_item_vv(var/atom/Target, var/sound = 1)
 	if(sound)
 		make_item_drop_sound()
@@ -216,7 +210,6 @@
 	if(hand)
 		return drop_r_hand(Target)
 	else		return drop_l_hand(Target)
-
 
 /mob/proc/unwield_drop()
 	var/obj/item/I = get_active_hand()
@@ -236,7 +229,6 @@
 			II.unwield(usr)
 			II.wielded = 0
 
-
 /mob/proc/make_item_drop_sound()
 	var/obj/item/I = get_active_hand()
 	spawn(1)
@@ -253,10 +245,6 @@
 			src?:loc?:liquid?:update_atoms()
 		src.update_inv_back()
 
-
-
-
-
 //TODO: phase out this proc
 /mob/proc/before_take_item(var/obj/item/W)	//TODO: what is this?
 	W.loc = null
@@ -268,7 +256,6 @@
 	hud_used.add_inventory_overlay()
 	update_icons()
 	return
-
 
 /mob/proc/u_equip(W as obj)
 	if (W == r_hand)
@@ -285,7 +272,6 @@
 		update_inv_wear_mask(0)
 	return
 
-
 //Attemps to remove an object on a mob.  Will not move it to another area or such, just removes from the mob.
 /mob/proc/remove_from_mob(var/obj/O)
 	src.u_equip(O)
@@ -299,7 +285,6 @@
 	if(hud_used)
 		hud_used.add_inventory_overlay()
 	return 1
-
 
 //Outdated but still in use apparently. This should at least be a human proc.
 /mob/proc/get_equipped_items()
@@ -336,114 +321,3 @@
 		else
 			return r_hand
 		return
-
-/mob/living/carbon/human/proc/equip_if_possible(obj/item/W, slot, del_on_fail = 1) // since byond doesn't seem to have pointers, this seems like the best way to do this :/
-	//warning: icky code
-	var/equipped = 0
-	switch(slot)
-		if(slot_back)
-			if(!src.back)
-				src.back = W
-				equipped = 1
-		if(slot_wear_mask)
-			if(!src.wear_mask)
-				src.wear_mask = W
-				equipped = 1
-		if(slot_handcuffed)
-			if(!src.handcuffed)
-				src.handcuffed = W
-				equipped = 1
-		if(slot_l_hand)
-			if(!src.l_hand)
-				src.l_hand = W
-				equipped = 1
-		if(slot_r_hand)
-			if(!src.r_hand)
-				src.r_hand = W
-				equipped = 1
-		if(slot_belt)
-			if(!src.belt && src.w_uniform)
-				src.belt = W
-				equipped = 1
-		if(slot_wear_id)
-			if(!src.wear_id)
-				src.wear_id = W
-				equipped = 1
-		if(slot_l_ear)
-			if(!src.l_ear)
-				src.l_ear = W
-				equipped = 1
-		if(slot_r_ear)
-			if(!src.r_ear)
-				src.r_ear = W
-				equipped = 1
-		if(slot_glasses)
-			if(!src.glasses)
-				src.glasses = W
-				equipped = 1
-		if(slot_gloves)
-			if(!src.gloves)
-				src.gloves = W
-				equipped = 1
-		if(slot_head)
-			if(!src.head)
-				src.head = W
-				equipped = 1
-		if(slot_shoes)
-			if(!src.shoes)
-				src.shoes = W
-				equipped = 1
-		if(slot_wear_suit)
-			if(!src.wear_suit)
-				src.wear_suit = W
-				equipped = 1
-		if(slot_w_uniform)
-			if(!src.w_uniform)
-				src.w_uniform = W
-				equipped = 1
-		if(slot_l_store)
-			if(!src.l_store && src.w_uniform)
-				src.l_store = W
-				equipped = 1
-		if(slot_r_store)
-			if(!src.r_store && src.w_uniform)
-				src.r_store = W
-				equipped = 1
-		if(slot_s_store)
-			if(!src.s_store && src.wear_suit)
-				src.s_store = W
-				equipped = 1
-		if(slot_wrist_r)
-			if(!src.wrist_r)
-				src.wrist_r = W
-				equipped = 1
-		if(slot_wrist_l)
-			if(!src.wrist_l)
-				src.wrist_l = W
-				equipped = 1
-		if(slot_amulet)
-			if(!src.amulet)
-				src.amulet = W
-				equipped = 1
-		if(slot_back2)
-			if(!src.back2)
-				src.back2 = W
-				equipped = 1
-		if(slot_in_backpack)
-			if (src.back && istype(src.back, /obj/item/weapon/storage/backpack))
-				var/obj/item/weapon/storage/backpack/B = src.back
-				if(B.contents.len < B.storage_slots && W.w_class <= B.max_w_class)
-					W.loc = B
-					equipped = 1
-
-	if(equipped)
-		W.layer = 20
-		W.plane = 30
-		W.appearance_flags |= NO_CLIENT_COLOR
-		if(src.back && W.loc != src.back)
-			W.loc = src
-	else
-		if (del_on_fail)
-			qdel(W)
-	return equipped
-

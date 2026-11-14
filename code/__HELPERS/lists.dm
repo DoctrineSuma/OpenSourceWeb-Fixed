@@ -47,11 +47,6 @@ proc/listgetindex(var/list/list,index)
 			return list[index]
 	return
 
-proc/isinlist(list/list)
-	if(istype(list))
-		return 1
-	return 0
-
 //Return either pick(list) or null if list is not of type /list or is empty
 proc/safepick(list/list)
 	if(!islist(list) || !list.len)
@@ -106,15 +101,6 @@ proc/listclearnulls(list/list)
  * If skipref = 1, repeated elements are treated as one.
  * If either of arguments is not a list, returns null
  */
-/proc/uniquemergelist(var/list/first, var/list/second, var/skiprep=0)
-	if(!islist(first) || !islist(second))
-		return
-	var/list/result = new
-	if(skiprep)
-		result = difflist(first, second, skiprep)+difflist(second, first, skiprep)
-	else
-		result = first ^ second
-	return result
 
 //Pretends to pick an element based on its weight but really just seems to pick a random element.
 /proc/pickweight(list/L)
@@ -229,9 +215,6 @@ proc/listclearnulls(list/list)
 		return (result + L.Copy(Li, 0))
 	return (result + R.Copy(Ri, 0))
 
-
-
-
 //Mergesort: Specifically for record datums in a list.
 /proc/sortRecord(var/list/datum/data/record/L, var/field = "name", var/order = 1)
 	if(isnull(L))
@@ -265,9 +248,6 @@ proc/listclearnulls(list/list)
 			return (result + L.Copy(Li, 0))
 	return (result + R.Copy(Ri, 0))
 
-
-
-
 //Mergesort: any value in a list
 /proc/sortList(var/list/L)
 	if(L.len < 2)
@@ -276,11 +256,6 @@ proc/listclearnulls(list/list)
 	return mergeLists(sortList(L.Copy(0,middle)), sortList(L.Copy(middle))) //second parameter null = to end of list
 
 //Mergsorge: uses sortList() but uses the var's name specifically. This should probably be using mergeAtom() instead
-/proc/sortNames(var/list/L)
-	var/list/Q = new()
-	for(var/atom/x in L)
-		Q[x.name] = x
-	return sortList(Q)
 
 /proc/mergeLists(var/list/L, var/list/R)
 	var/Li=1
@@ -295,7 +270,6 @@ proc/listclearnulls(list/list)
 	if(Li <= L.len)
 		return (result + L.Copy(Li, 0))
 	return (result + R.Copy(Ri, 0))
-
 
 //Mergesort: any value in a list, preserves key=value structure
 /proc/sortAssoc(var/list/L)
@@ -319,30 +293,8 @@ proc/listclearnulls(list/list)
 	return (result + R.Copy(Ri, 0))
 
 //Converts a bitfield to a list of numbers (or words if a wordlist is provided)
-/proc/bitfield2list(bitfield = 0, list/wordlist)
-	var/list/r = list()
-	if(istype(wordlist,/list))
-		var/max = min(wordlist.len,16)
-		var/bit = 1
-		for(var/i=1, i<=max, i++)
-			if(bitfield & bit)
-				r += wordlist[i]
-			bit = bit << 1
-	else
-		for(var/bit=1, bit<=65535, bit = bit << 1)
-			if(bitfield & bit)
-				r += bit
-
-	return r
 
 // Returns the key based on the index
-/proc/get_key_by_index(var/list/L, var/index)
-	var/i = 1
-	for(var/key in L)
-		if(index == i)
-			return key
-		i++
-	return null
 
 /proc/count_by_type(var/list/L, type)
 	var/i = 0
@@ -352,28 +304,6 @@ proc/listclearnulls(list/list)
 	return i
 
 //Don't use this on lists larger than half a dozen or so
-/proc/insertion_sort_numeric_list_ascending(var/list/L)
-	//world.log << "ascending len input: [L.len]"
-	var/list/out = list(pop(L))
-	for(var/entry in L)
-		if(isnum(entry))
-			var/success = 0
-			for(var/i=1, i<=out.len, i++)
-				if(entry <= out[i])
-					success = 1
-					out.Insert(i, entry)
-					break
-			if(!success)
-				out.Add(entry)
-
-	//world.log << "	output: [out.len]"
-	return out
-
-/proc/insertion_sort_numeric_list_descending(var/list/L)
-	//world.log << "descending len input: [L.len]"
-	var/list/out = insertion_sort_numeric_list_ascending(L)
-	//world.log << "	output: [out.len]"
-	return reverselist(out)
 
 proc/dd_sortedObjectList(list/incoming)
 	/*
@@ -438,43 +368,18 @@ datum/proc/dd_SortValue()
 /obj/machinery/dd_SortValue()
 	return "[sanitize(name)]"
 
-
 //Move a single element from position fromIndex within a list, to position toIndex
 //This will preserve associations ~Carnie
-
 
 //Move elements [fromIndex,fromIndex+len) to [toIndex,toIndex+len)
 //This will preserve associations and is much faster than copying to a new list
 //or checking for associative lists and manually copying elements ~Carnie
 
-
 //Move elements from [fromIndex, fromIndex+len) to [toIndex, toIndex+len)
 //Move any elements being overwritten by the move to the now-empty elements, preserving order
 //Note: if the two ranges overlap, only the destination order will be preserved fully, since some elements will be within both ranges ~Carnie
-/proc/swapRange(list/L, fromIndex, toIndex, len=1)
-	var/distance = abs(toIndex - fromIndex)
-	if(len > distance)	//there is an overlap, therefore swapping each element will require more swaps than inserting new elements
-		if(fromIndex < toIndex)
-			toIndex += len
-		else
-			fromIndex += len
-
-		for(var/i=0, i<distance, ++i)
-			L.Insert(fromIndex, null)
-			L.Swap(fromIndex, toIndex)
-			L.Cut(toIndex, toIndex+1)
-	else
-		if(toIndex > fromIndex)
-			var/a = toIndex
-			toIndex = fromIndex
-			fromIndex = a
-
-		for(var/i=0, i<len, ++i)
-			L.Swap(fromIndex++, toIndex++)
 
 //replaces reverseList ~Carnie
-
-
 
 //Move a single element from position fromIndex within a list, to position toIndex
 //All elements in the range [1,toIndex) before the move will be before the pivot afterwards
@@ -530,9 +435,3 @@ datum/proc/dd_SortValue()
 			L.Swap(start++,end--)
 
 	return L
-
-/proc/filter_list(var/list/L, var/type)
-	. = list()
-	for(var/entry in L)
-		if(istype(entry, type))
-			. += entry

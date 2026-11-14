@@ -20,7 +20,3 @@
 		else
 			catchBadType(O)
 			processing_objects -= O
-
-/datum/controller/process/obj/statProcess()
-	..()
-	stat(null, "[processing_objects.len] objects")

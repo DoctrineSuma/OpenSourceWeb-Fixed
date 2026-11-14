@@ -18,12 +18,9 @@ var/const/VIRTUAL_ABILITY_ALL  = (~VIRTUAL_ABILITY_NONE)
 #define INVISIBILITY_SYSTEM      99
 
 #define SEE_INVISIBLE_LIVING     25
-#define SEE_INVISIBLE_NOLIGHTING 15
 #define SEE_INVISIBLE_LEVEL_ONE  INVISIBILITY_LEVEL_ONE
 #define SEE_INVISIBLE_LEVEL_TWO  INVISIBILITY_LEVEL_TWO
-#define SEE_INVISIBLE_CULT       INVISIBILITY_OBSERVER
 #define SEE_INVISIBLE_OBSERVER   INVISIBILITY_EYE
-#define SEE_INVISIBLE_SYSTEM     INVISIBILITY_SYSTEM
 
 #define SEE_IN_DARK_DEFAULT 8
 
@@ -45,11 +42,6 @@ var/const/VIRTUAL_ABILITY_ALL  = (~VIRTUAL_ABILITY_NONE)
 /atom/movable/proc/recursive_move(var/atom/movable/am, var/old_loc, var/new_loc)
 	moved_event.raise_event(src, old_loc, new_loc)
 
-/atom/movable/proc/move_to_turf(var/atom/movable/am, var/old_loc, var/new_loc)
-	var/turf/T = get_turf(new_loc)
-	if(T && T != loc)
-		forceMove(T)
-
 // Similar to above but we also follow into nullspace
 /atom/movable/proc/move_to_turf_or_null(var/atom/movable/am, var/old_loc, var/new_loc)
 	var/turf/T = get_turf(new_loc)
@@ -62,14 +54,6 @@ var/const/VIRTUAL_ABILITY_ALL  = (~VIRTUAL_ABILITY_NONE)
 // Sometimes you just want to end yourself
 /datum/proc/qdel_self()
 	qdel(src)
-
-/proc/register_all_movement(var/event_source, var/listener)
-	moved_event.register(event_source, listener, /atom/movable/proc/recursive_move)
-	dir_set_event.register(event_source, listener, /atom/proc/recursive_dir_set)
-
-/proc/unregister_all_movement(var/event_source, var/listener)
-	moved_event.unregister(event_source, listener, /atom/movable/proc/recursive_move)
-	dir_set_event.unregister(event_source, listener, /atom/proc/recursive_dir_set)
 
 //	Observer Pattern Implementation: Moved
 //		Registration type: /atom/movable
@@ -186,12 +170,6 @@ var/decl/observ/sight_set/sight_set_event = new()
 * Sight Set Handling *
 *********************/
 
-/mob/proc/set_sight(var/new_sight)
-	var/old_sight = sight
-	if(old_sight != new_sight)
-		sight = new_sight
-		sight_set_event.raise_event(src, old_sight, new_sight)
-
 //	Observer Pattern Implementation: See Invisible Set
 //		Registration type: /mob
 //
@@ -211,12 +189,6 @@ var/decl/observ/see_invisible_set/see_invisible_set_event = new()
 * See Invisible Set Handling *
 *****************************/
 
-/mob/proc/set_see_invisible(var/new_see_invisible)
-	var/old_see_invisible = see_invisible
-	if(old_see_invisible != new_see_invisible)
-		see_invisible = new_see_invisible
-		see_invisible_set_event.raise_event(src, old_see_invisible, new_see_invisible)
-
 //	Observer Pattern Implementation: See In Dark Set
 //		Registration type: /mob
 //
@@ -235,12 +207,6 @@ var/decl/observ/see_in_dark_set/see_in_dark_set_event = new()
 /***************************
 * See In Dark Set Handling *
 ***************************/
-
-/mob/proc/set_see_in_dark(var/new_see_in_dark)
-	var/old_see_in_dark = sight
-	if(old_see_in_dark != new_see_in_dark)
-		see_in_dark  = new_see_in_dark
-		see_in_dark_set_event.raise_event(src, old_see_in_dark, new_see_in_dark)
 
 //	Observer Pattern Implementation: Destroyed
 //		Registration type: /datum
@@ -410,7 +376,6 @@ var/const/PROXIMITY_EXCLUDE_HOLDER_TURF = 1 // When acquiring turfs to monitor, 
 	if(proximity_flags & PROXIMITY_EXCLUDE_HOLDER_TURF)
 		. -= get_turf(holder)
 
-
 /obj/item/proxy_debug
 	var/image/overlay
 	var/proxy_type
@@ -568,33 +533,15 @@ var/list/event_listen_count = list()
 	fetched_decl_types = list()
 	fetched_decl_subtypes = list()
 
-/repository/decls/proc/decls_of_type(var/decl_prototype)
-	. = fetched_decl_types[decl_prototype]
-	if(!.)
-		. = get_decls(typesof(decl_prototype))
-		fetched_decl_types[decl_prototype] = .
-
-/repository/decls/proc/decls_of_subtype(var/decl_prototype)
-	. = fetched_decl_subtypes[decl_prototype]
-	if(!.)
-		. = get_decls(subtypesof(decl_prototype))
-		fetched_decl_subtypes[decl_prototype] = .
-
 /repository/decls/proc/get_decl(var/decl_type)
 	. = fetched_decls[decl_type]
 	if(!.)
 		. = new decl_type()
 		fetched_decls[decl_type] = .
 
-/repository/decls/proc/get_decls(var/list/decl_types)
-	. = list()
-	for(var/decl_type in decl_types)
-		.[decl_type] =  get_decl(decl_type)
-
 /decls/Destroy()
 	crash_with("Prevented attempt to delete a decl instance: [(src)]")
 	return QDEL_HINT_LETMELIVE // Prevents Decl destruction
-
 
 var/repository/unique/uniqueness_repository = new()
 

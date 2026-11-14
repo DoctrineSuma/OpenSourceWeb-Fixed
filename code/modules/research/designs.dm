@@ -30,14 +30,10 @@ reliability_mod (starts at 0, gets improved through experimentation). Example: P
 other types of metals and chemistry for reagents).
 - Add the AUTOLATHE tag to
 
-
 */
 #define	IMPRINTER	1	//For circuits. Uses glass/chemicals.
 #define PROTOLATHE	2	//New stuff. Uses glass/metal/chemicals
 #define	AUTOLATHE	4	//Uses glass/metal only.
-#define CRAFTLATHE	8	//Uses fuck if I know. For use eventually.
-#define MECHFAB		16 //Remember, objects utilising this flag should have construction_time and construction_cost vars.
-#define PODFAB		32
 //Note: More then one of these can be added to a design but imprinter and lathe designs are incompatable.
 
 /datum/design						//Datum for object designs, used in construction
@@ -54,7 +50,6 @@ other types of metals and chemistry for reagents).
 	var/locked = 0						//If true it will spawn inside a lockbox with currently sec access
 	var/category = null //Primarily used for Mech Fabricators, but can be used for anything
 
-
 //A proc to calculate the reliability of a design based on tech levels and innate modifiers.
 //Input: A list of /datum/tech; Output: The new reliabilty.
 /datum/design/proc/CalcReliability(var/list/temp_techs)
@@ -65,7 +60,6 @@ other types of metals and chemistry for reagents).
 	new_reliability = between(reliability_base, new_reliability, 100)
 	reliability = new_reliability
 	return
-
 
 ////////////////////////////////////////
 //Disks for transporting design datums//
@@ -89,7 +83,6 @@ other types of metals and chemistry for reagents).
 	materials = list("$metal" = 30, "$glass" = 10)
 	build_path = /obj/item/weapon/disk/tech_disk
 
-
 /obj/item/weapon/disk/design_disk
 	name = "Component Design Disk"
 	desc = "A disk for storing device design data for construction in lathes."
@@ -104,7 +97,6 @@ other types of metals and chemistry for reagents).
 /obj/item/weapon/disk/design_disk/New()
 	src.pixel_x = rand(-5.0, 5)
 	src.pixel_y = rand(-5.0, 5)
-
 
 /////////////////////////////////////////
 //////////////////Test///////////////////

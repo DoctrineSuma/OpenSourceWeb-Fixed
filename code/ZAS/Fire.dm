@@ -16,9 +16,7 @@ Attach to transfer valve and open. BOOM.
 atom/proc/temperature_expose(datum/gas_mixture/air, exposed_temperature, exposed_volume)
 	return null
 
-
 turf/proc/hotspot_expose(exposed_temperature, exposed_volume, soh = 0)
-
 
 turf/simulated/hotspot_expose(exposed_temperature, exposed_volume, soh)
 	if(fire_protection > world.time-300)
@@ -121,15 +119,11 @@ turf/simulated/hotspot_expose(exposed_temperature, exposed_volume, soh)
 	if(firelevel > 6)
 		icon_state = "3"
 
-
 	else if(firelevel > 2.5)
 		icon_state = "2"
 
-
 	else
 		icon_state = "1"
-
-
 
 	//im not sure how to implement a version that works for every creature so for now monkeys are firesafe
 	for(var/mob/living/carbon/human/M in loc)
@@ -176,7 +170,6 @@ turf/simulated/hotspot_expose(exposed_temperature, exposed_volume, soh)
 			flow.zburn(liquid,1)
 		my_tile.assume_air(flow)
 
-
 /obj/fire/New(newLoc,fl)
 	..()
 
@@ -188,10 +181,8 @@ turf/simulated/hotspot_expose(exposed_temperature, exposed_volume, soh)
 	firelevel = fl
 	air_master.active_hotspots.Add(src)
 
-
 /obj/fire/Destroy()
 	if (istype(loc, /turf/simulated))
-
 
 		loc = null
 	air_master.active_hotspots.Remove(src)
@@ -204,12 +195,7 @@ turf/simulated/hotspot_expose(exposed_temperature, exposed_volume, soh)
 		loc = null
 	air_master.active_hotspots.Remove(src)
 
-
 turf/simulated/var/fire_protection = 0 //Protects newly extinguished tiles from being overrun again.
-turf/proc/apply_fire_protection()
-turf/simulated/apply_fire_protection()
-	fire_protection = world.time
-
 
 datum/gas_mixture/proc/zburn(obj/effect/decal/cleanable/liquid_fuel/liquid, force_burn, no_check = 0)
 	. = 0
@@ -333,11 +319,9 @@ datum/gas_mixture/proc/calculate_firelevel(obj/effect/decal/cleanable/liquid_fue
 
 	return max( 0, firelevel)
 
-
 /mob/living/proc/FireBurn(var/firelevel, var/last_temperature, var/pressure)
 	var/mx = 5 * firelevel/vsc.fire_firelevel_multiplier * min(pressure / ONE_ATMOSPHERE, 1)
 	apply_damage(2.5*mx, BURN)
-
 
 /mob/living/carbon/human/FireBurn(var/firelevel, var/last_temperature, var/pressure)
 	//Burns mobs due to fire. Respects heat transfer coefficients on various body parts.

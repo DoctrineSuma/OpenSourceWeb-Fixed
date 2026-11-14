@@ -1,6 +1,5 @@
 var/savefile/Banlistjob
 
-
 /proc/_jobban_isbanned(var/client/clientvar, var/rank)
 	if(!clientvar) return 1
 	ClearTempbansjob()
@@ -53,7 +52,6 @@ var/savefile/Banlistjob
 		if (CMinutes >= Banlistjob["minutes"]) RemoveBanjob(A)
 
 	return 1
-
 
 /proc/AddBanjob(ckey, computerid, reason, bannedby, temp, minutes, rank)
 	UpdateTime()
@@ -236,37 +234,3 @@ var/savefile/Banlistjob
 		log_admin("[usr.client.ckey] has jobbanned from [job] [ckey].\nReason: [reason]\nThis will be removed in [mins] minutes.")
 		message_admins("\blue[usr.client.ckey] has banned from [job] [ckey].\nReason: [reason]\nThis will be removed in [mins] minutes.")*/
 //////////////////////////////////// DEBUG ////////////////////////////////////
-
-/proc/CreateBansjob()
-
-	UpdateTime()
-
-	var/i
-	var/last
-
-	for(i=0, i<1001, i++)
-		var/a = pick(1,0)
-		var/b = pick(1,0)
-		if(b)
-			Banlistjob.cd = "/base"
-			Banlistjob.dir.Add("trash[i]trashid[i]")
-			Banlistjob.cd = "/base/trash[i]trashid[i]"
-			Banlistjob["key"] << "trash[i]"
-		else
-			Banlistjob.cd = "/base"
-			Banlistjob.dir.Add("[last]trashid[i]")
-			Banlistjob.cd = "/base/[last]trashid[i]"
-			Banlistjob["key"] << last
-		Banlistjob["id"] << "trashid[i]"
-		Banlistjob["reason"] << "Trashban[i]."
-		Banlistjob["temp"] << a
-		Banlistjob["minutes"] << CMinutes + rand(1,2000)
-		Banlistjob["bannedby"] << "trashmin"
-		last = "trash[i]"
-
-	Banlistjob.cd = "/base"
-
-/proc/ClearAllBansjob()
-	Banlistjob.cd = "/base"
-	for (var/A in Banlistjob.dir)
-		RemoveBanjob(A, "full")

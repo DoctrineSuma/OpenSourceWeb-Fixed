@@ -32,7 +32,6 @@ Misc functions:
 
 	get_last_exec_time_as_text() - Returns the time of last iteration as text
 
-
 Control vars:
 
 	delay - 	delay between iterations
@@ -120,7 +119,6 @@ Data storage vars:
 			return 1
 		return 0
 
-
 	proc/set_delay(new_delay)
 		if(isnum(new_delay))
 			delay = max(1, round(new_delay))
@@ -142,13 +140,7 @@ Data storage vars:
 //			world << "\red Invalid arguments supplied for [src.type], ref = \ref[src]"
 			return 0
 
-	proc/toggle_null_checks()
-		check_for_null = !check_for_null
-		return check_for_null
-
 	proc/toggle()
 		if(!stop())
 			start()
 		return active()
-
-

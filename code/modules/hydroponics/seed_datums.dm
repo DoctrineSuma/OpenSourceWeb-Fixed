@@ -2,19 +2,6 @@ var/global/list/seed_types = list()       // A list of all seed data.
 var/global/list/gene_tag_masks = list()   // Gene obfuscation for delicious trial and error goodness.
 
 // Debug for testing seed genes.
-/client/proc/show_plant_genes()
-	set category = "Debug"
-	set name = "Show Plant Genes"
-	set desc = "Prints the round's plant gene masks."
-
-	if(!holder)	return
-
-	if(!gene_tag_masks)
-		usr << "Gene masks not set."
-		return
-
-	for(var/mask in gene_tag_masks)
-		usr << "[mask]: [gene_tag_masks[mask]]"
 
 // Predefined/roundstart varieties use a string key to make it
 // easier to grab the new variety when mutating. Post-roundstart
@@ -600,10 +587,8 @@ proc/populate_seed_list()
 				product.name += "?"
 				product.desc += " On second thought, something about this one looks strange."
 
-
 //				if(biolum_colour)
 //					product.l_color = biolum_colour
-
 
 			//Handle spawning in living, mobile products (like dionaea).
 			if(istype(product,/mob/living))
@@ -618,7 +603,6 @@ proc/populate_seed_list()
 			else if(istype(product,/obj/item/weapon/grown))
 				var/obj/item/weapon/grown/current_product = product
 				current_product.plantname = name
-
 
 // When the seed in this machine mutates/is modified, the tray seed value
 // is set to a new datum copied from the original. This datum won't actually

@@ -174,13 +174,11 @@
 	else
 		return ..()
 
-
 /obj/item/device/flashlight/pickup(mob/user)
 	if(on)
 		set_light(3, 3,"#f4fad4")
 		calculate_dir()
 		dir = WEST
-
 
 /obj/item/device/flashlight/dropped(mob/user)
 	if(on)
@@ -191,7 +189,6 @@
 /obj/item/device/flashlight/Destroy()
 	..()
 	qdel(light_spot)
-
 
 /obj/item/device/flashlight/proc/calculate_dir(var/turf/old_loc)
 	if (istype(src.loc,/obj/item/weapon/storage) || istype(src.loc,/obj/structure/closet))
@@ -311,14 +308,6 @@
 	spot_locked = FALSE
 	calculate_dir(old_loc)
 
-/obj/item/device/flashlight/entered_with_container()
-	spot_locked = FALSE
-	calculate_dir()
-
-/obj/item/device/flashlight/container_dir_changed(new_dir)
-	spot_locked = FALSE
-	set_dir(new_dir)
-
 /obj/item/device/flashlight/pen
 	name = "penlight"
 	desc = "A pen-sized light, used by medical staff."
@@ -351,7 +340,6 @@
 	g_amt = 0
 	on = 1
 
-
 // green-shaded desk lamp
 /obj/item/device/flashlight/lamp/green
 	desc = "A classic green-shaded desk lamp."
@@ -361,8 +349,6 @@
 	brightness_red = 2
 	brightness_green = 5
 	brightness_blue = 2
-
-
 
 /obj/item/device/flashlight/lamp/verb/toggle_light()
 	set name = "Toggle light"
@@ -389,7 +375,6 @@
 	brightness_red = 5
 	brightness_green = 1
 	brightness_blue = 1
-
 
 /obj/item/device/flashlight/flare/New()
 	fuel = rand(800, 1000) // Sorry for changing this so much but I keep under-estimating how long X number of ticks last in seconds.
@@ -422,7 +407,6 @@
 	M.IgniteMob()
 	..()
 
-
 /obj/item/device/flashlight/flare/attack_self(mob/user)
 
 	// Usual checks
@@ -439,7 +423,6 @@
 		src.force = on_damage
 		src.damtype = "fire"
 		processing_objects += src
-
 
 /obj/item/device/flashlight/seclite
 	name = "seclite"

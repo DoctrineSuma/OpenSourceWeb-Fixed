@@ -221,7 +221,6 @@
 
 //////////////END HOSTILE MOB TARGETTING AND AGGRESSION////////////
 
-
 /mob/living/simple_animal/hostile/Die()
 	..()
 	walk(src, 0)
@@ -284,7 +283,6 @@
 	target_mob = null
 	return
 
-
 /mob/living/simple_animal/hostile/proc/Shoot(var/target, var/start, var/user, var/bullet = 0)
 	if(target == start)
 		return
@@ -301,15 +299,6 @@
 	A.xo = target:x - start:x
 	spawn( 0 )
 		A.process()
-	return
-
-
-/mob/living/simple_animal/hostile/proc/EscapeConfinement()
-	if(buckled)
-		buckled.attack_animal(src)
-	if(!isturf(src.loc) && src.loc != null)//Did someone put us in something?
-		var/atom/A = src.loc
-		A.attack_animal(src)//Bang on it till we get out
 	return
 
 /mob/living/simple_animal/hostile/proc/FindHidden()

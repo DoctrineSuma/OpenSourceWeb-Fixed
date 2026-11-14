@@ -317,8 +317,3 @@ proc/ritual(var/turf/locc)
 		if(result)
 			ritual(result)
 	..()
-
-/mob/proc/addThanatiWord(var/text)
-	thanatiWords += text
-	for(var/x in thanatiWords)
-		to_chat(world, "[x]")

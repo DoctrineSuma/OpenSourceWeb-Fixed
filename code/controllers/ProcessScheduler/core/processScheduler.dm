@@ -295,30 +295,9 @@ var/global/datum/controller/processScheduler/processScheduler
 		return t / c
 	return c
 
-/datum/controller/processScheduler/proc/getProcessLastRunTime(var/datum/controller/process/process)
-	return last_run_time[process]
-
-/datum/controller/processScheduler/proc/getProcessHighestRunTime(var/datum/controller/process/process)
-	return highest_run_time[process]
-
-/datum/controller/processScheduler/proc/getStatusData()
-	var/list/data = new
-
-	for (var/datum/controller/process/p in processes)
-		data.len++
-		data[data.len] = p.getContextData()
-
-	return data
-
-/datum/controller/processScheduler/proc/getProcessCount()
-	return processes.len
-
 /datum/controller/processScheduler/proc/hasProcess(var/processName as text)
 	if (nameToProcessMap[processName])
 		return 1
-
-/datum/controller/processScheduler/proc/killProcess(var/processName as text)
-	restartProcess(processName)
 
 /datum/controller/processScheduler/proc/restartProcess(var/processName as text)
 	if (hasProcess(processName))
@@ -327,16 +306,6 @@ var/global/datum/controller/processScheduler/processScheduler
 		newInstance._copyStateFrom(oldInstance)
 		replaceProcess(oldInstance, newInstance)
 		oldInstance.kill()
-
-/datum/controller/processScheduler/proc/enableProcess(var/processName as text)
-	if (hasProcess(processName))
-		var/datum/controller/process/process = nameToProcessMap[processName]
-		process.enable()
-
-/datum/controller/processScheduler/proc/disableProcess(var/processName as text)
-	if (hasProcess(processName))
-		var/datum/controller/process/process = nameToProcessMap[processName]
-		process.disable()
 
 /datum/controller/processScheduler/proc/getCurrentTickElapsedTime()
 	if (world.time > currentTick)
@@ -359,15 +328,3 @@ var/global/datum/controller/processScheduler/processScheduler
 
 	//timeAllowance = world.tick_lag * min(1, 0.5 * ((200/max(1,cpuAverage)) - 1))
 	timeAllowance = min(timeAllowanceMax, max(0, timeAllowance + timeAllowanceDelta))
-
-/datum/controller/processScheduler/proc/statProcesses()
-	if(!isRunning)
-		stat("Processes", "Scheduler not running")
-		return
-	stat("Processes", "[processes.len] (R [running.len] / Q [queued.len] / I [idle.len])")
-	stat(null, "[round(cpuAverage, 0.1)] CPU, [round(timeAllowance, 0.1)/10] TA")
-	for(var/datum/controller/process/p in processes)
-		p.statProcess()
-
-/datum/controller/processScheduler/proc/getProcess(var/process_name)
-	return nameToProcessMap[process_name]

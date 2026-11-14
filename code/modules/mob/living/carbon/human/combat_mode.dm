@@ -45,7 +45,6 @@
 				H.update_inv_head(0)
 				H.update_inv_wear_mask(0)
 
-
 		var/list/sounds_list = H.client.SoundQuery()
 		for(var/playing_sound in sounds_list)
 			var/sound/found = playing_sound
@@ -87,17 +86,6 @@
 			adjustStaminaLoss(-2)
 		else
 			adjustStaminaLoss(-1)
-
-/mob/living/proc/cantsee()
-	for(var/mob/living/carbon/human/H in view(7, src))
-		if(!H.client)
-			return
-		if(!src.client)
-			return
-		if(src in H.hidden_mobs)
-			return 1
-		else
-			return 0
 
 /mob/proc/surrender()//Surrending. I need to put this in a different file.
 	if(stat == CONSCIOUS )

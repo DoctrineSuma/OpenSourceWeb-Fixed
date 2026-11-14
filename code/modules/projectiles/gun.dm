@@ -146,16 +146,6 @@
 		update_icon()
 		to_chat(user, "I toggle the safety [safety ? "on":"off"].")
 
-/obj/item/weapon/gun/proc/ShootSelf(var/mob/user)
-	if(ishuman(user))
-		var/mob/living/carbon/human/H = user
-		H.apply_damage(rand(70,90), BURN, "r_hand")
-		if(wielded)
-			H.apply_damage(rand(70,90), BURN, "l_hand")
-			H.apply_damage(rand(70,90), BURN, "r_hand")
-			return
-	return
-
 /obj/item/weapon/gun/proc/Fire(atom/target as mob|obj|turf|area, mob/living/user as mob|obj, params, pointblank=0, reflex = 0)//TODO: go over this
 	//Exclude lasertag guns from the CLUMSY check.
 	var/mob/living/carbon/human/HHC = user

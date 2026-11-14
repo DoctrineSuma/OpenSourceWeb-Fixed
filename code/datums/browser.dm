@@ -14,7 +14,6 @@
 	var/head_content = ""
 	var/content = ""
 
-
 /datum/browser/New(nuser, nwindow_id, ntitle = 0, nwidth = 0, nheight = 0, var/atom/nref = null)
 
 	user = nuser
@@ -28,9 +27,6 @@
 	if (nref)
 		ref = nref
 	add_stylesheet("common", 'html/browser/common.css') // this CSS sheet is common to all UIs
-
-/datum/browser/proc/add_head_content(nhead_content)
-	head_content = nhead_content
 
 /datum/browser/proc/set_window_options(nwindow_options)
 	window_options = nwindow_options
@@ -46,9 +42,6 @@
 
 /datum/browser/proc/set_content(ncontent)
 	content = ncontent
-
-/datum/browser/proc/add_content(ncontent)
-	content += ncontent
 
 /datum/browser/proc/get_header()
 	var/key
@@ -121,7 +114,6 @@
 	return filename
 	*/
 
-
 // Registers the on-close verb for a browse window (client/verb/.windowclose)
 // this will be called when the close-button of a window is pressed.
 //
@@ -145,7 +137,6 @@
 	winset(user, windowid, "on-close=\".windowclose [param]\"")
 
 	//world << "OnClose [user]: [windowid] : ["on-close=\".windowclose [param]\""]"
-
 
 // the on-close client verb
 // called when a browser popup window is closed after registering with proc/onclose()

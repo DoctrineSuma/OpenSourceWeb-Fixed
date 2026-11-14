@@ -170,7 +170,6 @@ var/turf/MiniSpawn
 						else
 							master_mode = "quietday"
 
-
 		while(current_state == GAME_STATE_PREGAME)
 			for(var/i=0, i<10, i++)
 				sleep(1)
@@ -181,7 +180,6 @@ var/turf/MiniSpawn
 			if(pregame_timeleft <= 0)
 				current_state = GAME_STATE_SETTING_UP
 	while (!setup())
-
 
 /datum/controller/gameticker/proc/setup()
 	//Create and announce mode
@@ -429,11 +427,9 @@ var/turf/MiniSpawn
 						flick("explode",cinematic)
 						cinematic.icon_state = "loss_nuke"
 
-
 			if(2)	//nuke was nowhere nearby	//TODO: a really distant explosion animation
 				sleep(50)
 				world << sound('sound/effects/nukee.ogg')
-
 
 			else	//station was destroyed
 				if( mode && !override )
@@ -477,7 +473,6 @@ var/turf/MiniSpawn
 		if(temp_buckle)	qdel(temp_buckle)	//release everybody
 		return
 
-
 	proc/create_characters()
 		for(var/mob/new_player/player in player_list)
 			if(player.ready && player.mind)
@@ -495,7 +490,6 @@ var/turf/MiniSpawn
 					//player.preferences.save_preferences()
 					//player.client.prefs.save_preferences()
 					qdel(player)
-
 
 	proc/collect_minds()
 		for(var/mob/living/player in player_list)
@@ -716,13 +710,7 @@ var/turf/MiniSpawn
 				else
 					to_chat(world,"<span class='passivebold'>[pick(cant_phrase)]</span> <span class='passive'>Коматозник еще не позволил этой истории закончиться!</span>")
 
-
 		return 1
-
-	proc/getfactionbyname(var/name)
-		for(var/datum/faction/F in factions)
-			if(F.name == name)
-				return F
 
 	proc/announce_events()
 		if(!message_events)
@@ -867,7 +855,6 @@ var/turf/MiniSpawn
 				if(supply_shuttle.points >= 5000 && (src.job == "Bookkeeper" || src.job == "Grayhound"))
 					src?.client?.ChromieWinorLoose(src?.client, 10)
 					src.unlock_medal("The Richest Man In The Fortress", 0, "Collected more then 5000 obols in the merchant console.", "24")
-
 
 /mob/living/carbon/human/proc/CheckFateCompletion()
 	if(job)

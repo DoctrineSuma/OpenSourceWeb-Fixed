@@ -11,7 +11,6 @@ var/list/ai_list = list()
 				subject.attack_ai(M)
 	return is_in_use
 
-
 /mob/living/silicon/ai
 	name = "AI"
 	icon = 'icons/mob/AI.dmi'//
@@ -135,7 +134,6 @@ var/list/ai_list = list()
 	ai_list -= src
 	..()
 
-
 /mob/living/silicon/ai/verb/pick_icon()
 	set category = "AI Commands"
 	set name = "Set AI Core Display"
@@ -184,16 +182,7 @@ var/list/ai_list = list()
 			//usr <<"You can only change your display once!"
 			//return
 
-
 // displays the malf_ai information if the AI is the malf
-/mob/living/silicon/ai/show_malf_ai()
-	if(ticker.mode.name == "AI malfunction")
-		var/datum/game_mode/malfunction/malf = ticker.mode
-		for (var/datum/mind/malfai in malf.malf_ai)
-			if (mind == malfai) // are we the evil one?
-				if (malf.apcs >= 3)
-					stat(null, "Time until station control secured: [max(malf.AI_win_timeleft/(malf.apcs/3), 0)] seconds")
-
 
 /mob/living/silicon/ai/proc/ai_alerts()
 	set category = "AI Commands"
@@ -262,19 +251,6 @@ var/list/ai_list = list()
 
 	return
 
-/mob/living/silicon/ai/proc/ai_cancel_call()
-	set category = "AI Commands"
-	if(src.stat == 2)
-		src << "You can't send the shuttle back because you are dead!"
-		return
-	if(istype(usr,/mob/living/silicon/ai))
-		var/mob/living/silicon/ai/AI = src
-		if(AI.control_disabled)
-			src	 << "Wireless control is disabled!"
-			return
-	cancel_call_proc(src)
-	return
-
 /mob/living/silicon/ai/check_eye(var/mob/user as mob)
 	if (!current)
 		return null
@@ -318,7 +294,6 @@ var/list/ai_list = list()
 				adjustBruteLoss(30)
 
 	updatehealth()
-
 
 /mob/living/silicon/ai/Topic(href, href_list)
 	if(usr != src)
@@ -536,7 +511,6 @@ var/list/ai_list = list()
 	//src.cameraFollow = null
 	src.view_core()
 
-
 //Replaces /mob/living/silicon/ai/verb/change_network() in ai.dm & camera.dm
 //Adds in /mob/living/silicon/ai/proc/ai_network_change() instead
 //Addition by Mord_Sith to define AI's network change ability
@@ -579,7 +553,6 @@ var/list/ai_list = list()
 				break
 	src << "\blue Switched to [network] camera network."
 //End of code by Mord_Sith
-
 
 /mob/living/silicon/ai/proc/choose_modules()
 	set category = "Malfunction"
@@ -667,8 +640,6 @@ var/list/ai_list = list()
 	camera_light_on = !camera_light_on
 	src << "Camera lights [camera_light_on ? "activated" : "deactivated"]."
 
-
-
 // Handled camera lighting, when toggled.
 // It will get the nearest camera from the eyeobj, lighting it.
 
@@ -692,18 +663,6 @@ var/list/ai_list = list()
 				src.current = camera
 
 		camera_light_on = world.timeofday + 1 * 20 // Update the light every 2 seconds.
-
-/mob/living/silicon/ai/proc/control_integrated_radio()
-	set name = "Radio Settings"
-	set desc = "Allows you to change settings of your radio."
-	set category = "AI Commands"
-
-	if(stat == DEAD)
-		return
-
-	src << "Accessing Subspace Transceiver control..."
-	if (src.aiRadio)
-		src.aiRadio.interact(src)
 
 /mob/living/silicon/ai/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	if(istype(W, /obj/item/weapon/wrench))

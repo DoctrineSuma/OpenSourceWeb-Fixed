@@ -24,7 +24,6 @@ var/list/VicesList = list(vices)
 //used for alternate_option
 
 #define LEGAL_RELIGION  "Gray Church"
-#define ILLEGAL_RELIGION "Thanati"
 
 datum/preferences
 	//doohickeys for savefiles
@@ -295,7 +294,6 @@ datum/preferences
 		//width	 - Screen' width. Defaults to 550 to make it look nice.
 		//height 	 - Screen's height. Defaults to 500 to make it look nice.
 
-
 		var/HTML = "<html><body><head><META http-equiv='X-UA-Compatible' content='IE=edge' charset='UTF-8'><Title>Farweb</title><style type='text/css'>body {font-family: Times;cursor: url('pointer.cur'), auto;}a {text-decoration:none;outline: none;border: none;margin:-1px;}a:focus{outline:none;}a:hover {color:#0d0d0d;background:#505055;outline: none;border: none;}a.active { text-decoration:none; color:#533333;}a.inactive:hover {color:#0d0d0d;background:#bb0000}a.active:hover {color:#bb0000;background:#0f0f0f}a.inactive:hover { text-decoration:none; color:#0d0d0d; background:#bb0000}table { width:100%; }td {text-align: center;}TR {border: 0px;}</style><script type='text/javascript'>function updateText(tmpdesc){document.getElementById('INFO').innerHTML = tmpdesc;}</script><body bgcolor=#0d0d0d text=#555555 alink=#777777 vlink=#777777 link=#777777></head>"
 		HTML += "<tt><center>"
 		HTML += "<b>Choose your destiny.</b><br>"
@@ -538,7 +536,6 @@ datum/preferences
 		job_engsec_med = 0
 		job_engsec_low = 0
 		usr?.client?.GetHighJob()
-
 
 	proc/GetJobDepartment(var/datum/job/job, var/level)
 		if(!job || !level)	return 0
@@ -818,7 +815,6 @@ datum/preferences
 								g_hair = hex2num(copytext(new_hair, 4, 6))
 								b_hair = hex2num(copytext(new_hair, 6, 8))
 
-
 					if("detail")
 						if(species == "Human" || species == "Unathi")
 							var/new_detail = input(user, "Choose your character's detail colour:", "Character Preference") as color|null
@@ -826,7 +822,6 @@ datum/preferences
 								r_detail = hex2num(copytext(new_detail, 2, 4))
 								g_detail = hex2num(copytext(new_detail, 4, 6))
 								b_detail = hex2num(copytext(new_detail, 6, 8))
-
 
 					if("h_style")
 						var/list/valid_hairstyles = list()
@@ -1139,7 +1134,6 @@ datum/preferences
 								if("Chariot")
 									to_chat(user, "The blighted fanatic who personally keeps the caves clean of the Thanati, a primitive veteran of some bygone conflict.")
 									to_chat(user, "You favor getting up close and personal. <b>You are armed with the Slab.</b>")
-
 
 					if("baron")
 						//var/inquisidor_tipos = input(user, "Escolha o seu tipo de Inquisidor.") as null|anything in list("Velhos Tempos", "| O Fanatico |", "o Conhecedor o", "() Lobo Solitario ()", "- Respeitado -", "Ω \[Beberrao] Ω", "* Perspicaz *", " / Informado \\ ", "@ Espadachim @", "→ Investigador ←", "§ Lider §", "○ Corrupto ○")

@@ -38,8 +38,6 @@ var/global/list/bans = list()
 /proc/check_ckey_whitelisted(var/ckey)
 	return (ckeywhitelistweb && (ckey in ckeywhitelistweb) )
 
-
-
 /proc/load_db_whitelist()
 	set waitfor = FALSE
 	var/DBQuery/query = dbcon.NewQuery("SELECT ckey FROM playersfarweb;")
@@ -58,14 +56,6 @@ var/global/list/bans = list()
 	while(query.NextRow())
 		bans.Add(query.item[1])
 
-/proc/unban_bob()
-	set waitfor = FALSE
-	bans.Remove("ChaoticAgent")
-	var/DBQuery/query = dbcon.NewQuery("UPDATE bansfarweb SET isbanned = 0 WHERE ckey = \"ChaoticAgent\"")
-	if(!query.Execute())
-		world.log << query.ErrorMsg()
-		return
-
 /datum/storyholder
 	var/story_number = 1 //So when you boot it up you aren't on 0
 
@@ -83,7 +73,6 @@ var/datum/storyholder/story_holder = new
 	story_id = story_id + 1
 	add_story_id()
 
-
 /proc/add_story_id()
 	set waitfor = FALSE
 	var/DBQuery/queryInsert = dbcon.NewQuery("UPDATE stories SET storyid =[story_id];")
@@ -91,19 +80,6 @@ var/datum/storyholder/story_holder = new
 		world.log << queryInsert.ErrorMsg()
 		queryInsert.Close()
 		return
-
-/proc/load_invitations()
-	var/list/Lines = file2list("config/invitesystem/hasinvited.txt")
-	for(var/line in Lines)
-		if(!length(line))
-			continue
-
-		var/ascii = text2ascii(line,1)
-
-		if(copytext(line,1,2) == "#" || ascii == 9 || ascii == 32)
-			continue
-
-		hasinvited.Add(ckey(line))
 
 /proc/load_comrade_list()
 	set waitfor = FALSE
@@ -132,19 +108,8 @@ var/datum/storyholder/story_holder = new
 	while(query.NextRow())
 		villainlist.Add(query.item[1])
 
-client/proc/load_registered_by()
-	set waitfor = FALSE
-	var/DBQuery/query = dbcon.NewQuery("SELECT invitedby FROM playersfarweb WHERE ckey = \"[ckey]\";")
-	if(!query.Execute())
-		world.log << query.ErrorMsg()
-		return
-	while(query.NextRow())
-		InvitedBy = query.item[1]
 		//query.Close()
 		//return
-
-/proc/has_invited(var/ckey)
-	return (hasinvited && (ckey in hasinvited))
 
 /proc/loadFateLocks()
 	if(!config.usefatelocks)
@@ -181,4 +146,3 @@ proc/stickyban(var/key)
 	world.SetConfig("ban",ckey(key),"type=sticky;message=God be saved!;")
 proc/remove_stickyban(var/key)
 	world.SetConfig("ban",ckey(key),null)
-

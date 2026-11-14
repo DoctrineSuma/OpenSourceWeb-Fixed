@@ -1,5 +1,4 @@
 
-
 //TODO: put these somewhere else
 /client/proc/mimewall()
 	set category = "Mime"
@@ -47,20 +46,3 @@
 		qdel(src)
 
 ///////////////////////////////
-
-/client/proc/mimespeak()
-	set category = "Mime"
-	set name = "Speech"
-	set desc = "Toggle your speech."
-	if(!ishuman(usr))
-		return
-
-	var/mob/living/carbon/human/H = usr
-
-	if(H.miming)
-		H.miming = 0
-	else
-		H << "You'll have to wait if you want to atone for your sins."
-		spawn(3000)
-			H.miming = 1
-	return

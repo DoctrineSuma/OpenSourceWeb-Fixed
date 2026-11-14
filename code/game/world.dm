@@ -14,7 +14,6 @@ var/currentmaprotation = "Default"
 var/date_string = time2text(world.realtime, "YYYY/MM-Month/DD-Day")
 var/rtlog_path
 
-
 #define RECOMMENDED_VERSION 501 //lol
 /world/New()
 	//logs]
@@ -74,7 +73,6 @@ var/rtlog_path
 		master_controller.setup()
 		thanatiGlobal.setup()
 	TgsInitializationComplete()
-
 
 	spawn(3000)		//so we aren't adding to the round-start lag
 		if(config.ToRban)
@@ -138,7 +136,6 @@ var/rtlog_path
 
 		return list2params(s)
 
-
 /world/Reboot(var/reason)
 	/*spawn(0)
 		world << sound(pick('sound/AI/newroundsexy.ogg','sound/misc/apcdestroyed.ogg','sound/misc/bangindonk.ogg')) // random end sounds!! - LastyBatsy
@@ -153,28 +150,10 @@ var/rtlog_path
 	qdel(world)
 	..(reason)
 
-/hook/startup/proc/loadMode()
-	world.load_mode()
-	return 1
-
-/world/proc/load_mode()
-	var/list/Lines = file2list("data/mode.txt")
-	if(Lines.len)
-		if(Lines[1])
-			master_mode = Lines[1]
-			diary << "Saved mode is '[master_mode]'"
-
 /world/proc/save_mode(var/the_mode)
 	var/F = file("data/mode.txt")
 	fdel(F)
 	F << the_mode
-
-/hook/startup/proc/loadMOTD()
-	world.load_motd()
-	return 1
-
-/world/proc/load_motd()
-	join_motd = sanitize_uni(file2text("config/motd.txt"))
 
 /world/proc/load_configuration()
 	config = new /datum/configuration()
@@ -241,12 +220,6 @@ var/rtlog_path
 var/failed_db_connections = 0
 
 #ifdef FARWEB_LIVE
-/hook/startup/proc/connectDB()
-	if(!setup_database_connection())
-		world.log << "Your server failed to establish a connection with the feedback database."
-	else
-		world.log << "Feedback database connection established."
-	return 1
 #endif
 
 proc/setup_database_connection()
@@ -281,8 +254,6 @@ proc/establish_db_connection()
 		return 1
 
 #undef FAILED_DB_CONNECTION_CUTOFF
-
-
 
 //runtime logging.
 

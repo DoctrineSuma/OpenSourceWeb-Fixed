@@ -185,7 +185,6 @@ turf/simulated/floor/proc/update_icon()
 
 		icon_state = "hull[random_icon]"
 
-
 	else if(is_grass_floor())
 		if(!broken && !burnt)
 			if(!(icon_state in list("grass1","grass2","grass3","grass4")))
@@ -283,20 +282,6 @@ turf/simulated/floor/proc/update_icon()
 			if(air)
 				update_visuals(air)*/
 
-/turf/simulated/floor/return_siding_icon_state()
-	..()
-	if(is_grass_floor())
-		var/dir_sum = 0
-		for(var/direction in cardinal)
-			var/turf/T = get_step(src,direction)
-			if(!(T.is_grass_floor()))
-				dir_sum += direction
-		if(dir_sum)
-			return "wood_siding[dir_sum]"
-		else
-			return 0
-
-
 /turf/simulated/floor/attack_paw(mob/user as mob)
 	return src.attack_hand(user)
 
@@ -322,9 +307,6 @@ turf/simulated/floor/proc/update_icon()
 		step(user.pulling, get_dir(user.pulling.loc, src))
 	return
 
-/turf/simulated/floor/proc/gets_drilled()
-	return
-
 /turf/simulated/floor/proc/break_tile_to_plating()
 	/*if(!is_plating())
 		make_plating()*/
@@ -335,10 +317,6 @@ turf/simulated/floor/proc/update_icon()
 
 /turf/simulated/floor/is_light_floor()
 	return 0
-
-/turf/simulated/floor/proc/is_neon_floor()
-	return 0
-
 
 /turf/simulated/floor/is_grass_floor()
 	return 0
@@ -351,12 +329,6 @@ turf/simulated/floor/proc/update_icon()
 
 /turf/simulated/floor/is_underplating()
 	return 0
-
-/turf/simulated/floor/proc/is_hull()
-	if(src.style == "hull_new")
-		return 1
-	else
-		return 0
 
 /turf/simulated/floor/is_plating()
 	return 0
@@ -441,8 +413,6 @@ turf/simulated/floor/proc/update_icon()
 						var/turf/simulated/floor/FF = get_step(src,direction)
 						FF.update_icon() //so siding get updated properly
 
-
-
 	icon_plating = "plating"
 
 	intact = 0
@@ -455,102 +425,19 @@ turf/simulated/floor/proc/update_icon()
 //This proc will make the turf a plasteel floor tile. The expected argument is the tile to make the turf with
 //If none is given it will make a new object. dropping or unequipping must be handled before or after calling
 //this proc.
-/turf/simulated/floor/proc/make_plasteel_floor(var/obj/item/stack/tile/plasteel/T = null)
-	broken = 0
-	burnt = 0
-	intact = 1
-
-	if(T)
-		if(istype(T,/obj/item/stack/tile/plasteel))
-
-			if (icon_regular_floor)
-				icon_state = icon_regular_floor
-			else
-				icon_state = "floor"
-				icon_regular_floor = icon_state
-			update_icon()
-			levelupdate()
-			return
-	//if you gave a valid parameter, it won't get thisf ar.
-
-	icon_state = "floor"
-	icon_regular_floor = icon_state
-
-	update_icon()
-	levelupdate()
 
 //This proc will make the turf a light floor tile. The expected argument is the tile to make the turf with
 //If none is given it will make a new object. dropping or unequipping must be handled before or after calling
 //this proc.
-/turf/simulated/floor/proc/make_light_floor(var/obj/item/stack/tile/light/T = null)
-	broken = 0
-	burnt = 0
-	intact = 1
-	if(T)
-		if(istype(T,/obj/item/stack/tile/light))
-
-			update_icon()
-			levelupdate()
-			return
-	//if you gave a valid parameter, it won't get thisf ar.
-
-
-	update_icon()
-	levelupdate()
 
 //This proc will make a turf into a grass patch. Fun eh? Insert the grass tile to be used as the argument
 //If no argument is given a new one will be made.
-/turf/simulated/floor/proc/make_grass_floor(var/obj/item/stack/tile/grass/T = null)
-	broken = 0
-	burnt = 0
-	intact = 1
-	if(T)
-		if(istype(T,/obj/item/stack/tile/grass))
-
-			update_icon()
-			levelupdate()
-			return
-	//if you gave a valid parameter, it won't get thisf ar.
-
-
-	update_icon()
-	levelupdate()
 
 //This proc will make a turf into a wood floor. Fun eh? Insert the wood tile to be used as the argument
 //If no argument is given a new one will be made.
-/turf/simulated/floor/proc/make_wood_floor(var/obj/item/stack/tile/wood/T = null)
-	broken = 0
-	burnt = 0
-	intact = 1
-	if(T)
-		if(istype(T,/obj/item/stack/tile/wood))
-
-			update_icon()
-			levelupdate()
-			return
-	//if you gave a valid parameter, it won't get thisf ar.
-
-
-	update_icon()
-	levelupdate()
 
 //This proc will make a turf into a carpet floor. Fun eh? Insert the carpet tile to be used as the argument
 //If no argument is given a new one will be made.
-/turf/simulated/floor/proc/make_carpet_floor(var/obj/item/stack/tile/carpet/T = null)
-	broken = 0
-	burnt = 0
-	intact = 1
-	if(T)
-		if(istype(T,/obj/item/stack/tile/carpet))
-
-			update_icon()
-			levelupdate()
-			return
-	//if you gave a valid parameter, it won't get thisf ar.
-
-
-	update_icon()
-	levelupdate()
 
 /turf/simulated/floor/attackby(obj/item/C as obj, mob/user as mob)
 	if(!C || !user)

@@ -179,7 +179,6 @@ But you can call procs that are of type /mob/living/carbon/human/proc/ for that 
 	spawn(10)
 		M.Animalize()
 
-
 /client/proc/makepAI(var/turf/T in mob_list)
 	set category = "Fun"
 	set name = "Make pAI"
@@ -302,15 +301,6 @@ But you can call procs that are of type /mob/living/carbon/human/proc/ for that 
 	M << sound(null, repeat = 0, wait = 0, volume = 0, channel = 12)
 	if( isobserver(adminmob) )
 		qdel(adminmob)
-
-/client/proc/cmd_switch_radio()
-	set category = "Debug"
-	set name = "Switch Radio Mode"
-	set desc = "Toggle between normal radios and experimental radios. Have a coder present if you do this."
-
-	GLOBAL_RADIO_TYPE = !GLOBAL_RADIO_TYPE // toggle
-	log_admin("[key_name(src)] has turned the experimental radio system [GLOBAL_RADIO_TYPE ? "on" : "off"].")
-	message_admins("[key_name_admin(src)] has turned the experimental radio system [GLOBAL_RADIO_TYPE ? "on" : "off"].", 0)
 
 /client/proc/cmd_admin_areatest()
 	set category = "Mapping"
@@ -455,7 +445,6 @@ But you can call procs that are of type /mob/living/carbon/human/proc/ for that 
 			if(issaved(A.vars[V]))
 				NewContent.vars[V] = A.vars[V]
 	return
-
 
 /client/proc/callproc_datum(var/atom/A as null|area|mob|obj|turf)
 	set category = "Debug"

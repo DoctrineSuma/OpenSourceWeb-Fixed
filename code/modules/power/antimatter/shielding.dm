@@ -25,13 +25,11 @@ proc/cardinalrange(var/center)
 	var/stability = 100//If this gets low bad things tend to happen
 	var/efficiency = 1//How many cores this core counts for when doing power processing, plasma in the air and stability could affect this
 
-
 /obj/machinery/am_shielding/New(loc)
 	..(loc)
 	spawn(10)
 		controllerscan()
 	return
-
 
 /obj/machinery/am_shielding/proc/controllerscan(var/priorscan = 0)
 	//Make sure we are the only one here
@@ -64,7 +62,6 @@ proc/cardinalrange(var/center)
 			qdel(src)
 	return
 
-
 /obj/machinery/am_shielding/Destroy()
 	if(control_unit)	control_unit.remove_shielding(src)
 	if(processing)	shutdown_core()
@@ -73,11 +70,9 @@ proc/cardinalrange(var/center)
 	..()
 	return
 
-
 /obj/machinery/am_shielding/CanPass(atom/movable/mover, turf/target, height=0, air_group=0)
 	if(air_group || (height==0))	return 1
 	return 0
-
 
 /obj/machinery/am_shielding/process()
 	if(!processing) . = PROCESS_KILL
@@ -85,10 +80,8 @@ proc/cardinalrange(var/center)
 	//TODO: think about checking the airmix for plasma and increasing power output
 	return
 
-
 /obj/machinery/am_shielding/emp_act()//Immune due to not really much in the way of electronics.
 	return 0
-
 
 /obj/machinery/am_shielding/blob_act()
 	stability -= 20
@@ -103,7 +96,6 @@ proc/cardinalrange(var/center)
 	check_stability()
 	return
 
-
 /obj/machinery/am_shielding/ex_act(severity)
 	switch(severity)
 		if(1.0)
@@ -115,12 +107,10 @@ proc/cardinalrange(var/center)
 	check_stability()
 	return
 
-
 /obj/machinery/am_shielding/bullet_act(var/obj/item/projectile/Proj)
 	if(Proj.flag != "bullet")
 		stability -= Proj.force/2
 	return 0
-
 
 /obj/machinery/am_shielding/update_icon()
 	overlays.Cut()
@@ -134,7 +124,6 @@ proc/cardinalrange(var/center)
 		if(!processing) setup_core()
 	else if(processing) shutdown_core()
 
-
 /obj/machinery/am_shielding/attackby(obj/item/W, mob/user)
 	if(!istype(W) || !user) return
 	if(W.force > 10)
@@ -142,8 +131,6 @@ proc/cardinalrange(var/center)
 		check_stability()
 	..()
 	return
-
-
 
 //Call this to link a detected shilding unit to the controller
 /obj/machinery/am_shielding/proc/link_control(var/obj/machinery/power/am_control_unit/AMC)
@@ -153,7 +140,6 @@ proc/cardinalrange(var/center)
 	control_unit.add_shielding(src,1)
 	return 1
 
-
 //Scans cards for shields or the control unit and if all there it
 /obj/machinery/am_shielding/proc/core_check()
 	for(var/direction in alldirs)
@@ -161,7 +147,6 @@ proc/cardinalrange(var/center)
 		if(!machine) return 0//Need all for a core
 		if(!istype(machine, /obj/machinery/am_shielding) && !istype(machine, /obj/machinery/power/am_control_unit))	return 0
 	return 1
-
 
 /obj/machinery/am_shielding/proc/setup_core()
 	processing = 1
@@ -171,14 +156,12 @@ proc/cardinalrange(var/center)
 	control_unit.reported_core_efficiency += efficiency
 	return
 
-
 /obj/machinery/am_shielding/proc/shutdown_core()
 	processing = 0
 	if(!control_unit)	return
 	control_unit.linked_cores.Remove(src)
 	control_unit.reported_core_efficiency -= efficiency
 	return
-
 
 /obj/machinery/am_shielding/proc/check_stability(var/injecting_fuel = 0)
 	if(stability > 0) return
@@ -187,17 +170,6 @@ proc/cardinalrange(var/center)
 	if(src)
 		qdel(src)
 	return
-
-
-/obj/machinery/am_shielding/proc/recalc_efficiency(var/new_efficiency)//tbh still not 100% sure how I want to deal with efficiency so this is likely temp
-	if(!control_unit || !processing) return
-	if(stability < 50)
-		new_efficiency /= 2
-	control_unit.reported_core_efficiency += (new_efficiency - efficiency)
-	efficiency = new_efficiency
-	return
-
-
 
 /obj/item/device/am_shielding_container
 	name = "packaged antimatter reactor section"

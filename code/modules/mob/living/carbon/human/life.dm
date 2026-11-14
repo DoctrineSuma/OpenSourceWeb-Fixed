@@ -35,7 +35,6 @@
 	var/temperature_alert = 0
 	var/in_stasis = 0
 
-
 /mob/living/carbon/human/Life()
 	set invisibility = 0
 	set background = 1
@@ -194,7 +193,6 @@
 
 		my_stats.spd = (my_stats.dx + my_stats.ht) / 4
 
-
 		if(nutrition_icon)
 			nutrition_icon.overlays.Cut()
 			var/image/I = new('icons/life/screen1.dmi', "V[disgust_level]")
@@ -306,7 +304,6 @@
 		halloss = 0
 		setHalLoss(0)
 
-
 		blinded = 0
 		sleeping = 0
 		src.reagents.add_reagent("dentrine",3000)
@@ -320,11 +317,9 @@
 		halloss = 0
 		setHalLoss(0)
 
-
 		blinded = 0
 		sleeping = 0
 		overlay_fullscreen("ghost", /obj/screen/fullscreen/screamer_overlay, 3)
-
 
 	if(isskeleton(src))
 		see_invisible = 15
@@ -338,7 +333,6 @@
 	if(src.isVampire && src.DeadEyes)
 		see_invisible = 15
 		see_in_dark = 100
-
 
 // Calculate how vulnerable the human is to under- and overpressure.
 // Returns 0 (equals 0 %) if sealed in an undamaged suit, 1 if unprotected (equals 100%).
@@ -656,7 +650,6 @@
 					for(var/mob/living/carbon/M in view(1,src))
 						src.spread_disease_to(M)
 
-
 	proc/get_breath_from_internal(volume_needed)
 		if(internal)
 			if (!contents.Find(internal))
@@ -668,7 +661,6 @@
 			else if(internals)
 				internals.icon_state = "internal0"
 		return null
-
 
 	proc/handle_breath(datum/gas_mixture/breath)
 		if(status_flags & GODMODE)
@@ -902,7 +894,6 @@
 			//world << "Breath: [breath.temperature], [src]: [bodytemperature], Adjusting: [temp_adj]"
 			bodytemperature += temp_adj
 
-
 		breath.update_values()
 		return 1
 
@@ -1044,28 +1035,6 @@
 		return temp_change
 	*/
 
-	proc/stabilize_temperature_from_calories()
-		var/body_temperature_difference = 310.15 - bodytemperature
-		if (abs(body_temperature_difference) < 0.01)
-			return //fuck this precision
-		switch(bodytemperature)
-			if(-INFINITY to 260.15) //260.15 is 310.15 - 50, the temperature where you start to feel effects.
-				if(nutrition >= 2) //If we are very, very cold we'll use up quite a bit of nutriment to heat us up.
-					nutrition -= 1
-					hidratacao -= 2
-				var/recovery_amt = max((body_temperature_difference / BODYTEMP_AUTORECOVERY_DIVISOR), BODYTEMP_AUTORECOVERY_MINIMUM)
-//				log_debug("Cold. Difference = [body_temperature_difference]. Recovering [recovery_amt]")
-				bodytemperature += recovery_amt
-			if(260.15 to 360.15)
-				var/recovery_amt = body_temperature_difference / BODYTEMP_AUTORECOVERY_DIVISOR
-//				log_debug("Norm. Difference = [body_temperature_difference]. Recovering [recovery_amt]")
-				bodytemperature += recovery_amt
-			if(360.15 to INFINITY) //360.15 is 310.15 + 50, the temperature where you start to feel effects.
-				//We totally need a sweat system cause it totally makes sense...~
-				var/recovery_amt = min((body_temperature_difference / BODYTEMP_AUTORECOVERY_DIVISOR), -BODYTEMP_AUTORECOVERY_MINIMUM)	//We're dealing with negative numbers
-//				log_debug("Hot. Difference = [body_temperature_difference]. Recovering [recovery_amt]")
-				bodytemperature += recovery_amt
-
 	//This proc returns a number made up of the flags for body parts which you are protected on. (such as HEAD, UPPER_TORSO, LOWER_TORSO, etc. See setup.dm for the full list)
 	proc/get_heat_protection_flags(temperature) //Temperature is the temperature you're being exposed to.
 		var/thermal_protection_flags = 0
@@ -1118,7 +1087,6 @@
 				thermal_protection += THERMAL_PROTECTION_HAND_LEFT
 			if(thermal_protection_flags & HAND_RIGHT)
 				thermal_protection += THERMAL_PROTECTION_HAND_RIGHT
-
 
 		return min(1,thermal_protection)
 
@@ -1264,9 +1232,6 @@
 
 		if (hidratacao > 0 && stat != 2 && !iszombie(src) && !isVampire)
 			hidratacao = max (0, hidratacao - THIRST_FACTOR)
-
-
-
 
 		if (drowsyness)
 /*			var/image/drunk = image('icons/mob/mob.dmi', "drunk")
@@ -1715,7 +1680,6 @@
 					else
 						nutrition_icon.icon_state = "hunger0"
 
-
 			if(awake)
 				if(sleeping == 0 && stat == 0)
 					if(awake.icon_state != "sleep0")
@@ -1782,7 +1746,6 @@
 				else
 					client?.screen -= global_hud?.blind//blind.layer = 0
 
-
 			handle_hud_vision()
 			if(disabilities & NEARSIGHTED)	//this looks meh but saves a lot of memory by not requiring to add var/prescription
 				if(glasses)					//to every /obj/item
@@ -1814,12 +1777,10 @@
 				client.screen += global_hud.g_dither
 				for(var/obj/I in client?.usingPlanes)
 
-
 					if(istype(I, /obj/blur_planemaster)) continue
 					I.add_filter("bloom", 12, list("type" = "bloom", size=2, offset=0,alpha=255))
 			else
 				for(var/obj/I in client?.usingPlanes)
-
 
 					if(istype(I, /obj/blur_planemaster)) continue
 					I.remove_filter("bloom")
@@ -1832,7 +1793,6 @@
 
 			if (istype(glasses, /obj/item/clothing/glasses/meson) || istype(glasses, /obj/item/clothing/glasses/thermal/syndi))
 				client.screen += global_hud.lp_dither
-
 
 			if(machine)
 				if(!machine.check_eye(src))		reset_view(null)
@@ -2061,7 +2021,6 @@
 
 		return temp
 
-
 	proc/handle_decay()
 		var/decaytime = world.time - timeofdeath
 
@@ -2101,7 +2060,6 @@
 			makeSkeleton()
 			return //No puking over skeletons, they don't smell at all!
 
-
 		for(var/mob/living/carbon/human/H in range(decaylevel, src))
 			if(prob(10))
 				if(airborne_can_reach(get_turf(src), get_turf(H)))
@@ -2134,68 +2092,6 @@
 					H.add_event("disgust", /datum/happiness_event/disgust/verygross)
 					H.disgust_level += 4
 
-
-	proc/handle_smelly_things()
-		var/obj/item/clothing/mask/M = src.wear_mask
-		if(M && (M.flags & BLOCK_GAS_SMOKE_EFFECT))
-			return
-		if(iszombie(src) || isVampire)
-			return
-		if(vice == "Necrophile")
-			return
-		if(job == "Misero")
-			return
-		if(job == "Mortus")
-			return
-		if(job == "Serpent")
-			return
-		if(job == "Esculap")
-			return
-		if(src.resisting_disgust)
-			return
-		if(special == "avantgarde")
-			return
-		if(src.holding_breath)
-			return
-		if(/obj/effect/decal/cleanable/poo in range(5, src))
-			if(prob(2))
-				to_chat(src, "<spawn class='ifeelsick'>Something smells like shit...")
-				vomit()
-				add_event("disgust", /datum/happiness_event/disgust/verygross)
-				if(prob(50))
-					vomit()
-
-		for(var/obj/item/weapon/reagent_containers/food/snacks/poo/P in range(5, src))
-			if(istype(P.loc, /obj/machinery/disposal) || istype(P.loc, /obj/item/weapon/storage/bag))
-				return
-			if(wear_mask)
-				return
-			if(iszombie(src) || isVampire)
-				return
-			if(vice == "Necrophile")
-				return
-			if(job == "Misero")
-				return
-			if(job == "Mortus")
-				return
-			if(job == "Serpent")
-				return
-			if(job == "Esculap")
-				return
-			if(src.resisting_disgust)
-				return
-			if(src.holding_breath)
-				return
-			if(special == "avantgarde")
-				return
-			if(prob(6))
-				to_chat(src, "<spawn class='ifeelsick'>Something smells like shit...")
-				vomit()
-				add_event("disgust", /datum/happiness_event/disgust/verygross)
-				if(prob(50))
-					vomit()
-
-
 /mob/living/carbon/human/handle_silent()
 	if(..())
 		speech_problem_flag = 1
@@ -2222,15 +2118,6 @@
 	if(istype(wear_mask, /obj/item/clothing/mask/breath) || istype(wear_mask, /obj/item/clothing/mask/gas))
 		if(internal)
 			playsound(src, mask_sound, rand(50,60), 1)
-
-/mob/living/carbon/human/proc/handle_artery()
-	for(var/datum/organ/external/E in organs)
-		if(E.status & ORGAN_ARTERY)
-			if(world.time >= E.whenstopartery)
-				E.status &= ~ORGAN_ARTERY
-				src.UpdateArteryIcon()
-				E.whenstopartery = -1
-				to_chat(src, "My [E.display_name] feels better.")
 
 /mob/living/carbon/human/proc/handle_blood_pools()
 	if(resting && vessel.get_reagent_amount("blood") && stat != 2)//check if human is laying and has blood, i dont know if this is the right way to check for laying

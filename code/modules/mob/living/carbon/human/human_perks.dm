@@ -3,30 +3,6 @@
 	var/description = "Description"
 	var/reflectmessage = "Nothing!"
 
-/datum/perk/proc/pick_perk(var/list/current_perks)
-	var/perks
-	if(length(current_perks))
-		perks = pick(subtypesof(/datum/perk/) - current_perks)
-	else
-		perks = pick(subtypesof(/datum/perk/))
-	if (perks)
-		var/perk = new perks
-		return perk
-	else
-		warning("There's an error in someone's perk.")
-
-/datum/perk/proc/pick_perk_ref(var/list/current_perks)
-	var/perks
-	if(length(current_perks))
-		perks = pick(subtypesof(/datum/perk/ref) - current_perks)
-	else
-		perks = pick(subtypesof(/datum/perk/ref))
-	if (perks)
-		var/perk = new perks
-		return perk
-	else
-		warning("There's an error in someone's perk2.")
-
 /mob/living/carbon/human/proc/add_perk(var/datum/perk/perkpath)
 	var/datum/perk/perkpaths = new perkpath(src.perks)
 	src.perks.Add(perkpaths)

@@ -3,7 +3,6 @@ var/global/BSACooldown = 0
 var/global/floorIsLava = 0
 var/global/log_adminsay = 1
 
-
 ////////////////////////////////
 /proc/message_admins(var/msg)
 	msg = "<span class=\"admin\"><span class=\"prefix\">ADMIN LOG:</span> <span class=\"message\">[msg]</span></span>"
@@ -20,7 +19,6 @@ var/global/log_adminsay = 1
 			if(C.prefs.toggles & CHAT_ATTACKLOGS)
 				var/msg = rendered
 				to_chat(C, msg)
-
 
 ///////////////////////////////////////////////////////////////////////////////////////////////Panels
 
@@ -180,7 +178,6 @@ var/global/log_adminsay = 1
 
 	usr << browse(body, "window=adminplayeropts;size=550x515")
 
-
 /datum/player_info/var/author // admin who authored the information
 /datum/player_info/var/rank //rank of admin who made the notes
 /datum/player_info/var/content // text content of the information
@@ -236,15 +233,6 @@ var/global/log_adminsay = 1
 
 	usr << browse(dat, "window=player_notes;size=400x400")
 
-
-/datum/admins/proc/player_has_info(var/key as text)
-	var/savefile/info = new("data/player_saves/[copytext(key, 1, 2)]/[key]/info.sav")
-	var/list/infos
-	info >> infos
-	if(!infos || !infos.len) return 0
-	else return 1
-
-
 /datum/admins/proc/show_player_info(var/key as text)
 	set category = "Admin"
 	set name = "Show Player Info"
@@ -283,8 +271,6 @@ var/global/log_adminsay = 1
 
 	dat += "</body></html>"
 	usr << browse(dat, "window=adminplayerinfo;size=480x480")
-
-
 
 /datum/admins/proc/access_news_network() //MARKER
 	set category = "Fun"
@@ -530,8 +516,6 @@ var/global/log_adminsay = 1
 	usr << browse(dat, "window=admincaster_main;size=400x600")
 	onclose(usr, "admincaster_main")
 
-
-
 /datum/admins/proc/Jobbans()
 	if(!check_rights(R_BAN))	return
 
@@ -670,11 +654,8 @@ var/global/log_adminsay = 1
 	usr << browse(dat, "window=secrets")
 	return
 
-
-
 /////////////////////////////////////////////////////////////////////////////////////////////////admins2.dm merge
 //i.e. buttons/verbs
-
 
 /datum/admins/proc/restart()
 	set category = "Server"
@@ -736,14 +717,6 @@ var/global/log_adminsay = 1
 
 	log_admin("[key_name(usr)] toggled OOC.")
 	message_admins("[key_name_admin(usr)] toggled Dead OOC.", 1)
-
-/datum/admins/proc/toggletraitorscaling()
-	set category = "Server"
-	set desc="Toggle traitor scaling"
-	set name="Toggle Traitor Scaling"
-	traitor_scaling = !traitor_scaling
-	log_admin("[key_name(usr)] toggled Traitor Scaling to [traitor_scaling].")
-	message_admins("[key_name_admin(usr)] toggled Traitor Scaling [traitor_scaling ? "on" : "off"].", 1)
 
 /datum/admins/proc/startnow()
 	set category = "Server"
@@ -905,7 +878,6 @@ var/global/log_adminsay = 1
 	log_admin("[key_name(usr)] spawned [chosen] at ([usr.x],[usr.y],[usr.z])")
 	message_admins("[key_name(usr)] spawned [chosen] at ([usr.x],[usr.y],[usr.z])")
 
-
 /datum/admins/proc/show_traitor_panel(var/mob/M in mob_list)
 	set category = "Admin"
 	set desc = "Edit mobs's memory and role"
@@ -919,19 +891,6 @@ var/global/log_adminsay = 1
 		return
 
 	M.mind.edit_memory()
-
-
-/datum/admins/proc/toggletintedweldhelmets()
-	set category = "Debug"
-	set desc="Reduces view range when wearing welding helmets"
-	set name="Toggle tinted welding helmes"
-	tinted_weldhelh = !( tinted_weldhelh )
-	if (tinted_weldhelh)
-		to_chat(world, "<B>The tinted_weldhelh has been enabled!</B>")
-	else
-		to_chat(world, "<B>The tinted_weldhelh has been disabled!</B>")
-	log_admin("[key_name(usr)] toggled tinted_weldhelh.")
-	message_admins("[key_name_admin(usr)] toggled tinted_weldhelh.", 1)
 
 /datum/admins/proc/toggleguests()
 	set category = "Server"
@@ -992,7 +951,6 @@ var/global/log_adminsay = 1
 //TO-DO:
 //
 //
-
 
 /**********************Administration Shuttle**************************/
 

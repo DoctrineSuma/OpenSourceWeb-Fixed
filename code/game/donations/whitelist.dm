@@ -105,15 +105,6 @@ var/global/list/patreons = list()
     while(queryInsert.NextRow())
         weedonator.Add(queryInsert.item[1])
 
-/proc/build_remigrator()
-    var/DBQuery/queryInsert = dbcon.NewQuery("Select ckey FROM donation_remigrator;")
-    if(!queryInsert.Execute())
-        world.log << queryInsert.ErrorMsg()
-        queryInsert.Close()
-        return
-    while(queryInsert.NextRow())
-        remigrator.Add(queryInsert.item[1])
-
 /proc/build_seaspotter()
     var/DBQuery/queryInsert = dbcon.NewQuery("Select ckey FROM donation_seaspotter_merc;")
     if(!queryInsert.Execute())
@@ -221,7 +212,6 @@ var/global/list/patreons = list()
         return
     while(queryInsert.NextRow())
         futa.Add(queryInsert.item[1])
-
 
 /proc/build_30cm()
     var/DBQuery/queryInsert = dbcon.NewQuery("Select ckey FROM donation_30cm;")

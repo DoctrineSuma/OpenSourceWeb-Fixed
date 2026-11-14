@@ -13,22 +13,6 @@
 /****************
 * Range Helpers *
 ****************/
-/proc/clients_in_range(var/atom/movable/center_vmob)
-	. = list()
-
-	ACQUIRE_VIRTUAL_OR_TURF(center_vmob)
-	for(var/mob/observer/virtual/v_mob in range(world.view, center_vmob))
-		var/client/C = v_mob.get_client()
-		if(C)
-			. |= C
-
-/proc/hearers_in_range(var/atom/movable/center_vmob, var/hearing_range = world.view)
-	. = list()
-
-	ACQUIRE_VIRTUAL_OR_TURF(center_vmob)
-	for(var/mob/observer/virtual/v_mob in range(hearing_range, center_vmob))
-		if(v_mob.abilities & VIRTUAL_ABILITY_HEAR)
-			. |= v_mob.host
 
 /proc/viewers_in_range(var/atom/movable/center_vmob)
 	. = list()
@@ -66,20 +50,6 @@
 //		* The viewing mob has the SEE_MOBS sight flag.
 
 // Gets the hosts of all virtual mobs that can see the given atom movable as well as its turf
-/proc/all_viewers(var/mob/observer/virtual/viewed_atom)
-	. = list()
-
-	viewed_atom = istype(viewed_atom) ? viewed_atom.host : viewed_atom
-	var/turf/T = get_turf(viewed_atom)
-	if(!T)
-		return
-
-	for(var/mob/observer/virtual/seeing_v_mob in viewers(world.view, viewed_atom))
-		if(!(seeing_v_mob.abilities & VIRTUAL_ABILITY_SEE))
-			continue
-		var/atom/movable/host = seeing_v_mob.host
-		if(host.virtual_can_see_turf(T))
-			. |= host
 
 // This proc returns all hosts of virtual mobs in the given atom's view range (using its turf), ignoring invisibility, VIRUAL_ABILITY_SEE, and most other restrictions.
 // In most cases you actually want the all_* procs above. This helper was designed with LOOC in mind.
@@ -96,8 +66,6 @@
 */
 
 // Eye mobs technically see everything always, the owner just has an overlay applied, thus this helper
-/atom/movable/proc/virtual_can_see_turf(var/turf/T)
-	return TRUE // We assume objects have already been filtered using viewers() or similar proc
 
 #undef ACQUIRE_VIRTUAL_OR_TURF
 #undef ACQUIRE_VIRTUAL_OR_RETURN

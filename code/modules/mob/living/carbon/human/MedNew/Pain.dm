@@ -1,9 +1,6 @@
 /datum/organ/external/proc/add_pain(var/number)
 	src.painLW += number
 
-/datum/organ/external/proc/remove_pain(var/number)
-	src.painLW -= number
-
 /mob/living/carbon/human/var
 	painLWThresold = 100
 
@@ -19,7 +16,6 @@
 		return 0
 	if(totaldor>0) return totaldor
 	else return 0
-
 
 /mob/living/carbon/human/proc/handle_painLW()
 	var/dolor = get_pain()
@@ -58,7 +54,6 @@
 
 	return 1
 
-
 //med em geral
 
 /mob/living/carbon/human/proc/death_door()
@@ -69,12 +64,10 @@
 	death_door = 1
 	src.updatePig()
 
-
 /mob/living/carbon/human/proc/undeath_door()
 	if(!death_door) return
 	death_door = 0
 	src.updatePig()
-
 
 /mob/living/carbon/human/proc/can_death_door(var/argumento = 1)
 	if(death_door && argumento)return
@@ -86,8 +79,6 @@
 	if(isVampire)return
 
 	return 1
-
-
 
 /mob/living/carbon/human/proc/handle_knock()
 	//O QUE MATA: ~FALTA DE AR, DOR(ATAQUE CARDIACO), ATAQUE CARDÍACO, ~CHOQUE HIPOVOLÊMICO, INFECÇÕES, ARRITMIA
@@ -108,7 +99,6 @@
 			if(0 to BLOOD_VOLUME_SURVIVE)
 				morte_temporizador -= 60
 				death_door()
-
 
 		if(getOxyLoss() > 60)
 			death_door()

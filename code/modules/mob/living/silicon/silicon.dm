@@ -96,7 +96,6 @@
 				msg += "<A href=?src=\ref[src];showalerts=1'>\[Show Alerts\]</a>"
 				src << msg
 
-
 			alarms_to_show = list()
 			alarms_to_clear = list()
 			for(var/i = 1; i < alarm_types_show.len; i++)
@@ -119,9 +118,6 @@
 	src << "\red <B>*BZZZT*</B>"
 	src << "\red Warning: Electromagnetic pulse detected."
 	..()
-
-/mob/living/silicon/proc/damage_mob(var/brute = 0, var/fire = 0, var/tox = 0)
-	return
 
 /mob/living/silicon/IsAdvancedToolUser()
 	return 1
@@ -153,38 +149,13 @@
 	updatehealth()
 	return 1*/
 
-/proc/islinked(var/mob/living/silicon/robot/bot, var/mob/living/silicon/ai/ai)
-	if(!istype(bot) || !istype(ai))
-		return 0
-	if (bot.connected_ai == ai)
-		return 1
-	return 0
-
-
 // this function shows the health of the pAI in the Status panel
-/mob/living/silicon/proc/show_system_integrity()
-	if(!src.stat)
-		stat(null, text("System integrity: [(src.health+100)/2]%"))
-	else
-		stat(null, text("Systems nonfunctional"))
-
 
 // This is a pure virtual function, it should be overwritten by all subclasses
-/mob/living/silicon/proc/show_malf_ai()
-	return 0
-
 
 // this function displays the station time in the status panel
-/mob/living/silicon/proc/show_station_time()
-	stat(null, "Ship's Time: [worldtime2text()]")
-
 
 // this function displays the shuttles ETA in the status panel if the shuttle has been called
-/mob/living/silicon/proc/show_emergency_shuttle_eta()
-	if(emergency_shuttle.online && emergency_shuttle.location < 2)
-		var/timeleft = emergency_shuttle.timeleft()
-		if (timeleft)
-			stat(null, "ETA-[(timeleft / 60) % 60]:[add_zero(num2text(timeleft % 60), 2)]")
 
 // this function displays the stations manifest in a separate window
 /mob/living/silicon/proc/show_station_manifest()

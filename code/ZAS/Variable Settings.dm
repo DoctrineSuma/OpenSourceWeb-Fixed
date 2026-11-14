@@ -13,7 +13,6 @@ var/global/vs_control/vsc = new
 	var/fire_fuel_energy_release_NAME = "Fire - Fuel energy release"
 	var/fire_fuel_energy_release_DESC = "The energy in joule released when burning one mol of a burnable substance"
 
-
 	var/IgnitionLevel = 0.5
 	var/IgnitionLevel_DESC = "Determines point at which fire can ignite"
 
@@ -72,7 +71,6 @@ var/global/vs_control/vsc = new
 	var/connection_temperature_delta = 10
 	var/connection_temperature_delta_NAME = "Connections - Temperature Difference"
 	var/connection_temperature_delta_DESC = "The smallest temperature difference which will cause heat to travel through doors."
-
 
 /vs_control/var/list/settings = list()
 /vs_control/var/list/bitflags = list("1","2","4","8","16","32","64","128","256","512","1024")
@@ -173,22 +171,6 @@ var/global/vs_control/vsc = new
 		ChangeSettingsDialog(user,plc.settings)
 	else
 		ChangeSettingsDialog(user,settings)
-
-/vs_control/proc/RandomizeWithProbability()
-	for(var/V in settings)
-		var/newvalue
-		if("[V]_RANDOM" in vars)
-			if(isnum(vars["[V]_RANDOM"]))
-				newvalue = prob(vars["[V]_RANDOM"])
-			else if(istext(vars["[V]_RANDOM"]))
-				newvalue = roll(vars["[V]_RANDOM"])
-			else
-				newvalue = vars[V]
-		V = newvalue
-
-/vs_control/proc/ChangePlasma()
-	for(var/V in plc.settings)
-		plc.Randomize(V)
 
 /vs_control/proc/SetDefault(var/mob/user)
 	var/list/setting_choices = list("Plasma - Standard", "Plasma - Low Hazard", "Plasma - High Hazard", "Plasma - Oh Shit!",\
@@ -319,7 +301,6 @@ var/global/vs_control/vsc = new
 			plc.CONTAMINATION_LOSS 			= initial(plc.CONTAMINATION_LOSS)
 			plc.PLASMA_HALLUCINATION 		= initial(plc.PLASMA_HALLUCINATION)
 			plc.N2O_HALLUCINATION 			= initial(plc.N2O_HALLUCINATION)
-
 
 	world << "\blue <b>[key_name(user)] changed the global plasma/ZAS settings to \"[def]\"</b>"
 

@@ -4,9 +4,6 @@
 /proc/hgibs(atom/location, var/list/viruses, var/datum/dna/MobDNA, var/fleshcolor, var/bloodcolor)
 	new /obj/effect/gibspawner/human(get_turf(location),viruses,MobDNA,fleshcolor,bloodcolor)
 
-/proc/xgibs(atom/location, var/list/viruses)
-	new /obj/effect/gibspawner/xeno(get_turf(location),viruses)
-
 /proc/robogibs(atom/location, var/list/viruses)
 	new /obj/effect/gibspawner/robot(get_turf(location),viruses)
 

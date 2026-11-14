@@ -16,12 +16,10 @@
 	else
 		health = maxHealth - getOxyLoss() - getToxLoss() - getFireLoss() - getBruteLoss() - getCloneLoss() - halloss
 
-
 //This proc is used for mobs which are affected by pressure to calculate the amount of pressure that actually
 //affects them once clothing is factored in. ~Errorage
 /mob/living/proc/calculate_affecting_pressure(var/pressure)
 	return 0
-
 
 //sort of a legacy burn method for /electrocute, /shock, and the e_chair
 /mob/living/proc/burn_skin(burn_amount)
@@ -50,27 +48,6 @@
 	else if(istype(src, /mob/living/silicon/ai))
 		return 0
 
-/mob/living/proc/adjustBodyTemp(actual, desired, incrementboost)
-	var/temperature = actual
-	var/difference = abs(actual-desired)	//get difference
-	var/increments = difference/10 //find how many increments apart they are
-	var/change = increments*incrementboost	// Get the amount to change by (x per increment)
-
-	// Too cold
-	if(actual < desired)
-		temperature += change
-		if(actual > desired)
-			temperature = desired
-	// Too hot
-	if(actual > desired)
-		temperature -= change
-		if(actual < desired)
-			temperature = desired
-//	if(istype(src, /mob/living/carbon/human))
-//		world << "[src] ~ [src.bodytemperature] ~ [temperature]"
-	return temperature
-
-
 // ++++ROCKDTBEN++++ MOB PROCS -- Ask me before touching.
 // Stop! ... Hammertime! ~Carn
 // I touched them without asking... I'm soooo edgy ~Erro (added nodamage checks)
@@ -81,10 +58,6 @@
 /mob/living/proc/adjustBruteLoss(var/amount)
 	if(status_flags & GODMODE)	return 0	//godmode
 	bruteloss = min(max(bruteloss + amount, 0),(maxHealth*2))
-
-
-/mob/living/proc/getStaminaLoss()//Stamina shit.
-	return stamina_loss
 
 /mob/living/proc/adjustStaminaLoss(var/amount)
 	if(status_flags & GODMODE)	return 0
@@ -117,8 +90,6 @@
 
 /mob/living/proc/getToxLoss()
 	return toxloss
-
-
 
 /mob/living/proc/adjustToxLoss(var/amount)
 	if(status_flags & GODMODE)	return 0	//godmode
@@ -171,14 +142,9 @@
 /mob/living/proc/getMaxHealth()
 	return maxHealth
 
-/mob/living/proc/setMaxHealth(var/newMaxHealth)
-	maxHealth = newMaxHealth
-
 // ++++ROCKDTBEN++++ MOB PROCS //END
 
-
 /mob/proc/get_contents()
-
 
 //Recursive function to find everything a mob is holding.
 /mob/living/get_contents(var/obj/item/weapon/storage/Storage = null)
@@ -227,7 +193,6 @@
 			return 1
 	return 0
 
-
 /mob/living/proc/electrocute_act(var/shock_damage, var/obj/source, var/siemens_coeff = 1.0)
 	  return 0 //only carbon liveforms have this proc
 
@@ -246,7 +211,6 @@
 //		t = "chest"
 	var/datum/organ/external/def_zone = ran_zone(t)
 	return def_zone
-
 
 // heal ONE external organ, organ gets randomly selected from damaged ones.
 /mob/living/proc/heal_organ_damage(var/brute, var/burn)
@@ -276,8 +240,6 @@
 
 /mob/living/proc/restore_all_organs()
 	return
-
-
 
 /mob/living/proc/revive()
 	rejuvenate()
@@ -403,7 +365,6 @@
 	if (restrained())
 		stop_pulling()
 
-
 	var/t7 = 1
 	if (restrained())
 		for(var/mob/living/M in range(src, 1))
@@ -490,7 +451,6 @@
 	if ((s_active && !( s_active in contents ) ))
 		s_active.close(src)
 
-
 	for(var/mob/living/carbon/human/H in oview(1, src))
 		H.update_vision_cone()
 	update_vision_cone()
@@ -526,7 +486,6 @@
 					playsound(src.loc, pick('sound/voice/tired.ogg'), 90, 0, -1)
 				else
 					playsound(src.loc, pick('sound/voice/femtired1.ogg','sound/voice/femtired2.ogg','sound/voice/femtired3.ogg','sound/voice/femtired4.ogg'), 90, 0, -1)
-
 
 /mob/living/verb/resist()
 	set name = "Resist"
@@ -661,7 +620,6 @@
 		for(var/mob/O in viewers(usr.loc))
 			O.show_message("\red <B>The [L.loc] begins to shake violently!</B>", 1)
 
-
 		spawn(0)
 			if(do_after(usr,(breakout_time*60*10))) //minutes * 60seconds * 10deciseconds
 				if(!C || !L || L.stat != CONSCIOUS || L.loc != C || C.opened) //closet/user destroyed OR user dead/unconcious OR user no longer in closet OR closet opened
@@ -705,7 +663,6 @@
 						var/obj/structure/bigDelivery/BD = C.loc
 						BD.attack_hand(usr)
 					C.open()
-
 
 	//Stop drop and roll & Handcuffs
 	else if(iscarbon(L))
@@ -959,7 +916,6 @@
 
 /mob/living/proc/has_eyes()
 	return 1
-
 
 /mob/living/update_gravity(has_gravity)
 	if(!ticker)

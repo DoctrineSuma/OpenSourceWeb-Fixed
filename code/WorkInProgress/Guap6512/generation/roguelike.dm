@@ -16,7 +16,6 @@ proc
 		new /node(D) //So the stairs aren't always at the end of a hallway.
 		return 1
 
-
 	//sblock is a proc that I use instead of block when I'm not sure which turf is
 	//the bottom-left and which one is the top-right, which is required for block.
 	sblock(turf/A,turf/B,turf/C,turf/D)
@@ -258,7 +257,6 @@ structure
 						new /node(F,src)
 			//Then, finally, create the nodes.
 
-
 node
 	var/structure/owner
 	var/turf/loc
@@ -291,8 +289,6 @@ rect
 	New(var/turf/A,var/turf/B)
 		BL = A
 		TR = B
-	proc/inRect()
-		return block(BL,TR)-bord(BL,TR)
 	proc/Rect()
 		return block(BL,TR)
 	proc/Border()

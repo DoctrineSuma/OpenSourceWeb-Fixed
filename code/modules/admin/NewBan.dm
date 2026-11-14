@@ -2,7 +2,6 @@ var/CMinutes = null
 var/savefile/Banlist
 var/list/bwhitelist
 
-
 /proc/CheckBan(var/ckey, var/id, var/address)
 	if(!Banlist)		// if Banlist cannot be located for some reason
 		LoadBans()		// try to load the bans
@@ -92,7 +91,6 @@ var/list/bwhitelist
 		if (CMinutes >= Banlist["minutes"]) RemoveBan(A)
 
 	return 1
-
 
 /proc/AddBan(ckey, computerid, reason, bannedby, temp, minutes, address)
 
@@ -189,37 +187,3 @@ var/list/bwhitelist
 	usr << browse(dat, "window=unbanp;size=875x400")
 
 //////////////////////////////////// DEBUG ////////////////////////////////////
-
-/proc/CreateBans()
-
-	UpdateTime()
-
-	var/i
-	var/last
-
-	for(i=0, i<1001, i++)
-		var/a = pick(1,0)
-		var/b = pick(1,0)
-		if(b)
-			Banlist.cd = "/base"
-			Banlist.dir.Add("trash[i]trashid[i]")
-			Banlist.cd = "/base/trash[i]trashid[i]"
-			Banlist["key"] << "trash[i]"
-		else
-			Banlist.cd = "/base"
-			Banlist.dir.Add("[last]trashid[i]")
-			Banlist.cd = "/base/[last]trashid[i]"
-			Banlist["key"] << last
-		Banlist["id"] << "trashid[i]"
-		Banlist["reason"] << "Trashban[i]."
-		Banlist["temp"] << a
-		Banlist["minutes"] << CMinutes + rand(1,2000)
-		Banlist["bannedby"] << "trashmin"
-		last = "trash[i]"
-
-	Banlist.cd = "/base"
-
-/proc/ClearAllBans()
-	Banlist.cd = "/base"
-	for (var/A in Banlist.dir)
-		RemoveBan(A)

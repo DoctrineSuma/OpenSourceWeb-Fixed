@@ -63,7 +63,6 @@ var/list/zombies = list()
 		set_species("Zombie Child")
 	update_all_zombie_icons()
 
-
 /mob/living/carbon/human/proc/handle_zombify()
 	if(!becoming_zombie)
 		return
@@ -179,16 +178,6 @@ var/list/zombies = list()
 	else
 		usr << "\blue This mob is not a human!"
 
-
-/mob/living/carbon/human/proc/traitor_infect()
-	becoming_zombie = 1
-	zombieleader = 1
-	src.verbs += /mob/living/carbon/human/proc/zombierelease
-	src << "You have been implanted with a chemical canister you can either release it yourself or wait until it activates."
-	sleep(3000)
-	if(becoming_zombie)
-		zombify()
-
 /mob/living/carbon/human/proc/supersuicide()
 	set name = "Zombie suicide"
 	set hidden = 0
@@ -203,10 +192,3 @@ var/list/zombies = list()
 				return
 	else
 		src << "\red Only for zombies."
-
-/mob/living/carbon/human/proc/zombierelease()
-	set name = "Zombify"
-	set desc = "Turns you into a zombie"
-	if(zombieleader)
-		zombify()
-

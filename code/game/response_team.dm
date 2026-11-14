@@ -24,7 +24,6 @@ client/verb/JoinResponseTeam()
 
 		if(response_team_members.len > 5) usr << "The emergency response team is already full!"
 
-
 		for (var/obj/effect/landmark/L in landmarks_list) if (L.name == "Commando")
 			L.name = null//Reserving the place.
 			var/new_name = input(usr, "Pick a name","Name") as null|text
@@ -49,31 +48,9 @@ client/verb/JoinResponseTeam()
 		usr << "You need to be an observer or new player to use this."
 */
 // returns a number of dead players in %
-proc/percentage_dead()
-	var/total = 0
-	var/deadcount = 0
-	for(var/mob/living/carbon/human/H in mob_list)
-		if(H.client) // Monkeys and mice don't have a client, amirite?
-			if(H.stat == 2) deadcount++
-			total++
-
-	if(total == 0) return 0
-	else return round(100 * deadcount / total)
 
 // Increments the ERT chance automatically, so that the later it is in the round,
 // the more likely an ERT is to be able to be called.
-proc/increment_ert_chance()
-	while(send_emergency_team == 0) // There is no ERT at the time.
-		if(get_security_level() == "green")
-			ert_base_chance += 1
-		if(get_security_level() == "blue")
-			ert_base_chance += 2
-		if(get_security_level() == "red")
-			ert_base_chance += 3
-		if(get_security_level() == "delta")
-			ert_base_chance += 10           // Need those big guns
-		sleep(600 * 3) // Minute * Number of Minutes
-
 
 /client/proc/create_response_team(obj/spawn_location, leader_selected = 0, commando_name)
 

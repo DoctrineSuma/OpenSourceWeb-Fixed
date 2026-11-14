@@ -1,7 +1,5 @@
 //Config stuff
 #define PRISON_MOVETIME 150	//Time to station is milliseconds.
-#define PRISON_STATION_AREATYPE "/area/shuttle/prison/station" //Type of the prison shuttle area for station
-#define PRISON_DOCK_AREATYPE "/area/shuttle/prison/prison"	//Type of the prison shuttle area for dock
 
 var/prison_shuttle_moving_to_station = 0
 var/prison_shuttle_moving_to_prison = 0
@@ -21,18 +19,14 @@ var/prison_shuttle_timeleft = 0
 	var/allowedtocall = 0
 	var/prison_break = 0
 
-
 	attackby(I as obj, user as mob)
 		return src.attack_hand(user)
-
 
 	attack_ai(var/mob/user as mob)
 		return src.attack_hand(user)
 
-
 	attack_paw(var/mob/user as mob)
 		return src.attack_hand(user)
-
 
 	attackby(I as obj, user as mob)
 		if(istype(I, /obj/item/weapon/screwdriver))
@@ -62,7 +56,6 @@ var/prison_shuttle_timeleft = 0
 		else
 			return src.attack_hand(user)
 
-
 	attack_hand(var/mob/user as mob)
 		if(!src.allowed(user) && (!hacked))
 			user << "\red Access Denied."
@@ -86,7 +79,6 @@ var/prison_shuttle_timeleft = 0
 		user << browse(dat, "window=computer;size=575x450")
 		onclose(user, "computer")
 		return
-
 
 	Topic(href, href_list)
 		if(..())
@@ -130,11 +122,9 @@ var/prison_shuttle_timeleft = 0
 		src.updateUsrDialog()
 		return
 
-
 	proc/prison_can_move()
 		if(prison_shuttle_moving_to_station || prison_shuttle_moving_to_prison) return 0
 		else return 1
-
 
 	proc/prison_break()
 		switch(prison_break)
@@ -152,7 +142,6 @@ var/prison_shuttle_timeleft = 0
 			if(1)
 				prison_break = 0
 
-
 	proc/post_signal(var/command)
 		var/datum/radio_frequency/frequency = radio_controller.return_frequency(1311)
 		if(!frequency) return
@@ -162,7 +151,6 @@ var/prison_shuttle_timeleft = 0
 		status_signal.data["command"] = command
 		frequency.post_signal(src, status_signal)
 		return
-
 
 	proc/prison_process()
 		while(prison_shuttle_time - world.timeofday > 0)

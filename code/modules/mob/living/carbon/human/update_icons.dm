@@ -16,7 +16,6 @@ var/global/list/human_icon_cache = list()
 	//UPDATE_ICONS SYSTEM//
 	///////////////////////
 
-
 /*
 Calling this  a system is perhaps a bit trumped up. It is essentially update_clothing dismantled into its
 core parts. The key difference is that when we generate overlays we do not generate either lying or standing
@@ -45,7 +44,6 @@ In practice this means that:
 	Everytime you do something minor like take a pen out of your pocket, we only update the in-hand overlay
 	etc...
 
-
 There are several things that need to be remembered:
 
 >	Whenever we do something that should cause an overlay to update (which doesn't use standard procs
@@ -71,7 +69,6 @@ There are several things that need to be remembered:
 	All of these are named after the variable they update from. They are defined at the mob/ level like
 	update_clothing was, so you won't cause undefined proc runtimes with usr.update_inv_wear_id() if the usr is a
 	slime etc. Instead, it'll just return without doing any work. So no harm in calling it for slimes and such.
-
 
 >	There are also these special cases:
 		update_mutations()	//handles updating your appearance for certain mutations.  e.g TK head-glows
@@ -149,10 +146,8 @@ Please contact me on #coderbus IRC. ~Carn x
 #define TYPINGINDICATOR_LAYER   34
 #define USERLESS_LAYER			35
 #define ARTERY_LAYER			36
-#define HOOD_LAYER				37
 #define AIMED_LAYER				38
 #define BLOOD_LAYER				39
-#define CHAT_LAYER				40
 #define WATER_LAYER				41
 #define RIPPLE_LAYER			42
 #define TOTAL_LAYERS			42
@@ -211,15 +206,6 @@ Please contact me on #coderbus IRC. ~Carn x
 
 var/global/list/damage_icon_parts = list()
 
-proc/get_damage_icon_part(damage_state, body_part, var/icon/dam_icon = 'icons/mob/dam_human.dmi')
-	if(damage_icon_parts["[damage_state]/[body_part]/[dam_icon]"] == null)
-		var/icon/DI = new /icon(dam_icon, damage_state)			// the damage icon for whole human
-		DI.Blend(new /icon('icons/mob/dam_mask.dmi', body_part), ICON_MULTIPLY)		// mask with this organ's pixels
-		damage_icon_parts["[damage_state]/[body_part]/[dam_icon]"] = DI
-		return DI
-	else
-		return damage_icon_parts["[damage_state]/[body_part]/[dam_icon]"]
-
 /mob/living/carbon/human/proc/UpdateArteryIcon(var/update_icons=1)
 	if(istype(src, /mob/living/carbon/human/monster))
 		return
@@ -227,7 +213,6 @@ proc/get_damage_icon_part(damage_state, body_part, var/icon/dam_icon = 'icons/mo
 	var/icon/artery_icon = 'icons/mob/Med/human_bleeding_male.dmi'
 
 	var/icon/standing = new /icon(artery_icon, "00")
-
 
 	var/image/standing_image = new /image("icon" = standing)
 	if(src.gender == "male")
@@ -301,7 +286,6 @@ proc/get_damage_icon_part(damage_state, body_part, var/icon/dam_icon = 'icons/mo
 	if(update_icons)   update_icons()
 	return
 
-
 //DAMAGE OVERLAYS
 //constructs damage icon for each organ from mask * damage field and saves it in our overlays_ lists
 /mob/living/carbon/human/UpdateDamageIcon(var/update_icons=1)
@@ -335,7 +319,6 @@ proc/get_damage_icon_part(damage_state, body_part, var/icon/dam_icon = 'icons/mo
 
 	var/icon/standing = new /icon(damage_icon, "00")
 
-
 	var/image/standing_image = new /image("icon" = standing)
 	if(src.gender == "male")
 		damage_icon = 'icons/mob/dam_human.dmi'
@@ -364,7 +347,6 @@ proc/get_damage_icon_part(damage_state, body_part, var/icon/dam_icon = 'icons/mo
 			var/icon/DI = new /icon(damage_icon, "[O.iconsdamage]_[O.damage_state]")
 
 			standing_image.overlays += DI
-
 
 	overlays_standing[DAMAGE_LAYER]	= standing_image
 
@@ -600,7 +582,6 @@ proc/get_damage_icon_part(damage_state, body_part, var/icon/dam_icon = 'icons/mo
 			husk_over.Blend(mask, ICON_ADD)
 			base_icon.Blend(husk_over, ICON_OVERLAY)
 
-
 		//Skin tone.
 		if(!husk && !hulk)
 			if(species.flags & HAS_SKIN_TONE)
@@ -792,7 +773,6 @@ proc/get_damage_icon_part(damage_state, body_part, var/icon/dam_icon = 'icons/mo
 		overlays_standing[MUTATIONS_LAYER]	= null
 	if(update_icons)   update_icons()
 
-
 /mob/living/carbon/human/proc/update_mutantrace(var/update_icons=1)
 	var/fat
 
@@ -821,7 +801,6 @@ proc/get_damage_icon_part(damage_state, body_part, var/icon/dam_icon = 'icons/mo
 	if (!targeted_by)
 		overlays_standing[TARGETED_LAYER]	= null
 	if(update_icons)		update_icons()
-
 
 /* --------------------------------------- */
 //For legacy support.
@@ -974,7 +953,6 @@ proc/get_damage_icon_part(damage_state, body_part, var/icon/dam_icon = 'icons/mo
 		else
 			overlays_standing[GLOVES_LAYER]	= null
 	if(update_icons)   update_icons()
-
 
 /mob/living/carbon/human/update_inv_glasses(var/update_icons=1)
 	if(glasses)
@@ -1129,7 +1107,6 @@ proc/get_damage_icon_part(damage_state, body_part, var/icon/dam_icon = 'icons/mo
 		overlays_standing[BELT_LAYER]	= null
 	if(update_icons)   update_icons()
 
-
 /mob/living/carbon/human/update_inv_wear_suit(var/update_icons=1)
 	if( wear_suit && istype(wear_suit, /obj/item/clothing/suit) )	//TODO check this
 		wear_suit.screen_loc = get_slot_loc("oclothing")	//TODO
@@ -1141,7 +1118,6 @@ proc/get_damage_icon_part(damage_state, body_part, var/icon/dam_icon = 'icons/mo
 			standing = image("icon" = ((wear_suit.icon_override) ? wear_suit.icon_override : 'icons/mob/suit.dmi'), "icon_state" = "[wear_suit.icon_state]")
 		if(FAT in src.mutations)
 			standing = image("icon" = ((wear_suit.icon_override) ? wear_suit.icon_override : 'icons/mob/suit_fat.dmi'), "icon_state" = "[wear_suit.icon_state]")
-
 
 		if( istype(wear_suit, /obj/item/clothing/suit/straight_jacket) )
 			drop_from_inventory(handcuffed)
@@ -1172,7 +1148,6 @@ proc/get_damage_icon_part(damage_state, body_part, var/icon/dam_icon = 'icons/mo
 	if(r_store)			r_store.screen_loc = get_slot_loc("storage2")	//TODO
 	if(update_icons)	update_icons()
 
-
 /mob/living/carbon/human/update_inv_wear_mask(var/update_icons=1)
 	if( wear_mask && ( istype(wear_mask, /obj/item/clothing/mask) || istype(wear_mask, /obj/item/clothing/tie) ) )
 		wear_mask.screen_loc = get_slot_loc("mask")	//TODO
@@ -1193,7 +1168,6 @@ proc/get_damage_icon_part(damage_state, body_part, var/icon/dam_icon = 'icons/mo
 		overlays_standing[FACEMASK_LAYER]	= null
 	if(update_icons)   update_icons()
 
-
 /mob/living/carbon/human/update_inv_back(var/update_icons=1)
 	if(back && back.item_state)
 		var/t_state = back.item_state
@@ -1213,8 +1187,6 @@ proc/get_damage_icon_part(damage_state, body_part, var/icon/dam_icon = 'icons/mo
 						overlays_standing[BACK_LAYER]	= image("icon" = ((back.icon_override) ? back.icon_override : 'icons/mob/back_f.dmi'), "icon_state" = "x[t_state]_left")
 					if(update_icons) update_icons()
 					return
-
-
 
 			overlays_standing[BACK_LAYER]	= image("icon" = ((back.icon_override) ? back.icon_override : 'icons/mob/back_f.dmi'), "icon_state" = "[t_state]")
 		else
@@ -1246,7 +1218,6 @@ proc/get_damage_icon_part(damage_state, body_part, var/icon/dam_icon = 'icons/mo
 		back.screen_loc = get_slot_loc("back")	//TODO
 		if(gender == FEMALE  && (!FAT in mutations))
 
-
 			if(istype(back, /obj/item/weapon/storage/backpack))
 				var/obj/item/weapon/storage/backpack/B = back
 				if(B.RightLeft)
@@ -1261,12 +1232,8 @@ proc/get_damage_icon_part(damage_state, body_part, var/icon/dam_icon = 'icons/mo
 					if(update_icons) update_icons()
 					return
 
-
-
 			overlays_standing[BACK_LAYER]	= image("icon" = ((back.icon_override) ? back.icon_override : 'icons/mob/back_f.dmi'), "icon_state" = "[back.icon_state]")
 		else
-
-
 
 			if(istype(back, /obj/item/weapon/storage/backpack))
 				var/obj/item/weapon/storage/backpack/B = back
@@ -1281,7 +1248,6 @@ proc/get_damage_icon_part(damage_state, body_part, var/icon/dam_icon = 'icons/mo
 						overlays_standing[BACK_LAYER]	= image("icon" = ((back.icon_override) ? back.icon_override : 'icons/mob/back.dmi'), "icon_state" = "[back.icon_state]_left")
 					if(update_icons) update_icons()
 					return
-
 
 			overlays_standing[BACK_LAYER]	= image("icon" = ((back.icon_override) ? back.icon_override : 'icons/mob/back.dmi'), "icon_state" = "[back.icon_state]")
 	else
@@ -1309,7 +1275,6 @@ proc/get_damage_icon_part(damage_state, body_part, var/icon/dam_icon = 'icons/mo
 						overlays_standing[BACK2_LAYER]	= image("icon" = ((back2.icon_override) ? back2.icon_override : 'icons/mob/back_f.dmi'), "icon_state" = "x[t_state]_left")
 					if(update_icons) update_icons()
 					return
-
 
 			overlays_standing[BACK2_LAYER]	= image("icon" = ((back2.icon_override) ? back2.icon_override : 'icons/mob/back_f.dmi'), "icon_state" = "[t_state]")
 			return
@@ -1342,7 +1307,6 @@ proc/get_damage_icon_part(damage_state, body_part, var/icon/dam_icon = 'icons/mo
 		back2.screen_loc = get_slot_loc("back2")	//TODO
 		if(gender == FEMALE  && (!FAT in mutations))
 
-
 			if(istype(back2, /obj/item/weapon/storage/backpack))
 				var/obj/item/weapon/storage/backpack/B = back2
 				if(B.RightLeft)
@@ -1357,10 +1321,8 @@ proc/get_damage_icon_part(damage_state, body_part, var/icon/dam_icon = 'icons/mo
 					if(update_icons) update_icons()
 					return
 
-
 			overlays_standing[BACK2_LAYER]	= image("icon" = ((back2.icon_override) ? back2.icon_override : 'icons/mob/back_f.dmi'), "icon_state" = "[back2.icon_state]")
 		else
-
 
 			if(istype(back2, /obj/item/weapon/storage/backpack))
 				var/obj/item/weapon/storage/backpack/B = back2
@@ -1388,7 +1350,6 @@ proc/get_damage_icon_part(damage_state, body_part, var/icon/dam_icon = 'icons/mo
 		if(hud_used)
 			hud_used.hidden_inventory_update() 	//Updates the screenloc of the items on the 'other' inventory bar
 
-
 /mob/living/carbon/human/update_inv_handcuffed(var/update_icons=1)
 	if(handcuffed)
 		drop_r_hand()
@@ -1411,7 +1372,6 @@ proc/get_damage_icon_part(damage_state, body_part, var/icon/dam_icon = 'icons/mo
 		overlays_standing[LEGCUFF_LAYER]	= null
 	if(update_icons)   update_icons()
 
-
 /mob/living/carbon/human/update_inv_r_hand(var/update_icons=1)
 	if(r_hand)
 		r_hand.screen_loc = get_slot_loc("rhand")	//TODO
@@ -1427,7 +1387,6 @@ proc/get_damage_icon_part(damage_state, body_part, var/icon/dam_icon = 'icons/mo
 		overlays_standing[R_HAND_LAYER] = null
 		overlays_standing[TOTAL_LAYERS] = null
 	if(update_icons)   update_icons()
-
 
 /mob/living/carbon/human/update_inv_l_hand(var/update_icons=1)
 	if(l_hand)
@@ -1534,23 +1493,6 @@ proc/get_damage_icon_part(damage_state, body_part, var/icon/dam_icon = 'icons/mo
 	if(update_icons)	update_icons()
 	update_hair()
 */
-/mob/living/carbon/human/proc/add_hood(var/update_icons=1)
-	overlays_standing[HOOD_LAYER] = null
-	var/image/standing = overlay_image('icons/mob/suit.dmi', "mortician-hood")
-	overlays_standing[HOOD_LAYER] = standing
-
-	if(update_icons)	update_icons()
-	update_hair(1)
-	return
-
-/mob/living/carbon/human/proc/remove_hood(var/update_icons=1)
-	overlays_standing[HOOD_LAYER] = null
-	var/image/standing = null
-	overlays_standing[HOOD_LAYER] = standing
-
-	if(update_icons)	update_icons()
-	update_hair(1)
-	return
 
 /mob/living/carbon/human/proc/add_aim(var/update_icons=1)
 	overlays_standing[AIMED_LAYER] = null
@@ -1567,7 +1509,6 @@ proc/get_damage_icon_part(damage_state, body_part, var/icon/dam_icon = 'icons/mo
 
 	if(update_icons)	update_icons()
 	return
-
 
 /mob/living/carbon/human/proc/bodyhair(var/update_icons=1)
 	var/fat = (FAT in src.mutations)

@@ -13,7 +13,6 @@ datum/admin_report/var
 	offender_key // store the key of the offender
 	offender_cid // store the cid of the offender
 
-
 datum/report_topic_handler
 	Topic(href,href_list)
 		..()
@@ -45,7 +44,6 @@ datum/report_topic_handler
 					user.reports_amount++
 
 var/datum/report_topic_handler/report_topic_handler
-
 
 world/New()
 	..()
@@ -98,14 +96,6 @@ client/proc/unhandled_reports()
 	return 0
 
 // checks if the player has an unhandled report against him
-client/proc/is_reported()
-	var/list/reports = load_reports()
-
-	for(var/datum/admin_report/N in reports) if(!N.done)
-		if(N.offender_key == src.key)
-			return 1
-
-	return 0
 
 // display only the reports that haven't been handled
 client/proc/display_admin_reports()
@@ -144,7 +134,6 @@ client/proc/Report(mob/M as mob in world)
 	var/body = input(src.mob, "Describe in detail what you're reporting [M] for", "Report") as null|text
 	if(!body) return
 
-
 	make_report(body, key, M.key, CID)
 
 	spawn(1)
@@ -168,7 +157,6 @@ client/proc/mark_report_done(ID as num)
 	found.done = 1
 
 	Reports["reports"]   << reports
-
 
 client/proc/edit_report(ID as num)
 //	if(!src.holder || src.holder.level < 0)

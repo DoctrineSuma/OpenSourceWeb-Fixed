@@ -5,9 +5,6 @@
 /mob
 	var/list/screens = list()
 
-/mob/proc/set_fullscreen(condition, screen_name, screen_type, arg)
-	condition ? overlay_fullscreen(screen_name, screen_type, arg) : clear_fullscreen(screen_name)
-
 /mob/proc/overlay_fullscreen(category, type, severity)
 	var/obj/screen/fullscreen/screen = screens[category]
 
@@ -47,15 +44,6 @@
 		if(client)
 			client.screen -= screen
 		qdel(screen)
-
-/mob/proc/clear_fullscreens()
-	for(var/category in screens)
-		clear_fullscreen(category)
-
-/mob/proc/hide_fullscreens()
-	if(client)
-		for(var/category in screens)
-			client.screen -= screens[category]
 
 /mob/proc/reload_fullscreen()
 	if(client)

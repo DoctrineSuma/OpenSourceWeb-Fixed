@@ -44,7 +44,6 @@
 
 //PLAYER INTERACTION
 
-
 /obj/machinery/shielding/energyconverter/attack_hand(mob/user as mob)
 	return interact(user)
 
@@ -197,18 +196,6 @@ Manual Mode Generation Rate:      <a href="?src=\ref[src]&man=1">M</a> <a href="
 /obj/machinery/shielding/energyconverter/power_change()
 	..()
 	update_icon()
-
-/obj/machinery/shielding/energyconverter/proc/produce_energy(var/amount)
-	//Get batteries
-
-	//how much can we put in?
-	var/maxin = min(amount, Capacitor.maxcharge - Capacitor.charge)
-
-	//put as much of amount as possible in
-	Capacitor.charge += maxin
-
-	//and return any we couldn't add to the shield set
-	return amount - maxin
 
 /obj/machinery/shielding/energyconverter/update_icon()
 	src.overlays.Cut()

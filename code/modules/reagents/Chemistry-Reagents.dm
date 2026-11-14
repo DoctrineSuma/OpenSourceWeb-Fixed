@@ -1,7 +1,6 @@
 //The reaction procs must ALWAYS set src = null, this detaches the proc from the object (the reagent)
 //so that it can continue working when the reagent is deleted while the proc is still active.
 
-
 /datum/reagent
 	var/name = "Reagent"
 	var/id = "reagent"
@@ -66,9 +65,6 @@ datum/reagent/proc/reaction_turf(var/turf/T, var/volume, var/shouldNull = 1)
 		src = null
 	return
 
-/datum/reagent/proc/touch_turf(var/turf/T, var/amount) // Cleaner cleaning, lube lubbing, etc, all go here
-	return
-
 /datum/reagent/proc/on_remove(var/data)
 	return
 
@@ -79,18 +75,12 @@ datum/reagent/proc/on_mob_life(var/mob/living/M as mob, var/alien)
 	first_life = FALSE
 	return
 
-datum/reagent/proc/on_move(var/mob/M)
-	return
-
 // Called after add_reagents creates a new reagent.
 datum/reagent/proc/on_new(var/data)
 	return
 
 // Called when two reagents of the same are mixing.
 datum/reagent/proc/on_merge(var/data)
-	return
-
-datum/reagent/proc/on_update(var/atom/A)
 	return
 
 // Called if the reagent has passed the overdose threshold and is set to be triggering overdose effects
@@ -117,27 +107,12 @@ datum/reagent/proc/addiction_act_stage4(var/mob/living/M as mob)
 		M << "<span class = 'userdanger'>You're not feeling good at all! You really need some [name].</span>"
 	return
 
-
 datum/reagent/blood
 	data = new/list("donor"=null,"viruses"=null,"blood_DNA"=null,"blood_type"=null,"resistances"=null,"trace_chem"=null, "antibodies" = null)
 	name = "Blood"
 	id = "blood"
 	reagent_state = LIQUID
 	color = BLOOD_COLOR // rgb: 200, 0, 0
-
-datum/reagent/blood/proc/herege()
-	var/datum/reagent/blood/B = src
-	for(var/i = 1, i <= B.data.len, i++)
-		var/coisas = B.data[i]
-		var/donor = coisas["donor"]
-		if(istype(donor, /mob/living/carbon/human))
-			var/mob/living/carbon/human/H = src
-			if(H.religion != "Gray Church")
-				return 1
-	return 0
-
-
-
 
 datum/reagent/blood/reaction_mob(var/mob/M, var/method=TOUCH, var/volume)
 	var/datum/reagent/blood/self = src
@@ -161,7 +136,6 @@ datum/reagent/blood/reaction_mob(var/mob/M, var/method=TOUCH, var/volume)
 		var/mob/living/carbon/C = M
 		C.antibodies |= self.data["antibodies"]
 
-
 datum/reagent/blood/reaction_turf(var/turf/simulated/T, var/volume)//splash the blood all over the place
 	if(!istype(T)) return
 	var/datum/reagent/blood/self = src
@@ -178,7 +152,6 @@ datum/reagent/blood/reaction_turf(var/turf/simulated/T, var/volume)//splash the 
 			var/datum/disease/newVirus = D.Copy(1)
 			blood_prop.viruses += newVirus
 			newVirus.holder = blood_prop
-
 
 	else if(istype(self.data["donor"], /mob/living/carbon/monkey))
 		var/obj/effect/decal/cleanable/blood/blood_prop = locate() in T
@@ -223,7 +196,6 @@ datum/reagent/vaccine
 
 			M.resistances += self.data
 		return
-
 
 datum/reagent/semen
 	name = "Semen"
@@ -649,7 +621,6 @@ datum/reagent/sugar
 		..()
 		return
 
-
 datum/reagent/glycerol
 	name = "Glycerol"
 	id = "glycerol"
@@ -767,7 +738,6 @@ datum/reagent/oxycodone
 		M.hallucination = max(M.hallucination, 3)
 		return
 
-
 datum/reagent/virus_food
 	name = "Virus Food"
 	id = "virusfood"
@@ -867,7 +837,6 @@ datum/reagent/fuel
 	reagent_state = LIQUID
 	color = "#660000" // rgb: 102, 0, 0
 	overdose_threshold = REAGENTS_OVERDOSE
-
 
 	reaction_obj(var/obj/O, var/volume)
 		var/turf/the_turf = get_turf(O)
@@ -1141,7 +1110,6 @@ datum/reagent/spaceacillin
 	on_mob_life(var/mob/living/M as mob)
 		..()
 		return
-
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -1681,7 +1649,6 @@ datum/reagent/toxin/acid/fluacid
 	color = "#8E18A9" // rgb: 142, 24, 169
 	toxpwr = 2
 	meltprob = 20
-
 
 /////////////////////////Food Reagents////////////////////////////
 // Part of the food code. Nutriment is used instead of the old "heal_amt" code. Also is where all the food
@@ -2917,7 +2884,6 @@ datum/reagent/ethanol/absinthe
 	slur_start = 15
 	confused_start = 30
 
-
 datum/reagent/ethanol/pwine
 	name = "Poison Wine"
 	id = "pwine"
@@ -2994,9 +2960,7 @@ datum/reagent/ethanol/sake
 	color = "#664300" // rgb: 102, 67, 0
 	boozepwr = 2
 
-
 /////////////////////////////////////////////////////////////////cocktail entities//////////////////////////////////////////////
-
 
 datum/reagent/ethanol/goldschlager
 	name = "Goldschlager"

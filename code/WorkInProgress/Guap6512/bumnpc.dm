@@ -1,9 +1,6 @@
 #define cycle_pause 15 //min 1
 #define viewrange 4 //min 2
 
-#define BUM_SLEEP 0
-#define BUM_ATTACK 1
-#define BUM_IDLE 2
 var/michael_shepard = FALSE
 
 /mob/living/carbon/human/bumbot/Move()
@@ -250,7 +247,6 @@ var/list/bumquotes = list("Cold... So cold...","Did you know?","People are so st
 
 			if(target?.stat == 2)
 				target = null
-
 
 			var/distance = get_dist(src, target)
 

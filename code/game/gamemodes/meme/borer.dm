@@ -12,7 +12,6 @@
 	votable = 0 // temporarily disable this mode for voting
 	var/attuned = 0
 
-
 	var/var/list/datum/mind/first_hosts = list()
 	var/var/list/assigned_hosts = list()
 
@@ -35,7 +34,6 @@
 
 	var/const/waittime_l = 600 //lower bound on time before intercept arrives (in tenths of seconds)
 	var/const/waittime_h = 1800 //upper bound on time before intercept arrives (in tenths of seconds)
-
 
 /datum/game_mode/borer/announce()
 	world << "<B>The current game mode is - Borer!</B>"
@@ -68,8 +66,6 @@
 		borers += borer
 		first_hosts += first_host
 
-
-
 		// so that we can later know which host belongs to which borer
 		assigned_hosts[borer.key] = first_host
 
@@ -81,7 +77,6 @@
 /datum/game_mode/borer/pre_setup()
 	return 1
 
-
 /datum/game_mode/borer/post_setup()
 	// create a borer and enter it
 	for(var/datum/mind/borer in borers)
@@ -89,7 +84,6 @@
 		var/mob/original = borer.current
 		borer.transfer_to(M)
 		M.clearHUD()
-
 
 		// get the host for this borer
 		var/datum/mind/first_host = assigned_hosts[borer.key]
@@ -104,7 +98,6 @@
 		ticker.mode.borers |= first_host    // make host antag
 		first_host.special_role = "Borer Thrall"
 
-
 		del original
 
 	log_admin("Created [borers.len] borers.")
@@ -113,7 +106,6 @@
 		send_intercept()
 	..()
 	return
-
 
 /datum/game_mode/proc/forge_borer_objectives(var/datum/mind/borer, var/datum/mind/first_host)
 
@@ -179,30 +171,3 @@
 		return ..()
 	else
 		return 1*/
-
-/datum/game_mode/proc/auto_declare_completion_borer()
-	for(var/datum/mind/borer in borers)
-		var/borerwin = 1
-
-		if((borer.current) && (istype(borer.current,/mob/living/simple_animal/borer) || istype(borer.current,/mob/living/captive_brain)))
-			world << "<B>The borer was [borer.key].</B>"
-			if(borer.current:last_host)
-				world << "<B>The last host was [borer.current:last_host].</B>"
-
-			var/count = 1
-			for(var/datum/objective/objective in borer.objectives)
-				if(objective.check_completion())
-					world << "<B>Objective #[count]</B>: [objective.explanation_text] \green <B>Success</B>"
-				else
-					world << "<B>Objective #[count]</B>: [objective.explanation_text] \red Failed"
-					borerwin = 0
-				count++
-
-		else
-			borerwin = 0
-
-		if(borerwin)
-			world << "<B>The borer was successful!<B>"
-		else
-			world << "<B>The borer has failed!<B>"
-	return 1

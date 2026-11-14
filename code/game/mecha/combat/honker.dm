@@ -27,7 +27,6 @@
 	return
 */
 
-
 /obj/mecha/combat/honker/melee_action(target)
 	if(!melee_can_hit)
 		return
@@ -124,7 +123,6 @@
 	output += ..()
 	return output
 
-
 /obj/mecha/combat/honker/get_equipment_list()
 	if(!equipment.len)
 		return
@@ -133,8 +131,6 @@
 		output += "[selected==MT?"<b id='\ref[MT]'>":"<a id='\ref[MT]' href='?src=\ref[src];select_equip=\ref[MT]'>"][MT.get_equip_info()][selected==MT?"</b>":"</a>"]<br>"
 	output += "</div>"
 	return output
-
-
 
 /obj/mecha/combat/honker/mechstep(direction)
 	var/result = step(src,direction)
@@ -153,12 +149,3 @@ obj/mecha/combat/honker/Topic(href, href_list)
 			if("sadtrombone")
 				playsound(src, 'sound/misc/sadtrombone.ogg', 50)
 	return
-
-proc/rand_hex_color()
-	var/list/colors = list("0","1","2","3","4","5","6","7","8","9","a","b","c","d","e","f")
-	var/color=""
-	for (var/i=0;i<6;i++)
-		color = color+pick(colors)
-	return color
-
-

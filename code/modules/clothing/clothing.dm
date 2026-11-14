@@ -182,7 +182,6 @@ SEE_PIXELS// if an object is located on an unlit area, but some of its pixels ar
 BLIND     // can't see anything
 */
 
-
 //Gloves
 /obj/item/clothing/gloves
 	name = "gloves"
@@ -224,7 +223,6 @@ BLIND     // can't see anything
 	icon = 'icons/obj/clothing/hats.dmi'
 	body_parts_covered = HEAD
 	slot_flags = SLOT_HEAD
-
 
 //Mask
 /obj/item/clothing/mask
@@ -329,32 +327,6 @@ BLIND     // can't see anything
 			var/mob/living/carbon/human/H = loc
 			H.update_inv_w_uniform()
 	..()
-
-/obj/item/clothing/under/proc/attachTie(obj/item/I, mob/user)
-	if(istype(I, /obj/item/clothing/tie))
-		if(hastie)
-			if(user)
-				user << "<span class='warning'>[src] already has an accessory.</span>"
-			return
-		else
-			if(user)
-				user.drop_item()
-			hastie = I
-			I.loc = src
-			if(user)
-				user << "<span class='notice'>You attach [I] to [src].</span>"
-			I.transform *= 0.5	//halve the size so it doesn't overpower the under
-			I.pixel_x += 8
-			I.pixel_y -= 8
-			I.layer = FLOAT_LAYER
-			overlays += I
-
-
-			if(istype(loc, /mob/living/carbon/human))
-				var/mob/living/carbon/human/H = loc
-				H.update_inv_w_uniform()
-
-			return
 
 /obj/item/clothing/under/proc/unequip_medal(var/mob/living/carbon/human/user)
 	if(!istype(user) || user.stat ||!medal_attached)

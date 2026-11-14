@@ -2,15 +2,6 @@
 	name = "Turret Protected Area"
 	var/list/turretTargets = list()
 
-/area/turret_protected/proc/subjectDied(target)
-	if( isliving(target) )
-		if( !issilicon(target) )
-			var/mob/living/L = target
-			if( L.stat )
-				if( L in turretTargets )
-					src.Exited(L)
-
-
 /area/turret_protected/Entered(O)
 	..()
 	if( master && master != src )
@@ -36,7 +27,6 @@
 		turretTargets -= O
 	..()
 	return 1
-
 
 /obj/machinery/turret
 	name = "turret"
@@ -70,7 +60,6 @@
 	var/atom/movable/cur_target
 	var/targeting_active = 0
 	var/area/turret_protected/protected_area
-
 
 /obj/machinery/turret/New()
 	spark_system = new /datum/effect/effect/system/spark_spread
@@ -114,7 +103,6 @@
 	src.enabled = enabled
 	src.lasers = lethal
 	src.power_change()
-
 
 /obj/machinery/turret/proc/get_protected_area()
 	var/area/turret_protected/TP = get_area(src)
@@ -163,7 +151,6 @@
 		new_target = pick(new_targets)
 	return new_target
 
-
 /obj/machinery/turret/process()
 	if(stat & (NOPOWER|BROKEN))
 		return
@@ -202,7 +189,6 @@
 			use_power = 1
 	return
 
-
 /obj/machinery/turret/proc/target()
 	while(src && enabled && !stat && check_target(cur_target))
 		src.dir = get_dir(src, cur_target)
@@ -235,7 +221,6 @@
 	spawn( 0 )
 		A.process()
 	return
-
 
 /obj/machinery/turret/proc/isDown()
 	return (invisibility!=0)
@@ -466,7 +451,6 @@
 //			Turret_Control.lethal = lethal										//in which this would be used on the current map.
 																				//If he wants it back he can uncomment it
 
-
 /obj/structure/turret/gun_turret
 	name = "Gun Turret"
 	density = 1
@@ -483,7 +467,6 @@
 	var/on = 0
 	icon = 'icons/obj/turrets.dmi'
 	icon_state = "gun_turret"
-
 
 	ex_act()
 		del src
@@ -508,12 +491,10 @@
 			del src
 		return
 
-
 	bullet_act(var/obj/item/projectile/Proj)
 		src.take_damage(Proj.damage)
 		..()
 		return
-
 
 	attack_hand(mob/user as mob)
 		user.set_machine(src)
@@ -551,7 +532,6 @@
 		src.updateUsrDialog()
 		return
 
-
 	proc/validate_target(atom/target)
 		if(get_dist(target, src)>scan_range)
 			return 0
@@ -562,7 +542,6 @@
 		else if(istype(target, /obj/mecha))
 			return 1
 		return 0
-
 
 	process()
 		spawn while(on)
@@ -603,7 +582,6 @@
 		if(pos_targets.len)
 			target = pick(pos_targets)
 		return target
-
 
 	proc/fire(atom/target)
 		if(!target)

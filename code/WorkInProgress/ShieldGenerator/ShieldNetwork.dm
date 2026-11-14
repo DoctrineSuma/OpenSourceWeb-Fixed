@@ -16,10 +16,7 @@ var/datum/shieldnetwork/ShieldNetwork
 
 	var/capacitators = 0
 
-
 //This entire proc should at some point be stripped, once proper shield networks are in
-/datum/shieldnetwork/proc/makenetwork()
-	return 1
 
 //Balance charge amongst all capacitors - whether they're online or not
 /datum/shieldnetwork/proc/Balance()
@@ -41,15 +38,6 @@ var/datum/shieldnetwork/ShieldNetwork
 	return (capacitators >= 3)
 
 //Use an amount of shield energy.  Returns 1 if the energy was supplied in full, or 0 otherwise
-/datum/shieldnetwork/proc/UsePower(amount)
-	for(var/obj/machinery/shielding/capacitor/S in Nodes)
-		if(S.charge >= amount)
-			S.charge -= amount
-			return 1
-		else if(S.charge <= amount && S.charge > 0)
-			amount -= S.charge
-			S.charge = 0
-	return 0 //No power left!
 
 //TODO remove these or figure out a better system that makes sense in-RP
 

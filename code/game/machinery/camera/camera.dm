@@ -90,7 +90,6 @@
 						O << "The screen bursts into static."
 			..()
 
-
 /obj/machinery/camera/ex_act(severity)
 	if(src.invuln)
 		return
@@ -141,7 +140,6 @@
 				assembly.loc = src.loc
 				assembly.state = 1
 			qdel(src)
-
 
 	// OTHER
 	else if ((istype(W, /obj/item/weapon/paper) || istype(W, /obj/item/device/pda)) && isliving(user))
@@ -223,7 +221,6 @@
 	for(var/mob/living/silicon/S in mob_list)
 		S.triggerAlarm("Camera", get_area(src), list(src), src)
 
-
 /obj/machinery/camera/proc/cancelCameraAlarm()
 	alarm_on = 0
 	for(var/mob/living/silicon/S in mob_list)
@@ -265,12 +262,6 @@
 
 //Return a working camera that can see a given mob
 //or null if none
-/proc/seen_by_camera(var/mob/M)
-	for(var/obj/machinery/camera/C in oview(4, M))
-		if(C.can_use())	// check if camera disabled
-			return C
-			break
-	return null
 
 /proc/near_range_camera(var/mob/M)
 

@@ -32,7 +32,3 @@
 		else
 			catchBadType(M)
 			mob_list -= M
-
-/datum/controller/process/mob/statProcess()
-	..()
-	stat(null, "[mob_list.len] mobs")

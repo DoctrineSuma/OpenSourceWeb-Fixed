@@ -64,7 +64,6 @@ var/list/wireColours = list("red", "blue", "green", "black", "orange", "brown", 
 		src.wires[colour] = index
 		//wires = shuffle(wires)
 
-
 /datum/wires/proc/Interact(var/mob/living/user)
 
 	var/html = null
@@ -138,9 +137,6 @@ var/list/wireColours = list("red", "blue", "green", "black", "orange", "brown", 
 					else
 						L << "<span class='error'>You need a remote signaller!</span>"
 
-
-
-
 		// Update Window
 			Interact(usr)
 
@@ -183,7 +179,6 @@ var/const/POWER = 8
 		A.safety()
 
 */
-
 
 //
 // Helper Procs
@@ -246,14 +241,12 @@ var/const/POWER = 8
 			S.loc = holder.loc
 			return S
 
-
 /datum/wires/proc/Pulse(var/obj/item/device/assembly/signaler/S)
 
 	for(var/colour in signallers)
 		if(S == signallers[colour])
 			PulseColour(colour)
 			break
-
 
 //
 // Cut Wire Colour/Index procs
@@ -270,19 +263,6 @@ var/const/POWER = 8
 	else
 		wires_status |= index
 		UpdateCut(index, 0)
-
-/datum/wires/proc/RandomCut()
-	var/r = rand(1, wires.len)
-	CutWireIndex(r)
-
-/datum/wires/proc/CutAll()
-	for(var/i = 1; i < MAX_FLAG && i < (1 << wire_count); i += i)
-		CutWireIndex(i)
-
-/datum/wires/proc/IsAllCut()
-	if(wires_status == (1 << wire_count) - 1)
-		return 1
-	return 0
 
 //
 //Shuffle and Mend

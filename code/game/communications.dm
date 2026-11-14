@@ -140,10 +140,6 @@ var/const/RADIO_MAGNETS = "radio_magnet"
 
 var/global/datum/controller/radio/radio_controller
 
-/hook/startup/proc/createRadioController()
-	radio_controller = new /datum/controller/radio()
-	return 1
-
 datum/controller/radio
 	var/list/datum/radio_frequency/frequencies = list()
 
@@ -155,7 +151,6 @@ datum/controller/radio
 			frequency = new
 			frequency.frequency = new_frequency
 			frequencies[f_text] = frequency
-
 
 //		world << "Adding listener to frequency [f_text]"
 		frequency.add_listener(device, d_filter)
@@ -244,7 +239,6 @@ datum/radio_frequency
 
 //			log_admin("DEBUG: post_signal(source=[source] ([source.x], [source.y], [source.z]),d_filter=[d_filter]) frequency=[frequency], N_f=[N_f], N_nf=[N_nf]")
 
-
 //			qdel(signal)
 
 		add_listener(obj/device as obj, var/d_filter as text|null)
@@ -273,7 +267,6 @@ datum/radio_frequency
 				if (devices_line.len==0)
 					devices -= devices_d_filter
 					qdel(devices_line)
-
 
 obj/proc/receive_signal(datum/signal/signal, receive_method, receive_param)
 	return null

@@ -277,16 +277,6 @@ datum/reagents/proc/metabolize(var/mob/M)
 	last_tick++
 	update_total()
 
-datum/reagents/proc/conditional_update_move(var/atom/A, var/Running = 0)
-	for(var/datum/reagent/R in reagent_list)
-		R.on_move (A, Running)
-	update_total()
-
-datum/reagents/proc/conditional_update(var/atom/A)
-	for(var/datum/reagent/R in reagent_list)
-		R.on_update (A)
-	update_total()
-
 datum/reagents/proc/handle_reactions()
 	if(my_atom && (my_atom.flags & NOREACT)) return //Yup, no reactions here. No siree.
 
@@ -331,7 +321,6 @@ datum/reagents/proc/handle_reactions()
 
 				if(required_temp == 0)
 					required_temp = chem_temp
-
 
 				if(total_matching_reagents == total_required_reagents && total_matching_catalysts == total_required_catalysts && matching_container && matching_other && chem_temp >= required_temp)
 					var/multiplier = min(multipliers)
@@ -378,7 +367,6 @@ datum/reagents/proc/del_reagent(var/reagent)
 			my_atom?.on_reagent_change()
 			check_gofast(my_atom)
 			return 0
-
 
 	return 1
 
@@ -528,14 +516,6 @@ datum/reagents/proc/get_reagent_amount(var/reagent)
 
 	return 0
 
-datum/reagents/proc/get_reagents()
-	var/res = ""
-	for(var/datum/reagent/A in reagent_list)
-		if (res != "") res += ","
-		res += A.name
-
-	return res
-
 datum/reagents/proc/remove_all_type(var/reagent_type, var/amount, var/strict = 0, var/safety = 1) // Removes all reagent of X type. @strict set to 1 determines whether the childs of the type are included.
 	if(!isnum(amount)) return 1
 
@@ -570,12 +550,6 @@ datum/reagents/proc/get_data(var/reagent_id)
 			//world << "proffering a data-carrying reagent ([reagent_id])"
 			return D.data
 
-datum/reagents/proc/set_data(var/reagent_id, var/new_data)
-	for(var/datum/reagent/D in reagent_list)
-		if(D.id == reagent_id)
-			//world << "reagent data set ([reagent_id])"
-			D.data = new_data
-
 datum/reagents/proc/copy_data(var/datum/reagent/current_reagent)
 	if (!current_reagent || !current_reagent.data) return null
 	if (!istype(current_reagent.data, /list)) return current_reagent.data
@@ -595,9 +569,7 @@ datum/reagents/proc/copy_data(var/datum/reagent/current_reagent)
 
 	return trans_data
 
-
 ///////////////////////////////////////////////////////////////////////////////////
-
 
 // Convenience proc to create a reagents holder for an atom
 // Max vol is maximum volume of holder

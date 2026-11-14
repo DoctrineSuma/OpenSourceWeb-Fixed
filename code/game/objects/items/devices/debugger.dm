@@ -20,26 +20,3 @@
 	g_amt = 20
 	origin_tech = "magnets=1;engineering=1"
 	var/obj/machinery/telecomms/buffer // simple machine buffer for device linkage
-
-/obj/item/device/debugger/is_used_on(obj/O, mob/user)
-	if(istype(O, /obj/machinery/power/apc))
-		var/obj/machinery/power/apc/A = O
-		if(A.emagged || A.malfhack)
-			user << "\red There is a software error with the device."
-		else
-			user << "\blue The device's software appears to be fine."
-		return 1
-	if(istype(O, /obj/machinery/door))
-		var/obj/machinery/door/D = O
-		if(D.operating == -1)
-			user << "\red There is a software error with the device."
-		else
-			user << "\blue The device's software appears to be fine."
-		return 1
-	else if(istype(O, /obj/machinery))
-		var/obj/machinery/A = O
-		if(A.emagged)
-			user << "\red There is a software error with the device."
-		else
-			user << "\blue The device's software appears to be fine."
-		return 1

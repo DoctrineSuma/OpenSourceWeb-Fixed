@@ -22,7 +22,6 @@ var/plinioposters = 0
 	required_enemies = 1
 	recommended_enemies = 1
 
-
 	uplink_welcome = "Revolutionary Uplink Console:"
 	uplink_uses = 10
 
@@ -78,7 +77,6 @@ var/plinioposters = 0
 
 	return 1
 
-
 /datum/game_mode/revolution/post_setup()
 	var/list/heads = get_living_heads()
 
@@ -119,7 +117,6 @@ var/plinioposters = 0
 			evermail_ref.receive(NG, 1)
 	..()
 
-
 /datum/game_mode/revolution/process()
 	checkwin_counter++
 	if(checkwin_counter >= 5)
@@ -127,16 +124,6 @@ var/plinioposters = 0
 			ticker.mode.check_win()
 		checkwin_counter = 0
 	return 0
-
-
-/datum/game_mode/proc/forge_revolutionary_objectives(var/datum/mind/rev_mind)
-	var/list/heads = get_living_heads()
-	for(var/datum/mind/head_mind in heads)
-		var/datum/objective/mutiny/rev_obj = new
-		rev_obj.owner = rev_mind
-		rev_obj.target = head_mind
-		rev_obj.explanation_text = "Assassinate [head_mind.name], the [head_mind.assigned_role]."
-		rev_mind.objectives += rev_obj
 
 /datum/game_mode/proc/greet_revolutionary(var/datum/mind/rev_mind, var/you_are=1, mob/living/carbon/human/user as mob)
 	var/obj_count = 1
@@ -288,7 +275,6 @@ var/plinioposters = 0
 			else
 				M << "[rev_mind.current] looks like they just remembered their real allegiance!"
 
-
 /////////////////////////////////////////////////////////////////////////////////////////////////
 //Keeps track of players having the correct icons////////////////////////////////////////////////
 //CURRENTLY CONTAINS BUGS:///////////////////////////////////////////////////////////////////////
@@ -421,92 +407,12 @@ var/plinioposters = 0
 		to_chat(world, "<h2><span class='combatbold'>The nobles managed to stop the revolution!</span></h2>")
 	return 1
 
-/datum/game_mode/proc/auto_declare_completion_revolution()
-	var/list/targets = list()
-
-	if(head_revolutionaries.len || istype(ticker.mode,/datum/game_mode/revolution))
-		var/text = "<FONT size = 2><B>The head revolutionaries were:</B></FONT>"
-
-		for(var/datum/mind/headrev in head_revolutionaries)
-			text += "<br>[headrev.key] was [headrev.name] ("
-			if(headrev.current)
-				if(headrev.current.stat == DEAD)
-					text += "died"
-				else if(!(headrev.current.z in vessel_z))
-					text += "fled the [vessel_type]"
-				else
-					text += "survived the revolution"
-				if(headrev.current.real_name != headrev.name)
-					text += " as [headrev.current.real_name]"
-			else
-				text += "body destroyed"
-			text += ")"
-
-			for(var/datum/objective/mutiny/objective in headrev.objectives)
-				targets |= objective.target
-
-		to_chat(world, text)
-
-	if(revolutionaries.len || istype(ticker.mode,/datum/game_mode/revolution))
-		var/text = "<FONT size = 2><B>The revolutionaries were:</B></FONT>"
-
-		for(var/datum/mind/rev in revolutionaries)
-			text += "<br>[rev.key] was [rev.name] ("
-			if(rev.current)
-				if(rev.current.stat == DEAD)
-					text += "died"
-				else if(!(rev.current.z in vessel_z))
-					text += "fled the [vessel_type]"
-				else
-					text += "survived the revolution"
-				if(rev.current.real_name != rev.name)
-					text += " as [rev.current.real_name]"
-			else
-				text += "body destroyed"
-			text += ")"
-
-		to_chat(world, text)
-
-
-	if( head_revolutionaries.len || revolutionaries.len || istype(ticker.mode,/datum/game_mode/revolution) )
-		var/text = "<FONT size = 2><B>The nobles were:</B></FONT>"
-
-		var/list/heads = get_all_heads()
-		for(var/datum/mind/head in heads)
-			var/target = (head in targets)
-			if(target)
-				text += "<font color='red'>"
-			text += "<br>[head.key] was [head.name] ("
-			if(head.current)
-				if(head.current.stat == DEAD)
-					text += "died"
-				else if(!(head.current.z in vessel_z))
-					text += "fled the [vessel_type]"
-				else
-					text += "survived the revolution"
-				if(head.current.real_name != head.name)
-					text += " as [head.current.real_name]"
-			else
-				text += "body destroyed"
-			text += ")"
-			if(target)
-				text += "</font>"
-
-		to_chat(world, text)
-
-/proc/is_convertable_to_rev(datum/mind/mind)
-	return istype(mind) && \
-		istype(mind.current, /mob/living/carbon/human) && \
-		!(mind.assigned_role in command_positions) && \
-		!(mind.assigned_role in list("Marduk", "Baron"))
-
 /obj/structure/sign/signnew/web/plineosalgado/tela
 	icon = 'icons/effects/96x96.dmi'
 	icon_state = "plinio"
 
 /obj/structure/sign/signnew/web/plineosalgado/tela/examine()
 	return
-
 
 /datum/game_mode/revolution/proc/NEGROSSALGAKA(){
 	for(var/mob/living/carbon/human/H in mob_list){

@@ -3,7 +3,6 @@
 #define WILD_ANIMAL_ATTACK 2
 #define INDUSTRIAL_ACCIDENT 3
 #define BIOHAZARD_OUTBREAK 4
-#define WARSHIPS_ARRIVE 5
 #define PIRATES 6
 #define CORPORATE_ATTACK 7
 #define ALIEN_RAIDERS 8
@@ -27,10 +26,8 @@
 
 #define DEFAULT 1
 
-#define ADMINISTRATIVE 2
 #define CLOTHING 3
 #define SECURITY 4
-#define SPECIAL_SECURITY 5
 
 #define FOOD 6
 #define ANIMALS 7
@@ -43,8 +40,6 @@
 #define ELECTRICAL 12
 #define ROBOTICS 13
 #define BIOMEDICAL 14
-
-#define GEAR_EVA 15
 
 //---- The following corporations are friendly with NanoTrasen and loosely enable trade and travel:
 //Corporation NanoTrasen - Generalised / high tech research and plasma exploitation.

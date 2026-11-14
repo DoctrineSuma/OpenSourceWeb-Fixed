@@ -33,8 +33,6 @@
 
 		return
 
-	proc/generate_menu()
-
 /obj/item/radio/integrated/beepsky
 	var/list/botlist = null		// list of bots
 	var/obj/machinery/bot/secbot/active 	// the active bot; if null, show bot list
@@ -119,7 +117,6 @@
 
 			beacons[signal.data["beacon"] ] = signal.source
 
-
 //		if(istype(P)) P.updateSelfDialog()
 
 	Topic(href, href_list)
@@ -139,7 +136,6 @@
 
 			if("botlist")
 				active = null
-
 
 			if("unload")
 				post_signal(control_freq, cmd, "unload", s_d_filter = RADIO_MULEBOT)
@@ -169,12 +165,9 @@
 				post_signal(control_freq, cmd, href_list["op"], s_d_filter = RADIO_MULEBOT)
 				post_signal(control_freq, cmd, "bot_status", s_d_filter = RADIO_MULEBOT)
 
-
-
 /*
  *	Radio Cartridge, essentially a signaler.
  */
-
 
 /obj/item/radio/integrated/signal
 	var/frequency = 1457

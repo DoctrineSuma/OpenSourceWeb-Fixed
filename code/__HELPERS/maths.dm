@@ -3,12 +3,6 @@
 var/const/E		= 2.71828183
 var/const/Sqrt2	= 1.41421356
 
-
-/proc/Atan2(x, y)
-	if(!x && !y) return 0
-	var/a = arccos(x / sqrt(x*x + y*y))
-	return y >= 0 ? a : -a
-
 /proc/Ceiling(x)
 	return -round(-x)
 
@@ -33,15 +27,10 @@ var/const/Sqrt2	= 1.41421356
 /proc/Inverse(x)
 	return 1 / x
 
-/proc/IsAboutEqual(a, b, deviation = 0.1)
-	return abs(a - b) <= deviation
-
 /proc/IsEven(x)
 	return x % 2 == 0
 
 // Returns true if val is from min to max, inclusive.
-/proc/IsInRange(val, min, max)
-	return min <= val && val <= max
 
 /proc/IsInteger(x)
 	return Floor(x) == x
@@ -53,14 +42,10 @@ var/const/Sqrt2	= 1.41421356
 	return x % y == 0
 
 // Least Common Multiple
-/proc/Lcm(a, b)
-	return abs(a) / Gcd(a, b) * abs(b)
 
 // Performs a linear interpolation between a and b.
 // Note that amount=0 returns a, amount=1 returns b, and
 // amount=0.5 returns the mean of a and b.
-/proc/Lerp(a, b, amount = 0.5)
-	return a + (b - a) * amount
 
 /proc/Mean(...)
 	var/values 	= 0
@@ -69,7 +54,6 @@ var/const/Sqrt2	= 1.41421356
 		values++
 		sum += val
 	return sum / values
-
 
 // Returns the nth root of x.
 /proc/Root(n, x)
@@ -81,28 +65,10 @@ var/const/Sqrt2	= 1.41421356
 
 // The quadratic formula. Returns a list with the solutions, or an empty list
 // if they are imaginary.
-/proc/SolveQuadratic(a, b, c)
-	ASSERT(a)
-	. = list()
-	var/d		= b*b - 4 * a * c
-	var/bottom  = 2 * a
-	if(d < 0) return
-	var/root = sqrt(d)
-	. += (-b + root) / bottom
-	if(!d) return
-	. += (-b - root) / bottom
 
 // tangent
 /proc/Tan(x)
 	return sin(x) / cos(x)
-
-/proc/ToDegrees(radians)
-				  // 180 / Pi
-	return radians * 57.2957795
-
-/proc/ToRadians(degrees)
-				  // Pi / 180
-	return degrees * 0.0174532925
 
 // min is inclusive, max is exclusive
 /proc/Wrap(val, min, max)

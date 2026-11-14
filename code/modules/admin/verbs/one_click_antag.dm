@@ -7,7 +7,6 @@ client/proc/one_click_antag()
 		holder.one_click_antag()
 	return
 
-
 /datum/admins/proc/one_click_antag()
 
 	var/dat = {"<B>One-click Antagonist</B><br>
@@ -23,8 +22,6 @@ client/proc/one_click_antag()
 
 	usr << browse(dat, "window=oneclickantag;size=400x400")
 	return
-
-
 
 /datum/admins/proc/makeDeathsquad()
 	var/list/mob/dead/observer/candidates = list()
@@ -96,30 +93,6 @@ client/proc/one_click_antag()
 			if (L.name == "Syndicate-Commando-Bomb")
 				new /obj/effect/spawner/newbomb/timer/syndicate(L.loc)
 */
-
-
-
-/datum/admins/proc/makeBody(var/mob/dead/observer/G_found) // Uses stripped down and bastardized code from respawn character
-	if(!G_found || !G_found.key)	return
-
-	//First we spawn a dude.
-	var/mob/living/carbon/human/new_character = new(pick(latejoin))//The mob being spawned.
-
-	new_character.gender = pick(MALE,FEMALE)
-
-	var/datum/preferences/A = new()
-	A.randomize_appearance_for(new_character)
-	if(new_character.gender == MALE)
-		new_character.real_name = "[pick(first_names_male)] [pick(last_names)]"
-	else
-		new_character.real_name = "[pick(first_names_female)] [pick(last_names)]"
-	new_character.name = new_character.real_name
-	new_character.age = rand(17,45)
-
-	new_character.dna.ready_dna(new_character)
-	new_character.key = G_found.key
-
-	return new_character
 
 /datum/admins/proc/create_syndicate_death_commando(obj/spawn_location, syndicate_leader_selected = 0, var/keyChosen)
 	var/mob/living/carbon/human/new_syndicate_commando = new(spawn_location.loc)

@@ -50,7 +50,6 @@
 		if(ai.holo)
 			ai.holo.move_hologram()
 
-
 // AI MOVEMENT
 
 // The AI's "eye". Described on the top of the page.
@@ -85,28 +84,6 @@
 // This will move the AIEye. It will also cause lights near the eye to light up, if toggled.
 // This is handled in the proc below this one.
 
-/client/proc/AIMove(n, direct, var/mob/living/silicon/ai/user)
-
-	var/initial = initial(user.sprint)
-	var/max_sprint = 50
-
-	if(user.cooldown && user.cooldown < world.timeofday) // 3 seconds
-		user.sprint = initial
-
-	for(var/i = 0; i < max(user.sprint, initial); i += 20)
-
-		var/turf/step = get_turf(get_step(user.eyeobj, direct))
-		if(step)
-			user.eyeobj.setLoc(step)
-
-	user.cooldown = world.timeofday + 5
-	if(user.acceleration)
-		user.sprint = min(user.sprint + 0.5, max_sprint)
-	else
-		user.sprint = initial
-
-	user.cameraFollow = null
-
 /client/proc/AIMoveZ(direct, var/mob/living/silicon/ai/user)
 
 	var/initial = initial(user.sprint)
@@ -126,15 +103,12 @@
 						var/turf/T = locate(user.eyeobj.x, user.eyeobj.y, controller.down_target)
 						user.eyeobj.setLoc(T)
 
-
 	user.cooldown = world.timeofday + 5
 
 	user.cameraFollow = null
 
-
 	//user.unset_machine() //Uncomment this if it causes problems.
 	//user.lightNearbyCamera()
-
 
 // Return to the Core.
 
@@ -143,7 +117,6 @@
 	set name = "AI Core"
 
 	view_core()
-
 
 /mob/living/silicon/ai/proc/view_core()
 

@@ -87,7 +87,6 @@ Class Procs:
    process()                  'game/machinery/machine.dm'
       Called by the 'master_controller' once per game tick for each machine that is listed in the 'machines' list.
 
-
 	Compiled by Aygar
 */
 
@@ -175,7 +174,6 @@ Class Procs:
 	var/area/A = get_area(src)
 	if(A && A.master)
 		A.master.powerupdate = 1
-
 
 /obj/machinery/proc/auto_use_power()
 	if(!powered(power_channel))
@@ -274,19 +272,6 @@ Class Procs:
   state(text, "blue")
   playsound(src.loc, 'sound/machines/ping.ogg', 50, 0)
 
-
-
-/obj/machinery/proc/is_operational()
-	return !(stat & (NOPOWER|BROKEN|MAINT))
-
-/obj/machinery/proc/default_pry_open(var/obj/item/weapon/crowbar/C)
-	. = !(state_open || panel_open || is_operational()) && istype(C)
-	if(.)
-		playsound(src.loc, 'sound/items/Crowbar.ogg', 50, 1)
-		visible_message("<span class = 'notice'>[usr] pry open \the [src].</span>", "<span class = 'notice'>You pry open \the [src].</span>")
-		open_machine()
-		return 1
-
 /obj/machinery/proc/default_deconstruction_crowbar(var/obj/item/weapon/crowbar/C, var/ignore_panel = 0)
 	. = istype(C) && (panel_open || ignore_panel)
 	if(.)
@@ -365,46 +350,9 @@ Class Procs:
 		return 1
 	return 0
 
-
 //called on machinery construction (i.e from frame to machinery) but not on initialization
 /obj/machinery/proc/construction()
 	return
-
-
-/obj/machinery/proc/open_machine()
-	state_open = 1
-	density = 0
-	dropContents()
-	update_icon()
-	updateUsrDialog()
-
-/obj/machinery/proc/dropContents()
-	var/turf/T = get_turf(src)
-	T.contents += contents
-	if(occupant)
-		if(occupant.client)
-			occupant.client.eye = occupant
-			occupant.client.perspective = MOB_PERSPECTIVE
-		occupant = null
-
-/obj/machinery/proc/close_machine(mob/living/target = null)
-	state_open = 0
-	density = 1
-	if(!target)
-		for(var/mob/living/carbon/C in loc)
-			if(C.buckled)
-				continue
-			else
-				target = C
-	if(target)
-		if(target.client)
-			target.client.perspective = EYE_PERSPECTIVE
-			target.client.eye = src
-		occupant = target
-		target.loc = src
-		target.stop_pulling()
-	updateUsrDialog()
-	update_icon()
 
 /obj/machinery/proc/ai_notice(var/message, var/obj/machinery/machine, var/style)
 	if(!machine || !message || !machine && !message)

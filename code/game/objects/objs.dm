@@ -19,8 +19,6 @@
 	var/force = 0
 	var/heavy = 0
 
-/obj/item/proc/is_used_on(obj/O, mob/user)
-
 /obj/proc/process()
 	processing_objects.Remove(src)
 	return 0
@@ -117,13 +115,11 @@ var/list/global/init_obj = list()
 	if(istype(M) && M.client && M.machine == src)
 		src.attack_self(M)
 
-
 /obj/proc/alter_health()
 	return 1
 
 /obj/proc/hide(h)
 	return
-
 
 /obj/proc/hear_talk(mob/M as mob, text)
 /*
@@ -133,8 +129,6 @@ var/list/global/init_obj = list()
 		mo.show_message(rendered, 2)
 		*/
 	return
-
-
 
 /obj/proc/isBlunts()
 	if(!sharp && !edge)

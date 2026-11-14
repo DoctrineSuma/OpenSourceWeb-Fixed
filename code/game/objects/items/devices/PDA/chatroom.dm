@@ -10,7 +10,3 @@ var/list/chatrooms = list()
 	var/topic = "" // topic message for the chatroom
 	var/password = "" // blank for no password.
 	var/operator = "" // name of the operator
-
-/datum/chatroom/proc/attempt_connect(var/obj/item/device/pda/device, var/obj/password)
-	if(!device)
-		return

@@ -34,13 +34,10 @@
 	var/stat_msg1
 	var/stat_msg2
 
-
-
 /obj/machinery/computer/communications/process()
 	if(..())
 		if(state != STATE_STATUSDISPLAY)
 			src.updateDialog()
-
 
 /obj/machinery/computer/communications/Topic(href, href_list)
 	if(..())
@@ -190,7 +187,6 @@
 				spawn(300)//10 minute cooldown
 					centcomm_message_cooldown = 0
 
-
 		// OMG SYNDICATE ...LETTERHEAD
 		if("MessageSyndicate")
 			if((src.authenticated==2) && (src.emagged))
@@ -211,8 +207,6 @@
 			usr << "Backup routing data restored!"
 			src.emagged = 0
 			src.updateDialog()
-
-
 
 		// AI interface
 		if("ai-main")
@@ -256,8 +250,6 @@
 		if("changeseclevel")
 			state = STATE_ALERT_LEVEL
 
-
-
 	src.updateUsrDialog()
 
 /obj/machinery/computer/communications/attackby(var/obj/I as obj, var/mob/user as mob)
@@ -269,10 +261,8 @@
 /obj/machinery/computer/communications/attack_ai(var/mob/user as mob)
 	return src.attack_hand(user)
 
-
 /obj/machinery/computer/communications/attack_paw(var/mob/user as mob)
 	return src.attack_hand(user)
-
 
 /obj/machinery/computer/communications/attack_hand(var/mob/user as mob)
 	if(..())
@@ -371,9 +361,6 @@
 	user << browse(dat, "window=communications;size=400x500")
 	onclose(user, "communications")
 
-
-
-
 /obj/machinery/computer/communications/proc/interact_ai(var/mob/living/silicon/ai/user as mob)
 	var/dat = ""
 	switch(src.aistate)
@@ -416,13 +403,8 @@
 			dat += " <A HREF='?src=\ref[src];operation=setstat;statdisp=alert;alert=lockdown'>Lockdown</A> |"
 			dat += " <A HREF='?src=\ref[src];operation=setstat;statdisp=alert;alert=biohazard'>Biohazard</A> \]<BR><HR>"
 
-
 	dat += "<BR>\[ [(src.aistate != STATE_DEFAULT) ? "<A HREF='?src=\ref[src];operation=ai-main'>Main Menu</A> | " : ""]<A HREF='?src=\ref[user];mach_close=communications'>Close</A> \]"
 	return dat
-
-/proc/enable_prison_shuttle(var/mob/user)
-	for(var/obj/machinery/computer/prison_shuttle/PS in world)
-		PS.allowedtocall = !(PS.allowedtocall)
 
 /proc/call_shuttle_proc(var/mob/user)
 	var/obj/item/device/radio/headset/bracelet/a = new /obj/item/device/radio/headset/bracelet(null)
@@ -535,7 +517,6 @@
 			status_signal.data["picture_state"] = data1
 
 	frequency.post_signal(src, status_signal)
-
 
 /obj/machinery/computer/communications/Destroy()
 

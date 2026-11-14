@@ -48,7 +48,6 @@
 #define RCON_YES	3
 
 //1000 joules equates to about 1 degree every 2 seconds for a single tile of air.
-#define MAX_ENERGY_CHANGE 1000
 
 #define MAX_TEMPERATURE 90
 #define MIN_TEMPERATURE -40
@@ -84,7 +83,6 @@
 	var/shorted = 0
 	var/breach_detection = 1 // Whether to use automatic breach detection or not
 
-
 	var/mode = AALARM_MODE_SCRUBBING
 	var/screen = AALARM_SCREEN_MAIN
 	var/area_uid
@@ -118,7 +116,6 @@
 	var/const/UNSAFE_TEMPERATURE_L = T20C-20
 	var/const/UNSAFE_TEMPERATURE_U = T20C+20
 
-
 /obj/machinery/alarm/server/New()
 	..()
 	req_access = list(access_rd, access_atmospherics, access_engine_equip)
@@ -129,7 +126,6 @@
 	TLV["pressure"] =		list(0,ONE_ATMOSPHERE*0.10,ONE_ATMOSPHERE*1.40,ONE_ATMOSPHERE*1.60) /* kpa */
 	TLV["temperature"] =	list(20, 40, 140, 160) // K
 	target_temperature = 90
-
 
 /obj/machinery/alarm/New(var/loc, var/dir, var/building = 0)
 	..()
@@ -157,7 +153,6 @@
 
 	first_run()
 
-
 /obj/machinery/alarm/proc/first_run()
 	if (name == "alarm")
 		name = "[alarm_area.name] Air Alarm"
@@ -170,12 +165,10 @@
 	TLV["pressure"] =		list(ONE_ATMOSPHERE*0.80,ONE_ATMOSPHERE*0.90,ONE_ATMOSPHERE*1.10,ONE_ATMOSPHERE*1.20) /* kpa */
 	TLV["temperature"] =	list(T0C-26, T0C, T0C+40, T0C+66) // K
 
-
 /obj/machinery/alarm/initialize()
 	set_frequency(frequency)
 	if (!master_is_operating())
 		elect_master()
-
 
 /obj/machinery/alarm/process()
 	if((stat & (NOPOWER|BROKEN)) || shorted || buildstage != 2)
@@ -351,10 +344,8 @@
 
 	return 0
 
-
 /obj/machinery/alarm/proc/master_is_operating()
 	return alarm_area.master_air_alarm && !(alarm_area.master_air_alarm.stat & (NOPOWER|BROKEN))
-
 
 /obj/machinery/alarm/proc/elect_master()
 	for (var/area/A in alarm_area.related)
@@ -425,18 +416,6 @@
 		return
 	spawn (10)
 		send_signal(m_id, list("init" = new_name) )
-
-/obj/machinery/alarm/proc/refresh_all()
-	for(var/id_tag in alarm_area.air_vent_names)
-		var/list/I = alarm_area.air_vent_info[id_tag]
-		if (I && I["timestamp"]+AALARM_REPORT_TIMEOUT/2 > world.time)
-			continue
-		send_signal(id_tag, list("status") )
-	for(var/id_tag in alarm_area.air_scrub_names)
-		var/list/I = alarm_area.air_scrub_info[id_tag]
-		if (I && I["timestamp"]+AALARM_REPORT_TIMEOUT/2 > world.time)
-			continue
-		send_signal(id_tag, list("status") )
 
 /obj/machinery/alarm/proc/set_frequency(new_frequency)
 	radio_controller.remove_object(src, frequency)
@@ -603,14 +582,6 @@
 	var/wireFlag = AAlarmIndexToFlag[wireIndex]
 	return ((AAlarmwires & wireFlag) == 0)
 
-/obj/machinery/alarm/proc/allWiresCut()
-	var/i = 1
-	while(i<=5)
-		if(AAlarmwires & AAlarmIndexToFlag[i])
-			return 0
-		i++
-	return 1
-
 /obj/machinery/alarm/proc/cut(var/wireColor)
 	var/wireFlag = AAlarmWireColorToFlag[wireColor]
 	var/wireIndex = AAlarmWireColorToIndex[wireColor]
@@ -682,7 +653,6 @@
 					shorted = 0
 					update_icon()
 
-
 		if (AALARM_WIRE_AI_CONTROL)
 			if (aidisabled == 0)
 				aidisabled = 1
@@ -743,7 +713,6 @@
 			user << browse(null, "window=air_alarm")
 			user << browse(null, "window=AAlarmwires")
 			return
-
 
 		else if (istype(user, /mob/living/silicon) && aidisabled)
 			user << "AI control for this Air Alarm interface has been disabled."
@@ -843,7 +812,6 @@ Toxins: <span class='dl[plasma_dangerlevel]'>[plasma_percent]</span>%<br>
 	else
 		output += "<a href='?src=\ref[src];atmos_alarm=1'>Activate - Atmospheric Alarm</a><hr>"
 
-
 	//if (other_dangerlevel==2)
 	//	output += "Notice: <span class='dl2'>High Concentration of Unknown Particles Detected</span><br>"
 	//else if (other_dangerlevel==1)
@@ -893,7 +861,6 @@ Toxins: <span class='dl[plasma_dangerlevel]'>[plasma_percent]</span>%<br>
 
 	return dat
 
-
 /obj/machinery/alarm/proc/return_controls()
 	var/output = ""//"<B>[alarm_zone] Air [name]</B><HR>"
 
@@ -915,7 +882,6 @@ Toxins: <span class='dl[plasma_dangerlevel]'>[plasma_percent]</span>%<br>
 				output += "<font color='red'><B>PANIC SYPHON ACTIVE</B></font><br><A href='?src=\ref[src];mode=[AALARM_MODE_SCRUBBING]'>Turn syphoning off</A>"
 			else
 				output += "<A href='?src=\ref[src];mode=[AALARM_MODE_PANIC]'><font color='red'>ACTIVATE PANIC SYPHON IN AREA</font></A>"
-
 
 		if (AALARM_SCREEN_VENT)
 			var/sensor_data = ""
@@ -1299,7 +1265,6 @@ table tr:first-child th:first-child { border: none;}
 					qdel(F)
 			RA.deactivate_air_doors(manual*5)
 
-
 /obj/machinery/alarm/attackby(obj/item/W as obj, mob/user as mob)
 /*	if (istype(W, /obj/item/weapon/wirecutters))
 		stat ^= BROKEN
@@ -1406,7 +1371,6 @@ Just a object used in constructing air alarms
 	w_class = 2.0
 	m_amt = 50
 	g_amt = 50
-
 
 /*
 AIR ALARM ITEM
@@ -1744,7 +1708,6 @@ Just a object used in constructing fire alarms
 	m_amt = 50
 	g_amt = 50
 
-
 /*
 FIRE ALARM ITEM
 Handheld fire alarm frame, for placing on walls
@@ -1788,7 +1751,6 @@ Code shamelessly copied from apc_frame
 	new /obj/machinery/firealarm(loc, ndir, 1)
 
 	qdel(src)
-
 
 /obj/machinery/partyalarm
 	name = "\improper PARTY BUTTON"

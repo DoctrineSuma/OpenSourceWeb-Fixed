@@ -1,7 +1,3 @@
-/mob/living/carbon/human/proc/is_vulnerable()
-	if(!combat_mode)
-		return 1
-	return 0
 
 /mob/living/carbon/human/proc/miss_chance_last_src(var/mob/living/carbon/human/H = src)
 	var/modifierLast = 0
@@ -29,7 +25,6 @@
 			if(src.grabbed_by[x])
 				modifierLast += 15
 				break;
-
 
 	return modifierLast
 

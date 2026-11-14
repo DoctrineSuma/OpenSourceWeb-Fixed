@@ -7,8 +7,6 @@
 //"Made specially for Otuska"
 // - Honker
 
-
-
 //Defines.
 #define OPPOSITE_DIR(D) turn(D, 180)
 
@@ -43,7 +41,6 @@ mob/living/InCone(mob/center = usr, dir = NORTH)
 			return 0
 		else
 			return .
-
 
 proc/cone(atom/center = usr, dir = NORTH, list/list = oview(center))
 	for(var/turf/T in list)
@@ -114,12 +111,6 @@ mob/living/carbon/human/update_vision_cone()
 				I.override = 0
 	else
 		return
-
-mob/living/carbon/human/proc/SetFov(var/n)
-	if(!n)
-		hide_cone()
-	else
-		show_cone()
 
 mob/living/carbon/human/proc/check_fov()
 	if(resting || lying || zoomed || isLeaning)

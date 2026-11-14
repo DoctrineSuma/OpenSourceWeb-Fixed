@@ -281,7 +281,6 @@
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-
 /obj/machinery/chem_dispenser/constructable
 	name = "portable chem dispenser"
 	icon = 'icons/obj/chemical.dmi'
@@ -340,7 +339,6 @@
 				beaker = null
 			default_deconstruction_crowbar(I)
 			return 1
-
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -429,7 +427,6 @@
 	src.add_fingerprint(usr)
 	usr.set_machine(src)
 
-
 	if (href_list["ejectp"])
 		if(loaded_pill_bottle)
 			loaded_pill_bottle.loc = src.loc
@@ -485,7 +482,6 @@
 					reagents.trans_id_to(beaker, id, amount)
 				else
 					reagents.remove_reagent(id, amount)
-
 
 		else if (href_list["removecustom"])
 
@@ -685,8 +681,6 @@
 	else
 		return 0
 
-
-
 /obj/machinery/chem_master/condimaster
 	name = "CondiMaster 3000"
 	condi = 1
@@ -706,11 +700,9 @@
 	var/wait = null
 	var/obj/item/weapon/reagent_containers/glass/beaker = null
 
-
 /obj/machinery/computer/pandemic/set_broken()
 	icon_state = (src.beaker?"mixer1_b":"mixer0_b")
 	stat |= BROKEN
-
 
 /obj/machinery/computer/pandemic/power_change()
 
@@ -725,7 +717,6 @@
 		spawn(rand(0, 15))
 			src.icon_state = (src.beaker?"mixer1_nopower":"mixer0_nopower")
 			stat |= NOPOWER
-
 
 /obj/machinery/computer/pandemic/Topic(href, href_list)
 	if(stat & (NOPOWER|BROKEN)) return
@@ -821,7 +812,6 @@
 				AD.Refresh()
 		src.updateUsrDialog()
 
-
 	else
 		usr << browse(null, "window=pandemic")
 		src.updateUsrDialog()
@@ -864,13 +854,11 @@
 			dat += "<b>Blood DNA:</b> [(Blood.data["blood_DNA"]||"none")]<BR>"
 			dat += "<b>Blood Type:</b> [(Blood.data["blood_type"]||"none")]<BR>"
 
-
 			if(Blood.data["viruses"])
 				var/list/vir = Blood.data["viruses"]
 				if(vir.len)
 					for(var/datum/disease/D in Blood.data["viruses"])
 						if(!D.hidden[PANDEMIC])
-
 
 							var/disease_creation = D.type
 							if(istype(D, /datum/disease/advance))
@@ -897,7 +885,6 @@
 								for(var/datum/symptom/S in A.symptoms)
 									english_symptoms += S.name
 								dat += english_list(english_symptoms)
-
 
 			dat += "<BR><b>Contains antibodies to:</b> "
 			if(Blood.data["resistances"])
@@ -927,7 +914,6 @@
 	user << browse("<TITLE>[src.name]</TITLE><BR>[dat]", "window=pandemic;size=575x400")
 	onclose(user, "pandemic")
 	return
-
 
 /obj/machinery/computer/pandemic/attackby(var/obj/I as obj, var/mob/user as mob)
 	if(istype(I, /obj/item/weapon/screwdriver))
@@ -1008,7 +994,6 @@
 		/obj/item/weapon/reagent_containers/food/snacks/grown/cherries = list("cherryjelly" = 0),
 		/obj/item/weapon/reagent_containers/food/snacks/grown/plastellium = list("plasticide" = 5),
 
-
 		//All types that you can put into the grinder to transfer the reagents to the beaker. !Put all recipes above this.!
 		/obj/item/weapon/reagent_containers/pill = list(),
 		/obj/item/weapon/reagent_containers/food = list()
@@ -1029,7 +1014,6 @@
 		/obj/item/weapon/reagent_containers/food/snacks/grown/poisonberries = list("poisonberryjuice" = 0),
 	)
 
-
 	var/list/holdingitems = list()
 
 /obj/machinery/reagentgrinder/New()
@@ -1040,7 +1024,6 @@
 /obj/machinery/reagentgrinder/update_icon()
 	icon_state = "juicer"+num2text(!isnull(beaker))
 	return
-
 
 /obj/machinery/reagentgrinder/attackby(var/obj/item/O as obj, var/mob/user as mob)
 
@@ -1128,7 +1111,6 @@
 			if(!anything)
 				beaker_contents += "Nothing<br>"
 
-
 		dat = {"
 	<b>Processing chamber contains:</b><br>
 	[processing_chamber]<br>
@@ -1146,7 +1128,6 @@
 	user << browse("<HEAD><TITLE>All-In-One Grinder</TITLE></HEAD><TT>[dat]</TT>", "window=reagentgrinder")
 	onclose(user, "reagentgrinder")
 	return
-
 
 /obj/machinery/reagentgrinder/Topic(href, href_list)
 	if(..())
@@ -1186,12 +1167,6 @@
 		holdingitems -= O
 	holdingitems = list()
 
-/obj/machinery/reagentgrinder/proc/is_allowed(var/obj/item/weapon/reagent_containers/O)
-	for (var/i in blend_items)
-		if(istype(O, i))
-			return 1
-	return 0
-
 /obj/machinery/reagentgrinder/proc/get_allowed_by_id(var/obj/item/weapon/grown/O)
 	for (var/i in blend_items)
 		if (istype(O, i))
@@ -1206,14 +1181,6 @@
 	for(var/i in juice_items)
 		if(istype(O, i))
 			return juice_items[i]
-
-/obj/machinery/reagentgrinder/proc/get_grownweapon_amount(var/obj/item/weapon/grown/O)
-	if (!istype(O))
-		return 5
-	else if (O.potency == -1)
-		return 5
-	else
-		return round(O.potency)
 
 /obj/machinery/reagentgrinder/proc/get_juice_amount(var/obj/item/weapon/reagent_containers/food/snacks/grown/O)
 	if (!istype(O))
@@ -1344,7 +1311,6 @@
 		O.reagents.trans_to(beaker, amount)
 		if(!O.reagents.total_volume)
 			remove_object(O)
-
 
 /obj/machinery/chem_heater
 	name = "chemical heater"
@@ -1489,5 +1455,3 @@
 		return
 	src.updateUsrDialog()
 	return
-
-

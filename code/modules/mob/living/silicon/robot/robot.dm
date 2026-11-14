@@ -302,7 +302,6 @@
 	set name = "Show Station Manifest"
 	show_station_manifest()
 
-
 /mob/living/silicon/robot/proc/robot_alerts()
 	var/dat = "<HEAD><TITLE>Current Station Alerts</TITLE><META HTTP-EQUIV='Refresh' CONTENT='10'></HEAD><BODY>\n"
 	dat += "<A HREF='?src=\ref[src];mach_close=robotalerts'>Close</A><BR><BR>"
@@ -337,7 +336,6 @@
 
 	return dat
 
-
 /mob/living/silicon/robot/verb/self_diagnosis_verb()
 	set category = "Robot Commands"
 	set name = "Self Diagnosis"
@@ -347,7 +345,6 @@
 
 	var/dat = self_diagnosis()
 	src << browse(dat, "window=robotdiagnosis")
-
 
 /mob/living/silicon/robot/verb/toggle_component()
 	set category = "Robot Commands"
@@ -381,46 +378,15 @@
 	return 0
 
 // this function shows information about the malf_ai gameplay type in the status screen
-/mob/living/silicon/robot/show_malf_ai()
-	..()
-	if(ticker.mode.name == "AI malfunction")
-		var/datum/game_mode/malfunction/malf = ticker.mode
-		for (var/datum/mind/malfai in malf.malf_ai)
-			if(connected_ai)
-				if(connected_ai.mind == malfai)
-					if(malf.apcs >= 3)
-						stat(null, "Time until [vessel_type] control secured: [max(malf.AI_win_timeleft/(malf.apcs/3), 0)] seconds")
-			else if(ticker.mode:malf_mode_declared)
-				stat(null, "Time left: [max(ticker.mode:AI_win_timeleft/(ticker.mode:apcs/3), 0)]")
-	return 0
-
 
 // this function displays jetpack pressure in the stat panel
-/mob/living/silicon/robot/proc/show_jetpack_pressure()
-	// if you have a jetpack, show the internal tank pressure
-	var/obj/item/weapon/tank/jetpack/current_jetpack = installed_jetpack()
-	if (current_jetpack)
-		stat("Internal Atmosphere Info", current_jetpack.name)
-		stat("Tank Pressure", current_jetpack.air_contents.return_pressure())
-
 
 // this function returns the robots jetpack, if one is installed
-/mob/living/silicon/robot/proc/installed_jetpack()
-	if(module)
-		return (locate(/obj/item/weapon/tank/jetpack) in module.modules)
-	return 0
-
 
 // this function displays the cyborgs current cell charge in the stat panel
-/mob/living/silicon/robot/proc/show_cell_power()
-	if(cell)
-		stat(null, text("Charge Left: [cell.charge]/[cell.maxcharge]"))
-	else
-		stat(null, text("No Cell Inserted!"))
 
 /mob/living/silicon/robot/restrained()
 	return 0
-
 
 /mob/living/silicon/robot/ex_act(severity)
 	if(!blinded)
@@ -443,7 +409,6 @@
 
 	updatehealth()
 
-
 /mob/living/silicon/robot/meteorhit(obj/O as obj)
 	for(var/mob/M in viewers(src, null))
 		M.show_message(text("\red [src] has been hit by [O]"), 1)
@@ -455,13 +420,11 @@
 		updatehealth()
 	return
 
-
 /mob/living/silicon/robot/bullet_act(var/obj/item/projectile/Proj)
 	..(Proj)
 	updatehealth()
 	if(prob(75) && Proj.damage > 0) spark_system.start()
 	return 2
-
 
 /mob/living/silicon/robot/Bump(atom/movable/AM as mob|obj, yes)
 	spawn( 0 )
@@ -499,7 +462,6 @@
 		return
 	return
 
-
 /mob/living/silicon/robot/triggerAlarm(var/class, area/A, var/O, var/alarmsource)
 	if (stat == 2)
 		return 1
@@ -524,7 +486,6 @@
 //	if (viewalerts) robot_alerts()
 	return 1
 
-
 /mob/living/silicon/robot/cancelAlarm(var/class, area/A as area, obj/origin)
 	var/list/L = alarms[class]
 	var/cleared = 0
@@ -541,7 +502,6 @@
 		queueAlarm(text("--- [class] alarm in [A.name] has been cleared."), class, 0)
 //		if (viewalerts) robot_alerts()
 	return !cleared
-
 
 /mob/living/silicon/robot/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	if (istype(W, /obj/item/weapon/handcuffs)) // fuck i don't even know why isrobot() in handcuff code isn't working so this will have to do
@@ -766,7 +726,6 @@
 			else
 				usr << "Upgrade error!"
 
-
 	else
 		if( !(istype(W, /obj/item/device/robotanalyzer) || istype(W, /obj/item/device/healthanalyzer)) )
 			spark_system.start()
@@ -785,7 +744,6 @@
 		var/damage = rand(M.melee_damage_lower, M.melee_damage_upper)
 		adjustBruteLoss(damage)
 		updatehealth()
-
 
 /mob/living/silicon/robot/attack_hand(mob/user)
 
@@ -923,7 +881,6 @@
 	<BR>
 	<B>Installed Modules</B><BR><BR>"}
 
-
 	for (var/obj in module.modules)
 		if (!obj)
 			dat += text("<B>Resource depleted</B><BR>")
@@ -943,7 +900,6 @@
 			dat += text("[obj]: \[<A HREF=?src=\ref[src];act=\ref[obj]>Activate</A> | <B>Deactivated</B>\]<BR>")
 */
 	src << browse(dat, "window=robotmod&can_close=0")
-
 
 /mob/living/silicon/robot/Topic(href, href_list)
 	..()
@@ -1030,7 +986,6 @@
 /mob/living/silicon/robot/proc/radio_menu()
 	radio.interact(src)//Just use the radio's Topic() instead of bullshit special-snowflake code
 
-
 /mob/living/silicon/robot/Move(a, b, flag)
 
 	. = ..()
@@ -1081,7 +1036,6 @@
 	if(src.camera)
 		src.camera.network = list()
 		cameranet.removeCamera(src.camera)
-
 
 /mob/living/silicon/robot/proc/ResetSecurityCodes()
 	set category = "Robot Commands"

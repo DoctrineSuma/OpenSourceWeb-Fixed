@@ -1,7 +1,6 @@
 #define COLOR_DARKMODE_BACKGROUND "#0e0b0e"
 #define COLOR_DARKMODE_DARKBACKGROUND "#171717"
 #define COLOR_DARKMODE_TEXT "#a4bad6"
-#define COLOR_WEBHOOK_DEFAULT 0x8bbbd5
 
 /client/proc/force_dark_theme() //Inversely, if theyre using white theme and want to swap to the superior dark theme, let's get WINSET() ing
 	//Main windows

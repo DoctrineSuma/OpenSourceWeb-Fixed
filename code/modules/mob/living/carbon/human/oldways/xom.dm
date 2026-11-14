@@ -129,24 +129,6 @@ var/xomPhrases = list("Time for some fun!", "Have you ever been breastfed by a g
 		bans.Add(ckey)
 		del(src?.client)
 
-/mob/living/carbon/human/proc/givechromies(var/fontSize = "133%", var/textColor = "#808080", var/name = "Xom")
-	if(!client)
-		return
-	var/client/C = client
-	to_chat(src, "<span style='font-size: [fontSize]'><span class='saybasic'><b style='color: [textColor]'>[name]</b></span> <span class='sayverb'>exclaims, </span>\"<span class='saybasic'><b>Here's a gift for you!</b></span></span>\"")
-
-	var/timesToChromie = rand(1, 4)
-	var/removeLater = 0
-	for(var/x = 0; x != timesToChromie; x++)
-		var/randChromies = rand(1, 5)
-		removeLater += randChromies
-		C.ChromieWinorLoose(src, randChromies)
-		sleep(1)
-
-	spawn(rand(70, 130))
-		to_chat(src, "<span style='font-size: [fontSize]'><span class='saybasic'><b style='color: [textColor]'>[name]</b></span> <span class='sayverb'>exclaims, </span>\"<span class='saybasic'><b>Just kidding! I don't like people like you!</b></span></span>\"")
-		C.ChromieWinorLoose(src, -1 * removeLater)
-
 /mob/living/carbon/human/proc/letsseeafriend(var/fontSize = "133%", var/textColor = "#808080", var/name = "Xom")
 	var/list/friends = list()
 	for(var/mob/living/carbon/human/bumbot/B in mob_list)
@@ -231,7 +213,6 @@ var/xomPhrases = list("Time for some fun!", "Have you ever been breastfed by a g
 			return
 		}
 		H.wrenchedhead()
-
 
 /mob/living/carbon/human/proc/turnintoblackperson(var/fontSize = "133%", var/textColor = "#808080", var/name = "Xom")
 	if(s_tone <= -150){

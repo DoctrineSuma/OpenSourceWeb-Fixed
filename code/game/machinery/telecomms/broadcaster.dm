@@ -63,7 +63,6 @@ var/message_delay = 0 // To make sure restarting the recentmessages list is kept
 							  signal.data["compression"], signal.data["level"], signal.frequency,
 							  signal.data["verb"], signal.data["language"]	)
 
-
 	   /** #### - Simple Broadcast - #### **/
 
 		if(signal.data["type"] == 1)
@@ -72,7 +71,6 @@ var/message_delay = 0 // To make sure restarting the recentmessages list is kept
 			Broadcast_SimpleMessage(signal.data["name"], signal.frequency,
 								  signal.data["message"],null, null,
 								  signal.data["compression"], listening_level)
-
 
 	   /** #### - Artificial Broadcast - #### **/
 	   			// (Imitates a mob)
@@ -103,7 +101,6 @@ var/message_delay = 0 // To make sure restarting the recentmessages list is kept
 	if(message_delay)
 		message_delay = 0
 	..()
-
 
 /*
 	Basically just an empty shell for receiving and broadcasting radio messages. Not
@@ -161,8 +158,6 @@ var/message_delay = 0 // To make sure restarting the recentmessages list is kept
 							  signal.data["realname"], signal.data["vname"], 3, signal.data["compression"], list(0), connection.frequency,
 							  signal.data["verb"], signal.data["language"])
 
-
-
 /**
 
 	Here is the big, bad function that broadcasts a message given the appropriate
@@ -211,8 +206,6 @@ var/message_delay = 0 // To make sure restarting the recentmessages list is kept
 	@param compression:
 		If 0, the signal is audible
 		If nonzero, the signal may be partially inaudible or just complete gibberish.
-
-
 
 	@param freq
 		The frequency of the signal
@@ -268,7 +261,6 @@ var/message_delay = 0 // To make sure restarting the recentmessages list is kept
 		for (var/obj/item/device/radio/R in connection.devices["[RADIO_CHAT]"])
 			if(R.receive_range(display_freq, level) > -1)
 				radios += R
-
 
 	// Get a list of mobs who can hear from the radios we collected.
 	var/list/receive = get_mobs_in_radio_ranges(radios)
@@ -326,7 +318,6 @@ var/message_delay = 0 // To make sure restarting the recentmessages list is kept
 			else
 				heard_garbled += R
 
-
   /* ###### Begin formatting and sending the message ###### */
 	if (length(heard_masked) || length(heard_normal) || length(heard_voice) || length(heard_garbled) || length(heard_gibberish))
 
@@ -359,7 +350,6 @@ var/message_delay = 0 // To make sure restarting the recentmessages list is kept
 				freq_text = M.job
 
 		//There's probably a way to use the list var of channels in code\game\communications.dm to make the dept channels non-hardcoded, but I wasn't in an experimentive mood. --NEO
-
 
 		// --- If the frequency has not been assigned a name, just use the frequency as the name ---
 
@@ -437,7 +427,6 @@ var/message_delay = 0 // To make sure restarting the recentmessages list is kept
 		else if (display_freq in DEPT_FREQS)
 			part_a = "<span class='comms'><span class='commsname'>"
 
-
 		// --- d_filter the message; place it in quotes apply a verb ---
 
 		var/quotedmsg = null
@@ -480,7 +469,6 @@ var/message_delay = 0 // To make sure restarting the recentmessages list is kept
 
 	 /* ###### Send the message ###### */
 
-
 	  	/* --- Process all the mobs that heard a masked voice (understood) --- */
 
 		if (length(heard_masked))
@@ -506,14 +494,11 @@ var/message_delay = 0 // To make sure restarting the recentmessages list is kept
 			for (var/mob/R in heard_garbled)
 				R.hear_radio(message, verbage, speaking, part_a, part_b, M, 1, vname)
 
-
 		/* --- Complete gibberish. Usually happens when there's a compressed message --- */
 
 		if (length(heard_gibberish))
 			for (var/mob/R in heard_gibberish)
 				R.hear_radio(message, verbage, speaking, part_a, part_b, M, 1)
-
-
 
 /proc/Broadcast_SimpleMessage(var/source, var/frequency, var/text, var/data, var/mob/M, var/compression, var/level)
 
@@ -529,7 +514,6 @@ var/message_delay = 0 // To make sure restarting the recentmessages list is kept
 
 	var/list/receive = list()
 
-
 	// --- Broadcast only to intercom devices ---
 
 	if(data == 1)
@@ -537,7 +521,6 @@ var/message_delay = 0 // To make sure restarting the recentmessages list is kept
 			var/turf/position = get_turf(R)
 			if(position && position.z == level)
 				receive |= R.send_hear(display_freq, level)
-
 
 	// --- Broadcast only to intercoms and station-bounced radios ---
 
@@ -550,7 +533,6 @@ var/message_delay = 0 // To make sure restarting the recentmessages list is kept
 			if(position && position.z == level)
 				receive |= R.send_hear(display_freq)
 
-
 	// --- Broadcast to syndicate radio! ---
 
 	else if(data == 3)
@@ -561,7 +543,6 @@ var/message_delay = 0 // To make sure restarting the recentmessages list is kept
 			if(position && position.z == level)
 				receive |= R.send_hear(SYND_FREQ)
 
-
 	// --- Broadcast to ALL radio devices ---
 
 	else
@@ -569,7 +550,6 @@ var/message_delay = 0 // To make sure restarting the recentmessages list is kept
 			var/turf/position = get_turf(R)
 			if(position && position.z == level)
 				receive |= R.send_hear(display_freq)
-
 
   /* ###### Organize the receivers into categories for displaying the message ###### */
 
@@ -586,7 +566,6 @@ var/message_delay = 0 // To make sure restarting the recentmessages list is kept
 
 		if (R.client && !(R.client.prefs.toggles & CHAT_RADIO)) //Adminning with 80 people on can be fun when you're trying to talk and all you can hear is radios.
 			continue
-
 
 		// --- Check for compression ---
 		if(compression > 0)
@@ -606,7 +585,6 @@ var/message_delay = 0 // To make sure restarting the recentmessages list is kept
 			// - Just display a garbled message -
 
 			heard_garbled += R
-
 
   /* ###### Begin formatting and sending the message ###### */
 	if (length(heard_normal) || length(heard_garbled) || length(heard_gibberish))
@@ -633,7 +611,6 @@ var/message_delay = 0 // To make sure restarting the recentmessages list is kept
 			if(1347)
 				freq_text = "Supply"
 		//There's probably a way to use the list var of channels in code\game\communications.dm to make the dept channels non-hardcoded, but I wasn't in an experimentive mood. --NEO
-
 
 		// --- If the frequency has not been assigned a name, just use the frequency as the name ---
 
@@ -711,7 +688,6 @@ var/message_delay = 0 // To make sure restarting the recentmessages list is kept
 			for (var/mob/R in heard_garbled)
 				R.show_message(rendered, 2)
 
-
 		/* --- Complete gibberish. Usually happens when there's a compressed message --- */
 
 		if (length(heard_gibberish))
@@ -722,11 +698,6 @@ var/message_delay = 0 // To make sure restarting the recentmessages list is kept
 				R.show_message(rendered, 2)
 
 //Use this to test if an obj can communicate with a Telecommunications Network
-
-/atom/proc/test_telecomms()
-	var/datum/signal/signal = src.telecomms_process()
-	var/turf/position = get_turf(src)
-	return (position.z in signal.data["level"] && signal.data["done"])
 
 /atom/proc/telecomms_process()
 
@@ -757,4 +728,3 @@ var/message_delay = 0 // To make sure restarting the recentmessages list is kept
 	//world.log << "Level: [signal.data["level"]] - Done: [signal.data["done"]]"
 
 	return signal
-

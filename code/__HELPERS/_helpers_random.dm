@@ -72,11 +72,6 @@ var/global/list/GlobalPool = list()
 	D.ResetVars()
 	D.disposed = 1 //Set to stop processing while pooled
 
-/proc/IsPooled(var/datum/D)
-	if(isnull(GlobalPool[D.type]))
-		return 0
-	return 1
-
 /datum/proc/Prepare(args)
 	if(islist(args))
 		New(arglist(args))

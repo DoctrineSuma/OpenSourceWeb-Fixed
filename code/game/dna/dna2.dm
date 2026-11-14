@@ -5,7 +5,6 @@
 */
 
 // What each index means:
-#define DNA_OFF_LOWERBOUND 0
 #define DNA_OFF_UPPERBOUND 1
 #define DNA_ON_LOWERBOUND  2
 #define DNA_ON_UPPERBOUND  3
@@ -13,8 +12,6 @@
 // Define block bounds (off-low,off-high,on-low,on-high)
 // Used in setupgame.dm
 #define DNA_DEFAULT_BOUNDS list(1,2049,2050,4095)
-#define DNA_HARDER_BOUNDS  list(1,3049,3050,4095)
-#define DNA_HARD_BOUNDS    list(1,3490,3500,4095)
 
 // Defines which values mean "on" or "off".
 //  This is to make some of the more OP superpowers a larger PITA to activate,
@@ -178,7 +175,6 @@ var/global/list/datum/dna/gene/dna_genes[0]
 	if (block<=0) return
 	return UI[block] > 2050
 
-
 // Set UI gene "on" (1) or "off" (0)
 /datum/dna/proc/SetUIState(var/block,var/on,var/defer=0)
 	if (block<=0) return
@@ -246,18 +242,8 @@ var/global/list/datum/dna/gene/dna_genes[0]
 
 // Set a DNA SE block's value, given a value and a max possible value.
 // Might be used for species?
-/datum/dna/proc/SetSEValueRange(var/block,var/value,var/maxvalue)
-	if (block<=0) return
-	ASSERT(maxvalue<=4095)
-	var/range = round(4095 / maxvalue)
-	if(value)
-		SetSEValue(block, value * range - rand(1,range-1))
 
 // Getter version of above.
-/datum/dna/proc/GetSEValueRange(var/block,var/maxvalue)
-	if (block<=0) return 0
-	var/value = GetSEValue(block)
-	return round(1 +(value / 4096)*maxvalue)
 
 // Is the block "on" (1) or "off" (0)? (Un-assigned genes are always off.)
 /datum/dna/proc/GetSEState(var/block)
@@ -308,7 +294,6 @@ var/global/list/datum/dna/gene/dna_genes[0]
 	//testing("SetSESubBlock([block],[subBlock],[newSubBlock],[defer]): [oldBlock] -> [newBlock]")
 	SetSEBlock(block,newBlock,defer)
 
-
 /proc/EncodeDNABlock(var/value)
 	return add_zero2(num2hex(value,1), 3)
 
@@ -355,4 +340,3 @@ var/global/list/datum/dna/gene/dna_genes[0]
 
 	unique_enzymes = md5(character.real_name)
 	reg_dna[unique_enzymes] = character.real_name
-

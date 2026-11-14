@@ -38,7 +38,6 @@ CC|FC|
   |PB|
 PE|PE|PE
 
-
 Icon Addemdum
 Icon system is much more robust, and the icons are all variable based.
 Each part has a reference string, powered, strength, and contruction values.
@@ -81,7 +80,6 @@ So, hopefully this is helpful if any more icons are to be added/changed/wonderin
 	..()
 	return
 
-
 /obj/structure/particle_accelerator/verb/rotate()
 	set name = "Rotate Clockwise"
 	set category = "Object"
@@ -119,14 +117,12 @@ So, hopefully this is helpful if any more icons are to be added/changed/wonderin
 	..()
 	return
 
-
 /obj/structure/particle_accelerator/attackby(obj/item/W, mob/user)
 	if(istool(W))
 		if(src.process_tool_hit(W,user))
 			return
 	..()
 	return
-
 
 /obj/structure/particle_accelerator/Move()
 	..()
@@ -150,12 +146,10 @@ So, hopefully this is helpful if any more icons are to be added/changed/wonderin
 		else
 	return
 
-
 /obj/structure/particle_accelerator/blob_act()
 	if(prob(50))
 		qdel(src)
 	return
-
 
 /obj/structure/particle_accelerator/meteorhit()
 	if(prob(50))
@@ -180,19 +174,11 @@ So, hopefully this is helpful if any more icons are to be added/changed/wonderin
 		master.update_state()
 		return 0
 
-
 /obj/structure/particle_accelerator/proc/report_ready(var/obj/O)
 	if(O && (O == master))
 		if(construction_state >= 3)
 			return 1
 	return 0
-
-
-/obj/structure/particle_accelerator/proc/report_master()
-	if(master)
-		return master
-	return 0
-
 
 /obj/structure/particle_accelerator/proc/connect_master(var/obj/O)
 	if(O && istype(O,/obj/machinery/particle_accelerator/control_box))
@@ -200,7 +186,6 @@ So, hopefully this is helpful if any more icons are to be added/changed/wonderin
 			master = O
 			return 1
 	return 0
-
 
 /obj/structure/particle_accelerator/proc/process_tool_hit(var/obj/O, var/mob/user)
 	if(!(O) || !(user))
@@ -253,8 +238,6 @@ So, hopefully this is helpful if any more icons are to be added/changed/wonderin
 		return 1
 	return 0
 
-
-
 /obj/machinery/particle_accelerator
 	name = "Particle Accelerator"
 	desc = "Part of a Particle Accelerator."
@@ -271,7 +254,6 @@ So, hopefully this is helpful if any more icons are to be added/changed/wonderin
 	var/powered = null
 	var/strength = 0
 	var/desc_holder = null
-
 
 /obj/machinery/particle_accelerator/verb/rotate()
 	set name = "Rotate Clockwise"
@@ -313,7 +295,6 @@ So, hopefully this is helpful if any more icons are to be added/changed/wonderin
 	..()
 	return
 
-
 /obj/machinery/particle_accelerator/attackby(obj/item/W, mob/user)
 	if(istool(W))
 		if(src.process_tool_hit(W,user))
@@ -337,22 +318,18 @@ So, hopefully this is helpful if any more icons are to be added/changed/wonderin
 		else
 	return
 
-
 /obj/machinery/particle_accelerator/blob_act()
 	if(prob(50))
 		qdel(src)
 	return
-
 
 /obj/machinery/particle_accelerator/meteorhit()
 	if(prob(50))
 		qdel(src)
 	return
 
-
 /obj/machinery/particle_accelerator/proc/update_state()
 	return 0
-
 
 /obj/machinery/particle_accelerator/proc/process_tool_hit(var/obj/O, var/mob/user)
 	if(!(O) || !(user))

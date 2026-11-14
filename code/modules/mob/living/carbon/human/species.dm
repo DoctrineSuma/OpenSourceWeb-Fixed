@@ -228,20 +228,12 @@
 	return
 
 // Used to update alien icons for aliens.
-/datum/species/proc/handle_login_special(var/mob/living/carbon/human/H)
-	return
 
 // As above.
-/datum/species/proc/handle_logout_special(var/mob/living/carbon/human/H)
-	return
 
 // Builds the HUD using species-specific icons and usable slots.
-/datum/species/proc/build_hud(var/mob/living/carbon/human/H)
-	return
 
 // Grabs the window recieved when you click-drag someone onto you.
-/datum/species/proc/get_inventory_dialogue(var/mob/living/carbon/human/H)
-	return
 
 //Used by xenos understanding larvae and dionaea understanding nymphs.
 /datum/species/proc/can_understand(var/mob/other)
@@ -261,7 +253,6 @@
 
 	//If you wanted to add a species-level ability:
 	/*abilities = list(/client/proc/test_ability)*/
-
 
 /mob/living/carbon/human/proc/isChild()//Used to tell if someone is a child.
 	if(species && (species.name == "Child" || species.name == "Zombie Child"))
@@ -627,7 +618,6 @@
 	special_act(var/mob/living/carbon/human/target)
 		if(prob(12))
 			target.zombie_infect()
-
 
 /datum/unarmed_attack/punch
 	attack_verb = list("punch")

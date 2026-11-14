@@ -1,7 +1,4 @@
-#define I_DODGE		"dodge"
-#define I_PARRY		"parry"
 #define LEGAL_RELIGION	"Gray Church"
-#define ILLEGAL_RELIGION	"Thanati"
 /mob
 	density = 1
 	layer = 4.0
@@ -129,7 +126,6 @@
 	var/timeofdeath = 0//Living
 	var/cpr_time = 1//Carbon
 
-
 	var/bodytemperature = 310.055	//98.7 F
 	var/old_x = 0
 	var/old_y = 0
@@ -190,7 +186,6 @@
 	var/const/deafness = 2//Carbon
 	var/const/muteness = 4//Carbon
 
-
 	var/datum/dna/dna = null//Carbon
 	var/radiation = 0//Carbon
 
@@ -245,7 +240,6 @@
 
 	var/list/radar_blips = list() // list of screen objects, radar blips
 	var/radar_open = 0 	// nonzero is radar is open
-
 
 	var/obj/control_object //Used by admins to possess objects. All mobs should have this var
 

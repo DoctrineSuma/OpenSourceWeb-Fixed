@@ -8,34 +8,6 @@
 
 /*UL*/
 
-
-/proc/invertHTML(HTMLstring)
-
-	if (!( istext(HTMLstring) ))
-		CRASH("Given non-text argument!")
-		return
-	else
-		if (length(HTMLstring) != 7)
-			CRASH("Given non-HTML argument!")
-			return
-	var/textr = copytext(HTMLstring, 2, 4)
-	var/textg = copytext(HTMLstring, 4, 6)
-	var/textb = copytext(HTMLstring, 6, 8)
-	var/r = hex2num(textr)
-	var/g = hex2num(textg)
-	var/b = hex2num(textb)
-	textr = num2hex(255 - r)
-	textg = num2hex(255 - g)
-	textb = num2hex(255 - b)
-	if (length(textr) < 2)
-		textr = text("0[]", textr)
-	if (length(textg) < 2)
-		textr = text("0[]", textg)
-	if (length(textb) < 2)
-		textr = text("0[]", textb)
-	return text("#[][][]", textr, textg, textb)
-	return
-
 //Returns the middle-most value
 /proc/dd_range(var/low, var/high, var/num)
 	return max(low,min(high,num))
@@ -45,7 +17,6 @@
 	if(A < lower) return 0
 	if(A > upper) return 0
 	return 1
-
 
 /proc/Get_Angle(atom/movable/start,atom/movable/end)//For beams.
 	if(!start || !end) return 0
@@ -154,8 +125,6 @@ Turf and target are seperate in case you want to teleport some distance from a t
 
 	return destination
 
-
-
 /proc/LinkBlocked(turf/A, turf/B)
 	if(A == null || B == null) return 1
 	var/adir = get_dir(A,B)
@@ -171,7 +140,6 @@ Turf and target are seperate in case you want to teleport some distance from a t
 	if(DirBlocked(A,adir)) return 1
 	if(DirBlocked(B,rdir)) return 1
 	return 0
-
 
 /proc/DirBlocked(turf/loc,var/dir)
 	for(var/obj/structure/window/D in loc)
@@ -250,8 +218,6 @@ Turf and target are seperate in case you want to teleport some distance from a t
 /proc/format_frequency(var/f)
 	return "[round(f / 10)].[f % 10]"
 
-
-
 //This will update a mob's name, real_name, mind.name, data_core records, pda and id
 //Calling this proc without an oldname will only update the mob and skip updating the pda, id and records ~Carn
 /mob/proc/fully_replace_character_name(var/oldname,var/newname)
@@ -293,8 +259,6 @@ Turf and target are seperate in case you want to teleport some distance from a t
 					if(!search_id)	break
 					search_pda = 0
 	return 1
-
-
 
 //Generalised helper proc for letting mobs rename themselves. Used to be clname() and ainame()
 //Last modified by Carn
@@ -339,28 +303,13 @@ Turf and target are seperate in case you want to teleport some distance from a t
 					A.aiPDA.owner = newname
 					A.aiPDA.name = newname + " (" + A.aiPDA.ownjob + ")"
 
-
 		fully_replace_character_name(oldname,newname)
-
-
 
 //Picks a string of symbols to display as the law number for hacked or ion laws
 /proc/ionnum()
 	return "[pick("!","@","#","$","%","^","&","*")][pick("!","@","#","$","%","^","&","*")][pick("!","@","#","$","%","^","&","*")][pick("!","@","#","$","%","^","&","*")]"
 
 //When an AI is activated, it can choose from a list of non-slaved borgs to have as a slave.
-/proc/freeborg()
-	var/select = null
-	var/list/borgs = list()
-	for (var/mob/living/silicon/robot/A in player_list)
-		if (A.stat == 2 || A.connected_ai || A.scrambledcodes)
-			continue
-		var/name = "[A.real_name] ([A.modtype] [A.braintype])"
-		borgs[name] = A
-
-	if (borgs.len)
-		select = input("Unshackled borg signals detected:", "Borg selection", null, null) as null|anything in borgs
-		return borgs[select]
 
 //When a borg is activated, it can choose which AI it wants to be slaved to
 /proc/active_ais()
@@ -389,34 +338,6 @@ Turf and target are seperate in case you want to teleport some distance from a t
 		if(user)	. = input(usr,"AI signals detected:", "AI selection") in ais
 		else		. = pick(ais)
 	return .
-
-/proc/get_sorted_mobs()
-	var/list/old_list = getmobs()
-	var/list/AI_list = list()
-	var/list/Dead_list = list()
-	var/list/keyclient_list = list()
-	var/list/key_list = list()
-	var/list/logged_list = list()
-	for(var/named in old_list)
-		var/mob/M = old_list[named]
-		if(issilicon(M))
-			AI_list |= M
-		else if(isobserver(M) || M.stat == 2)
-			Dead_list |= M
-		else if(M.key && M.client)
-			keyclient_list |= M
-		else if(M.key)
-			key_list |= M
-		else
-			logged_list |= M
-		old_list.Remove(named)
-	var/list/new_list = list()
-	new_list += AI_list
-	new_list += keyclient_list
-	new_list += key_list
-	new_list += logged_list
-	new_list += Dead_list
-	return new_list
 
 //Returns a list of all mobs with their name
 /proc/getmobs()
@@ -475,22 +396,10 @@ Turf and target are seperate in case you want to teleport some distance from a t
 	return moblist
 
 //E = MC^2
-/proc/convert2energy(var/M)
-	var/E = M*(SPEED_OF_LIGHT_SQ)
-	return E
 
 //M = E/C^2
-/proc/convert2mass(var/E)
-	var/M = E/(SPEED_OF_LIGHT_SQ)
-	return M
 
 //Forces a variable to be posative
-/proc/modulus(var/M)
-	if(M >= 0)
-		return M
-	if(M < 0)
-		return -M
-
 
 /proc/key_name(var/whom, var/include_link = null, var/include_name = 1)
 	var/mob/M
@@ -539,7 +448,6 @@ Turf and target are seperate in case you want to teleport some distance from a t
 
 /proc/key_name_admin(var/whom, var/include_name = 1)
 	return key_name(whom, 1, include_name)
-
 
 //Will return the location of the turf an atom is ultimatly sitting on
 /proc/get_turf_loc(var/atom/movable/M) //gets the location of the turf that the atom is on, or what the atom is in is on, etc
@@ -590,7 +498,6 @@ Turf and target are seperate in case you want to teleport some distance from a t
 
 	return locate(x,y,A.z)
 
-
 // returns turf relative to A offset in dx and dy tiles
 // bound to map limits
 /proc/get_offset_target_turf(var/atom/A, var/dx, var/dy)
@@ -601,10 +508,6 @@ Turf and target are seperate in case you want to teleport some distance from a t
 //Makes sure MIDDLE is between LOW and HIGH. If not, it adjusts it. Returns the adjusted value.
 /proc/between(var/low, var/middle, var/high)
 	return max(min(middle, high), low)
-
-proc/arctano(x)
-	var/y=arcsin(x/sqrt(1+x*x))
-	return y
 
 //returns random gauss number
 proc/GaussRand(var/sigma)
@@ -664,42 +567,6 @@ proc/anim(turf/location as turf,target as mob|obj,a_icon,a_icon_state as text,fl
 
 	return 1
 
-/proc/is_blocked_turf(var/turf/T)
-	var/cant_pass = 0
-	if(T.density) cant_pass = 1
-	for(var/atom/A in T)
-		if(A.density)//&&A.anchored
-			cant_pass = 1
-	return cant_pass
-
-/proc/get_step_towards2(var/atom/ref , var/atom/trg)
-	var/base_dir = get_dir(ref, get_step_towards(ref,trg))
-	var/turf/temp = get_step_towards(ref,trg)
-
-	if(is_blocked_turf(temp))
-		var/dir_alt1 = turn(base_dir, 90)
-		var/dir_alt2 = turn(base_dir, -90)
-		var/turf/turf_last1 = temp
-		var/turf/turf_last2 = temp
-		var/free_tile = null
-		var/breakpoint = 0
-
-		while(!free_tile && breakpoint < 10)
-			if(!is_blocked_turf(turf_last1))
-				free_tile = turf_last1
-				break
-			if(!is_blocked_turf(turf_last2))
-				free_tile = turf_last2
-				break
-			turf_last1 = get_step(turf_last1,dir_alt1)
-			turf_last2 = get_step(turf_last2,dir_alt2)
-			breakpoint++
-
-		if(!free_tile) return get_step(ref, base_dir)
-		else return get_step_towards(ref,free_tile)
-
-	else return get_step(ref, base_dir)
-
 /proc/do_mob(var/mob/user , var/mob/target, var/time = 30) //This is quite an ugly solution but i refuse to use the old request system.
 	if(!user || !target) return 0
 	var/user_loc = user.loc
@@ -734,7 +601,6 @@ proc/anim(turf/location as turf,target as mob|obj,a_icon,a_icon_state as text,fl
 	for(var/i = 0, i<numticks, i++)
 		sleep(delayfraction)
 		progbar.update(world.time - starttime)
-
 
 		if(!user || user.stat || user.weakened || user.stunned || !(user.loc == T))
 			qdel(progbar)
@@ -893,11 +759,9 @@ proc/anim(turf/location as turf,target as mob|obj,a_icon,a_icon_state as text,fl
 						if(!nextturf || !istype(nextturf, /turf/space))
 							nextturf = get_step(corner, turn(direction, 180))
 
-
 						// Take on the icon of a neighboring scrolling space icon
 						X.icon = nextturf.icon
 						X.icon_state = nextturf.icon_state
-
 
 					for(var/obj/O in T)
 
@@ -963,8 +827,6 @@ proc/anim(turf/location as turf,target as mob|obj,a_icon,a_icon_state as text,fl
 	for(var/obj/O in doors)
 		O:update_nearby_tiles(1)
 
-
-
 proc/DuplicateObject(obj/original, var/perfectcopy = 0 , var/sameloc = 0)
 	if(!original)
 		return null
@@ -982,7 +844,6 @@ proc/DuplicateObject(obj/original, var/perfectcopy = 0 , var/sameloc = 0)
 				if(!(V in list("type","loc","locs","vars", "parent", "parent_type","verbs","ckey","key")))
 					O.vars[V] = original.vars[V]
 	return O
-
 
 /area/proc/copy_contents_to(var/area/A , var/platingRequired = 0 )
 	//Takes: Area. Optional: If it should copy to areas that don't have plating
@@ -1028,7 +889,6 @@ proc/DuplicateObject(obj/original, var/perfectcopy = 0 , var/sameloc = 0)
 
 	var/copiedobjs = list()
 
-
 	moving:
 		for (var/turf/T in refined_src)
 			var/datum/coords/C_src = refined_src[T]
@@ -1049,7 +909,6 @@ proc/DuplicateObject(obj/original, var/perfectcopy = 0 , var/sameloc = 0)
 					X.icon_state = old_icon_state1
 					X.icon = old_icon1 //Shuttle floors are in shuttle.dmi while the defaults are floors.dmi
 
-
 					var/list/objs = new/list()
 					var/list/newobjs = new/list()
 					var/list/mobs = new/list()
@@ -1062,10 +921,8 @@ proc/DuplicateObject(obj/original, var/perfectcopy = 0 , var/sameloc = 0)
 
 						objs += O
 
-
 					for(var/obj/O in objs)
 						newobjs += DuplicateObject(O , 1)
-
 
 					for(var/obj/O in newobjs)
 						O.loc = X
@@ -1084,8 +941,6 @@ proc/DuplicateObject(obj/original, var/perfectcopy = 0 , var/sameloc = 0)
 					copiedobjs += newobjs
 					copiedobjs += newmobs
 
-
-
 					for(var/V in T.vars)
 						if(!(V in list("type","loc","locs","vars", "parent", "parent_type","verbs","ckey","key","x","y","z","contents", "luminosity")))
 							X.vars[V] = T.vars[V]
@@ -1102,9 +957,6 @@ proc/DuplicateObject(obj/original, var/perfectcopy = 0 , var/sameloc = 0)
 					refined_trg -= B
 					continue moving
 
-
-
-
 	var/list/doors = new/list()
 
 	if(toupdate.len)
@@ -1119,12 +971,7 @@ proc/DuplicateObject(obj/original, var/perfectcopy = 0 , var/sameloc = 0)
 	for(var/obj/O in doors)
 		O:update_nearby_tiles(1)
 
-
-
-
 	return copiedobjs
-
-
 
 proc/get_cardinal_dir(atom/A, atom/B)
 	var/dx = abs(B.x - A.x)
@@ -1143,21 +990,12 @@ proc/view_or_range(distance = world.view , center = usr , type)
 			. = range(distance,center)
 	return
 
-proc/oview_or_orange(distance = world.view , center = usr , type)
-	switch(type)
-		if("view")
-			. = oview(distance,center)
-		if("range")
-			. = orange(distance,center)
-	return
-
 proc/get_mob_with_client_list()
 	var/list/mobs = list()
 	for(var/mob/M in mob_list)
 		if (M.client)
 			mobs += M
 	return mobs
-
 
 /proc/parse_zone(zone)
 	if(zone == "r_hand") return "right hand"
@@ -1173,7 +1011,6 @@ proc/get_mob_with_client_list()
 	else if (zone == "l_foot") return "left foot"
 	else if (zone == "r_foot") return "right foot"
 	else return zone
-
 
 /proc/get_turf(turf/location)
 	while(location)
@@ -1191,7 +1028,6 @@ proc/get_mob_with_client_list()
 
 /proc/get_turf_or_move(turf/location)
 	return get_turf(location)
-
 
 //Quick type checks for some tools
 var/global/list/common_tools = list(
@@ -1243,23 +1079,8 @@ var/global/list/common_tools = list(
 		return 1
 	return 0
 
-/proc/iswire(O)
-	if(istype(O, /obj/item/stack/cable_coil))
-		return 1
-	return 0
-
 proc/is_hot(obj/item/W as obj)
 	return 0
-
-/proc/is_surgery_tool(obj/item/W as obj)
-	return (	\
-	istype(W, /obj/item/weapon/surgery_tool/scalpel)			||	\
-	istype(W, /obj/item/weapon/surgery_tool/hemostat)		||	\
-	istype(W, /obj/item/weapon/surgery_tool/retractor)		||	\
-	istype(W, /obj/item/weapon/surgery_tool/cautery)			||	\
-	istype(W, /obj/item/weapon/surgery_tool/bonegel)			||	\
-	istype(W, /obj/item/weapon/surgery_tool/bonesetter)
-	)
 
 //check if mob is lying down on something we can operate him on.
 /proc/can_operate(mob/living/carbon/M)
@@ -1319,7 +1140,6 @@ var/list/WALLITEMS = list(
 					if(EAST)
 						if(O.pixel_x < -10)
 							return 1
-
 
 	//Some stuff is placed directly on the wallturf (signs)
 	for(var/obj/O in get_step(loc, dir))
@@ -1409,28 +1229,5 @@ var/savefile/iconCache = new("data/iconCache.sav")
 	CRASH(msg)
 
 #define LOCATE_COORDS(X, Y, Z) locate(between(1, X, world.maxx), between(1, Y, world.maxy), Z)
-/proc/getcircle(turf/center, var/radius) //Uses a fast Bresenham rasterization algorithm to return the turfs in a thin circle.
-	if(!radius) return list(center)
-
-	var/x = 0
-	var/y = radius
-	var/p = 3 - 2 * radius
-
-	. = list()
-	while(y >= x) // only formulate 1/8 of circle
-
-		. += LOCATE_COORDS(center.x - x, center.y - y, center.z) //upper left left
-		. += LOCATE_COORDS(center.x - y, center.y - x, center.z) //upper upper left
-		. += LOCATE_COORDS(center.x + y, center.y - x, center.z) //upper upper right
-		. += LOCATE_COORDS(center.x + x, center.y - y, center.z) //upper right right
-		. += LOCATE_COORDS(center.x - x, center.y + y, center.z) //lower left left
-		. += LOCATE_COORDS(center.x - y, center.y + x, center.z) //lower lower left
-		. += LOCATE_COORDS(center.x + y, center.y + x, center.z) //lower lower right
-		. += LOCATE_COORDS(center.x + x, center.y + y, center.z) //lower right right
-
-		if(p < 0)
-			p += 4*x++ + 6;
-		else
-			p += 4*(x++ - y--) + 10;
 
 #undef LOCATE_COORDS

@@ -1,5 +1,3 @@
-/mob/living/carbon/human/proc/zoomMap(var/size = 1.5)
-    winset(src, "mapwindow.map", "zoom=[size]")
 
 /mob/living/carbon/human/monster/loge
 	desc = "Whats that? Moving foreskin?!"
@@ -15,7 +13,6 @@
 			return 0
 		if(weakened || paralysis || handcuffed || !canmove)
 			return 1
-
 
 		if (!target)
 			for (var/mob/living/carbon/human/C in orange(5, src.loc))

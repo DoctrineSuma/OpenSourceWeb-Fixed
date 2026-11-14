@@ -37,69 +37,6 @@
 	updateTimeToStart()
 	updatePig()
 
-/mob/living/carbon/human/proc/updateSpider()
-	if(!client)
-		return
-
-	var/list/text = list()
-	var/fulltext = ""
-
-	if(reflectneed >= 750)
-		text += "<a href='#' id='ReflectExperience'>Reflect your Experience!<br></a>"
-	if(src?.mind?.succubus)
-		text += "<a href='#' id='teleportSlaves'>Teleport Slaves<br></a><a href='#' id='punishSlave'>Punish Slave<br></a> <a href='#' id='killSlave'>Kill Slave<br></a>"
-	if(src.verbs.Find(/mob/living/carbon/human/proc/plantEgg))
-		text += "<a href='#' id='plantEgg'>Lay Egg<br></a>"
-	if(src.verbs.Find(/mob/living/carbon/human/proc/plantWeeds))
-		text += "<a href='#' id='plantWeeds'>Plant Weeds<br></a>"
-	switch(job)
-		if("Bishop")
-			text += "<a href='#'' id='Excommunicate'>Excommunicate<br></a><a href='#'' id='BannishtheUndead'>Banish Undead</a><a href='#'' id='RobofSins'><br>Rob of Sins<br></a><a href='#' id='Epitemia''>Epitemia<br></a><a href='#'' id='RewardtheInquisitor'>Reward the Inquisitor</a><a href='#'' id='Coronation'><br>Coronation</a><a href='#'' id='Eucharisty'><br>Eucharisty<br></a><a href='#'' id='BannishSpirits'>Banish Spirits<br></a><a href='#'' id='CallforChurchMeeting'>Call for Chuch Meeting<br></a><a href='#' id='Marriage''>Marriage!<br></a><a href='#' id='ClearName''>Clear Name<br></a>"
-		if("Priest")
-			text += "<a href='#'' id='Excommunicate'>Excommunicate<br></a><a href='#'' id='BannishtheUndead'>Banish Undead</a><a href='#'' id='RobofSins'><br>Rob of Sins<br></a><a href='#' id='Epitemia''>Epitemia<br></a><a href='#'' id='RewardtheInquisitor'>Reward the Inquisitor</a><a href='#'' id='Coronation'><br>Coronation</a><a href='#'' id='Eucharisty'><br>Eucharisty<br></a><a href='#'' id='BannishSpirits'>Banish Spirits<br></a><a href='#'' id='CallforChurchMeeting'>Call for Chuch Meeting<br></a><a href='#' id='Marriage''>Marriage!<br></a><a href='#' id='ClearName''>Clear Name<br></a>"
-		if("Monk")
-			text += "<a href='#'' id='BannishtheUndead'>Banish Undead</a><a href='#'' id='RobofSins'><br>Rob of Sins<br></a><a href='#'' id='Eucharisty'><br>Eucharisty<br></a><a href='#'' id='BannishSpirits'>Banish Spirits<br></a><a href='#' id='Marriage!''>Marriage<br></a>"
-		if("Expedition Leader")
-			text += "<a href='#' id='SetMigSpawn'>Set Migrant Arrival<br></a><a href='#' id='announceEx'>Announce (14 TILES)<br></a>"
-		if("Bum")
-			text += "<a href='#' id='tellTheTruth'>Tell the Truth<br></a>"
-		if("Urchin")
-			text += "<a href='#' id='tellTheTruth'>Tell the Truth<br></a>"
-		if("Migrant")
-			if(!migclass)
-				if(ckey in outlaw)
-					text += "<a href='#' id='ChoosemigrantClass'>Choose Migrant Class!<br></a><a href='#' id='ToggleOutlaw'>Toggle Outlaw!<br></a>"
-				else
-					text += "<a href='#' id='ChoosemigrantClass'>Choose Migrant Class!<br></a>"
-		if("Count")
-			text += "<a href='#' id='Reinforcement'>Change Reinforcement Type<br></a><a href='#' id='Command'>Command<br></a><a href='#' id='SpecialReinforcement'>Call for Special Reinforcement!<br></a><a href='#' id='Recruit'>Recruit<br></a><a href='#' id='CaptureThrone'>Capture Throne<br></a>"
-		if("Count Hand")
-			text += "<a href='#' id='Command'>Command<br></a><a href='#' id='SpecialReinforcement'>Call for Special Reinforcement!<br></a><a href='#' id='Recruit'>Recruit<br></a>"
-		if("Count Heir")
-			text += "<a href='#' id='SpecialReinforcement'>Call for Special Reinforcement!<br></a>"
-		if("Sieger")
-			if(!migclass)
-				text += "<a href='#' id='ChoosesiegerClass'>Choose Sieger Class!<br></a>"
-		if("Mercenary")
-			if(!migclass)
-				text += "<a href='#' id='PegaclasseMerc'>Choose Mercenary Class!<br></a>"
-	if(src.consyte)
-		text += "<a href='#' id='Choir'>Choir<br></a><a href='#' id='respark'>Respark<br></a>"
-	if(src.job == "Jester")
-		text += "<a href='#' id='Choir'>Choir<br></a><a href='#' id='nickname'>Give a nickname!<br></a>"
-		text += "<a href='#' id='Choir'>Choir<br></a><a href='#' id='juggle'>Juggle!<br></a>"
-		text += "<a href='#' id='Choir'>Choir<br></a><a href='#' id='rememberjoke'>Remember Joke!<br></a>"
-		text += "<a href='#' id='Choir'>Choir<br></a><a href='#' id='joke'>Joke!<br></a>"
-	if(check_perk(/datum/perk/pathfinder))
-		text += "<a href='#' id='TrackSomeonePathfinder'>Track Someone<br></a><a href='#' id='TrackselfPathfinder'>Track Yourself<br></a>"
-
-	if(check_perk(/datum/perk/singer))
-		text += "<a href='#' id='RememberSong'>Remember Song<br></a><a href='#' id='Sing'>Sing<br></a>"
-
-	for(var/T in text)
-		fulltext += "[T]"
-
-
 /mob/living/carbon/human/proc/updateSmalltext()
 	if(!client)
 		return
@@ -371,9 +308,6 @@
 		client.changebuttoncontent("#chrome", "<span class='segment1'>" + generateVerbList(list(list("LimparCromossomos", "(100) Wipe Chromosomes"), list("ChamarCharon", "(10) Launch Babylon"), list("ForcePadla", "(7) Force Padla"), list("ReceiveObols", "(1) Receive Obols"), list("RetirarVice", "(1) Remove Vice"))) + "</span>")
 	else
 		client.changebuttoncontent("#chrome", "<span class='segment1'>" + generateVerbList(list(list("LimparCromossomos", "(100) Wipe Chromosomes"), list("ChamarCharon", "(10) Launch Babylon"), list("ForcePadla", "(7) Force Padla"), list("ReRolarSpecial", "(2) Reroll Special"))) + "</span>")
-
-/client/proc/setDefaultButtons()
-	changebuttoncontent("#Verb", {"<span class='segment1'>[generateVerbList(list(list("DisguiseVoice", "Disguise Voice"), list("Dance", "Dance"), list("vomit", "Try to Vomit"), list("Pee", "Pee"), list(".asktostop", "Stop")))]</span>"} + {"<span class='segment2'>[generateVerbList(list(list("Notes", "Memories"), list("Pray", "Pray"), list("AddNote", "Add Memories"), list("Clean", "Clean"), list("Masturbate", "Masturbate"), list("Poo", "Poo")))]</span>"})
 
 /client/New()
 	..()

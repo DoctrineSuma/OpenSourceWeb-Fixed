@@ -109,15 +109,6 @@ var/list/xeno_species = list(/datum/species/xenos, /datum/species/xenos/drone, /
 			H.adjustToxLoss(-weeds_heal_rate)
 	..()
 
-
-/datum/species/xenos/handle_login_special(var/mob/living/carbon/human/H)
-	H.AddInfectionImages()
-	..()
-
-/datum/species/xenos/handle_logout_special(var/mob/living/carbon/human/H)
-	H.RemoveInfectionImages()
-	..()
-
 /datum/species/xenos/drone
 	name = "Xenomorph Drone"
 	caste_name = "drone"
@@ -253,16 +244,6 @@ var/list/xeno_species = list(/datum/species/xenos, /datum/species/xenos/drone, /
 
 	//maxHealth = 250
 	//health = 250
-
-/datum/species/xenos/queen/handle_login_special(var/mob/living/carbon/human/H)
-	..()
-	// Make sure only one official queen exists at any point.
-	if(!alien_queen_exists(1,H))
-		H.real_name = "alien queen ([alien_number])"
-		H.name = H.real_name
-	else
-		H.real_name = "alien princess ([alien_number])"
-		H.name = H.real_name
 
 /datum/hud_data/alien
 

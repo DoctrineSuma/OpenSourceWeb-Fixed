@@ -51,9 +51,7 @@
 		if(!turbine)
 			stat |= BROKEN
 
-
 #define COMPFRICTION 5e5
-#define COMPSTARTERLOAD 2800
 
 /obj/machinery/compressor/process()
 	if(!starter)
@@ -73,7 +71,6 @@
 
 	rpm = max(0, rpm - (rpm*rpm)/COMPFRICTION)
 
-
 	if(starter && !(stat & NOPOWER))
 		use_power(2800)
 		if(rpm<1000)
@@ -81,8 +78,6 @@
 	else
 		if(rpm<1000)
 			rpmtarget = 0
-
-
 
 	if(rpm>50000)
 		overlays += image('icons/obj/pipes.dmi', "comp-o4", FLY_LAYER)
@@ -105,8 +100,6 @@
 		if(!compressor)
 			stat |= BROKEN
 
-
-#define TURBPRES 9000000
 #define TURBGENQ 20000
 #define TURBGENG 0.8
 
@@ -135,7 +128,6 @@
 
 	if(lastgen > 100)
 		overlays += image('icons/obj/pipes.dmi', "turb-o", FLY_LAYER)
-
 
 	for(var/mob/M in viewers(1, src))
 		if ((M.client && M.machine == src))
@@ -180,7 +172,6 @@
 
 	if (( usr.machine==src && ((get_dist(src, usr) <= 1) && istype(src.loc, /turf))) || (istype(usr, /mob/living/silicon/ai)))
 
-
 		if( href_list["close"] )
 			usr << browse(null, "window=turbine")
 			usr.machine = null
@@ -200,14 +191,8 @@
 
 	return
 
-
-
-
-
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
 
 /obj/machinery/computer/turbine_computer/New()
 	..()
@@ -274,8 +259,6 @@
 	user << browse(dat, "window=computer;size=400x500")
 	onclose(user, "computer")
 	return
-
-
 
 /obj/machinery/computer/turbine_computer/Topic(href, href_list)
 	if(..())

@@ -216,15 +216,6 @@ world
 #define TO_HEX_DIGIT(n) ascii2text((n&15) + ((n&15)<10 ? 48 : 87))
 
 icon
-	proc/MakeLying()
-		var/icon/I = new(src,dir=SOUTH)
-		I.BecomeLying()
-		return I
-
-	proc/BecomeLying()
-		Turn(90)
-		Shift(SOUTH,6)
-		Shift(EAST,1)
 
 	// Multiply all alpha values by this float
 	proc/ChangeOpacity(opacity = 1.0)
@@ -587,7 +578,6 @@ proc/AngleToHue(angle)
 	hue += round(hue / 255)
 	return hue
 
-
 // positive angle rotates forward through red->green->blue
 proc/RotateHue(hsv, angle)
 	var/list/HSV = ReadHSV(hsv)
@@ -626,7 +616,6 @@ proc/ColorTone(rgb, tone)
 
 	if(gray <= tone_gray) return BlendRGB("#000000", tone, gray/(tone_gray || 1))
 	else return BlendRGB(tone, "#ffffff", (gray-tone_gray)/((255-tone_gray) || 1))
-
 
 /*
 Get flat icon by DarkCampainger. As it says on the tin, will return an icon with all the overlays
@@ -748,22 +737,6 @@ proc
 			//Also, icons cannot directly set icon_state. Slower than changing variables but whatever.
 			alpha_mask.Blend(image_overlay,ICON_OR)//OR so they are lumped together in a nice overlay.
 		return alpha_mask//And now return the mask.
-
-/mob/proc/AddCamoOverlay(atom/A)//A is the atom which we are using as the overlay.
-	var/icon/opacity_icon = new(A.icon, A.icon_state)//Don't really care for overlays/underlays.
-	//Now we need to culculate overlays+underlays and add them together to form an image for a mask.
-	//var/icon/alpha_mask = getFlatIcon(src)//Accurate but SLOW. Not designed for running each tick. Could have other uses I guess.
-	var/icon/alpha_mask = getIconMask(src)//Which is why I created that proc. Also a little slow since it's blending a bunch of icons together but good enough.
-	opacity_icon.AddAlphaMask(alpha_mask)//Likely the main source of lag for this proc. Probably not designed to run each tick.
-	opacity_icon.ChangeOpacity(0.4)//Front end for MapColors so it's fast. 0.5 means half opacity and looks the best in my opinion.
-	for(var/i=0,i<5,i++)//And now we add it as overlays. It's faster than creating an icon and then merging it.
-		var/image/I = image("icon" = opacity_icon, "icon_state" = A.icon_state, "layer" = layer+0.8)//So it's above other stuff but below weapons and the like.
-		switch(i)//Now to determine offset so the result is somewhat blurred.
-			if(1)	I.pixel_x--
-			if(2)	I.pixel_x++
-			if(3)	I.pixel_y--
-			if(4)	I.pixel_y++
-		overlays += I//And finally add the overlay.
 
 /proc/getHologramIcon(icon/A, safety=1)//If safety is on, a new icon is not created.
 	var/icon/flat_icon = safety ? A : new(A)//Has to be a new icon to not constantly change the same icon.

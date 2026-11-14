@@ -19,7 +19,6 @@ var/decl/sound_player/sound_player = new()
 	taken_channels = list()
 	sound_tokens_by_sound_id = list()
 
-
 //This can be called if either we're doing whole sound setup ourselves or it will be as part of from-file sound setup
 /decl/sound_player/proc/PlaySoundDatum(var/atom/source, var/sound_id, var/sound/sound, var/range, var/prefer_mute)
 	var/token_type = isnum(sound.environment) ? /datum/sound_token : /datum/sound_token/static_environment
@@ -123,25 +122,13 @@ var/decl/sound_player/sound_player = new()
 	Stop()
 	. = ..()
 
-datum/sound_token/proc/SetVolume(var/new_volume)
-	new_volume = clamp(new_volume, 0, 100)
-	if(sound.volume == new_volume)
-		return
-	sound.volume = new_volume
-	PrivUpdateListeners()
-
 datum/sound_token/proc/Mute()
 	PrivUpdateStatus(status|SOUND_MUTE)
-
-/datum/sound_token/proc/Unmute()
-	PrivUpdateStatus(status & ~SOUND_MUTE)
 
 /datum/sound_token/proc/Pause()
 	PrivUpdateStatus(status|SOUND_PAUSED)
 
 // Normally called Resume but I don't want to give people false hope about being unable to un-stop a sound
-/datum/sound_token/proc/Unpause()
-	PrivUpdateStatus(status & ~SOUND_PAUSED)
 
 /datum/sound_token/proc/Stop()
 	if(status & SOUND_STOPPED)

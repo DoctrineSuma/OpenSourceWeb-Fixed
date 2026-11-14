@@ -76,15 +76,10 @@
 		stat |= NOPOWER
 	return
 
-
 // the powernet datum
 // each contiguous network of cables & nodes
 
-
 // rebuild all power networks from scratch
-
-/hook/startup/proc/buildPowernets()
-	return makepowernets()
 
 /proc/makepowernets()
 	for(var/datum/powernet/PN in powernets)
@@ -109,7 +104,6 @@
 		M.powernet.nodes[M] = M
 
 	return 1
-
 
 // returns a list of all power-related objects (nodes, cable, junctions) in turf,
 // excluding source, that match the direction d
@@ -150,7 +144,6 @@
 				else if(C.d1 == turn(C.d2, 180))
 					. += C
 	return .
-
 
 /obj/structure/cable/proc/get_connections()
 	. = list()	// this will be a list of all connected power objects
@@ -196,7 +189,6 @@
 
 	return .
 
-
 /obj/machinery/power/proc/get_connections()
 
 	. = list()
@@ -224,7 +216,6 @@
 			. += C
 	return .
 
-
 /proc/powernet_nextlink(var/obj/O, var/datum/powernet/PN)
 	var/list/P
 
@@ -249,7 +240,6 @@
 		for(var/L = 2 to P.len)
 			powernet_nextlink(P[L], PN)
 
-
 // cut a powernet at this cable object
 /datum/powernet/proc/cut_cable(var/obj/structure/cable/C)
 	var/turf/T1 = C.loc
@@ -262,7 +252,6 @@
 	if(C.d2)	T2 = get_step(T1, C.d2)
 	if(C.d1)	T1 = get_step(T1, C.d1)
 
-
 	var/list/P1 = power_list(T1, C, C.d1)	// what joins on to cut cable in dir1
 	var/list/P2 = power_list(T2, C, C.d2)	// what joins on to cut cable in dir2
 
@@ -271,7 +260,6 @@
 //			world.log << "P1: [O] at [O.x] [O.y] : [istype(O, /obj/structure/cable) ? "[O:d1]/[O:d2]" : null] "
 //		for(var/obj/O in P2)
 //			world.log << "P2: [O] at [O.x] [O.y] : [istype(O, /obj/structure/cable) ? "[O:d1]/[O:d2]" : null] "
-
 
 	if(P1.len == 0 || P2.len == 0)//if nothing in either list, then the cable was an endpoint no need to rebuild the powernet,
 		cables -= C				//just remove cut cable from the list
@@ -359,14 +347,11 @@
 //		//there is a loop, so nothing to be done
 //		return
 
-
-
 /datum/powernet/proc/reset()
 	load = newload
 	newload = 0
 	avail = newavail
 	newavail = 0
-
 
 	viewload = 0.8*viewload + 0.2*load
 
@@ -451,7 +436,6 @@
 	qdel(net2)
 	return net1
 
-
 /obj/machinery/power/proc/connect_to_network()
 	var/turf/T = src.loc
 	var/obj/structure/cable/C = T.get_cable_node()
@@ -483,7 +467,6 @@
 		var/obj/machinery/power/apc/FINDME = locate() in RA
 		if (FINDME)
 			return FINDME
-
 
 //Determines how strong could be shock, deals damage to mob, uses power.
 //M is a mob who touched wire/whatever
@@ -549,4 +532,3 @@
 	else if (istype(power_source, /obj/item/weapon/cell))
 		cell.use(drained_energy)
 	return drained_energy
-

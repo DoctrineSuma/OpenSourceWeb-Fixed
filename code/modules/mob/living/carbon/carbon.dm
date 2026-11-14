@@ -86,7 +86,6 @@
 
 	return
 
-
 /mob/living/carbon/attack_paw(mob/M as mob)
 	if(!istype(M, /mob/living/carbon)) return
 
@@ -110,8 +109,6 @@
 	if (shock_damage<1)
 		return 0
 
-
-
 	src.take_overall_damage(0,shock_damage,used_weapon="Electrocution")
 	//src.burn_skin(shock_damage)
 	//src.adjustFireLoss(shock_damage) //burn_skin will do this for us
@@ -129,7 +126,6 @@
 				Weaken(1)
 //	if(src.weakened < 20*siemens_coeff)	src.weakened = 20*siemens_coeff
 	return shock_damage
-
 
 /mob/living/carbon/proc/swap_hand()
 	var/obj/item/item_in_hand = src.get_active_hand()
@@ -256,7 +252,6 @@
 				H.update_inv_gloves(0)
 			H.germ_level = 0
 	update_icons()	//apply the now updated overlays to the mob
-
 
 //Throwing stuff
 
@@ -476,13 +471,6 @@ proc/strToSpeedModifier(var/strength, var/w_class)//Looks messy. Is messy. Is al
 /mob/living/carbon/fire_act(datum/gas_mixture/air, exposed_temperature, exposed_volume)
 	..()
 	bodytemperature = max(bodytemperature, BODYTEMP_HEAT_DAMAGE_LIMIT+10)
-
-/mob/living/carbon/can_use_hands()
-	if(handcuffed)
-		return 0
-	if(buckled && ! istype(buckled, /obj/structure/stool/bed/chair)) // buckling does not restrict hands
-		return 0
-	return 1
 
 /mob/living/carbon/restrained()
 	if (handcuffed)
@@ -726,6 +714,3 @@ var/const/GALOSHES_DONT_HELP = 8
 		if(slot_r_hand)
 			return r_hand
 	return null
-
-
-

@@ -135,7 +135,6 @@ proc/cmd_admin_mute(mob/M as mob, mute_type, automute = 0)
 	message_admins("[key_name_admin(usr)] has [muteunmute] [key_name_admin(M)] from [mute_string].", 1)
 	M << "You have been [muteunmute] from [mute_string]."
 
-
 /client/proc/cmd_admin_add_random_ai_law()
 	set category = "Fun"
 	set name = "Add Random AI Law"
@@ -152,7 +151,6 @@ proc/cmd_admin_mute(mob/M as mob, mute_type, automute = 0)
 		command_alert("Ion storm detected near the [vessel_type]. Please check all AI-controlled equipment for errors.", "Anomaly Alert")
 		world << sound('sound/AI/ionstorm.ogg')
 	IonStorm(0)
-
 
 /*
 Allow admins to set players to be able to respawn/bypass 30 min wait, without the admin having to edit variables directly
@@ -182,7 +180,6 @@ Ccomp's first proc.
 		return ghosts
 	else
 		return mobs
-
 
 /client/proc/allow_character_respawn()
 	set category = "Special Verbs"
@@ -242,11 +239,8 @@ Ccomp's first proc.
 		action = "enabled"
 		src << "\blue <B>AntagHUD usage has been enabled</B>"
 
-
 	log_admin("[key_name(usr)] has [action] antagHUD usage for observers")
 	message_admins("Admin [key_name_admin(usr)] has [action] antagHUD usage for observers", 1)
-
-
 
 /client/proc/toggle_antagHUD_restrictions()
 	set category = "Server"
@@ -275,7 +269,6 @@ Ccomp's first proc.
 	message_admins("Admin [key_name_admin(usr)] has [action] on joining the round if they use AntagHUD", 1)
 
 */
-
 
 /*
 If a guy was gibbed and you want to revive him, this is a good way to do so.
@@ -578,30 +571,7 @@ Traitors and the like can also be revived with the previous role mostly intact.
 		log_game("[key_name(usr)] has canceled the Babylon launch.")
 		message_admins("[key_name_admin(usr)] has canceled the Babylon launch.", 1)
 
-
 	return
-
-/client/proc/admin_deny_shuttle()
-	set category = "Admin"
-	set name = "Toggle Deny Shuttle"
-
-	if (!ticker)
-		return
-
-	if(!check_rights(R_ADMIN))	return
-
-	emergency_shuttle.deny_shuttle = !emergency_shuttle.deny_shuttle
-
-	log_admin("[key_name(src)] has [emergency_shuttle.deny_shuttle ? "denied" : "allowed"] the shuttle to be called.")
-	message_admins("[key_name_admin(usr)] has [emergency_shuttle.deny_shuttle ? "denied" : "allowed"] the shuttle to be called.")
-
-/client/proc/cmd_admin_attack_log(mob/M as mob in mob_list)
-	set category = "Special Verbs"
-	set name = "Attack Log"
-
-	usr << text("\red <b>Attack Log for []</b>", mob)
-	for(var/t in M.attack_log)
-		usr << t
 
 /client/proc/everyone_random()
 	set category = "Fun"
@@ -620,7 +590,6 @@ Traitors and the like can also be revived with the previous role mostly intact.
 		usr << "Disabled."
 		return
 
-
 	var/notifyplayers = alert(src, "Do you want to notify the players?", "Options", "Yes", "No", "Cancel")
 	if(notifyplayers == "Cancel")
 		return
@@ -634,7 +603,6 @@ Traitors and the like can also be revived with the previous role mostly intact.
 	usr << "<i>Remember: you can always disable the randomness by using the verb again, assuming the round hasn't started yet</i>."
 
 	ticker.random_players = 1
-
 
 /client/proc/toggle_random_events()
 	set category = "Server"

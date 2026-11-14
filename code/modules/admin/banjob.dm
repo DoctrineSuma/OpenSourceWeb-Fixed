@@ -8,11 +8,6 @@ var/jobban_keylist[0]		//to store the keys & ranks
 	jobban_keylist.Add(text("[M.ckey] - [rank] ## [reason]"))
 	jobban_savebanfile()
 
-/proc/jobban_client_fullban(ckey, rank)
-	if (!ckey || !rank) return
-	jobban_keylist.Add(text("[ckey] - [rank]"))
-	jobban_savebanfile()
-
 //returns a reason if M is banned from rank, returns 0 otherwise
 /proc/jobban_isbanned(mob/M, rank)
 	if(M && rank)
@@ -94,10 +89,8 @@ DEBUG
 	jobban_remove("[M.ckey] - [rank]")
 	jobban_savebanfile()
 
-
 /proc/ban_unban_log_save(var/formatted_log)
 	text2file(formatted_log,"data/ban_unban_log.txt")
-
 
 /proc/jobban_updatelegacybans()
 	if(!jobban_runonce)
@@ -106,7 +99,6 @@ DEBUG
 		for(var/T in jobban_keylist)
 			if(!T)	continue
 		jobban_runonce++	//don't run this update again
-
 
 /proc/jobban_remove(X)
 	for (var/i = 1; i <= length(jobban_keylist); i++)

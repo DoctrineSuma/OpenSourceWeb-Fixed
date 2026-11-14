@@ -200,7 +200,6 @@
 	if(!(status & ORGAN_DESTROYED) && brute > 32 && !iszombie(owner) && !(owner.status_flags & STATUS_NO_PAIN))
 		owner?.emote("agonydeath")
 
-
 	// High brute damage or sharp objects may damage internal organs
 	if(internal_organs && ( (sharp && brute >= 5) || brute >= 10) && prob(15))
 		// Damage an internal organ
@@ -426,7 +425,6 @@ This function completely restores a damaged organ to perfect condition.
 
 	owner.updatehealth()
 	owner.UpdateBandageIcon()
-
 
 /datum/organ/external/proc/createwound(var/type = CUT, var/damage)
 	if(damage == 0) return
@@ -729,7 +727,6 @@ Note that amputating the affected organ does in fact remove the infection from t
 	if (open && !clamped && (H && !(H.species.flags & NO_BLOOD)))	//things tend to bleed if they are CUT OPEN
 		status |= ORGAN_BLEEDING
 
-
 // new damage icon system
 // adjusted to set damage_state to brute/burn code only (without r_name0 as before)
 /datum/organ/external/proc/update_icon()
@@ -930,13 +927,9 @@ Note that amputating the affected organ does in fact remove the infection from t
 				if(FOOT_LEFT)
 					owner.u_equip(owner.shoes)
 
-
-
 			owner.visible_message("<span class='graytextbold'> [capitalize(owner.name)]'s [display_name] blasts into gore!</span> ")
 			playsound(owner, 'sound/effects/gore/gore.ogg', 70, 1)
 			PoolOrNew(/obj/effect/decal/cleanable/blood/gibs/normal, owner.loc)
-
-
 
 			owner.update_body(1)
 			owner.UpdateArteryIcon()
@@ -989,26 +982,12 @@ Note that amputating the affected organ does in fact remove the infection from t
 		W.germ_level = 0
 	return rval
 
-/datum/organ/external/proc/clampe()
-	var/rval = 0
-	src.status &= ~ORGAN_BLEEDING
-	for(var/datum/wound/W in wounds)
-		if(W.internal) continue
-		rval |= !W.clamped
-		W.clamped = 1
-	return rval
-
 /datum/organ/external/proc/salve()
 	var/rval = 0
 	for(var/datum/wound/W in wounds)
 		rval |= !W.salved
 		W.salved = 1
 	return rval
-
-/datum/organ/external/proc/mayhit()
-	if(status & ORGAN_DESTROYED & ORGAN_BLEEDING & ORGAN_SPLINTED & ORGAN_DEAD)
-		return
-	return 1
 
 /datum/organ/external/proc/fracture()
 
@@ -1053,11 +1032,9 @@ Note that amputating the affected organ does in fact remove the infection from t
 
 	return 1
 
-
 /datum/organ/external/proc/tendon_ize()
 
 	if(status & ORGAN_TENDON){return} //nao da pra quebrar algo quebrado
-
 
 	status |= ORGAN_TENDON
 
@@ -1113,13 +1090,10 @@ Note that amputating the affected organ does in fact remove the infection from t
 
 	return new /icon(race_icon, "[icon_name][gender ? "_[gender]" : ""][fat ? "_fat" : ""]")
 
-
 /datum/organ/external/proc/is_usable()
 	if(cripple_left > 0)
 		return 0
 	return !(status & (ORGAN_DESTROYED|ORGAN_MUTATED|ORGAN_DEAD|ORGAN_CUT_AWAY|ORGAN_TENDON) || !(painLW < pain_disability_threshold) || (fingers.len && get_fingers() < 2) || (fingers.len && get_broken_fingers() > 3))
-
-
 
 /datum/organ/external/proc/is_broken()
 	return ((status & ORGAN_BROKEN) && !(status & ORGAN_SPLINTED))
@@ -1231,7 +1205,6 @@ Note that amputating the affected organ does in fact remove the infection from t
 		if(!test)
 			amt += x
 
-
 	return amt
 
 /datum/organ/external/proc/get_fucked_up()
@@ -1257,28 +1230,3 @@ Note that amputating the affected organ does in fact remove the infection from t
 			amt += "<span class='missingnew'><big>[uppertext(F.name)] BROKEN</big></span>"
 
 	return amt
-
-/datum/organ/external/proc/ripout_fingers(throw_dir, num=32) //Won't support knocking teeth out of a dismembered head or anything like that yet.
-	if(ismonster(owner))
-		return
-	num = clamp(num, 1, 32)
-	var/done = 0
-	if(fingers && fingers.len) //We still have teeth
-		var/lostfingers = rand(1,3)
-		for(var/i, i <= lostfingers, i++) //Random amount of teeth stacks
-			var/obj/item/weapon/organ/finger/F = pick(fingers)
-			fingers -= F
-			playsound(owner, "chop", 50, 1, -1)
-			owner.visible_message("<span class='graytextbold'> [capitalize(owner.name)]'s [F] flies off in bloody arc!</span> ")
-			F.loc = owner.loc
-			var/turf/target = get_turf(owner.loc)
-			var/range = rand(1, 3)
-			for(var/j = 1; j < range; j++)
-				var/turf/new_turf = get_step(target, throw_dir)
-				target = new_turf
-				if(new_turf.density)
-					break
-			F.throw_at(get_edge_target_turf(F,pick(alldirs)),rand(1,3),30)
-			F.loc:add_blood(owner)
-			done = 1
-	return done

@@ -60,7 +60,6 @@
 	In line with this, docking controllers should prevent players from manually doing things when the override is NOT enabled.
 */
 
-
 /datum/computer/file/embedded_program/docking
 	var/tag_target				//the tag of the docking controller that we are trying to dock with
 	var/dock_state = STATE_UNDOCKED
@@ -176,7 +175,6 @@
 	if (control_mode == MODE_SERVER && dock_state == STATE_UNDOCKED)
 		control_mode = MODE_NONE
 
-
 /datum/computer/file/embedded_program/docking/proc/initiate_docking(var/target)
 	if (dock_state != STATE_UNDOCKED || control_mode == MODE_SERVER)	//must be undocked and not serving another request to begin a new docking handshake
 		return
@@ -237,12 +235,6 @@
 	response_sent = 0
 	received_confirm = 0
 
-/datum/computer/file/embedded_program/docking/proc/force_undock()
-	//world << "[id_tag]: forcing undock"
-	if (tag_target)
-		send_docking_command(tag_target, "dock_error")
-	reset()
-
 /datum/computer/file/embedded_program/docking/proc/docked()
 	return (dock_state == STATE_DOCKED)
 
@@ -250,8 +242,6 @@
 	return (dock_state == STATE_UNDOCKED)
 
 //returns 1 if we are saftely undocked (and the shuttle can leave)
-/datum/computer/file/embedded_program/docking/proc/can_launch()
-	return undocked()
 
 /datum/computer/file/embedded_program/docking/proc/send_docking_command(var/recipient, var/command)
 	var/datum/signal/signal = new
@@ -273,7 +263,6 @@
 		if (STATE_DOCKING) return "docking"
 		if (STATE_UNDOCKING) return "undocking"
 		if (STATE_DOCKED) return "docked"
-
 
 #undef STATE_UNDOCKED
 #undef STATE_DOCKING

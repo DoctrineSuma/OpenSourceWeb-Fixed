@@ -49,10 +49,8 @@
 	updateUsrDialog()
 	return 1
 
-
 /obj/machinery/atmospherics/unary/cryo_cell/allow_drop()
 	return 0
-
 
 /obj/machinery/atmospherics/unary/cryo_cell/relaymove(mob/user as mob)
 	if(user.stat)
@@ -314,17 +312,11 @@
 	put_mob(usr)
 	return
 
-
-
 /datum/data/function/proc/reset()
-	return
-
-/datum/data/function/proc/r_input(href, href_list, mob/user as mob)
 	return
 
 /datum/data/function/proc/display()
 	return
-
 
 /obj/machinery/atmospherics/unary/cryo_cell/blue
 	icon = 'icons/obj/cryogenics.dmi'

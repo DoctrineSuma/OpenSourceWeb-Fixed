@@ -11,20 +11,16 @@
 	faction = "blob"
 	use_me = 0 //Blobs can't emote
 
-
 	New()
 		real_name += " [pick(rand(1, 99))]"
 		name = real_name
 		..()
 
-
 	say(var/message)
 		return//No talking for you
 
-
 	emote(var/act,var/m_type=1,var/message = null)
 		return
-
 
 	Life()
 		set invisibility = 0
@@ -35,7 +31,6 @@
 		if(health < 0)
 			src.dust()
 
-
 	proc/clamp_values()
 		AdjustStunned(0)
 		AdjustParalysis(0)
@@ -45,11 +40,9 @@
 			stat = CONSCIOUS
 		return
 
-
 	proc/UpdateDamage()
 		health = 60 - (getOxyLoss() + getToxLoss() + getFireLoss() + getBruteLoss() + getCloneLoss())
 		return
-
 
 	death(gibbed)
 		if(key)
@@ -61,18 +54,15 @@
 				ghost.client.eye = ghost
 			return ..(gibbed)
 
-
 	blob_act()
 		src << "The blob attempts to reabsorb you."
 		adjustToxLoss(20)
 		return
 
-
 	Process_Spacemove()
 		if(locate(/obj/effect/blob) in oview(1,src))
 			return 1
 		return (..())
-
 
 /mob/living/blob/verb/create_node()
 	set category = "Blob"
@@ -103,7 +93,6 @@
 	B.change_to("Node")
 	src.dust()
 	return
-
 
 /mob/living/blob/verb/create_factory()
 	set category = "Blob"
@@ -141,7 +130,6 @@
 	src.dust()
 	return
 
-
 /mob/living/blob/verb/revert()
 	set category = "Blob"
 	set name = "Purge Defense"
@@ -165,7 +153,6 @@
 	src.dust()
 	return
 
-
 /mob/living/blob/verb/spawn_blob()
 	set category = "Blob"
 	set name = "Create new blob"
@@ -185,23 +172,7 @@
 	src.dust()
 	return
 
-
 ///mob/proc/Blobize()
-/client/proc/Blobcount()
-	set category = "Debug"
-	set name = "blobreport"
-	set desc = "blob report."
-	set hidden = 1
-
-	if(!holder)
-		src << "Only administrators may use this command."
-		return
-	if(ticker && ticker.mode)
-		src << "blobs: [blobs.len]"
-		src << "cores: [blob_cores.len]"
-		src << "nodes: [blob_nodes.len]"
-	return
-
 
 /client/proc/Blobize()//Mostly stolen from the respawn command
 	set category = "Debug"
@@ -253,7 +224,3 @@
 	B << "Check your Blob verbs and hit Create Node to build a node."
 	spawn(10)
 		qdel(G_found)
-
-
-
-

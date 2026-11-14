@@ -4,7 +4,6 @@
 // Do not remove this functionality without good reason, cough reagent_containers cough.
 // -Sayu
 
-
 /obj/item/weapon/storage
 	name = "storage"
 	icon = 'icons/obj/storage.dmi'
@@ -81,7 +80,6 @@
 				return
 	return
 
-
 /obj/item/weapon/storage/proc/return_inv()
 
 	var/list/L = list(  )
@@ -131,21 +129,6 @@
 
 //This proc draws out the inventory and places the items on it. tx and ty are the upper left tile and mx, my are the bottm right.
 //The numbers are calculated from the bottom-left The bottom-left slot being 1,1.
-/obj/item/weapon/storage/proc/orient_objs(tx, ty, mx, my)
-	var/cx = tx
-	var/cy = ty
-
-	src.boxes.screen_loc = "[tx]:,[ty] to [mx],[my]"
-	for(var/obj/O in src.contents)
-		O.screen_loc = "[cx],[cy]"
-		O.layer = 20
-		O.plane = 30
-		cx++
-		if (cx > mx)
-			cx = tx
-			cy--
-	src.closer.screen_loc = "[mx+1],[my]"
-	return
 
 //This proc draws out the inventory and places the items on it. It uses the standard position.
 /obj/item/weapon/storage/proc/standard_orient_objs(var/rows, var/cols, var/list/obj/item/display_contents)
@@ -204,7 +187,6 @@
 				cy--
 	src.closer.screen_loc = "[4+cols+1]:16,2:16"
 	return
-
 
 /datum/numbered_display
 	var/obj/item/sample_object
@@ -442,7 +424,6 @@
 		if(0)
 			usr << "[src] now picks up one item at a time."
 
-
 /obj/item/weapon/storage/verb/quick_empty()
 	set name = "Empty Contents"
 	set category = "Object"
@@ -517,7 +498,3 @@
 	new src.foldable(get_turf(src))
 	qdel(src)
 //BubbleWrap END
-
-
-
-

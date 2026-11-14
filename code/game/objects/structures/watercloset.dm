@@ -87,8 +87,6 @@
 			else
 				user << "<span class='notice'>You need a tighter grip.</span>"
 
-
-
 /obj/machinery/shower
 	name = "shower"
 	desc = "The HS-451."
@@ -269,18 +267,12 @@
 			if(istype(E,/obj/effect/rune) || istype(E,/obj/effect/decal/cleanable) || istype(E,/obj/effect/overlay))
 				qdel(E)
 
-/obj/machinery/shower/proc/call_update_shower()
-	if(!on)
-		update_icon()
-
 /obj/item/weapon/bikehorn/rubberducky
 	name = "rubber ducky"
 	desc = "Rubber ducky you're so fine, you make bathtime lots of fuuun. Rubber ducky I'm awfully fooooond of yooooouuuu~"	//thanks doohl
 	icon = 'icons/obj/watercloset.dmi'
 	icon_state = "rubberducky"
 	item_state = "rubberducky"
-
-
 
 /obj/structure/sink
 	name = "sink"
@@ -351,7 +343,6 @@
 		M:update_inv_gloves()
 	M.visible_message("<span class='passivebold'>[M]</span><span class='passive'> washes their hands using \the [src].</span>")
 
-
 /obj/structure/sink/attackby(obj/item/O as obj, mob/user as mob)
 	if(busy)
 		user << "\red Someone's already washing here."
@@ -402,11 +393,9 @@
 	O.clean_blood()
 	user.visible_message("<span class='passivebold'>[user]</span><span class='passive'> washes a [I] using \the [src].</span>")
 
-
 /obj/structure/sink/kitchen
 	name = "kitchen sink"
 	icon_state = "sink_alt"
-
 
 /obj/structure/sink/puddle	//splishy splashy ^_^
 	name = "puddle"

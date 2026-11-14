@@ -12,12 +12,6 @@ var/datum/paiController/paiController			// Global handler for pAI candidates
 	var/comments
 	var/ready = 0
 
-
-/hook/startup/proc/paiControllerSetup()
-	paiController = new /datum/paiController()
-	return 1
-
-
 /datum/paiController
 	var/list/pai_candidates = list()
 	var/list/asked = list()
@@ -105,7 +99,6 @@ var/datum/paiController/paiController			// Global handler for pAI candidates
 			candidate = new /datum/paiCandidate()
 			candidate.key = M.key
 			pai_candidates.Add(candidate)
-
 
 		var/dat = ""
 		dat += {"

@@ -22,7 +22,3 @@
 		else
 			catchBadType(O)
 			ReagentsToUpdate -= O
-
-/datum/controller/process/fluids/statProcess()
-	..()
-	stat(null, "[ReagentsToUpdate.len] objects")

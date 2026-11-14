@@ -215,7 +215,6 @@ var/list/advance_cures = 	list(
 	else
 		CRASH("Our properties were empty or null!")
 
-
 // Assign the spread type and give it the correct description.
 /datum/disease/advance/proc/SetSpread(var/spread_id)
 	switch(spread_id)
@@ -253,7 +252,6 @@ var/list/advance_cures = 	list(
 		else
 			severity = "Unknown"
 
-
 // Will generate a random cure, the less resistance the symptoms have, the harder the cure.
 /datum/disease/advance/proc/GenerateCure(var/list/properties = list())
 	if(properties && properties.len)
@@ -264,7 +262,6 @@ var/list/advance_cures = 	list(
 		// Get the cure name from the cure_id
 		var/datum/reagent/D = chemical_reagents_list[cure_id]
 		cure = D.name
-
 
 	return
 
@@ -301,7 +298,6 @@ var/list/advance_cures = 	list(
 	id = result
 	return result
 
-
 // Add a symptom, if it is over the limit (with a small chance to be able to go over)
 // we take a random symptom away and add the new one.
 /datum/disease/advance/proc/AddSymptom(var/datum/symptom/S)
@@ -328,49 +324,6 @@ var/list/advance_cures = 	list(
 */
 
 // Mix a list of advance diseases and return the mixed result.
-/proc/Advance_Mix(var/list/D_list)
-
-	//world << "Mixing!!!!"
-
-	var/list/diseases = list()
-
-	for(var/datum/disease/advance/A in D_list)
-		diseases += A.Copy()
-
-	if(!diseases.len)
-		return null
-	if(diseases.len <= 1)
-		return pick(diseases) // Just return the only entry.
-
-	var/i = 0
-	// Mix our diseases until we are left with only one result.
-	while(i < 20 && diseases.len > 1)
-
-		i++
-
-		var/datum/disease/advance/D1 = pick(diseases)
-		diseases -= D1
-
-		var/datum/disease/advance/D2 = pick(diseases)
-		D2.Mix(D1)
-
-	 // Should be only 1 entry left, but if not let's only return a single entry
-	//world << "END MIXING!!!!!"
-	var/datum/disease/advance/to_return = pick(diseases)
-	to_return.Refresh(1)
-	return to_return
-
-/proc/SetViruses(var/datum/reagent/R, var/list/data)
-	if(data)
-		var/list/preserve = list()
-		if(istype(data) && data["viruses"])
-			for(var/datum/disease/A in data["viruses"])
-				preserve += A.Copy()
-			R.data = data.Copy()
-		else
-			R.data = data
-		if(preserve.len)
-			R.data["viruses"] = preserve
 
 /proc/AdminCreateVirus(var/mob/user)
 	var/i = 5

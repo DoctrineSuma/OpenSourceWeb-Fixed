@@ -19,18 +19,6 @@ var/list/whitelist = list()
 */
 /var/list/alien_whitelist = list()
 
-/hook/startup/proc/loadAlienWhitelist()
-	if(config.usealienwhitelist)
-		load_alienwhitelist()
-	return 1
-
-/proc/load_alienwhitelist()
-	var/text = file2text("config/alienwhitelist.txt")
-	if (!text)
-		diary << "Failed to load config/alienwhitelist.txt\n"
-	else
-		alien_whitelist = text2list(text, "\n")
-
 //todo: admin aliens
 /proc/is_alien_whitelisted(mob/M, var/species)
 	if(!config.usealienwhitelist)

@@ -1,7 +1,5 @@
 //Config stuff
 #define SYNDICATE_ELITE_MOVETIME 600	//Time to station is milliseconds. 60 seconds, enough time for everyone to be on the shuttle before it leaves.
-#define SYNDICATE_ELITE_STATION_AREATYPE "/area/shuttle/syndicate_elite/station" //Type of the spec ops shuttle area for station
-#define SYNDICATE_ELITE_DOCK_AREATYPE "/area/shuttle/syndicate_elite/mothership"	//Type of the spec ops shuttle area for dock
 
 var/syndicate_elite_shuttle_moving_to_station = 0
 var/syndicate_elite_shuttle_moving_to_mothership = 0
@@ -252,7 +250,6 @@ var/syndicate_elite_shuttle_timeleft = 0
 		syndicate_elite_shuttle_time = world.timeofday + SYNDICATE_ELITE_MOVETIME
 		spawn(0)
 			syndicate_elite_process()
-
 
 	else if (href_list["mainmenu"])
 		temp = null

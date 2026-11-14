@@ -4,7 +4,6 @@
 	Hello, friends, this is Doohl from sexylands. You may be wondering what this
 	monstrous code file is. Sit down, boys and girls, while I tell you the tale.
 
-
 	The machines defined in this file were designed to be compatible with any radio
 	signals, provided they use subspace transmission. Currently they are only used for
 	headsets, but they can eventually be outfitted for real COMPUTER networks. This
@@ -36,7 +35,6 @@ var/global/list/obj/machinery/telecomms/telecomms_list = list()
 	var/circuitboard = null // string pointing to a circuitboard type
 	var/hide = 0				// Is it a hidden machine?
 	var/listening_level = 0	// 0 = auto set in New() - this is the z level that the machine is listening to.
-
 
 /obj/machinery/telecomms/proc/relay_information(datum/signal/signal, d_filter, copysig, amount = 20)
 	// relay signal to all linked machinery that are of type [d_filter]. If signal has been sent [amount] times, stop sending
@@ -103,7 +101,6 @@ var/global/list/obj/machinery/telecomms/telecomms_list = list()
 		else
 			qdel(copy)
 
-
 		send_count++
 		if(machine.is_freq_listening(signal))
 			machine.traffic++
@@ -112,7 +109,6 @@ var/global/list/obj/machinery/telecomms/telecomms_list = list()
 			machine.receive_information(copy, src)
 		else
 			machine.receive_information(signal, src)
-
 
 	if(send_count > 0 && is_freq_listening(signal))
 		traffic++
@@ -135,7 +131,6 @@ var/global/list/obj/machinery/telecomms/telecomms_list = list()
 	else
 		return 0
 
-
 /obj/machinery/telecomms/New()
 	telecomms_list += src
 	..()
@@ -155,7 +150,6 @@ var/global/list/obj/machinery/telecomms/telecomms_list = list()
 		else
 			for(var/obj/machinery/telecomms/T in telecomms_list)
 				add_link(T)
-
 
 /obj/machinery/telecomms/Destroy()
 	telecomms_list -= src
@@ -300,7 +294,6 @@ var/global/list/obj/machinery/telecomms/telecomms_list = list()
 		return 0
 	return 1
 
-
 /*
 	The HUB idles until it receives information. It then passes on that information
 	depending on where it came from.
@@ -326,7 +319,6 @@ var/global/list/obj/machinery/telecomms/telecomms_list = list()
 	long_range_link = 1
 	netspeed = 40
 
-
 /obj/machinery/telecomms/hub/receive_information(datum/signal/signal, obj/machinery/telecomms/machine_from)
 	if(is_freq_listening(signal))
 		if(istype(machine_from, /obj/machinery/telecomms/receiver))
@@ -336,7 +328,6 @@ var/global/list/obj/machinery/telecomms/telecomms_list = list()
 			// Get a list of relays that we're linked to, then send the signal to their levels.
 			relay_information(signal, "/obj/machinery/telecomms/relay", 1)
 			relay_information(signal, "/obj/machinery/telecomms/broadcaster", 1) // Send it to a broadcaster.
-
 
 /*
 	The relay idles until it receives information. It then passes on that information
@@ -441,8 +432,6 @@ var/global/list/obj/machinery/telecomms/telecomms_list = list()
 			if(can_send)
 				break
 
-
-
 /*
 	The processor is a very simple machine that decompresses subspace signals and
 	transfers them back to the original bus. It is essential in producing audible
@@ -481,14 +470,12 @@ var/global/list/obj/machinery/telecomms/telecomms_list = list()
 				signal.data["slow"] += rand(5, 10) // slow the signal down
 				relay_information(signal, "/obj/machinery/telecomms/server")
 
-
 /*
 	The server logs all traffic and signal data. Once it records the signal, it sends
 	it to the subspace broadcaster.
 
 	Store a maximum of 100 logs and then deletes them.
 */
-
 
 /obj/machinery/telecomms/server
 	name = "Telecommunication Server"
@@ -581,12 +568,6 @@ var/global/list/obj/machinery/telecomms/telecomms_list = list()
 			if(!can_send)
 				relay_information(signal, "/obj/machinery/telecomms/broadcaster")
 
-
-/obj/machinery/telecomms/server/proc/setcode(var/t)
-	if(t)
-		if(istext(t))
-			rawcode = t
-
 /obj/machinery/telecomms/server/proc/compile()
 	return 0
 
@@ -600,18 +581,6 @@ var/global/list/obj/machinery/telecomms/telecomms_list = list()
 				logs--
 				break
 
-/obj/machinery/telecomms/server/proc/add_entry(var/content, var/input)
-	var/datum/comm_log_entry/log = new
-	var/identifier = num2text( rand(-1000,1000) + world.time )
-	log.name = "[input] ([md5(identifier)])"
-	log.input_type = input
-	log.parameters["message"] = content
-	log_entries.Add(log)
-	update_logs()
-
-
-
-
 // Simple log entry datum
 
 /datum/comm_log_entry
@@ -619,10 +588,3 @@ var/global/list/obj/machinery/telecomms/telecomms_list = list()
 	var/name = "data packet (#)"
 	var/garbage_collector = 1 // if set to 0, will not be garbage collected
 	var/input_type = "Speech File"
-
-
-
-
-
-
-

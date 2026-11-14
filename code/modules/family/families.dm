@@ -175,15 +175,11 @@
 				if("Nephew")   return "Aunt"
 				if("Niece")    return "Aunt"
 
-
 /datum/relation/family
 	var/sex_restricted = null
 	var/list/connected_relatives = list() //We use this so we can store multiple connected relations
 	family_flag = 1
 	finalized = 1
-
-/datum/relation/family/get_desc_string()
-	return "[connected_relation.relation_holder] is your [name]."
 
 /datum/relation/family/mother
 	name = "Mother"
@@ -230,7 +226,6 @@
 
 /datum/relation/family/Wife
 	name = "Wife"
-
 
 /mob/living/carbon/human/verb/check_family()
 	set hidden = 1

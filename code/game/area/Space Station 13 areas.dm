@@ -16,7 +16,6 @@ NOTE: there are two lists of areas in the end of this file: centcom and station 
 #define CAVES list('cave_ambient2.ogg','sound/fwambi/Cave3.ogg','caves4.ogg', 'caves8.ogg', 'caves7.ogg', 'Cave4.ogg', 'caves3.ogg')
 #define FORTRESS list('sound/lfwbambimusic/atrementous-city.ogg', 'sound/lfwbambimusic/curvedblade.ogg', 'sound/lfwbambimusic/dustareallherbeauties.ogg', 'sound/fwambi/ravenheart7.ogg', 'sound/fwambi/happy_temple.ogg', 'sound/fwambi/many_torches.ogg')
 
-
 /area
 	var/fire = null
 	var/atmos = 0
@@ -68,19 +67,6 @@ NOTE: there are two lists of areas in the end of this file: centcom and station 
 /*Adding a wizard area teleport list because motherfucking lag -- Urist*/
 /*I am far too lazy to make it a proper list of areas so I'll just make it run the usual telepot routine at the start of the game*/
 var/list/teleportlocs = list()
-
-/hook/startup/proc/setupTeleportLocs()
-	for(var/area/AR in world)
-		if(istype(AR, /area/shuttle) || istype(AR, /area/syndicate_station) || istype(AR, /area/wizard_station)) continue
-		if(teleportlocs.Find(AR.name)) continue
-		var/turf/picked = pick(get_area_turfs(AR.type))
-		if (picked.z in vessel_z || picked.z == asteroid_z)
-			teleportlocs += AR.name
-			teleportlocs[AR.name] = AR
-
-	teleportlocs = sortAssoc(teleportlocs)
-
-	return 1
 
 var/list/ghostteleportlocs = list()
 
@@ -281,17 +267,14 @@ var/list/ghostteleportlocs = list()
 	has_gravity = 1
 	atmos = 0
 
-
 /area/dunwell/OFFMAP
 	name = "OFFMAP"
 	icon_state = "unknown"
-
 
 /area/dunwell/OFFMAP/Entered(A)
 	if(istype(A,/mob/dead/observer))
 		var/mob/dead/observer/O = A
 		O.Sendtohell()
-
 
 /area/dunwell/miscplaces
 	name = "MISCPLACES"
@@ -322,8 +305,6 @@ var/list/ghostteleportlocs = list()
 	ambience_vol = 24
 	single_ambience = FALSE
 	var/alarm_toggled = FALSE
-
-
 
 /area/dunwell/station/Entered(A)
 	..()
@@ -464,7 +445,6 @@ var/list/ghostteleportlocs = list()
 	icon_state = "holy2"
 	hum = 1
 
-
 /area/dunwell/station/church/harbor
 	name = "Church Harbor"
 	icon_state = "harbor"
@@ -496,7 +476,6 @@ var/list/ghostteleportlocs = list()
 	icon_state = "misc"
 	hum = 1
 
-
 /area/dunwell/station/library
 	name = "Library"
 	icon_state = "library"
@@ -506,7 +485,6 @@ var/list/ghostteleportlocs = list()
 	name = "Consyte"
 	icon_state = "room"
 	hum = 1
-
 
 /area/dunwell/station/residential
 	name = "\improper Residential Area"
@@ -518,7 +496,6 @@ var/list/ghostteleportlocs = list()
 	icon_state = "misc"
 	hum = 1
 	sound_env = TUNNEL_ENCLOSED
-
 
 /area/dunwell/station/miser/trash
 	name = "Trash Disposal"
@@ -542,7 +519,6 @@ var/list/ghostteleportlocs = list()
 
 	L << sound(null, repeat = 0, wait = 0, volume = 0, channel = 21)
 
-
 /area/dunwell/station/miser/airy5
 	name = "Burrows"
 	icon_state = "misc2"
@@ -551,7 +527,6 @@ var/list/ghostteleportlocs = list()
 	playsomething = 'loop_airy5.ogg'
 	playvolume = 30
 	repeat = 1
-
 
 /area/dunwell/station/bathroom
 	name = "Bathroom"
@@ -622,18 +597,15 @@ var/list/ghostteleportlocs = list()
 		T.temperature = COLDDIRT
 		new /obj/effect/snowfog(T)
 
-
 /area/dunwell/station/dungeon
 	name = "Dungeon"
 	icon_state = "dungeon"
 	hum = 1
 
-
 /area/dunwell/station/armory
 	name = "Armory"
 	icon_state = "hangar"
 	hum = 1
-
 
 /area/dunwell/station/armory/riot
 	name = "Riot Armory"
@@ -654,12 +626,10 @@ var/list/ghostteleportlocs = list()
 	icon_state = "dining"
 	hum = 1
 
-
 /area/dunwell/station/brothel
 	name = "Brothel"
 	icon_state = "brothel"
 	hum = 1
-
 
 /area/dunwell/station/brothel/Entered(A)
 	..()
@@ -672,8 +642,6 @@ var/list/ghostteleportlocs = list()
 	if(!istype(A,/mob/living))	return
 	var/mob/living/L = A
 	L.update_icons()
-
-
 
 /area/dunwell/station/burrow
 	name = "Burrows"
@@ -699,18 +667,15 @@ var/list/ghostteleportlocs = list()
 	icon_state = "misc"
 	hum = 1
 
-
 /area/dunwell/station/dorms/warehouse
 	name = "Warehouse"
 	icon_state = "misc"
 	hum = 1
 
-
 /area/dunwell/station/dorms/abandonedlibrary
 	name = "Abandoned Library"
 	icon_state = "misc"
 	hum = 1
-
 
 /area/dunwell/station/dorms/patriarch
 	name = "Patriarch House"
@@ -741,16 +706,13 @@ var/list/ghostteleportlocs = list()
 	name = "Meister's Office"
 	icon_state = "crown"
 
-
 /area/dunwell/station/bridge/noble
 	name = "Baron's Chamber"
 	icon_state = "crown3"
 
-
 /area/dunwell/station/bridge/noble/hand
 	name = "Hand's Chamber"
 	icon_state = "crown2"
-
 
 /area/dunwell/station/bridge/noble/throne_room
 	name = "Great Hall"
@@ -762,8 +724,6 @@ var/list/ghostteleportlocs = list()
 	name = "Hangar"
 	icon_state = "hangar"
 
-
-
 /area/dunwell/station/cerberon
 	name = "Garrison"
 	icon_state = "cerberon1"
@@ -774,7 +734,6 @@ var/list/ghostteleportlocs = list()
 	forced_ambience = list('sound/effects/wind/wind_2_1.ogg', 'sound/effects/wind/wind_2_2.ogg', 'sound/effects/wind/wind_3_1.ogg', 'sound/effects/wind/wind_4_1.ogg', 'sound/effects/wind/wind_4_2.ogg', 'sound/effects/wind/wind_5_1.ogg')
 	requires_power = 0
 	luminosity = 0
-
 
 /area/dunwell/station/meistercomm
 	name = "Meistercomm"
@@ -840,11 +799,9 @@ var/list/ghostteleportlocs = list()
 	icon_state = "camp2"
 	hum = 1
 
-
 	name = "Lifeweb room"
 	icon_state = "lifeweb"
 	hum = 1
-
 
 /area/dunwell/station/lifeweb/Entered(A)
 	..()
@@ -906,14 +863,11 @@ var/list/ghostteleportlocs = list()
 	music = "music/escape.ogg"
 	luminosity = 0
 
-
 	requires_power = 1
-
 
 /area/shuttle/train/station
 	name = "\improper Train Station"
 	nukesafe = TRUE
-
 
 /area/shuttle/train/transit
 	name = "\improper Train Transit"
@@ -927,7 +881,6 @@ var/list/ghostteleportlocs = list()
 	forced_ambience = list('charon_loop.ogg')
 	music = "music/escape.ogg"
 	luminosity = 0
-
 
 	lighting_use_dynamic = 1
 	requires_power = 1
@@ -949,7 +902,6 @@ var/list/ghostteleportlocs = list()
 /area/shuttle/escape_pod2
 	name = "\improper Escape Pod B"
 	music = "music/escape.ogg"
-
 
 /area/shuttle/escape_pod2/station
 	icon_state = "shuttle2"
@@ -1023,13 +975,11 @@ var/list/ghostteleportlocs = list()
 	requires_power = 1
 	luminosity = 0
 
-
 /area/shuttle/alien/mine
 	icon_state = "shuttle"
 	name = "\improper Alien Shuttle Mine"
 	requires_power = 1
 	luminosity = 0
-
 
 /area/shuttle/prison/
 	name = "\improper Prison Shuttle"
@@ -1049,14 +999,12 @@ var/list/ghostteleportlocs = list()
 	icon_state = "shuttle2"
 	luminosity = 0
 
-
 	requires_power = 1
 
 /area/shuttle/church/station
 	name = "\improper INKVD Shuttle"
 	icon_state = "shuttle2"
 	luminosity = 0
-
 
 	requires_power = 1
 
@@ -1122,7 +1070,6 @@ var/list/ghostteleportlocs = list()
 	name = "\improper Vox Skipjack"
 	icon_state = "yellow"
 	requires_power = 0
-
 
 /area/airtunnel1/      // referenced in airtunnel.dm:759
 
@@ -1223,12 +1170,6 @@ var/list/ghostteleportlocs = list()
 /area/syndicate_interception_station/server
 	name = "\improper Syndicate Server room"
 
-
-
-
-
-
-
 /area/syndicate_mothership/control
 	name = "\improper Syndicate Control Room"
 	icon_state = "syndie-control"
@@ -1253,7 +1194,6 @@ var/list/ghostteleportlocs = list()
 /area/asteroid/artifactroom
 	name = "\improper Asteroid - Artifact"
 	icon_state = "cave"
-
 
 //SATELLITE
 /area/ship/scrap/satellite/command
@@ -1291,7 +1231,6 @@ var/list/ghostteleportlocs = list()
 
 /area/ship/scrap/cargo_wreck/dorm_bay
 	name = "\improper Cargo Ship - Dormitory"
-
 
 //
 
@@ -1424,7 +1363,6 @@ var/list/ghostteleportlocs = list()
 	power_light = 1
 	used_light = 1
 	always_unpowered = 0
-
 
 /area/vox_station/transit
 	name = "\improper hyperspace"
@@ -1676,7 +1614,6 @@ var/list/ghostteleportlocs = list()
 	name = "Starboard Primary Hallway"
 	icon_state = "hallS"
 
-
 /area/luna/hallway/primary/aft
 	name = "Aft Primary Hallway"
 	icon_state = "hallA"
@@ -1685,11 +1622,9 @@ var/list/ghostteleportlocs = list()
 	name = "Fore Starboard Primary Hallway"
 	icon_state = "hallS"
 
-
 /area/luna/hallway/primary/port
 	name = "Port Primary Hallway"
 	icon_state = "hallP"
-
 
 /area/luna/hallway/primary/central
 	name = "Central Primary Hallway"
@@ -1711,7 +1646,6 @@ var/list/ghostteleportlocs = list()
 	name = "Central Primary Hallway"
 	icon_state = "hallC"
 
-
 /area/luna/hallway/secondary/exit
 	name = "Escape Shuttle Hallway"
 	icon_state = "escape"
@@ -1719,7 +1653,6 @@ var/list/ghostteleportlocs = list()
 /area/luna/hallway/secondary/construction
 	name = "Construction Area"
 	icon_state = "construction"
-
 
 /area/luna/hallway/secondary/entry
 	name = "Arrival Shuttle Hallway"
@@ -1747,7 +1680,6 @@ var/list/ghostteleportlocs = list()
 	name = "Bridge Deck Fore Port Maintenance"
 	icon_state = "fpmaint"
 
-
 /area/luna/maintenance/fsmaint1
 	name = "Sub Deck Fore Starboard Maintenance"
 	icon_state = "fsmaint"
@@ -1763,7 +1695,6 @@ var/list/ghostteleportlocs = list()
 /area/luna/maintenance/fsmaint4
 	name = "Bridge Deck Fore Starboard Maintenance"
 	icon_state = "fsmaint"
-
 
 /area/luna/maintenance/asmaint1
 	name = "Sub Deck Aft Starboard Maintenance"
@@ -1781,7 +1712,6 @@ var/list/ghostteleportlocs = list()
 	name = "Bridge Deck Aft Starboard Maintenance"
 	icon_state = "asmaint"
 
-
 /area/luna/maintenance/apmaint1
 	name = "Sub Deck Aft Port Maintenance"
 	icon_state = "apmaint"
@@ -1797,7 +1727,6 @@ var/list/ghostteleportlocs = list()
 /area/luna/maintenance/apmaint4
 	name = "Bridge Deck Aft Port Maintenance"
 	icon_state = "apmaint"
-
 
 /area/luna/maintenance/maintcentral1
 	name = "Sub Deck Central Maintenance"
@@ -1815,7 +1744,6 @@ var/list/ghostteleportlocs = list()
 	name = "Bridge Deck Central Maintenance"
 	icon_state = "maintcentral"
 
-
 /area/luna/maintenance/fmaintcentral1
 	name = "Sub Deck Fore Central Maintenance"
 	icon_state = "maintcentral"
@@ -1831,7 +1759,6 @@ var/list/ghostteleportlocs = list()
 /area/luna/maintenance/fmaintcentral4
 	name = "Bridge Deck Fore Central Maintenance"
 	icon_state = "maintcentral"
-
 
 /area/luna/maintenance/pmaintcentral1
 	name = "Sub Deck Port Central Maintenance"
@@ -1849,7 +1776,6 @@ var/list/ghostteleportlocs = list()
 	name = "Bridge Deck Port Central Maintenance"
 	icon_state = "maintcentral"
 
-
 /area/luna/maintenance/fore1
 	name = "Sub Deck Fore Maintenance"
 	icon_state = "fmaint"
@@ -1865,7 +1791,6 @@ var/list/ghostteleportlocs = list()
 /area/luna/maintenance/fore4
 	name = "Bridge Deck Fore Maintenance"
 	icon_state = "fmaint"
-
 
 /area/luna/maintenance/starboard1
 	name = "Sub Deck Starboard Maintenance"
@@ -1883,11 +1808,9 @@ var/list/ghostteleportlocs = list()
 	name = "Bridge Deck Starboard Maintenance"
 	icon_state = "smaint"
 
-
 /area/luna/maintenance/hangarequip
 	name = "Hangar Equipment Room"
 	icon_state = "smaint"
-
 
 /area/luna/maintenance/port1
 	name = "Sub Deck Port Maintenance"
@@ -1905,7 +1828,6 @@ var/list/ghostteleportlocs = list()
 	name = "Bridge Deck Port Maintenance"
 	icon_state = "pmaint"
 
-
 /area/luna/maintenance/aft1
 	name = "Sub Deck Aft Maintenance"
 	icon_state = "amaint"
@@ -1922,7 +1844,6 @@ var/list/ghostteleportlocs = list()
 	name = "Bridge Deck Aft Maintenance"
 	icon_state = "amaint"*/
 
-
 /area/luna/maintenance/starboardsolar
 	name = "Starboard Solar Maintenance"
 	icon_state = "SolarcontrolS"
@@ -1931,11 +1852,9 @@ var/list/ghostteleportlocs = list()
 	name = "Port Solar Maintenance"
 	icon_state = "SolarcontrolP"
 
-
 /area/luna/maintenance/storage
 	name = "Atmospherics"
 	icon_state = "green"
-
 
 /area/luna/maintenance/disposal
 	name = "Waste Disposal"
@@ -2173,21 +2092,13 @@ var/list/ghostteleportlocs = list()
 	name = "\improper Law Office"
 	icon_state = "law"
 
-
-
-
-
-
-
 /area/holodeck
 	name = "\improper Holodeck"
 	icon_state = "Holodeck"
 	luminosity = 1
 
-
 /area/holodeck/alphadeck
 	name = "\improper Holodeck Alpha"
-
 
 /area/holodeck/source_plating
 	name = "\improper Holodeck - Off"
@@ -2232,16 +2143,6 @@ var/list/ghostteleportlocs = list()
 
 /area/holodeck/source_space
 	name = "\improper Holodeck - Space"
-
-
-
-
-
-
-
-
-
-
 
 //Engineering
 
@@ -2295,7 +2196,6 @@ var/list/ghostteleportlocs = list()
 	requires_power = 0
 	luminosity = 1
 
-
 	auxport
 		name = "\improper Fore Port Solar Array"
 		icon_state = "panelsA"
@@ -2335,7 +2235,6 @@ var/list/ghostteleportlocs = list()
 /area/maintenance/auxsolarstarboard
 	name = "Fore Starboard Solar Maintenance"
 	icon_state = "SolarcontrolA"
-
 
 /area/assembly/chargebay
 	name = "\improper Mech Bay"
@@ -2588,7 +2487,6 @@ area/assembly/podbay
 /area/security/checkpoint3
 	name = "\improper Docking Checkpoint"
 	icon_state = "security"
-
 
 /area/security/checkpoint/supply
 	name = "Security Post - Cargo Bay"
@@ -2927,34 +2825,26 @@ area/assembly/podbay
 	icon_state = "storage"
 	luminosity = 1
 
-
 /area/turret_protected/AIsatextFS
 	name = "\improper AI Sat Ext"
 	icon_state = "storage"
 	luminosity = 1
-
 
 /area/turret_protected/AIsatextAS
 	name = "\improper AI Sat Ext"
 	icon_state = "storage"
 	luminosity = 1
 
-
 /area/turret_protected/AIsatextAP
 	name = "\improper AI Sat Ext"
 	icon_state = "storage"
 	luminosity = 1
 
-
 /area/turret_protected/NewAIMain
 	name = "\improper AI Main New"
 	icon_state = "storage"
 
-
-
 //Misc
-
-
 
 /area/wreck/ai
 	name = "\improper AI Chamber"
@@ -2975,8 +2865,6 @@ area/assembly/podbay
 /area/generic
 	name = "Unknown"
 	icon_state = "storage"
-
-
 
 // Telecommunications Satellite
 
@@ -3023,8 +2911,6 @@ area/assembly/podbay
 /area/tcommsat/lounge
 	name = "\improper Telecommunications Satellite Lounge"
 	icon_state = "tcomsatlounge"
-
-
 
 // Away Missions
 /area/awaymission
@@ -3241,9 +3127,6 @@ var/list/the_station_areas = list (
 	/area/turret_protected/ai,
 )
 
-
-
-
 /area/beach
 	name = "Keelin's private beach"
 	icon_state = "null"
@@ -3299,4 +3182,3 @@ var/list/the_station_areas = list (
 						H << S
 
 		spawn(60) .()
-

@@ -79,8 +79,6 @@
 				face = 1
 				break;
 
-
-
 	if(!face)
 		face_atom(A)
 
@@ -144,7 +142,6 @@
 					setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 				UnarmedAttack(A, 1)
 
-
 			return
 		else // non-adjacent click
 			if(W)
@@ -165,7 +162,6 @@
 /mob/proc/DblClickOn(var/atom/A, var/params)
 	ClickOn(A,params)
 
-
 /*
 	Translates into attack_hand, etc.
 
@@ -181,7 +177,6 @@
 
 /mob/proc/KickAttack(var/atom/A, var/proximity_flag)
 	return
-
 
 /*
 	Ranged unarmed attack:
@@ -229,8 +224,6 @@
 				face = 1
 				break;
 
-
-
 	if(!face)
 		face_atom(A)
 
@@ -241,7 +234,6 @@
 	middle_click_intent_check(M)
 	return
 
-
 /mob/proc/RightClickOn(var/atom/A, var/proximity_flag)
 	var/face = 0
 	if(grabbed_by.len)
@@ -249,8 +241,6 @@
 			if(grabbed_by[x])
 				face = 1
 				break;
-
-
 
 	if(!face)
 		face_atom(A)
@@ -292,7 +282,6 @@
 						G.aim_at(user)
 						return src.visible_message("<span class='combatbold'>[H]</span><span class='combat'> aims at [user] with <b>[I]</b>!</span>")
 					return src.visible_message("<span class='combatbold'>[H]</span><span class='combat'> threatens [user] with <b>[I]</b>!</span>")
-
 
 	return
 
@@ -348,7 +337,6 @@
 	user.visible_message("<span class='examinebold'>[usr]</span><span class='examine'> points at</span><span class='examinebold'> [src].</span>")
 	user.next_move = world.time + 20
 
-
 // In case of use break glass
 /*
 /atom/proc/MiddleClick(var/mob/M as mob)
@@ -365,9 +353,6 @@
 		if(T)
 			T.Click(location, control, params)
 	. = 1
-
-
-
 
 /*
 	Shift click
@@ -559,12 +544,6 @@
 
 /atom/proc/clean_mmb(mob/living/carbon/human/user)
 	return
-
-/atom/proc/stab_act(mob/living/carbon/human/user)
-	return
-
-/mob/living/carbon/human/stab_act(var/mob/living/carbon/human/user)
-
 
 /mob/proc/attackhand_rightclick()
 	if(!usr) return FALSE

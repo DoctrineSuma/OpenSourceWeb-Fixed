@@ -30,17 +30,6 @@
 		var/t = getAndLocate(i)
 		return ismob(t) ? t : null
 
-	proc/getTurf(i)
-		var/t = getAndLocate(i)
-		return isturf(t) ? t : null
-
-	proc/getAtom(i)
-		return getType(i,/atom)
-
-	proc/getArea(i)
-		var/t = getAndLocate(i)
-		return isarea(t) ? t : null
-
 	proc/getStr(i)//params should always be text, but...
 		var/t = get(i)
 		return istext(t) ? t : null
@@ -48,13 +37,3 @@
 	proc/getType(i,type)
 		var/t = getAndLocate(i)
 		return istype(t,type) ? t : null
-
-	proc/getPath(i)
-		var/t = get(i)
-		if(t)
-			t = text2path(t)
-		return ispath(t) ? t : null
-
-	proc/getList(i)
-		var/t = getAndLocate(i)
-		return islist(t) ? t : null

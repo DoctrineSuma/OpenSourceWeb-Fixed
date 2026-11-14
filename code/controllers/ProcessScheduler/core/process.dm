@@ -222,27 +222,8 @@
 	else if (elapsedTime > hang_warning_time)
 		setStatus(PROCESS_STATUS_MAYBE_HUNG)
 
-
 /datum/controller/process/proc/getElapsedTime()
 	return TimeOfGame - run_start
-
-/datum/controller/process/proc/tickDetail()
-	return
-
-/datum/controller/process/proc/getContext()
-	return "<tr><td>[name]</td><td>[main.averageRunTime(src)]</td><td>[main.last_run_time[src]]</td><td>[main.highest_run_time[src]]</td><td>[ticks]</td></tr>\n"
-
-/datum/controller/process/proc/getContextData()
-	return list(
-	"name" = name,
-	"averageRunTime" = main.averageRunTime(src),
-	"lastRunTime" = main.last_run_time[src],
-	"highestRunTime" = main.highest_run_time[src],
-	"ticks" = ticks,
-	"schedule" = schedule_interval,
-	"status" = getStatusText(),
-	"disabled" = disabled
-	)
 
 /datum/controller/process/proc/getStatus()
 	return status
@@ -269,16 +250,9 @@
 /datum/controller/process/proc/getPreviousStatus()
 	return previousStatus
 
-/datum/controller/process/proc/getPreviousStatusText()
-	return getStatusText(previousStatus)
-
 /datum/controller/process/proc/setStatus(var/newStatus)
 	previousStatus = status
 	status = newStatus
-
-/datum/controller/process/proc/setLastTask(var/task, var/object)
-	last_task = task
-	last_object = object
 
 /datum/controller/process/proc/_copyStateFrom(var/datum/controller/process/target)
 	main = target.main
@@ -306,23 +280,6 @@
 
 /datum/controller/process/proc/enable()
 	disabled = 0
-
-/datum/controller/process/proc/getAverageRunTime()
-	return main.averageRunTime(src)
-/datum/controller/process/proc/getLastRunTime()
-	return main.getProcessLastRunTime(src)
-
-/datum/controller/process/proc/getHighestRunTime()
-	return main.getProcessHighestRunTime(src)
-
-/datum/controller/process/proc/getTicks()
-	return ticks
-
-/datum/controller/process/proc/statProcess()
-	var/averageRunTime = round(getAverageRunTime(), 0.1)/10
-	var/lastRunTime = round(getLastRunTime(), 0.1)/10
-	var/highestRunTime = round(getHighestRunTime(), 0.1)/10
-	stat("[name]", "T#[getTicks()] | AR [averageRunTime] | LR [lastRunTime] | HR [highestRunTime] | D [cpu_defer_count]")
 
 /datum/controller/process/proc/catchException(var/exception/e, var/thrower)
 	if(istype(e)) // Real runtimes go to the real error handler

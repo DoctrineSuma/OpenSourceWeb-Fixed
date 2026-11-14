@@ -31,18 +31,9 @@ var/static/list/global_skills
 	for(var/datum/skill/skill in global_skills)
 		skills_holder[skill.id] = list("value" = 0, "data"= skill)
 
-
 /datum/skills/proc/ADD_SKILL(var/stat,var/n)
 	var/S = get_skill_value(stat,src)
 	S += n
-	if(!S)
-		return 0
-	get_skill_value(stat,src) = S
-	return S
-
-/datum/skills/proc/REDUCE_SKILL(var/stat,var/n)
-	var/S = get_skill_value(stat,src)
-	S -= n
 	if(!S)
 		return 0
 	get_skill_value(stat,src) = S
@@ -831,31 +822,6 @@ proc/strToDamageModifier(var/strength, var/ht)
 
 //BASICAMENTE A PROC ABAIXO O PLANO É SER SUBSTITUIDA PELA DE CIMA
 //A DE BAIXO É MUITO CAGADA E DEIXA TUDO ROUBADO!!!
-proc/strToDamageModifierItem(var/strength, var/ht)
-	switch(strength)
-		if(1 to 5)
-			return 1//+3 +3
-
-		if(6 to 9)
-			return 3.5//+2 +5
-
-		if(10 to 12)
-			return 4
-
-		if(12 to 14)
-			return 4.8//+3 +5
-
-		if(14 to 16)
-			return 5
-
-		if(16 to 20)
-			return 7
-		if(20 to 25)
-			return 30
-		if(25 to 30)
-			return 40
-		if(31 to INFINITY)
-			return 80
 
 /datum/stats
 	var/mob/living/carbon/human/host = null
@@ -1233,7 +1199,6 @@ proc/strToDamageModifierItem(var/strength, var/ht)
 			initpr = pr
 			initim = im
 
-
 /**************************************
 ************HUMAN MY NIGGA*************
 ***************************************/
@@ -1256,8 +1221,6 @@ proc/skilltxt(var/skill)
 			return "<span class='holyshituractuallysogooditmakesmecringedudelol'>Master"
 		if(17 to INFINITY)
 			return "<span class='legendary'>Legendary"
-
-
 
 proc/skilltxt2(var/skill)
 	switch(skill)
@@ -1367,9 +1330,6 @@ proc/skilltxt2(var/skill)
 		msg += "<span class='perks'>*[PERK.description]*</span> "
 	to_chat(src, "[msg]", 23)
 
-
-
-
 #define SKILL_SUCESSO 1
 #define SKILL_FALHA 0
 
@@ -1388,7 +1348,6 @@ proc/skillcheck(var/skill, var/requirement, var/show_message, var/mob/user, var/
 			return SKILL_SUCESSO
 		else
 			return SKILL_FALHA
-
 
 proc/statcheck(var/stat, var/requirement, var/show_message, var/mob/user, var/message = "I have failed to do this.")//1 - 100
 	var/dice = "1d20"
@@ -1504,7 +1463,6 @@ proc/statcheck(var/stat, var/requirement, var/show_message, var/mob/user, var/me
 	to_chat(src, "<span class='holyshituractuallysogooditmakesmecringedudelol'>I learned more about [lowertext(my_skills.GET_SKILL_NAME(skill))]!</span>")
 	return TRUE
 
-
 proc/skill2typerson(var/amount)
 	switch(amount)
 		if(0)
@@ -1577,7 +1535,6 @@ proc/skill2typerson(var/amount)
 		if(M == src) continue
 		if(M.my_skills.GET_SKILL(skills_list[teaching_skill]) >= my_skills.GET_SKILL(skills_list[teaching_skill])) continue
 		M.ready_to_learn(text_power, src, skills_list[teaching_skill])
-
 
 /mob/living/carbon/human/proc/ready_to_learn(var/text_power, var/mob/living/carbon/human/who, var/skill)
 	var/to_delete = "[skill]-[world.time]"

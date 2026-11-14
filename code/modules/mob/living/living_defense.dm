@@ -10,43 +10,8 @@
 	2 - fullblock
 */
 
-/mob/living/carbon/human/proc/armorRollPenetration(var/forceDamage, var/obj/usedweapon, var/def_zone = 0, var/attack_flag = "melee")
-	var/weaponsharp = usedweapon ? is_sharp(usedweapon) : 0
-	var/weaponedge = usedweapon ? has_edge(usedweapon) : 0
-	var/weaponisblunt = usedweapon ? usedweapon.isBlunts() : 1
-
-	var/protection = getarmor(def_zone, attack_flag)
-	var/proba = 25
-
-	proba += protection
-
-	if(weaponisblunt)
-		proba /= 1.35
-	if(weaponsharp)
-		proba *= 1.5
-	if(weaponedge)
-		proba *= 1.25
-
-	proba -= forceDamage / 2
-
-	if(proba <= 0)
-		return 0
-	if(protection <= 20)
-		proba = protection
-	if(proba <= 0)
-		proba = 5
-	if(proba >= 100)
-		proba = 90
-
-	if(prob(proba/1.5))
-		return 2 //PROTEGEU
-	if(prob(proba))
-		return 1 //SOFTEN!!
-	return 0
-
 /mob/living/proc/getarmor(var/def_zone, var/type)
 	return 0
-
 
 /mob/living/bullet_act(var/obj/item/projectile/P, var/def_zone)
 	var/obj/item/weapon/cloaking_device/C = locate((/obj/item/weapon/cloaking_device) in src)
@@ -79,7 +44,6 @@
 		apply_damage(P.damage, P.damage_type, def_zone, absorb, 0, P, sharp=proj_sharp, edge=proj_edge)
 	P.on_hit(src, absorb, def_zone)
 	return absorb
-
 
 //this proc handles being hit by a thrown atom
 /mob/living/hitby(atom/movable/AM as mob|obj,var/speed = 5)//Standardization and logging -Sieve
@@ -141,7 +105,6 @@
 					src.anchored = 1
 					src.pinned += O
 					src.verbs += /mob/proc/yank_out_object
-
 
 /mob/living/proc/near_wall(var/direction,var/distance=1)
 	var/turf/T = get_step(get_turf(src),direction)

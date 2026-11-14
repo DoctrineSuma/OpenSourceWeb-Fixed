@@ -26,7 +26,6 @@ proc/explosion(turf/epicenter, devastation_range, heavy_impact_range, light_impa
 		epicenter = get_turf(epicenter)
 		if(!epicenter) return
 
-
 		playsound(epicenter, pick('sound/effects/explosionfar.ogg','sound/effects/explosionfar2.ogg','sound/effects/explosionfar3.ogg'), 125, 1, round(devastation_range*2,1) )
 		playsound(epicenter, "explosion", 100, 1, round(devastation_range,1) )
 		var/datum/effect/effect/system/smoke_spread/explosion/smoke = new
@@ -89,12 +88,6 @@ proc/explosion(turf/epicenter, devastation_range, heavy_impact_range, light_impa
 				defer_powernet_rebuild = 0
 
 	return 1
-
-
-
-proc/secondaryexplosion(turf/epicenter, range)
-	for(var/turf/tile in range(range, epicenter))
-		tile.ex_act(2)
 
 ///// Z-Level Stuff
 proc/explosion_z_transfer(turf/epicenter, devastation_range, heavy_impact_range, light_impact_range, flash_range, up = 1, down = 1)

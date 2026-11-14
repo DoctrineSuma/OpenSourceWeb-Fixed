@@ -14,10 +14,6 @@
 	if(prob(50))
 		rate = -rate
 
-/hook/startup/proc/createSun()
-	sun = new /datum/sun()
-	return 1
-
 // calculate the sun's position given the time of day
 
 /datum/sun/proc/calc_position()
@@ -57,7 +53,6 @@
 		dx = s/abs(s)
 		dy = c / abs(s)
 
-
 	for(var/obj/machinery/power/M in solars_list)
 
 		if(!M.powernet)
@@ -74,8 +69,6 @@
 			var/obj/machinery/power/solar/S = M
 			if(S.control)
 				occlusion(S)
-
-
 
 // for a solar panel, trace towards sun to see if we're in shadow
 
@@ -99,7 +92,3 @@
 
 	S.obscured = 0		// if hit the edge or stepped 20 times, not obscured
 	S.update_solar_exposure()
-
-
-
-

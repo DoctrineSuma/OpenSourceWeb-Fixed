@@ -57,7 +57,6 @@ Class Procs:
 
 */
 
-
 /connection_edge/var/zone/A
 
 /connection_edge/var/list/connecting_turfs = list()
@@ -115,9 +114,6 @@ Class Procs:
 
 			if(repelled) spawn if(M) M.RepelAirflowDest(differential/5)
 			else spawn if(M) M.GotoAirflowDest(differential/10)
-
-
-
 
 /connection_edge/zone/var/zone/B
 
@@ -237,15 +233,3 @@ Class Procs:
 /connection_edge/unsimulated/recheck()
 	if(!A.air.compare(air))
 		air_master.mark_edge_active(src)
-
-proc/ShareHeat(datum/gas_mixture/A, datum/gas_mixture/B, connecting_tiles)
-	//This implements a simplistic version of the Stefan-Boltzmann law.
-	var/energy_delta = ((A.temperature - B.temperature) ** 4) * STEFAN_BOLTZMANN_CONSTANT * connecting_tiles * 2.5
-	var/maximum_energy_delta = max(0, min(A.temperature * A.heat_capacity() * A.group_multiplier, B.temperature * B.heat_capacity() * B.group_multiplier))
-	if(maximum_energy_delta > abs(energy_delta))
-		if(energy_delta < 0)
-			maximum_energy_delta *= -1
-		energy_delta = maximum_energy_delta
-
-	A.temperature -= energy_delta / (A.heat_capacity() * A.group_multiplier)
-	B.temperature += energy_delta / (B.heat_capacity() * B.group_multiplier)

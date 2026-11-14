@@ -2,7 +2,6 @@
 	var/doubleVisioned = 0
 	var/blurred = 0
 
-
 /mob/proc/CU(var/firstVal = -15, var/secondVal = 15, var/firstSpeed = 14, var/secondSpeed = 14)
 	set waitfor = 0
 	if(!client) return
@@ -158,7 +157,6 @@
 	SC3.alpha = 65
 	SC3.plane = 12
 
-
 	var/tmp/obj/render_controller/luz/L1 = new
 	var/tmp/obj/render_controller/luz/L2 = new
 	L1.alpha = 65
@@ -193,7 +191,3 @@
 	client.screen.Remove(L2)
 	blurred = 0
 */
-/mob/proc/CU2(var/number = 10)
-	if(!client) return
-	for(var/x = 0, x <= number, x++)
-		CU()

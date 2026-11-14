@@ -16,7 +16,6 @@ proc/get_infection_chance(var/mob/living/carbon/M, var/vector = "Airborne")
 			if(istype(M:wear_suit, /obj/item/clothing/suit/space) && istype(M:head, /obj/item/clothing/head/helmet/space)) score += 15
 			if(istype(M:wear_suit, /obj/item/clothing/suit/bio_suit) && istype(M:head, /obj/item/clothing/head/bio_hood)) score += 15
 
-
 		if (vector == "Contact")
 			if(M:gloves) score += 15
 			if(istype(M:wear_suit, /obj/item/clothing/suit/space)) score += 10
@@ -92,8 +91,6 @@ proc/airborne_can_reach(turf/source, turf/target)
 	M.virus2["[D.uniqueID]"] = D
 
 //Fancy prob() function.
-/proc/dprob(var/p)
-	return(prob(sqrt(p)) && prob(sqrt(p)))
 
 /mob/living/carbon/proc/spread_disease_to(var/mob/living/carbon/victim, var/vector = "Airborne")
 	if (src == victim)

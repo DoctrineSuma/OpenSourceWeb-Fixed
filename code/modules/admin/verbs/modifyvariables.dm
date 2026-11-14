@@ -1,14 +1,5 @@
 var/list/forbidden_varedit_object_types = list(/datum/admins)
 
-/client/proc/cmd_modify_ticker_variables()
-	set category = "Debug"
-	set name = "Edit Ticker Variables"
-
-	if (ticker == null)
-		src << "Game hasn't started yet."
-	else
-		src.modify_variables(ticker)
-
 /client/proc/mod_list_add_ass() //haha
 
 	var/class = "text"
@@ -56,7 +47,6 @@ var/list/forbidden_varedit_object_types = list(/datum/admins)
 	if(!var_value) return
 
 	return var_value
-
 
 /client/proc/mod_list_add(var/list/L)
 
@@ -250,7 +240,6 @@ var/list/forbidden_varedit_object_types = list(/datum/admins)
 		if("marked datum")
 			L[L.Find(variable)] = holder.marked_datum
 
-
 /client/proc/modify_variables(var/atom/O, var/param_var_name = null, var/autodetect_class = 0)
 	if(!check_rights(R_VAREDIT))	return
 
@@ -438,21 +427,17 @@ var/list/forbidden_varedit_object_types = list(/datum/admins)
 				var/var_new = input("Enter new number:","Num",O.vars[variable]) as null|num
 				if(var_new == null) return
 
-
 			else if(variable=="LuminosityRed")
 				var/var_new = input("Enter new number:","Num",O.vars[variable]) as null|num
 				if(var_new == null) return
-
 
 			else if(variable=="LuminosityGreen")
 				var/var_new = input("Enter new number:","Num",O.vars[variable]) as null|num
 				if(var_new == null) return
 
-
 			else if(variable=="LuminosityBlue")
 				var/var_new = input("Enter new number:","Num",O.vars[variable]) as null|num
 				if(var_new == null) return
-
 
 			else if(variable=="stat")
 				var/var_new = input("Enter new number:","Num",O.vars[variable]) as null|num
@@ -500,4 +485,3 @@ var/list/forbidden_varedit_object_types = list(/datum/admins)
 	world.log << "### VarEdit by [src]: [O.type] [variable]=[html_encode("[O.vars[variable]]")]"
 	log_admin("[key_name(src)] modified [original_name]'s [variable] to [O.vars[variable]]")
 	message_admins("[key_name_admin(src)] modified [original_name]'s [variable] to [O.vars[variable]]", 1)
-

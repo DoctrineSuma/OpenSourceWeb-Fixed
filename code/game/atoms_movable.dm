@@ -52,9 +52,6 @@
 	..()
 	return QDEL_HINT_HARDDEL_NOW
 
-/atom/movable/proc/entered_with_container(var/atom/old_loc)
-	return
-
 /atom/movable/proc/forceMove(atom/destination)
 	if(destination)
 		if(loc)
@@ -102,7 +99,6 @@
 	if(pulledby)
 		return 1
 
-
 	if(locate(/obj/structure/catwalk) in orange(1, get_turf(src))) //Not realistic but makes pushing things in space easier
 		return 1
 	if(locate(/obj/structure/lattice) in orange(1, get_turf(src))) //Not realistic but makes pushing things in space easier
@@ -119,7 +115,6 @@
 	inertia_dir = direction
 	if(!direction)
 		return 1
-
 
 	var/old_dir = dir
 	. = step(src, direction)
@@ -138,7 +133,6 @@
 				if(A.density && !A.throwpass)	// **TODO: Better behaviour for windows which are dense, but shouldn't always stop movement
 					src.throw_impact(A,speed)
 					src.throwing = 0
-
 
 /atom/movable/proc/throw_at(atom/target, range, speed, thrower)
 	if(!target || !src)
@@ -173,8 +167,6 @@
 	var/area/a = get_area(src.loc)
 	if(dist_x > dist_y)
 		var/error = dist_x/2 - dist_y
-
-
 
 		while(src && target &&((((src.x < target.x && dx == EAST) || (src.x > target.x && dx == WEST)) && dist_travelled < range) || (a && a.has_gravity == 0)  || istype(src.loc, /turf/space)) && src.throwing && istype(src.loc, /turf))
 			// only stop when we've gone the whole distance (or max throw range) and are on a non-space tile, or hit something, or hit the end of the map, or someone picks it up
@@ -257,7 +249,6 @@
 
 			if(16)
 				path = /obj/item/weapon/spacecash/gold/c1
-
 
 		for(var/x = 1; x <= (C.worth / divide); x++)
 			var/obj/item/weapon/spacecash/S = new path(loc)

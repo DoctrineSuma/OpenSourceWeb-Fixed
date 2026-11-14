@@ -37,7 +37,6 @@
 	playsound(src.loc, "rustle", 50, 1, -5)
 	..()
 
-
 /obj/item/weapon/storage/backpack/coinbag
 	name = "coin bag"
 	slot_flags = SLOT_BELT
@@ -92,17 +91,6 @@
 			*/
 		..()
 
-	proc/failcheck(mob/user as mob)
-		if (prob(src.reliability)) return 1 //No failure
-		if (prob(src.reliability))
-			user << "\red The Bluespace portal resists your attempt to add another item." //light failure
-		else
-			user << "\red The Bluespace generator malfunctions!"
-			for (var/obj/O in src.contents) //it broke, delete what was in it
-				qdel(O)
-			crit_fail = 1
-			icon_state = "brokenpack"
-
 /obj/item/weapon/storage/backpack/holding/belt //It is here instead of belts so it works with all the BoH code.
 	name = "belt of holding"
 	desc = "An experimental belt that opens into a small, localized pocket of Blue Space."
@@ -141,7 +129,6 @@
 	is_satchel = TRUE
 	RightLeft = TRUE
 
-
 /obj/item/weapon/storage/backpack/capelp
 	name = "leather cape"
 	desc = "A fancy leather cape."
@@ -162,7 +149,6 @@
 	storage_slots = 2
 	is_satchel = TRUE
 	RightLeft = TRUE
-
 
 /obj/item/weapon/storage/backpack/merccloak
 	name = "black's cloak"
@@ -336,7 +322,6 @@
 	src.contents += new/obj/item/weapon/flame/candle/tnt/stick
 	src.contents += new/obj/item/weapon/flame/candle/tnt/stick
 
-
 /obj/item/weapon/storage/backpack/minisatchelchurch
 	name = "leather satchel"
 	desc = "It's a very fancy satchel made with fine leather."
@@ -344,7 +329,6 @@
 	item_state = "satchel"
 	is_satchel = TRUE
 	storage_slots = 6
-
 
 /obj/item/weapon/storage/backpack/minisatchelchurch2
 	name = "leather satchel"
@@ -354,7 +338,6 @@
 	is_satchel = TRUE
 	storage_slots = 6
 
-
 /obj/item/weapon/storage/backpack/beltsatchelchurch
 	name = "leather satchel"
 	desc = "It's a very fancy satchel made with fine leather."
@@ -363,7 +346,6 @@
 	is_satchel = TRUE
 	storage_slots = 3
 	slot_flags = SLOT_BELT
-
 
 /obj/item/weapon/storage/backpack/beltsatchel
 	name = "leather satchel"
@@ -392,8 +374,6 @@
 	src.contents += new/obj/item/weapon/flame/candle/tnt/stick
 	src.contents += new/obj/item/weapon/flame/candle/tnt/stick
 	src.contents += new/obj/item/weapon/flame/candle/tnt/stick
-
-
 
 /obj/item/weapon/storage/backpack/satchel_norm
 	name = "satchel"

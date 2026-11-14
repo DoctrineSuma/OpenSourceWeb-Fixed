@@ -13,7 +13,6 @@
 	..()
 	return
 
-
 /obj/machinery/computer/teleporter/attackby(I as obj, mob/living/user as mob)
 	if(istype(I, /obj/item/weapon/card/data/))
 		var/obj/item/weapon/card/data/C = I
@@ -30,7 +29,6 @@
 
 		if(!L)
 			L = locate("landmark*[C.data]") // use old stype
-
 
 		if(istype(L, /obj/effect/landmark/) && istype(L.loc, /turf))
 			usr << "You insert the coordinates into the machine."
@@ -140,7 +138,6 @@
 	anchored = 1.0
 	var/lockeddown = 0
 
-
 /obj/machinery/teleport/hub
 	name = "teleporter hub"
 	desc = "It's the hub of a teleporting machine."
@@ -240,7 +237,6 @@
 			var/mob/living/MM = O
 			if(MM.check_contents_for(/obj/item/weapon/storage/backpack/holding))
 				precision = rand(1,100)
-
 
 	var/turf/destturf = get_turf(destination)
 
@@ -356,7 +352,6 @@
 	else
 		icon_state = "controller"
 
-
 /obj/effect/laser/Bump()
 	src.range--
 	return
@@ -364,6 +359,3 @@
 /obj/effect/laser/Move()
 	src.range--
 	return
-
-/atom/proc/laserhit(L as obj)
-	return 1

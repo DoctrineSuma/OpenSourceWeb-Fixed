@@ -59,8 +59,6 @@ research holder datum.
 		possible_designs += new D(src)
 	RefreshResearch()
 
-
-
 //Checks to see if tech has all the required pre-reqs.
 //Input: datum/tech; Output: 0/1 (false/true)
 /datum/research/proc/TechHasReqs(var/datum/tech/T)
@@ -153,13 +151,6 @@ research holder datum.
 			if(KT.level <= level) KT.level = max((KT.level + 1), (level - 1))
 	return
 
-/datum/research/proc/UpdateDesign(var/path)
-	for(var/datum/design/KD in known_designs)
-		if(KD.build_path == path)
-			KD.reliability_mod += rand(1,2)
-			break
-	return
-
 /datum/research/proc/UpdateDesigns(var/obj/item/I, var/list/temp_tech)
 	for(var/T in temp_tech)
 		if(temp_tech[T] - 1 >= known_tech[T])
@@ -170,8 +161,6 @@ research holder datum.
 						D.reliability = min(100, D.reliability + rand(1,3))
 						if(I.crit_fail)
 							D.reliability = min(100, D.reliability + rand(3, 5))
-
-
 
 /***************************************************************
 **						Technology Datums					  **
@@ -184,7 +173,6 @@ datum/tech	//Datum of individual technologies.
 	var/id = "id"						//An easily referenced ID. Must be alphanumeric, lower-case, and no symbols.
 	var/level = 1						//A simple number scale of the research level. Level 0 = Secret tech.
 	var/list/req_tech = list()			//List of ids associated values of techs required to research this tech. "id" = #
-
 
 //Trunk Technologies (don't require any other techs and you start knowning them).
 
@@ -264,7 +252,6 @@ datum/tech/robotics
 	id = "robotics"
 	req_tech = list("materials" = 3, "programming" = 3)
 */
-
 
 /obj/item/weapon/disk/tech_disk
 	name = "Technology Disk"

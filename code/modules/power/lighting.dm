@@ -2,14 +2,11 @@
 //
 // consists of light fixtures (/obj/machinery/light) and light tube/bulb items (/obj/item/weapon/light)
 
-
 // status values shared between lighting fixtures and items
 #define LIGHT_OK 0
 #define LIGHT_EMPTY 1
 #define LIGHT_BROKEN 2
 #define LIGHT_BURNED 3
-
-
 
 /obj/item/light_fixture_frame
 	name = "light fixture frame"
@@ -280,12 +277,10 @@
 	brightness_range = 5
 	brightness_power = 3
 
-
 /obj/machinery/light/small/mijadaroxo
 	brightness_color = "#6532cd"
 	brightness_range = 9
 	brightness_power = 8
-
 
 /obj/machinery/light/small/roxodaora
 	brightness_color = "#685ae6"
@@ -342,7 +337,6 @@
 					broken(1)
 			if("bulb")
 
-
 				if(prob(5))
 					broken(1)
 		spawn(1)
@@ -387,18 +381,6 @@
 	if(on != on_gs)
 		on_gs = on
 
-/obj/machinery/light/proc/isalert()
-	if(!(src.z in vessel_z))
-		return 0
-	if(security_level >= SEC_LEVEL_RED)
-		return 1
-	else
-		return 0
-
-/obj/machinery/light/small/isalert()		//I don't want them to change to red
-	return 0
-
-
 /obj/machinery/light/small/bulb_ov
 	icon_state = "bulb_ov"
 	layer = 5.1
@@ -406,7 +388,6 @@
 
 /obj/machinery/light/small/bulb_ov/New()
 	color = brightness_color
-
 
 /obj/machinery/light/small/bulb_light
 	icon_state = "bulb_light"
@@ -467,8 +448,6 @@
 			if(LIGHT_BROKEN)
 				usr << "[desc] The [fitting] has been smashed."
 
-
-
 // attack with item - insert light (if right type), otherwise try to break the light
 
 /obj/machinery/light/attackby(obj/item/W, mob/user)
@@ -495,7 +474,6 @@
 				switchcount = L.switchcount
 				rigged = L.rigged
 
-
 				on = has_power()
 				update()
 
@@ -516,7 +494,6 @@
 		//If xenos decide they want to smash a light bulb with a toolbox, who am I to stop them? /N
 
 	else if(status != LIGHT_BROKEN && status != LIGHT_EMPTY)
-
 
 		if(prob(1+W.force * 5))
 
@@ -565,7 +542,6 @@
 			//if(!user.mutations & COLD_RESISTANCE)
 			if (prob(75))
 				electrocute_mob(user, get_area(src), src, rand(0.7,1.0))
-
 
 // returns whether this light has power
 // true if area has power and lightswitch is on
@@ -654,7 +630,6 @@
 	L.status = status
 	L.rigged = rigged
 
-
 	// light item inherits the switchcount, then zero it
 	L.switchcount = switchcount
 	switchcount = 0
@@ -667,7 +642,6 @@
 	status = LIGHT_EMPTY
 	update()
 
-
 /obj/machinery/light/attack_tk(mob/user)
 	if(status == LIGHT_EMPTY)
 		user << "There is no [fitting] in this light."
@@ -678,7 +652,6 @@
 	var/obj/item/weapon/light/L = new light_type()
 	L.status = status
 	L.rigged = rigged
-
 
 	// light item inherits the switchcount, then zero it
 	L.switchcount = switchcount
@@ -736,12 +709,8 @@
 	if(prob(75))
 		broken()
 
-
 /obj/machinery/light/bullet_act()
 	broken()
-
-
-
 
 // timed process
 // use power
@@ -761,7 +730,6 @@
 		sleep(rand(0,8))
 		on = 1
 		update()
-
 
 // called when area power state changes
 /obj/machinery/light/power_change()
@@ -804,8 +772,6 @@
 	var/rigged = 0		// true if rigged to explode
 	var/brightness = 2
 
-
-
 /obj/item/weapon/light/tube
 	name = "light tube"
 	desc = "A replacement light tube."
@@ -813,10 +779,6 @@
 	base_state = "ltube"
 	item_state = "c_tube"
 	g_amt = 100
-
-
-
-
 
 /obj/item/weapon/light/tube/large
 	w_class = 2
@@ -842,7 +804,6 @@
 	item_state = "egg4"
 	g_amt = 100
 
-
 // update the icon state and description of the light
 
 /obj/item/weapon/light/proc/update()
@@ -857,11 +818,9 @@
 			icon_state = "[base_state]-broken"
 			desc = "A broken [name]."
 
-
 /obj/item/weapon/light/New()
 	..()
 	update()
-
 
 // attack bulb/tube with object
 // if a syringe, can inject plasma to make it explode

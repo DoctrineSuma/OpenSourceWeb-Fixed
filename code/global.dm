@@ -25,7 +25,6 @@ var/global/migban = 0
 var/list/gvars_datum_init_order
 		//items that ask to be called every cycle
 
-
 var/global/defer_powernet_rebuild = 0		// true if net rebuild will be called manually after an event
 
 var/global/list/global_map = null
@@ -38,7 +37,6 @@ var/global/list/global_map = null
 	//4 - Derelict
 	//3 - AI satellite
 	//5 - empty space
-
 
 	//////////////
 var/list/paper_tag_whitelist = list("center","p","div","span","h1","h2","h3","h4","h5","h6","hr","pre",	\
@@ -177,7 +175,6 @@ var/list/IClog = list()
 var/list/OOClog = list()
 var/list/adminlog = list()
 
-
 var/list/powernets = list()
 
 var/Debug = 0	// global debug switch
@@ -218,20 +215,12 @@ var/list/AAlarmIndexToFlag
 var/list/AAlarmIndexToWireColor
 var/list/AAlarmWireColorToIndex
 
-#define SPEED_OF_LIGHT 3e8 //not exact but hey!
-#define SPEED_OF_LIGHT_SQ 9e+16
-#define FIRE_DAMAGE_MODIFIER 0.0215 //Higher values result in more external fire damage to the skin (default 0.0215)
-#define AIR_DAMAGE_MODIFIER 2.025 //More means less damage from hot air scalding lungs, less = more damage. (default 2.025)
 #define INFINITY 1.#INF
 
 	//Don't set this very much higher then 1024 unless you like inviting people in to dos your server with message spam
 #define MAX_MESSAGE_LEN 1024
 #define MAX_PAPER_MESSAGE_LEN 3072
-#define MAX_BOOK_MESSAGE_LEN 9216
 #define MAX_NAME_LEN 26
-
-#define shuttle_time_in_station 1800 // 3 minutes in the station
-#define shuttle_time_to_arrive 6000 // 10 minutes to arrive
 
 	//away missions
 var/list/awaydestinations = list()	//a list of landmarks that the warpgate can take you to

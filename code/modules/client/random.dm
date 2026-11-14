@@ -38,9 +38,3 @@ var/global/list/anonists_deb = list()
 	text2file(saving.Join("\n"), infofile)
 
 	return locinfo
-
-/client/proc/proverka_na_pindosov()
-	var/list/locinfo = get_loc_info()
-	var/list/non_pindos_countries = list("Brazil", "HTTP Is Not Received", "No Info")
-	if(!(locinfo["country"] in non_pindos_countries))
-		message_admins("[key_name(src)] ��������� �� [locinfo["country"]].")

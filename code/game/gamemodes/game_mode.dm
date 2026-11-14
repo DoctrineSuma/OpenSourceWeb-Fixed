@@ -81,7 +81,6 @@ Implants;
 /datum/game_mode/proc/announce() //to be calles when round starts
 	world << "<B>Notice</B>: [src] did not define announce()"
 
-
 ///can_start()
 ///Checks to see if the game can be setup and ran with the current number of players or whatnot.
 /datum/game_mode/proc/can_start()
@@ -98,12 +97,10 @@ Implants;
 			return 1
 	return 0
 
-
 ///pre_setup()
 ///Attempts to select players for special roles the mode might have.
 /datum/game_mode/proc/pre_setup()
 	return 1
-
 
 ///post_setup()
 ///Everyone should now be on the station and have their normal gear.  This is the place to give the special roles extra things
@@ -112,18 +109,15 @@ Implants;
 		display_roundstart_logout_report()
 	return 1
 
-
 ///process()
 ///Called by the gameticker
 /datum/game_mode/proc/process()
 	return 0
 
-
 /datum/game_mode/proc/check_finished() //to be called by ticker
 	if(emergency_shuttle.location==2 || station_was_nuked || roundendready)
 		return 1
 	return 0
-
 
 /datum/game_mode/proc/declare_completion()
 	var/amountswon = 0 // 1 ele existia 2 ele existia mas falhou 3 ele existia e foi bem sucedido
@@ -214,15 +208,12 @@ Implants;
 				ghosts++
 	return 0*/
 
-
 /datum/game_mode/proc/check_win() //universal trigger to be called at mob death, nuke explosion, etc. To be called from everywhere.
 	return 0
-
 
 /datum/game_mode/proc/send_intercept()
 	var/intercepttext = "<FONT size = 3><B>Cent. Com. Update</B> Requested status information:</FONT><HR>"
 	intercepttext += "<B> In case you have misplaced your copy, attached is a list of personnel whom reliable sources&trade; suspect may be affiliated with the Syndicate:</B><br>"
-
 
 	var/list/suspects = list()
 	for(var/mob/living/carbon/human/man in player_list) if(man.client && man.mind)
@@ -276,7 +267,6 @@ Implants;
 			M << sound('sound/AI/intercept.ogg')
 	if(security_level < SEC_LEVEL_BLUE)
 		set_security_level(SEC_LEVEL_BLUE)*/
-
 
 /datum/game_mode/proc/get_players_for_role(var/role, override_jobbans=0)
 	var/list/players = list()
@@ -387,7 +377,6 @@ Implants;
 							//			recommended_enemies if the number of people with that role set to yes is less than recomended_enemies,
 							//			Less if there are not enough valid players in the game entirely to make recommended_enemies.
 
-
 /datum/game_mode/proc/latespawn(var/mob)
 
 /*
@@ -403,7 +392,6 @@ Implants;
 		if(P.client && P.ready)
 			. ++
 
-
 ///////////////////////////////////
 //Keeps track of all living heads//
 ///////////////////////////////////
@@ -414,16 +402,9 @@ Implants;
 			heads += player.mind
 	return heads
 
-
 ////////////////////////////
 //Keeps track of all heads//
 ////////////////////////////
-/datum/game_mode/proc/get_all_heads()
-	var/list/heads = list()
-	for(var/mob/player in mob_list)
-		if(player.mind && (player.mind.assigned_role in command_positions))
-			heads += player.mind
-	return heads
 
 /datum/game_mode/New()
 	newscaster_announcements = pick(newscaster_standard_feeds)
@@ -443,7 +424,6 @@ proc/display_roundstart_logout_report()
 					break
 			if(!found)
 				msg += "<b>[L.name]</b> ([L.ckey]), the [L.job] (<font color='#ffcc00'><b>Disconnected</b></font>)\n"
-
 
 		if(L.ckey && L.client)
 			if(L.client.inactivity >= (ROUNDSTART_LOGOUT_REPORT_TIME / 2))	//Connected, but inactive (alt+tabbed or something)
@@ -478,23 +458,9 @@ proc/display_roundstart_logout_report()
 						msg += "<b>[L.name]</b> ([ckey(D.mind.key)]), the [L.job] (<font color='red'><b>Ghosted</b></font>)\n"
 						continue //Ghosted while alive
 
-
-
 	for(var/mob/M in mob_list)
 		if(M.client && M.client.holder)
 			M << msg
-
-
-proc/get_nt_opposed()
-	var/list/dudes = list()
-	for(var/mob/living/carbon/human/man in player_list)
-		if(man.client)
-			if(man.client.prefs.nanotrasen_relation == "Opposed")
-				dudes += man
-			else if(man.client.prefs.nanotrasen_relation == "Skeptical" && prob(50))
-				dudes += man
-	if(dudes.len == 0) return null
-	return pick(dudes)
 
 /datum/game_mode/proc/check_round()
 

@@ -1,43 +1,27 @@
 #define LAZYINITLIST(L) if (!L) L = list()
 //Picks from the list, with some safeties, and returns the "default" arg if it fails
-#define DEFAULTPICK(L, default) ((istype(L, /list) && L:len) ? pick(L) : default)
 // Sets a L back to null iff it is empty
 #define UNSETEMPTY(L) if (L && !L.len) L = null
 // Removes I from list L, and sets I to null if it is now empty
 #define LAZYREMOVE(L, I) if(L) { L -= I; if(!length(L)) { L = null; } }
 // Adds I to L, initalizing L if necessary
-#define LAZYADD(L, I) if(!L) { L = list(); } L += I;
 // Insert I into L at position X, initalizing L if necessary
-#define LAZYINSERT(L, I, X) if(!L) { L = list(); } L.Insert(X, I);
 // Adds I to L, initalizing L if necessary, if I is not already in L
-#define LAZYDISTINCTADD(L, I) if(!L) { L = list(); } L |= I;
 // Sets L[A] to I, initalizing L if necessary
 #define LAZYSET(L, A, I) if(!L) { L = list(); } L[A] = I;
 // Reads I from L safely - Works with both associative and traditional lists.
-#define LAZYACCESS(L, I) (L ? (isnum(I) ? (I > 0 && I <= length(L) ? L[I] : null) : L[I]) : null)
 // Reads the length of L, returning 0 if null
 #define LAZYLEN(L) length(L)
 // Safely checks if I is in L
-#define LAZYISIN(L, I) (L ? (I in L) : FALSE)
 // Null-safe List.Cut() and discard.
-#define LAZYCLEARLIST(L) if(L) { L.Cut(); L = null; }
 // Reads L or an empty list if L is not a list.  Note: Does NOT assign, L may be an expression.
-#define SANITIZE_LIST(L) ( islist(L) ? L : list() )
 
 #define sound_to(target, sound)                             target << sound
 #define to_target(target, payload)            target << (payload)
-#define from_target(target, receiver)         target >> (receiver)
 #define to_file(handle, value)                to_target(handle, value)
-#define to_save(handle, value)                to_target(handle, value) //semantics
-#define from_save(handle, target_var)         from_target(handle, target_var)
 #define legacy_chat(target, message)          to_target(target, message)
 #define to_world(message)                     to_chat(world, message)
 #define to_world_log(message)                 to_target(world.log, message)
-#define image_to(target, image)               to_target(target, image)
-#define show_browser(target, content, title)  to_target(target, browse(content, title))
-#define close_browser(target, title)          to_target(target, browse(null, title))
-#define send_rsc(target, content, title)      to_target(target, browse_rsc(content, title))
-#define send_link(target, url)                to_target(target, link(url))
 #define send_output(target, msg, control)     to_target(target, output(msg, control))
 #define go(message) world << message
 
@@ -47,44 +31,18 @@
 	##X = ##InitValue;\
 	gvars_datum_init_order += #X;\
 }
-#define GLOBAL_UNMANAGED(X, InitValue) /datum/controller/global_vars/proc/InitGlobal##X()
 
 #ifndef TESTING
-#define GLOBAL_PROTECT(X)\
-/datum/controller/global_vars/InitGlobal##X(){\
-	..();\
-	gvars_datum_protected_varlist += #X;\
-}
 #else
-#define GLOBAL_PROTECT(X)
 #endif
-
-#define GLOBAL_REAL_VAR(X) var/global/##X
-#define GLOBAL_REAL(X, Typepath) var/global##Typepath/##X
 
 #define GLOBAL_RAW(X) /datum/controller/global_vars/var/global##X
 
-#define GLOBAL_VAR_INIT(X, InitValue) GLOBAL_RAW(/##X); GLOBAL_MANAGED(X, InitValue)
-
-#define GLOBAL_VAR_CONST(X, InitValue) GLOBAL_RAW(/const/##X) = InitValue; GLOBAL_UNMANAGED(X, InitValue)
-
-#define GLOBAL_LIST_INIT(X, InitValue) GLOBAL_RAW(/list/##X); GLOBAL_MANAGED(X, InitValue)
-
-#define GLOBAL_LIST_EMPTY(X) GLOBAL_LIST_INIT(X, list())
-
 #define GLOBAL_DATUM_INIT(X, Typepath, InitValue) GLOBAL_RAW(Typepath/##X); GLOBAL_MANAGED(X, InitValue)
 
-#define GLOBAL_VAR(X) GLOBAL_RAW(/##X); GLOBAL_MANAGED(X, null)
-
-#define GLOBAL_LIST(X) GLOBAL_RAW(/list/##X); GLOBAL_MANAGED(X, null)
-
-#define GLOBAL_DATUM(X, Typepath) GLOBAL_RAW(Typepath/##X); GLOBAL_MANAGED(X, null)
-
 /// Create a typed list global with an initializer expression
-#define GLOBAL_LIST_INIT_TYPED(X, Typepath, InitValue) GLOBAL_RAW(/list##Typepath/X); GLOBAL_MANAGED(X, InitValue)
 
 /// Create a typed list global that is initialized as an empty list
-#define GLOBAL_LIST_EMPTY_TYPED(X, Typepath) GLOBAL_LIST_INIT_TYPED(X, Typepath, list())
 
 #define GLOBAL_PROC "some_magic_bullshit"
 
@@ -122,7 +80,6 @@
 #define PROCESS_DEFAULT_HANG_RESTART_TIME 	900 // 90 seconds
 #define PROCESS_DEFAULT_SCHEDULE_INTERVAL 	50  // 50 ticks
 #define PROCESS_DEFAULT_SLEEP_INTERVAL		2	// 2 ticks
-#define PROCESS_DEFAULT_CPU_THRESHOLD		90  // 90%
 
 // SCHECK macros
 // This references src directly to work around a weird bug with try/catch

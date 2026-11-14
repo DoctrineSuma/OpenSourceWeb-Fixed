@@ -1,5 +1,4 @@
 //Thirst levels for humans
-#define THIRST_LEVEL_MAX 600
 #define THIRST_LEVEL_FILLED 500
 #define THIRST_LEVEL_MEDIUM 300
 #define THIRST_LEVEL_THIRSTY 200

@@ -4,39 +4,6 @@
 //===================================================================================
 var/global/list/map_sectors = list()
 
-/hook/startup/proc/build_map()					//I had a problem reading this, so I decided to explain everything.
-	if(!config.use_overmap)
-		return 1
-	testing("Building overmap...")
-	var/obj/effect/mapinfo/data
-
-	moving_levels.len = world.maxz
-
-	for(var/level in 1 to world.maxz)
-
-		data = locate("sector[level]")
-
-		if(istype(data, /obj/effect/mapinfo/ship))							//First we'll check for ships, because they can occupy multiplie levels
-			var/obj/effect/map/ship/found_ship = locate("ship_[data.shipname]")
-			if(found_ship)													//If there is a ship with such a name...
-				testing("Ship \"[data.shipname]\" found at [data.mapx],[data.mapy] corresponding to zlevel [level]")
-				found_ship.ship_levels += level								//Adding this z-level to the list of the ship's z-levels.
-				map_sectors["[level]"] = found_ship
-			else
-				found_ship = new data.obj_type(data)	//If there is no ship with such name, we will create one.
-				found_ship.ship_levels += level
-				map_sectors["[level]"] = found_ship
-				testing("Ship \"[data.shipname]\" created \"[data.name]\" at [data.mapx],[data.mapy] corresponding to zlevel [level]")
-
-		else if (data)														//Else we will just create an object, corresponding to it.
-			testing("Located sector \"[data.name]\" at [data.mapx],[data.mapy] corresponding to zlevel [level]")
-			map_sectors["[level]"] = new data.obj_type(data)
-
-	for(var/obj/effect/map/ship/S in world)
-		S.update_spaceturfs()
-
-	return 1
-
 //===================================================================================
 //Metaobject for storing information about sector this zlevel is representing.
 //Should be placed only once on every zlevel.
@@ -53,7 +20,6 @@ var/global/list/map_sectors = list()
 	var/mapy			//overmap zlevel
 	var/known = 1
 	var/shipname
-
 
 /obj/effect/mapinfo/New()
 	tag = "sector[z]"

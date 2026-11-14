@@ -7,10 +7,8 @@
 	In the case of free-flowing gas you can do things with gas and still use 0 power, hence the distinction between negative and non-negative return values.
 */
 
-
 /obj/machinery/atmospherics/var/last_flow_rate = 0
 /obj/machinery/portable_atmospherics/var/last_flow_rate = 0
-
 
 /obj/machinery/atmospherics/var/debug = 0
 
@@ -216,80 +214,6 @@
 //For omni devices. Instead d_filtering is an associative list mapping gasids to gas mixtures.
 //I don't like the copypasta, but I decided to keep both versions of gas d_filtering as d_filter_gas is slightly faster (doesn't create as many temporary lists, doesn't call update_values() as much)
 //d_filter_gas can be removed and replaced with this proc if need be.
-/proc/d_filter_gas_multi(var/obj/machinery/M, var/list/d_filtering, var/datum/gas_mixture/source, var/datum/gas_mixture/sink_clean, var/total_transfer_moles = null, var/available_power = null)
-	if (source.total_moles < MINUMUM_MOLES_TO_d_filter) //if we cant transfer enough gas just stop to avoid further processing
-		return -1
-
-	d_filtering = d_filtering & source.gas	//only d_filter gasses that are actually there. DO NOT USE &=
-
-	var/total_specific_power = 0		//the power required to remove one mole of input gas
-	var/total_d_filterable_moles = 0		//the total amount of d_filterable gas
-	var/total_und_filterable_moles = 0	//the total amount of non-d_filterable gas
-	var/list/specific_power_gas = list()	//the power required to remove one mole of pure gas, for each gas type
-	for (var/g in source.gas)
-		if (source.gas[g] < MINUMUM_MOLES_TO_d_filter)
-			continue
-
-		if (g in d_filtering)
-			var/datum/gas_mixture/sink_d_filtered = d_filtering[g]
-			specific_power_gas[g] = calculate_specific_power_gas(g, source, sink_d_filtered)/ATMOS_d_filter_EFFICIENCY
-			total_d_filterable_moles += source.gas[g]
-		else
-			specific_power_gas[g] = calculate_specific_power_gas(g, source, sink_clean)/ATMOS_d_filter_EFFICIENCY
-			total_und_filterable_moles += source.gas[g]
-
-		var/ratio = source.gas[g]/source.total_moles //converts the specific power per mole of pure gas to specific power per mole of input gas mix
-		total_specific_power = specific_power_gas[g]*ratio
-
-	//Figure out how much of each gas to d_filter
-	if (isnull(total_transfer_moles))
-		total_transfer_moles = source.total_moles
-	else
-		total_transfer_moles = min(total_transfer_moles, source.total_moles)
-
-	//limit transfer_moles based on available power
-	if (!isnull(available_power) && total_specific_power > 0)
-		total_transfer_moles = min(total_transfer_moles, available_power/total_specific_power)
-
-	if (total_transfer_moles < MINUMUM_MOLES_TO_d_filter) //if we cant transfer enough gas just stop to avoid further processing
-		return -1
-
-	//Update Flow Rate var
-	if (istype(M, /obj/machinery/atmospherics))
-		var/obj/machinery/atmospherics/A = M
-		A.last_flow_rate = (total_transfer_moles/source.total_moles)*source.volume //group_multiplier gets divided out here
-	if (istype(M, /obj/machinery/portable_atmospherics))
-		var/obj/machinery/portable_atmospherics/P = M
-		P.last_flow_rate = (total_transfer_moles/source.total_moles)*source.volume //group_multiplier gets divided out here
-
-	var/datum/gas_mixture/removed = source.remove(total_transfer_moles)
-	if (!removed) //Just in case
-		return -1
-
-	var/list/d_filtered_power_used = list()		//power used to move d_filterable gas to the d_filtered gas mixes
-	var/und_filtered_power_used = 0	//power used to move und_filterable gas to sink_clean
-	for (var/g in removed.gas)
-		var/power_used = specific_power_gas[g]*removed.gas[g]
-
-		if (g in d_filtering)
-			var/datum/gas_mixture/sink_d_filtered = d_filtering[g]
-			//use update=0. All the d_filtered gasses are supposed to be added simultaneously, so we update after the for loop.
-			sink_d_filtered.adjust_gas_temp(g, removed.gas[g], removed.temperature, update=1)
-			removed.adjust_gas(g, -removed.gas[g], update=0)
-			if (power_used)
-				d_filtered_power_used[sink_d_filtered] = power_used
-		else
-			und_filtered_power_used += power_used
-
-	removed.update_values()
-
-	var/power_draw = und_filtered_power_used
-	for (var/datum/gas_mixture/sink_d_filtered in d_filtered_power_used)
-		power_draw += d_filtered_power_used[sink_d_filtered]
-
-	sink_clean.merge(removed)
-
-	return power_draw
 
 //Similar deal as the other atmos process procs.
 //mix_sources maps input gas mixtures to mix ratios. The mix ratios MUST add up to 1.

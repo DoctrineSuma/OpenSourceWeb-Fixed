@@ -63,13 +63,6 @@ var/datum/cameranet/cameranet = new()
 		return
 	majorChunkChange(A, 2)
 
-/datum/cameranet/proc/updateChunk(x, y, z)
-	// 0xf = 15
-	if(!chunkGenerated(x, y, z))
-		return
-	var/datum/camerachunk/chunk = getCameraChunk(x, y, z)
-	chunk.hasChanged()
-
 // Removes a camera from a chunk.
 
 /datum/cameranet/proc/removeCamera(obj/machinery/camera/c)
@@ -135,7 +128,6 @@ var/datum/cameranet/cameranet = new()
 		if(chunk.visibleTurfs[position])
 			return 1
 	return 0
-
 
 // Debug verb for VVing the chunk that the turf is in.
 /*

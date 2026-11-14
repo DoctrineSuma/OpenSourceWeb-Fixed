@@ -304,7 +304,6 @@
 				update |= temp.take_damage(b_loss * 0.05, used_weapon = weapon_message)
 	if(update)	UpdateDamageIcon()
 
-
 /mob/living/carbon/human/blob_act()
 	if(stat == 2)	return
 	show_message("\red The blob attacks you!")
@@ -325,7 +324,6 @@
 				UpdateDamageIcon()
 		updatehealth()
 	return
-
 
 /mob/living/carbon/human/attack_animal(mob/living/simple_animal/M as mob)
 	if(M.melee_damage_upper == 0)
@@ -350,7 +348,6 @@
 		apply_damage(damage, BRUTE, affecting, armor)
 		if(armor >= 2)	return
 
-
 /mob/living/carbon/human/proc/is_loyalty_implanted(mob/living/carbon/human/M)
 	for(var/L in M.contents)
 		if(istype(L, /obj/item/weapon/implant/loyalty))
@@ -374,11 +371,8 @@
 		return 1
 	return 0
 
-
-
 /mob/living/carbon/human/var/co2overloadtime = null
 /mob/living/carbon/human/var/temperature_resistance = T0C+75
-
 
 /mob/living/carbon/human/show_inv(mob/user as mob)
 	if(istype(src, /mob/living/carbon/human/monster))
@@ -511,9 +505,6 @@
 	return
 
 //gets ID card object from special clothes slot or null.
-/mob/living/carbon/human/proc/get_idcard()
-	if(wear_id)
-		return wear_id.GetID()
 
 //Added a safety check in case you want to shock a human mob directly through electrocute_act.
 /mob/living/carbon/human/electrocute_act(var/shock_damage, var/obj/source, var/siemens_coeff = 1.0, var/safety = 0, var/faisca = FALSE)
@@ -529,7 +520,6 @@
 			var/obj/item/clothing/gloves/G = gloves
 			siemens_coeff = G.siemens_coefficient
 	return ..(shock_damage,source,siemens_coeff)
-
 
 /mob/living/carbon/human/Topic(href, href_list)
 	if (href_list["refresh"])
@@ -618,12 +608,10 @@
 		var/isnude_p = P.is_nude()
 		var/ya = "&#1103;"
 
-
 		if (href_list["interaction"] == "bow")
 			H.visible_message("<span class='examinebold'>[H]</span> <span class='examine'>bows before</span> <span class='examinebold'>[P].</span>")
 			if (istype(P.loc, /obj/structure/closet) && P.loc == H.loc)
 				P.visible_message("<span class='examinebold'>[H]</span> <span class='examine'>bows before</span> <span class='examinebold'>[P].</span>")
-
 
 		else if (href_list["interaction"] == "pet")
 			if(((!istype(P.loc, /obj/structure/closet)) || (H.loc == P.loc)) && hashands)
@@ -727,7 +715,6 @@
 			else
 				H.visible_message("<B>[H]</B> waves [H.gender == MALE ? "his" : "her"] stump at <B>[P]</B>.")
 
-
 		else if (href_list["interaction"] == "slap")
 			if(((Adjacent(P) && !istype(P.loc, /obj/structure/closet)) || (H.loc == P.loc)) && hashands)
 				H.visible_message("<span class='combatbold'>[H]</span> <span class='combat'>slaps</span> <span class='combatbold'>[P]</span> <span class='combat'>across the face!</span>")
@@ -752,7 +739,6 @@
 				playsound(loc, 'sound/weapons/throwtap.ogg', 50, 1, -1)
 				if (P.stamina_loss < 5)
 					P.stamina_loss += 5
-
 
 		else if (href_list["interaction"] == "spit")
 			if(((Adjacent(P) && !istype(P.loc, /obj/structure/closet)) || (H.loc == P.loc)) && mouthfree)
@@ -864,11 +850,8 @@
 					var/message = pick("You have no lust now.")//"Íå õî÷åòñ[ya] ìíå...", "Êàê-òî íåò æåëàíè[ya]...", "×òî-òî íå îõîòà...", "Íåò, íå ñåé÷àñ.")
 					to_chat(H, "<span class='erp'>[message]</span>")
 
-
-
 	..()
 	return
-
 
 ///eyecheck()
 ///Returns a number between -1 to 2
@@ -900,7 +883,6 @@
 			number += 2
 	return number
 
-
 /mob/living/carbon/human/IsAdvancedToolUser()
 	return species.has_fine_manipulation
 
@@ -918,7 +900,6 @@
 		return 1
 
 	return 0
-
 
 /mob/living/carbon/human/proc/check_dna()
 	dna.check_integrity(src)
@@ -1132,12 +1113,6 @@
 		return NEUTER
 	return gender
 
-/mob/living/carbon/human/proc/increase_germ_level(n)
-	if(gloves)
-		gloves.germ_level += n
-	else
-		germ_level += n
-
 /mob/living/carbon/human/revive()
 	add_teeth()
 	bodyhair()
@@ -1184,7 +1159,6 @@
 	var/datum/organ/internal/lungs/L = internal_organs_by_name["lungs"]
 	return L && L.is_bruised()
 
-
 /mob/living/carbon/human/proc/add_teeth()
 	var/datum/organ/external/mouth/U = locate() in organs
 	if(istype(U))
@@ -1207,7 +1181,6 @@
 		H.nose = N
 		H.ears.Add(R)
 		H.ears.Add(L)
-
 
 /mob/living/carbon/human/proc/add_fingers() //botar dedo nas maos, sim e tudo manual
 	var/datum/organ/external/hand/r_hand/R = locate() in organs
@@ -1463,7 +1436,6 @@
 	else
 		return 0
 
-
 /mob/living/carbon/human/proc/bloody_doodle()
 	set category = "IC"
 	set name = "Write in blood"
@@ -1522,8 +1494,6 @@
 /mob/living/carbon/human/proc/exam_self()
 //	set name = "Examine Self"
 //	set category = "IC"
-
-
 
 	if(istype(src, /mob/living/carbon/human))
 		var/mob/living/carbon/human/H = usr
@@ -1657,7 +1627,6 @@
 				flavor_text += sanitize(flavor_texts[T])
 				flavor_text += "\n\n"
 	return ..()
-
 
 /mob/living/carbon/human/proc/expose_brain()
 	var/datum/organ/external/head/H = get_organ("head")

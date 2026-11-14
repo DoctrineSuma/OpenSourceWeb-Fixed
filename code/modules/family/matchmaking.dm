@@ -2,7 +2,6 @@
 #define AGE_SAME 1
 #define AGE_CHILD 2
 
-
 var/static/list/family_blacklisted_jobs = list("Innkeeper", "Innkeeper Wife", "Bulter", "Sitzfrau", "Incarn", "Inquisitor", "Practicus", "Guest")
 var/global/datum/matchmaker/matchmaker = new()
 var/datum/family/baron_family = null
@@ -52,12 +51,10 @@ var/client/list/set_spoused = list() //prevents set_spoused people from being sh
 		to_chat(human_target,"<span class='combat'>Setspouse <span class='combatbold'>FAIL!</span> </span>")
 		return
 
-
 	if(!human_sender.has_penis() && !human_target.has_penis())
 		to_chat(human_sender,"<span class='combat'>Setspouse <span class='combatbold'>FAIL!</span></span>")
 		to_chat(human_target,"<span class='combat'>Setspouse <span class='combatbold'>FAIL!</span> </span>")
 		return
-
 
 	var/mob/living/carbon/human/husband
 	var/mob/living/carbon/human/wife
@@ -86,7 +83,6 @@ var/client/list/set_spoused = list() //prevents set_spoused people from being sh
 		var/datum/relation/R = T
 		relation_types[initial(R.name)] = T
 
-
 /datum/matchmaker/proc/update_family_icons(mob/living/carbon/human/H)
 	if(H.mind?.relations.len)
 		for(var/datum/relation/family/R in H.mind.relations)
@@ -99,14 +95,6 @@ var/client/list/set_spoused = list() //prevents set_spoused people from being sh
 				if(H.client)
 					H.client.images += I
 
-/datum/matchmaker/proc/add_relations_to_notes()
-	//Add families to notes
-	for(var/mob/living/carbon/human/H in player_list)
-		H.mind.store_memory("<big><b>Family:</b></big>\n")
-		for(var/datum/relation/family/R in matchmaker.get_relationships(H.mind))
-			//to_world("This person is our relative: [R.connected_relation.relation_holder.current.name] But this doesnt work [R.connected_relation.relation_holder.current.name]")
-			H.mind.memory += "[R.connected_relation.relation_holder.current.name] is my [R.name].\n"
-
 /datum/matchmaker/proc/do_matchmaking()
 	var/list/to_warn = list()
 	for(var/datum/relation/R in relations)
@@ -116,7 +104,6 @@ var/client/list/set_spoused = list() //prevents set_spoused people from being sh
 			to_warn |= R.relation_holder.current
 	for(var/mob/M in to_warn)
 		to_chat(M,"<span class='warning'>You have new connections. Use \"See Relationship Info\" to view and finalize them.</span>")
-
 
 /datum/matchmaker/proc/do_migrant_matchmaking(var/list/mob/living/carbon/human/migrants)
 	if(!migrants.len || migrants.len == 1)
@@ -307,9 +294,6 @@ var/client/list/set_spoused = list() //prevents set_spoused people from being sh
 	connected_relation = R
 	R.connected_relation = src
 	return 1
-
-/datum/relation/proc/get_desc_string()
-	return "[relation_holder] and [connected_relation.relation_holder] know each connected_relation."
 
 mob/living/carbon/human/proc/adjust_age(var/target_age, var/direction)
 	switch(direction)

@@ -1,6 +1,4 @@
 //Config stuff
-#define SUPPLY_DOCKZ 6          //Z-level of the Dock.
-#define SUPPLY_STATIONZ 4       //Z-level of the Station.
 #define SUPPLY_STATION_AREATYPE /area/supply/station //Type of the supply shuttle area for station
 #define SUPPLY_DOCK_AREATYPE /area/supply/dock	//Type of the supply shuttle area for dock
 
@@ -178,7 +176,6 @@ var/global/TaxUponSells = 20
 							eta = 0
 							send()
 
-
 				sleep(processing_interval)
 
 	proc/send()
@@ -241,7 +238,6 @@ var/global/TaxUponSells = 20
 
 		var/area/shuttle = locate(shuttle_at)
 		if(!shuttle)	return
-
 
 		for(var/atom/movable/MA in shuttle)
 			if(MA.anchored)	continue
@@ -364,7 +360,6 @@ var/global/TaxUponSells = 20
 
 /obj/item/weapon/paper/manifest
 	name = "Supply Manifest"
-
 
 /obj/machinery/computer/ordercomp/attack_ai(var/mob/user as mob)
 	return attack_hand(user)
@@ -852,6 +847,3 @@ var/global/TaxUponSells = 20
 	if(C == 0)
 		return 0
 	return round(C + ((C / 100) * taxes))
-
-
-

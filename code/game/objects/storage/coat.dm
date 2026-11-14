@@ -54,20 +54,6 @@
 
 //This proc draws out the inventory and places the items on it. tx and ty are the upper left tile and mx, my are the bottm right.
 //The numbers are calculated from the bottom-left The bottom-left slot being 1,1.
-/obj/item/clothing/suit/storage/proc/orient_objs(tx, ty, mx, my)
-	var/cx = tx
-	var/cy = ty
-	src.boxes.screen_loc = text("[tx]:,[ty] to [mx],[my]")
-	for(var/obj/O in src.contents)
-		O.screen_loc = text("[cx],[cy]")
-		O.layer = 20
-		O.plane = 30
-		cx++
-		if (cx > mx)
-			cx = tx
-			cy--
-	src.closer.screen_loc = text("[mx+1],[my]")
-	return
 
 //This proc draws out the inventory and places the items on it. It uses the standard position.
 /obj/item/clothing/suit/storage/proc/standard_orient_objs(var/rows,var/cols)
@@ -154,7 +140,6 @@
 	W.dropped(user)
 	add_fingerprint(user)
 	show_to(user)
-
 
 /obj/item/weapon/storage/dropped(mob/user as mob)
 	return

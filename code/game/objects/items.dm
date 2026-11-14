@@ -1,10 +1,6 @@
 /obj/var/blunt = FALSE
 
-#define QDEL_NULL_LIST(x) if(x) { for(var/y in x) { qdel(y) }}; if(x) {x.Cut(); x = null; } // Second x check to handle items that LAZYREMOVE on qdel.
-
 #define QDEL_NULL(x) if(x) { qdel(x) ; x = null }
-
-#define QDEL_IN(item, time) addtimer(CALLBACK(GLOBAL_PROC, .proc/qdel, item), time, TIMER_STOPPABLE)
 
 /obj/item
 	name = "item"
@@ -231,7 +227,6 @@
 			if(SKILL_SWING)
 				TheSpec = "[generatehintbox("https://cdn.discordapp.com/attachments/781574628229382144/828016821218312242/club.png","CLUB/AXES - Smashes bones. Your control in assaults and parrying with crushing weapons.")]"
 
-
 	if(!isobserver(usr))
 		usr.visible_message("<span class='looksatbold'>[usr.name]</span> <span class='looksat'>looks at [src].</span>")
 		if(get_dist(usr,src) > 5)//Don't get descriptions of things far away.
@@ -277,7 +272,6 @@
 						to_chat(usr, "<span class='combat'>it's slightly damaged!</span>")
 	return
 
-
 /obj/item/proc/damageItem(var/damagetype)
 	var/modifier = 1
 	switch(damagetype)
@@ -294,7 +288,6 @@
 		playsound(src.loc, 'breaksound.ogg', 100, 1)
 		src.visible_message("<span class='combatbold'>[src]</span><span class='combat'> breaks!</span>")
 		qdel(src)
-
 
 /obj/item/proc/damageSharp(var/damagetype)
 	if(!src.sharp)
@@ -591,7 +584,6 @@
 		src.loc = null
 	return ..()
 
-
 /obj/item/proc/talk_into(mob/M as mob, text)
 	return
 
@@ -632,8 +624,6 @@
 // called when this item is removed from a storage item, which is passed on as S. The loc variable is already set to the new destination before this is called.
 /obj/item/proc/on_exit_storage(obj/item/weapon/storage/S as obj, var/new_location)
 	return
-
-/obj/item/proc/nigga_cat(obj/item/W as obj, mob/target as mob)
 
 // called when this item is added into a storage item, which is passed on as S. The loc variable is already set to the storage item.
 /obj/item/proc/on_enter_storage(obj/item/weapon/storage/S as obj)
@@ -861,7 +851,6 @@
 
 		//END MONKEY
 
-
 /obj/item/verb/verb_pickup()
 	set src in oview(1)
 	set category = "Object"
@@ -895,14 +884,12 @@
 	usr.UnarmedAttack(src)
 	return
 
-
 //This proc is executed when someone clicks the on-screen UI button. To make the UI button show, set the 'icon_action_button' to the icon_state of the image of the button in screen1_action.dmi
 //The default action is attack_self().
 //Checks before we get to here are: mob is alive, mob is not restrained, paralyzed, asleep, resting, laying, item is on the mob.
 /obj/item/proc/ui_action_click()
 	if( src in usr )
 		attack_self(usr)
-
 
 /obj/item/proc/IsShield()
 	return 0
@@ -1001,7 +988,6 @@ var/global/list/blood_overlay_cache = list()
 		return
 	I.attempt_wield(src)
 
-
 /obj/item/proc/unwield(mob/user)
 	if(!wielded || !user)
 		return
@@ -1057,7 +1043,6 @@ var/global/list/blood_overlay_cache = list()
 	O.desc = "Your second grip on the [name]"
 	user.put_in_inactive_hand(O)
 	return
-
 
 /obj/item/proc/update_wield_icon()
 	if(wielded && wielded_icon)

@@ -6,7 +6,6 @@
  *		Racks
  */
 
-
 /*
  * Tables
  */
@@ -46,7 +45,6 @@
 /obj/structure/table/Destroy()
 	update_adjacent()
 	..()
-
 
 //Thanks InfinityStation!
 /obj/structure/table/Crossed(var/mob/living/M as mob)
@@ -286,13 +284,11 @@
 		else
 	return
 
-
 /obj/structure/table/examine()
 	set src in oview()
 	..()
 	if(dented)
 		usr << "It looks to have [dented] [prob(30) ? "face shaped " : ""] dents in it."
-
 
 /obj/structure/table/blob_act()
 	if(prob(75))
@@ -378,7 +374,6 @@
 	if (O.loc != src.loc)
 		step(O, get_dir(O, src))
 	return
-
 
 /obj/structure/table/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	if (istype(W, /obj/item/weapon/grab) && get_dist(src,user)<2)
@@ -627,7 +622,6 @@
 		return 1
 	qdel(I)
 
-
 /*
  * Glass tables
  */
@@ -639,15 +633,6 @@
 //	parts = // TODO: construction
 	health = 30
 
-/obj/structure/table/glass/tablepush(obj/item/I, mob/user)
-	if(..())
-		visible_message("<span class='warning'>[src] breaks!</span>")
-		playsound(src.loc, "shatter", 50, 1)
-		new frame(src.loc)
-		new /obj/item/weapon/shard(src.loc)
-		qdel(src)
-
-
 /obj/structure/table/glass/climb_table(mob/user)
 	if(..())
 		visible_message("<span class='warning'>[src] breaks!</span>")
@@ -656,7 +641,6 @@
 		new /obj/item/weapon/shard(src.loc)
 		qdel(src)
 		user.Weaken(5)
-
 
 /*
  * Wooden tables
@@ -713,7 +697,6 @@
 			return
 
 	..()
-
 
 /*
  * Racks
@@ -876,7 +859,6 @@
 					return 1
 			tableclimber = null
 	return 0
-
 
 /obj/structure/rack/lwtable/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	if (istype(W, /obj/item/weapon/grab) && get_dist(src,user)<2)
@@ -1070,7 +1052,6 @@
 
 /obj/structure/rack/meteorhit(obj/O as obj)
 	qdel(src)
-
 
 /obj/structure/rack/attack_hand(mob/user)
 	if(HULK in user.mutations)

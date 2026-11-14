@@ -2,11 +2,9 @@
 
 // Controls the emergency shuttle
 
-
 // these define the time taken for the shuttle to get to SS13
 // and the time before it leaves again
 #define SHUTTLEARRIVETIME 600		// 10 minutes = 600 seconds
-#define SHUTTLELEAVETIME 0		// 3 minutes = 180 seconds
 #define SHUTTLETRANSITTIME 120		// 2 minutes = 120 seconds
 
 var/global/datum/shuttle_controller/emergency_shuttle/emergency_shuttle
@@ -50,7 +48,6 @@ datum/shuttle_controller
 
 datum/shuttle_controller/proc/shuttlealert(var/X)
 		alert = X
-
 
 datum/shuttle_controller/proc/recall()
 	var/obj/item/device/radio/headset/bracelet/a = new /obj/item/device/radio/headset/bracelet(null)

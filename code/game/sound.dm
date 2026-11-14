@@ -1,38 +1,16 @@
 #define GENERIC 0
-#define PADDED_CELL 1
 #define ROOM 2
 #define BATHROOM 3
-#define LIVINGROOM 4
 #define STONEROOM 5
-#define AUDITORIUM 6
-#define CONCERT_HALL 7
 #define CAVE 8
-#define ARENA 9
 #define HANGAR 10
-#define CARPETED_HALLWAY 11
-#define HALLWAY 12
-#define STONE_CORRIDOR 13
-#define ALLEY 14
-#define FOREST 15
-#define CITY 16
-#define MOUNTAINS 17
-#define QUARRY 18
-#define PLAIN 19
-#define PARKING_LOT 20
-#define SEWER_PIPE 21
 #define UNDERWATER 22
 #define DRUGGED 23
 #define DIZZY 24
 #define PSYCHOTIC 25
 
 #define STANDARD_STATION STONEROOM
-#define LARGE_ENCLOSED HANGAR
-#define SMALL_ENCLOSED BATHROOM
 #define TUNNEL_ENCLOSED CAVE
-#define LARGE_SOFTFLOOR CARPETED_HALLWAY
-#define MEDIUM_SOFTFLOOR LIVINGROOM
-#define SMALL_SOFTFLOOR ROOM
-#define ASTEROID CAVE
 #define SPACE UNDERWATER
 
 /proc/playsound(var/atom/source, soundin, vol as num, vary, extrarange as num, falloff, var/is_global, var/frequency, var/wait=0, var/repeat=0, var/channel = 0)
@@ -60,7 +38,6 @@
 				M.playsound_local(turf_source, soundin, vol/(1+z_dist), vary, frequency, falloff, is_global, channel, wait, repeat)
 
 var/const/FALLOFF_SOUNDS = 0.5
-
 
 /mob/proc/playsound_local(var/turf/turf_source, soundin, vol as num, vary, frequency, falloff, is_global, channel=0, wait=0, repeat=0)
 	if(!src.client || ear_deaf > 0)	return
@@ -145,12 +122,10 @@ var/const/FALLOFF_SOUNDS = 0.5
 
 	src << S
 
-
 /client/proc/playtitlemusic()
 	if(!global.login_music) return
 	if(prefs.toggles & SOUND_LOBBY)
 		src << sound(global.login_music, repeat = 1, wait = 0, volume = prefs?.music_volume, channel = 1) // MAD JAMS
-
 
 /proc/get_rand_frequency()
 	return rand(32000, 55000) //Frequency stuff only works with 45kbps oggs.

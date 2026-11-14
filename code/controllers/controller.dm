@@ -9,14 +9,10 @@
 /datum/controller/proc/Shutdown()
 
 //when we enter dmm_suite.load_map
-/datum/controller/proc/StartLoadingMap()
 
 //when we exit dmm_suite.load_map
-/datum/controller/proc/StopLoadingMap()
 
 /datum/controller/proc/Recover()
-
-/datum/controller/proc/stat_entry()
 
 /proc/log_runtime(exception/e, datum/e_src, extra_info)
 	if(!istype(e))
