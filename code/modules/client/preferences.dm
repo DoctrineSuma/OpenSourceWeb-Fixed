@@ -169,27 +169,32 @@ datum/preferences
 		user << browse_rsc(bg2,"bg2.png")
 		user << browse_rsc(bg1,"bg.png")
 		user << browse_rsc(dice,"dice.png")
-		//var/dat = "<html><head><style type='text/css'>html {overflow: auto;};body {cursor: url('pointer.cur'), auto;overflow:hidden;font-family: Times;background-repeat:repeat-x;}a {text-decoration:none;outline: none;border: none;margin:-1px;}a:focus{outline:none;border: none;}a:hover {Color:#0d0d0d;background:#505055;outline: none;border: none;}a.active { text-decoration:none; Color:#533333;border: none;}a.inactive:hover {Color:#0d0d0d;background:#bb0000;border: none;}a.active:hover {Color:#bb0000;background:#0f0f0f;}a.inactive:hover { text-decoration:none; Color:#0d0d0d; background:#bb0000;border: none;}a img {     border: 0; }TABLE.winto {z-index:-1;position: absolute;top: 12;left:14;background-position: bottom;background-repeat:repeat-x;border: 4px dotted #222222;/*    border-top:4px double #777777; */border-bottom: none;border-top: none;}TR {border: 0px;}</style></head><body background = 'bg2.png' bgColor=#0d0d0d text=#555555 alink=#777777 vlink=#777777 link=#777777>"
-		var/dat = {"<html><head><META charset='UTF-8'> <Title>Farweb</title> <style>
-			html { overflow: show; }
-			body { cursor: url('pointer.cur'), auto; overflow: show; font-family: Times; background-repeat: repeat-x; position: relative; }
-			a { text-decoration:none; outline: none; border: none; margin:-1px; }
-			a:focus { outline:none; border: none; }
-			a:hover { color:#0d0d0d; background:#505055; outline: none; border: none; }
-			a.active { text-decoration:none; color:#533333; border: none; }
-			a.inactive:hover { color:#0d0d0d; background:#bb0000; border: none; }
-			a.active:hover { color:#bb0000; background:#0f0f0f; }
-			a img { border: 0; }
-			TABLE.winto { position: relative; top: 12px; left: 14px; background-position: bottom; background-repeat: repeat-x; border: 4px dotted #222222; border-bottom: none; border-top: none; }
-			TR { border: 0px; } </style></head>"}
+		var/dat = {"<!DOCTYPE html><html><head><meta http-equiv='X-UA-Compatible' content='IE=edge'><meta charset='UTF-8'><title>Farweb</title><style>
+			html, body { width: 100%; height: 100%; margin: 0; padding: 0; overflow: hidden; }
+			body { cursor: url('pointer.cur'), auto; font-family: Times, serif; background: #0d0d0d url('bg2.png') repeat-x top left; color: #555; }
+			a { color: #777; text-decoration: none; outline: none; }
+			a:focus { outline: none; }
+			a:hover { color: #0d0d0d; background: #505055; }
+			a.active { color: #533333; }
+			a.inactive:hover { color: #0d0d0d; background: #bb0000; }
+			a.active:hover { color: #bb0000; background: #0f0f0f; }
+			a img { border: 0; vertical-align: middle; }
+			.frame { position: absolute; top: 0; right: 0; bottom: 0; left: 0; overflow: hidden; border: 4px dotted #222; }
+			.frame-bottom { position: absolute; right: 0; bottom: -20px; left: 0; height: 96px; background: url('bg.png') repeat-x bottom left; }
+			.close-control { position: absolute; top: 2px; right: 6px; z-index: 2; line-height: 20px; }
+			.ready-control { position: absolute; right: 8px; bottom: 27px; z-index: 2; margin: 0; }
+			.settings { position: absolute; top: 26px; right: 8px; bottom: 56px; left: 8px; overflow: auto; }
+			.winto { width: 100%; table-layout: fixed; border-collapse: collapse; }
+			.winto td { padding: 8px; vertical-align: top; overflow-wrap: break-word; word-wrap: break-word; }
+			.winto .portrait { text-align: center; }
+			.appearance { border-collapse: collapse; }
+			.appearance td { padding: 2px; }
+		</style></head>"}
 		var/mob/new_player/N = user
-		dat += "<body background = 'bg2.png' bgColor=#0d0d0d text=#555555 alink=#777777 vlink=#777777 link=#777777>"
-		dat += "<p style='position: absolute;top: 10;left:295; font-size:400%'><font face='Times'><b>†</b></font></p>"
-		dat += "<p align = 'right'><a onfocus='this.blur()' href='?_src_=prefs;preference=toggleLobbyScreen'>¤</a></p>"
-		//dat += "<p align = 'right'><a onfocus='this.blur()' href='byond://?src=[0x30005a1];preferences=1;toggletitle=1'>¤</a></p>"
-		dat += "<table bgColor=#0d0d0d width=500 height=300 border=0 cellpadding=2>"
-		dat += "<table class = 'winto' bgColor=#0d0d0d background = 'bg.png' width=600 border=0 cellpadding=15>"
-		dat += "<tr height='10'><td width='240px'>"
+		dat += "<body><div class='frame'><div class='frame-bottom'></div>"
+		// This existing control toggles the native title bar; keep its original action.
+		dat += "<a class='close-control' title='Toggle window title bar' onfocus='this.blur()' href='?_src_=prefs;preference=toggleLobbyScreen'>¤</a>"
+		dat += "<div class='settings'><table class='winto'><colgroup><col width='38%'><col width='20%'><col width='42%'></colgroup><tr><td>"
 		//dat += "<img src=previewicon.png height=64 width=64 align='right'><img src=previewicon2.png height=64 width=64 align='right'></center>"
 		dat += "<b>Name:</b> <a href='?_src_=prefs;preference=name;task=input'><b>[real_name]</b></a><a href='?_src_=prefs;preference=name;task=random'><img src='dice.png' height=16 width=16></A><br>"
 		//dat += "<br>"
@@ -215,26 +220,24 @@ datum/preferences
 		//dat += "<b>Random Marriage:</b> <a href='?_src_=prefs;preference=random_marry'><b>[random_marry ? "Yes" : "No"]</b></a>"
 		dat += "</td>"
 
-		dat += "<td valign=top rowspan=2>"
-		dat += "<br><center><b></b><br><img src=previewicon.png height=64 width=64 align='right'></a><big>"
-		dat += "<td width=220>"
-		dat += "<table><tr><td><b>Blood Type:</b> <a href='byond://?src=\ref[user];preference=b_type;task=input'>[b_type]</a><br><b>Skin Color:</b> <a href='?_src_=prefs;preference=s_tone;task=input'>[-s_tone + 35]/255</a><br></td>"
-		dat += "</tr></table>"
-		dat += "<table><tr><td><b>Hair: </b><br></td>"
+		dat += "<td class='portrait'><img src='previewicon.png' height='64' width='64' alt='Character preview'></td>"
+		dat += "<td><b>Blood Type:</b> <a href='byond://?src=\ref[user];preference=b_type;task=input'>[b_type]</a><br>"
+		dat += "<b>Skin Color:</b> <a href='?_src_=prefs;preference=s_tone;task=input'>[-s_tone + 35]/255</a><br>"
+		dat += "<table class='appearance'><tr><td><b>Hair:</b></td>"
 		dat += "<td height=16 bgColor='#[num2hex(r_hair, 2)][num2hex(g_hair, 2)][num2hex(b_hair, 2)]'><a href='?_src_=prefs;preference=hair;task=input'>Color</a></td>"
-		dat += "<td><a href='?_src_=prefs;preference=h_style;task=input'>[h_style]</a></tr>"
+		dat += "<td><a href='?_src_=prefs;preference=h_style;task=input'>[h_style]</a></td></tr>"
 		dat += "<tr>"
 		dat += "<td> <b>Details: </b><br></td>"
 		dat += "<td height=16 bgColor='#[num2hex(r_detail, 2)][num2hex(g_detail, 2)][num2hex(b_detail, 2)]'><a href='?_src_=prefs;preference=detail;task=input'>Color</a></td>"
-		dat += "<td><a href='?_src_=prefs;preference=d_style;task=input'>[d_style]</a></tr>"
+		dat += "<td><a href='?_src_=prefs;preference=d_style;task=input'>[d_style]</a></td></tr>"
 		dat += "<tr>"
 		dat += "<td> <b>Facial: </b><br></td>"
 		dat += "<td height=16 bgColor='#[num2hex(r_facial, 2)][num2hex(g_facial, 2)][num2hex(b_facial, 2)]'><a onfocus='this.blur()' href='?_src_=prefs;preference=facial;task=input'>Color</a></td>"
-		dat += "<td><a href='?_src_=prefs;preference=f_style;task=input'>[f_style]</a></tr>"
+		dat += "<td><a href='?_src_=prefs;preference=f_style;task=input'>[f_style]</a></td></tr>"
 		dat += "<tr>"
 		dat += "<td> <b>Eyes: </b><br></td>"
 		dat += "<td height=16 bgColor='#[num2hex(r_eyes, 2)][num2hex(g_eyes, 2)][num2hex(b_eyes, 2)]'><a onfocus='this.blur()' href='?_src_=prefs;preference=eyes;task=input'>Color</a></td>"
-		dat += "</tr></table></b></a></td></tr>"
+		dat += "</tr></table></td></tr>"
 		dat += "<tr>"
 		dat += "<td>"
 		dat += "<b>Be Fat:</b> <a onfocus='this.blur()' href='?_src_=prefs;preference=fatness'><b>[fat ? "Yes" : "No"]</b></a><br>"
@@ -247,7 +250,7 @@ datum/preferences
 		dat += "<b>Origins:</b> <a href='?_src_=prefs;preference=province'><b>[MigProvince]</b></a><br>"
 		dat += "<a onfocus='this.blur()' href='?_src_=prefs;preference=dom_hand'><b>[dom_hand ? "Right-handed" : "Left-handed"]</b></a><br>"
 		dat += "</td>"
-		dat += "<td colspan=3>"
+		dat += "<td></td><td>"
 		if(!N.special && !SpecialRolledList.Find(N.ckey))
 			dat += "<a onfocus='this.blur()' href='byond://?src=\ref[user];special=1'>Make Special</A><br>"
 		else
@@ -258,30 +261,29 @@ datum/preferences
 		dat += "<a onfocus='this.blur()' href=\"byond://?src=\ref[user];preference=reload\">New</a>"
 		dat += "</td>"
 		dat += "</tr>"
-		dat += "<tr height=15>"
-		dat += "<td colspan=3 ></td></tr><BR></table>"
+		dat += "</table></div>"
 		if(master_mode == "miniwar")
-			dat += "<p style='position: absolute;right: 5px;bottom: 20px;'><a onfocus='this.blur()' href='byond://?src=\ref[user];mini_war=1' class=inactive><b>War is coming!</b></A></P>"
+			dat += "<p class='ready-control'><a onfocus='this.blur()' href='byond://?src=\ref[user];mini_war=1' class=inactive><b>War is coming!</b></A></P>"
 
 		else if(!ticker || ticker.current_state <= GAME_STATE_PREGAME)
 			if(master_mode == "holywar" || master_mode == "minimig")
-				dat += "<p style='position: absolute;right: 5px;bottom: 20px;'><a onfocus='this.blur()' href='byond://?src=\ref[user];late_join=1' class=inactive><b>War is coming!</b></A></P>"
+				dat += "<p class='ready-control'><a onfocus='this.blur()' href='byond://?src=\ref[user];late_join=1' class=inactive><b>War is coming!</b></A></P>"
 
 			else
 				if(!N.ready && master_mode != "holywar" || !N.ready && master_mode != "minimig")
-					dat += "<p style='position: absolute;right: 5px;bottom: 20px;'><a onfocus='this.blur()' href='byond://?src=\ref[user];ready=1' class=inactive><b>You are not ready.<b></A></P>"
+					dat += "<p class='ready-control'><a onfocus='this.blur()' href='byond://?src=\ref[user];ready=1' class=inactive><b>You are not ready.</b></A></P>"
 				else
-					dat += "<p style='position: absolute;right: 5px;bottom: 20px;'><a onfocus='this.blur()' href='byond://?src=\ref[user];ready=0' class=inactive><b>Ready</b></A></P>"
+					dat += "<p class='ready-control'><a onfocus='this.blur()' href='byond://?src=\ref[user];ready=0' class=inactive><b>Ready</b></A></P>"
 
 		else if(ticker?.mode.config_tag == "siege")
 			if(N.ready)
-				dat += "<p style='position: absolute;right: 5px;bottom: 20px;'><a onfocus='this.blur()' href='byond://?src=\ref[user];late_war=1' class=inactive><b>Cancel</b></A></P>"
+				dat += "<p class='ready-control'><a onfocus='this.blur()' href='byond://?src=\ref[user];late_war=1' class=inactive><b>Cancel</b></A></P>"
 			else
-				dat += "<p style='position: absolute;right: 5px;bottom: 20px;'><a onfocus='this.blur()' href='byond://?src=\ref[user];late_war=0' class=inactive><b>War!</b></A></P>"
+				dat += "<p class='ready-control'><a onfocus='this.blur()' href='byond://?src=\ref[user];late_war=0' class=inactive><b>War!</b></A></P>"
 		else
-			dat += "<p style='position: absolute;right: 5px;bottom: 20px;'><a onfocus='this.blur()' href='byond://?src=\ref[user];late_join=1' class=inactive><b>Join!</b></A></P>"
+			dat += "<p class='ready-control'><a onfocus='this.blur()' href='byond://?src=\ref[user];late_join=1' class=inactive><b>Join!</b></A></P>"
 
-		dat += "<br></body></html>"
+		dat += "</div></body></html>"
 
 		user << browse(dat, "window=preferences;size=600x400;can_close=0;can_resize=0;titlebar=[toggleLobbyScreen]")
 
