@@ -243,7 +243,7 @@ datum/preferences
 		dat += "<b>Be Fat:</b> <a onfocus='this.blur()' href='?_src_=prefs;preference=fatness'><b>[fat ? "Yes" : "No"]</b></a><br>"
 		//REMOVER ESSE DEPOIS
 		dat += "<br>"
-		dat += "<b>Vice:</b> <a onfocus='this.blur()' href='?_src_=prefs;preference=vice;task=input'><b>[vice]</b></a><br>"
+		dat += "<b>Vice:</b> <a onfocus='this.blur()' href='?_src_=prefs;preference=vice;task=input'><b>[vice ? vice : "select"]</b></a><br>"
 		dat += "<b>Sign:</b> <a onfocus='this.blur()' href='?_src_=prefs;preference=zodiac;task=input'><b>[zodiac]</b></a><br>"
 		dat += "<b>Faith:</b> <a onfocus='this.blur()' href='?_src_=prefs;preference=religion'><b>[religion == LEGAL_RELIGION ? "Gray Church" : "Heresy"]</b></a><br>"
 		dat += "<b>Family:</b> <a onfocus='this.blur()' href='?_src_=prefs;preference=family'><b>[family ? "Yes" : "No"]</b></a><br>"

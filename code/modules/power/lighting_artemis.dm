@@ -1,6 +1,6 @@
 // Light bult simples
 /obj/machinery/light/small/artemis/basic
-	name = "Uma lampada amarela."
+	name = "Lamp"
 	icon_state = "bulba1"
 	base_state = "bulba"
 	fitting = "bulb"

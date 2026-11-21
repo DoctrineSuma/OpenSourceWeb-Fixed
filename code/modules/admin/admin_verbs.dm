@@ -114,6 +114,7 @@ var/list/admin_verbs_server = list(
 	/datum/admins/proc/adjump,
 	/datum/admins/proc/toggle_aliens,
 	/client/proc/toggle_random_events,
+	/client/proc/toggle_admin_free_power,
 	/client/proc/fyutha,
 	)
 var/list/admin_verbs_debug = list(

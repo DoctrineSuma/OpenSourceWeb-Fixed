@@ -1,6 +1,9 @@
-var/list/lifewebAreas = list()
+var/global/list/lifewebAreas = list()
 var/global/list/chargers = list()
-var/list/affectedItems = list()
+var/global/list/affectedItems = list()
+
+// When enabled, keeps lights/doors powered without draining batteries
+var/global/adminFreePower = 0
 
 /obj/machinery/web_recharger
 	name = "battery charger"
@@ -16,13 +19,13 @@ var/list/affectedItems = list()
 	var/powered = FALSE
 	var/image/powerOverlay
 
-obj/item/weapon/cell/web/New()
+/obj/item/weapon/cell/web/New()
     ..()
 
     for(var/x = 0; x <= charge; x++)
         item_worth++
 
-obj/item/weapon/cell/web/empty/New()
+/obj/item/weapon/cell/web/empty/New()
     ..()
 
     charge = 0
@@ -141,35 +144,39 @@ obj/item/weapon/cell/web/empty/New()
     for(var/area/A in lifewebAreas)
         if(A.name == active_area)
             for(var/obj/machinery/light/lamp in A.webItems)
-                if(charging || energyInvestimento) //FOASE
-                    if(charging.charge || energyInvestimento)
+                if(adminFreePower || charging || energyInvestimento) //FOASE
+                    if(adminFreePower || (charging && charging.charge) || energyInvestimento)
                         lamp.on = TRUE
                         lamp.update()
                         continue
                 lamp.on = FALSE
                 lamp.update()
             for(var/obj/machinery/lamppost/lamp in A.webItems)
-                if(charging || energyInvestimento)
-                    if(charging.charge || energyInvestimento)
+                if(adminFreePower || charging || energyInvestimento)
+                    if(adminFreePower || (charging && charging.charge) || energyInvestimento)
                         lamp.on = TRUE
                         lamp.update()
                         continue
                 lamp.on = FALSE
                 lamp.update()
             for(var/obj/machinery/redlamp/lamp in A.webItems)
-                if(charging || energyInvestimento)
-                    if(charging.charge || energyInvestimento)
+                if(adminFreePower || charging || energyInvestimento)
+                    if(adminFreePower || (charging && charging.charge) || energyInvestimento)
                         lamp.on = TRUE
                         lamp.update()
                         continue
                 lamp.on = FALSE
                 lamp.update()
             for(var/obj/machinery/door/airlock/door in A.webItems)
-                if(charging || energyInvestimento)
-                    if(charging.charge || energyInvestimento)
+                if(adminFreePower || charging || energyInvestimento)
+                    if(adminFreePower || (charging && charging.charge) || energyInvestimento)
                         door.lwOn = TRUE
                         continue
                 door.lwOn = FALSE
+
+    // Free power keeps the lights on without spending the battery's charge.
+    if(adminFreePower)
+        return
 
     var/subtractAmount = 1 / rand(9, 12)
     if(charging)
